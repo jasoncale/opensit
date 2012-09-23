@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @sit.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @sit.body %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @sit.user_id %>
+</p>
+
+<p>
+  <b>Allow comments:</b>
+  <%= @sit.allow_comments %>
+</p>
+
+
+<%= link_to 'Edit', edit_sit_path(@sit) %> |
+<%= link_to 'Back', sits_path %>
+
+<h2>Comments</h2>
+<div id="comments">
+  <%= render :partial => @sit.comments %>
+</div>
+
+<% form_for [@sit, Comment.new] do |f| %>
+  <p>
+    <%= f.label :body, "New comment" %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p><%= f.submit "Add comment" %></p>
+<% end %>

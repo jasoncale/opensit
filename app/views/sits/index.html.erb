@@ -1,0 +1,29 @@
+<h1>Listing sits</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th>User</th>
+    <th>Allow comments</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sits.each do |sit| %>
+  <tr>
+    <td><%= sit.title %></td>
+    <td><%= sit.body %></td>
+    <td><%= sit.user_id %></td>
+    <td><%= sit.allow_comments %></td>
+    <td><%= link_to 'Show', sit %></td>
+    <td><%= link_to 'Edit', edit_sit_path(sit) %></td>
+    <td><%= link_to 'Destroy', sit, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sit', new_sit_path %>
