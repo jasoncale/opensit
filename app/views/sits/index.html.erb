@@ -1,29 +1,9 @@
-<h1>Listing sits</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Body</th>
-    <th>User</th>
-    <th>Allow comments</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Recent sits</h1>
 
 <% @sits.each do |sit| %>
-  <tr>
-    <td><%= sit.title %></td>
-    <td><%= sit.body %></td>
-    <td><%= sit.user_id %></td>
-    <td><%= sit.allow_comments %></td>
-    <td><%= link_to 'Show', sit %></td>
-    <td><%= link_to 'Edit', edit_sit_path(sit) %></td>
-    <td><%= link_to 'Destroy', sit, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+  
+  <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
 
-<br />
+<% end %>
 
 <%= link_to 'New Sit', new_sit_path %>

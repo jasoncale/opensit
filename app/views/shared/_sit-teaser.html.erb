@@ -1,0 +1,18 @@
+<article class="sit-teaser">
+  <header><%= link_to sit.user.username, user_path(sit.user.id) %> logged 30 minutes of practice. Style: vipassana. <%= time_ago_in_words(sit.created_at) %> ago</header>
+  
+  <div class="body"><%= sit.body %></div>
+
+  <div class="sit-meta">
+    <a href="#">Comment</a>
+    <a href="#">Share</a>
+    <a href="#">Add to favourites</a>
+    <a href="#">Send message</a>
+    <a href="#">Follow</a>
+    <a href="sit.html">Permalink</a>
+  </div> <!-- end .sit-meta -->
+
+  <%= link_to 'Show', sit %>
+  <%= link_to 'Edit', edit_sit_path(sit) %>
+  <%= link_to 'Destroy', sit, confirm: 'Are you sure?', method: :delete %>
+</article>

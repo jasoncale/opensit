@@ -1,0 +1,50 @@
+label {
+  display: inline;
+}
+
+nav.navbar .navbar-inner {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+
+nav.navbar .container { 
+	width: 940px; 
+	margin: 0 auto;
+}
+
+#main-footer .navbar {
+	margin-top: 18px;
+	margin-bottom: 0; 
+}
+
+/**
+ *   SITS
+ */
+
+/* Sit teaser */
+article.sit-teaser {
+	padding: 10px;
+	border-bottom: 1px dotted #666;
+}
+article.sit-teaser:hover {
+	background: #e2e2e2;
+}
+article.sit-teaser header {
+	float: left;
+	font-size: 0.85em;
+}
+article.sit-teaser .my-sit {
+	float: right;
+}
+article.sit-teaser .body {
+	clear: left;
+	font-size: 1.2em;
+	line-height: 1.5;
+}
+
+/* Sit full */
+article.sit-full .body {
+  font-size: 1.2em;
+  line-height: 1.5;  
+}

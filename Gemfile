@@ -22,6 +22,19 @@ end
 
 gem 'jquery-rails'
 
+# Devise authentication
+gem 'devise'
+
+# Annotate your rails models
+gem 'annotate', '2.5.0', group: :development
+
+# Simple form with country select
+gem 'simple_form'
+gem 'country_select'
+
+# Rails admin
+gem 'rails_admin'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

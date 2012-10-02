@@ -20,12 +20,8 @@
     <%= f.text_area :body %>
   </div>
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :allow_comments %><br />
-    <%= f.check_box :allow_comments %>
+    <%= f.label :allow_comments %>
+    <%= f.check_box :allow_comments, { checked: true } %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: sits
+#
+#  id             :integer          not null, primary key
+#  title          :string(255)
+#  body           :text
+#  user_id        :integer
+#  allow_comments :boolean
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 require 'test_helper'
 
 class SitTest < ActiveSupport::TestCase

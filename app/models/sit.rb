@@ -1,6 +1,21 @@
+# == Schema Information
+#
+# Table name: sits
+#
+#  id             :integer          not null, primary key
+#  title          :string(255)
+#  body           :text
+#  user_id        :integer
+#  allow_comments :boolean
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class Sit < ActiveRecord::Base
-  validates :body, :presence => true
+  attr_accessible :allow_comments, :body, :title, :user_id
+  
+  belongs_to :user
   has_many :comments
   
-  attr_accessible :allow_comments, :body, :title, :user_id
-end
+  validates :body, :presence => true
+end                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        # 

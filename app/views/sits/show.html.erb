@@ -1,38 +1,20 @@
-<p id="notice"><%= notice %></p>
+<%= render :partial => 'shared/sit-full', :locals => { :sit => @sit } %>
 
-<p>
-  <b>Title:</b>
-  <%= @sit.title %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= @sit.body %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @sit.user_id %>
-</p>
-
-<p>
-  <b>Allow comments:</b>
-  <%= @sit.allow_comments %>
-</p>
-
-
-<%= link_to 'Edit', edit_sit_path(@sit) %> |
-<%= link_to 'Back', sits_path %>
-
-<h2>Comments</h2>
-<div id="comments">
-  <%= render :partial => @sit.comments %>
-</div>
-
-<% form_for [@sit, Comment.new] do |f| %>
-  <p>
-    <%= f.label :body, "New comment" %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p><%= f.submit "Add comment" %></p>
-<% end %>
+<% if @sit.allow_comments %>
+  <h2>Comments</h2>
+  <div id="comments">
+  <% @sit.comments.each do |comment| %>      
+    <p><%= link_to comment.user.username, user_path(comment.user_id) %>: <%= comment.body %><br> <%= time_ago_in_words(comment.created_at) %> ago</p>
+  <% end %>
+  </div>
+  
+  <h1>Post Comment</h1>
+  
+  <%= form_for [@sit, @sit.comments.build] do |f| %>
+    <%= f.label :comment, 'Your comment' %>:
+    <%= f.text_field :body %><br />
+    <%= f.submit %>
+  <% end %>
+<% else %>
+  <%= "No comments allowed." %>
+<% end %>  

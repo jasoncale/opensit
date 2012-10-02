@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Opensit</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%= full_title(yield(:title)) %></title> 
+    <%= stylesheet_link_tag    "bootstrap" %>
+    <%= stylesheet_link_tag    "opensit" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  
+  <body> <!-- ID here would allow for unique page styling without any additional markup -->
 
-<%= yield %>
+  <%= render 'layouts/header' %>
 
-</body>
+  <div class="container">
+  
+  <%  puts '<p class="notice">' + notice + '</p>' unless notice.blank?
+      puts '<p class="alert">' + alert + '</p>' unless alert.blank? %>
+  
+  <%= yield %>
+  
+  </div> <!-- end div.container -->
+  
+  <%= render 'layouts/footer' %>
+  <%= debug(params) if Rails.env.development? %>
+      
+  </body>
 </html>
+ 

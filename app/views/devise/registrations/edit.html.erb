@@ -1,0 +1,59 @@
+<!-- <h2>Edit <%= resource_name.to_s.humanize %></h2> -->
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , :class => 'form-horizontal'}) do |f| %>
+  <%= devise_error_messages! %>
+  
+  <%= f.input :first_name %>
+    
+  <%= f.input :last_name %>
+  
+  <%= f.input :dob, :as => :date, :label => 'Date of birth', :start_year => Date.today.year - 90,
+                              :end_year => Date.today.year - 12, :order => [:day, :month, :year],
+                              :input_html => { :class => 'span1' } %>
+  
+  <%= f.input :gender, :collection => [['Male', 0], ['Female', 1], ['Transgender', 2]], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
+  
+  <%= f.input :city %>
+  
+  <%= f.input :country %>
+  
+  <h2>Bio</h2>
+  <%= f.input :who, :label => 'Who are you?', :input_html => { :rows => 10, :class => "span6" } %>
+  
+  <h2>Contemplative Profile</h2>
+  <%= f.input :style, :label => 'Style', :input_html => { :rows => 10, :class => "span6" },
+              :hint => 'What style does your practice stem from or most closely resemble?' %>
+  
+  <%= f.input :why, :label => 'Why do you practice?', :input_html => { :rows => 10, :class => "span6" },
+              :hint => 'What inspires you to meditate regularly? What do you hope to achieve?' %>
+  
+  <%= f.input :practice, :label => 'What do you practice?', :input_html => { :rows => 10, :class => "span6" },
+              :hint => 'No two sits are the same, but tell us a little about your core meditation practice.<br />
+              What do you actually do when sit down on the cushion and shut your eyes?' %>
+  
+  
+  <h2>Sits</h2>
+  
+  <%= f.input :default_sit_length %>
+  
+  <%= f.input :public_diary,
+              :hint => 'Do you want other people to be able to see your sits?' %>
+  
+
+  <%= f.input :password, :autocomplete => "off", :label => 'Password', :hint => "Leave blank if you don\'t want to change it" %>
+
+  <%= f.input :password_confirmation %>
+
+  <%= f.input :current_password, :hint => 'We need your current password to confirm your changes' %>
+
+  <%= f.submit "Update" %>
+
+<% end %>
+
+<h3>Cancel my account</h3>
+
+  (<a href="#">Change my email address</a>)
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>

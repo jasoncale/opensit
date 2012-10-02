@@ -1,8 +1,10 @@
 class SitsController < ApplicationController
+  before_filter :authenticate_user!, :only => [:new, :edit, :update, :destroy]
+  
   # GET /sits
   # GET /sits.json
   def index
-    @sits = Sit.all
+    @sits = Sit.order("created_at DESC").all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,7 +42,8 @@ class SitsController < ApplicationController
   # POST /sits
   # POST /sits.json
   def create
-    @sit = Sit.new(params[:sit])
+    @user = current_user
+    @sit = @user.sits.new(params[:sit])
 
     respond_to do |format|
       if @sit.save

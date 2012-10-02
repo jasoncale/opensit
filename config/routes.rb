@@ -1,5 +1,19 @@
 Opensit::Application.routes.draw do
-  resources :sits, :has_many => :comments
+  
+  root :to => "static_pages#home"
+  
+  devise_for :users
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  match 'about' => "static_pages#about"
+  match 'help' => "static_pages#help"
+
+  resources :users
+  match 'me' => "users#me"
+  
+  resources :sits do
+    resources :comments
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

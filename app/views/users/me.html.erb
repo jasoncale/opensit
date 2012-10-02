@@ -1,0 +1,58 @@
+<section class="my-sits">
+  <h2>My sits</h2>
+  
+  <p>Search my sits: <input type="text" /></p>
+  
+  <% @mysits.each do |sit| %>
+  
+    <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
+  
+  <% end %>
+  
+</section>
+
+<section class="my-groups">
+  <h2>My groups</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Group name</th>
+      <th>Latest activity</th>
+      <th>New since last visit?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Zen kids</td>
+      <td><a href="#">Meetup</a></td>
+      <td>2 new post since last visit</td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="my-favourites">
+  <h2>My favourites</h2>
+  <p>You can favourite sits, users, threads, replys, private messages and blogposts and then find them all here!</p>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Saved</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><a href="sit.html">Whoosh!</a></td>
+      <td>Sit</td>
+      <td>13th April, 2012</td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<p>You (<strong><%= current_user.username %></strong>) registered <strong><%= time_ago_in_words(current_user.created_at) %> ago</strong> 
+  with the email address <strong><%= current_user.email %></strong>
+
+<%= link_to 'Back', users_path %>
