@@ -54,4 +54,13 @@ class User < ActiveRecord::Base
                   :email, :first_name, :gender, :last_login, :last_name, 
                   :password, :practice, :profile_pic, :public_diary, :style, 
                   :user_type, :username, :who, :why, :password_confirmation, :remember_me
+                  
+  # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
+  def update_with_password(params={}) 
+    if params[:password].blank? 
+      params.delete(:password) 
+      params.delete(:password_confirmation) if params[:password_confirmation].blank? 
+    end 
+    update_attributes(params) 
+  end
 end

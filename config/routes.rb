@@ -2,7 +2,7 @@ Opensit::Application.routes.draw do
   
   root :to => "static_pages#home"
   
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   match 'about' => "static_pages#about"
