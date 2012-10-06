@@ -32,18 +32,13 @@
     <h2>Global SitStream</h2>
     <h3>Join 240,000 users logging over 1 million hours of practice</h3>
     
-    <%  %>
+    <% @sits.each do |sit| %>
+ 
+      <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
+
+    <% end %>
     
   </section> <!-- end section#global_sitstream -->
-  
-  </div>
-  
-  <div class="row">
-  
-  <section id="newest-users" class="well span6">
-    <h2>Newest Users</h2>
-    <%#  %>
-  </section>
   
   </div>
   
@@ -54,6 +49,12 @@
   <section class="socialstream">
     <h1>SocialStream</h1>
     <p>Latest updates from all of the <%= link_to "people I follow", '#' %>.</p>
+    
+    <% @sits.each do |sit| %>
+ 
+      <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
+
+    <% end %>
   </section>
   
   </div>

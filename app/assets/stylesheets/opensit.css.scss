@@ -1,0 +1,61 @@
+label {
+  display: inline;
+}
+
+nav.navbar .navbar-inner {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+nav.navbar .container { 
+  width: 940px; 
+  margin: 0 auto;
+}
+
+#main-footer .navbar {
+  margin-top: 18px;
+  margin-bottom: 0; 
+}
+
+/**
+ *   SITS
+ */
+
+/* Sit teaser */
+article.sit-teaser {
+  padding: 10px;
+  border-bottom: 1px dotted #666;
+  &:hover {
+   background: #e2e2e2;
+  }
+  .side {
+    float: left;
+    width: 10%;
+  }
+  .header {
+    float: left;
+    font-size: 0.85em;
+  }
+  .sit-badge {
+    border-radius: 5px;
+    border: 1px solid #2C2C2C;
+    background-color: #3A87AD;
+    color: white;
+    padding: 3px;
+  }
+  .my-sit {
+    float: right;
+  }
+  .body {
+    clear: left;
+    font-size: 1.2em;
+    line-height: 1.5em;
+  }
+}
+
+/* Sit full */
+article.sit-full .body {
+  font-size: 1.2em;
+  line-height: 1.5;  
+}

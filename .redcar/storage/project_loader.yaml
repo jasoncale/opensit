@@ -1,7 +1,0 @@
---- 
-open_files: 
-  - app/controllers/sits_controller.rb
-  - app/models/sit.rb
-  - app/views/sits/_form.html.erb
-  - app/views/sits/show.html.erb
-  - app/models/comment.rb

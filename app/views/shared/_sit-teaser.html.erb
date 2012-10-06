@@ -1,15 +1,23 @@
 <article class="sit-teaser">
-  <header><%= link_to sit.user.username, user_path(sit.user.id) %> logged 30 minutes of practice. Style: vipassana. <%= time_ago_in_words(sit.created_at) %> ago</header>
+  
+  <div class="side">
+    <a href="sit.html">S</a>
+    <a href="#" title="Add a comment"><i class="icon-pencil"></i></a>
+    <a href="#" title="Add to favourites"><i class="icon-heart"></i></a>
+  </div>
+  
+  <header>
+    <span class="sit-badge">30 mins of Vipassana on 30/10/98</span>
+    <%= link_to sit.user.username, user_path(sit.user.id) %> 
+    <%= time_ago_in_words(sit.created_at) %> ago
+  </header>
   
   <div class="body"><%= sit.body %></div>
 
   <div class="sit-meta">
-    <a href="#">Comment</a>
-    <a href="#">Share</a>
-    <a href="#">Add to favourites</a>
-    <a href="#">Send message</a>
-    <a href="#">Follow</a>
-    <a href="sit.html">Permalink</a>
+    <a href="#" title="Share"><i class="icon-share"></i></a>
+    <a href="#" title="Send message to this user"><i class="icon-envelope"></i>
+    <a href="#" title="Follow this users updates"><i class="icon-plus-sign"></i></a>
   </div> <!-- end .sit-meta -->
 
   <%= link_to 'Show', sit %>
