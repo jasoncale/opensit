@@ -1,8 +1,16 @@
 <!-- <h2>Edit <%= resource_name.to_s.humanize %></h2> -->
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , :class => 'form-horizontal'}) do |f| %>
+<% if @user.avatar.blank? %>
+<%= image_tag 'http://placehold.it/100x100' %>
+<% else %>
+<%= image_tag @user.avatar.thumb %>
+<% end %>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => :true, :method => :put , :class => 'form-horizontal'}) do |f| %>
   <%= devise_error_messages! %>
   
+  <%= f.file_field :avatar %>
+
   <%= f.input :first_name %>
     
   <%= f.input :last_name %>

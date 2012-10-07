@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121002201840) do
+ActiveRecord::Schema.define(:version => 20121007070830) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20121002201840) do
     t.integer  "failed_attempts",                     :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.string   "avatar"
   end
 
 end

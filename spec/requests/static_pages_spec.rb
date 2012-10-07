@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-describe "Static Pages" do
-  describe "Home page" do
-    
-    it "should have the content 'Where meditators meet'" do
-      visit '/'
-      page.should have_content('Where meditators meet')
-    end
-  end
-  
-  describe "About page" do
+describe "Static pages" do
 
-    it "should have the content 'About'" do
-      visit '/about'
-      page.should have_selector('title',
-                  :text => "About")
-    end
+  subject { page }
+
+  describe "Home page" do
+    before { visit root_path }
+
+    it { should have_selector('h1',    text: 'Where meditators meet.') }
+    it { should have_selector('title', text: 'OpenSit') }
+    it { should_not have_selector 'title', text: '| Home' }
   end
-  
+
+  describe "About page" do
+    before { visit about_path }
+
+    it { should have_selector('h1',    text: 'About') }
+    it { should have_selector('title', text: 'OpenSit | About') }
+  end
 end

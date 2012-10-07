@@ -31,6 +31,10 @@ gem 'jquery-rails'
 # Devise authentication
 gem 'devise'
 
+# Classier solution for file uploads for Rails
+gem 'carrierwave'
+gem 'mini_magick'
+
 # Annotate your rails models
 gem 'annotate', '2.5.0', group: :development
 
