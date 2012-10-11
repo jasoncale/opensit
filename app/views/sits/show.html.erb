@@ -1,7 +1,12 @@
+<div class="alert alert-success"><%= flash[:notice] %></div>
+
 <%= render :partial => 'shared/sit-full', :locals => { :sit => @sit } %>
 
-<% if @sit.allow_comments %>
-  <h2>Comments</h2>
+<% if @sit.disable_comments %>
+  <%= "Comments disabled for this sit." %>
+  
+<% else %>
+  <h2 id="comments">Comments</h2>
   <div id="comments">
   <% @sit.comments.each do |comment| %>      
     <p><%= link_to comment.user.username, user_path(comment.user_id) %>: <%= comment.body %><br> <%= time_ago_in_words(comment.created_at) %> ago</p>
@@ -15,6 +20,4 @@
     <%= f.text_field :body %><br />
     <%= f.submit %>
   <% end %>
-<% else %>
-  <%= "No comments allowed." %>
-<% end %>  
+ <% end %>

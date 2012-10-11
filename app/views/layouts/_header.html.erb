@@ -1,5 +1,5 @@
   <header id="main-header">
-    <nav class="navbar">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <%= link_to "OpenSit", root_path, :class => 'brand' %>
@@ -9,11 +9,11 @@
             <li><form class="navbar-search"><input type="text" name="search" class="search-query" placeholder="Search" /></form></li>
           </ul>
          <% if user_signed_in? %>
-          <a class="pull-left btn btn-inverse" href="/me"><i class="icon-user icon-white"></i>
-            <%= current_user.username %>
-          </a>
           <a class="pull-left btn btn-primary" href="/sits/new"><i class="icon-plus icon-white"></i>
             New sit
+          </a>
+          <a class="pull-left btn btn-inverse" href="/me"><i class="icon-user icon-white"></i>
+            <%= current_user.username %>
           </a>
            
           <ul class="nav">

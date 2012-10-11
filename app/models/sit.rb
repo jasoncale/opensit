@@ -12,7 +12,7 @@
 #
 
 class Sit < ActiveRecord::Base
-  attr_accessible :allow_comments, :body, :title, :user_id
+  attr_accessible :disable_comments, :duration, :s_type, :body, :title, :user_id
   
   belongs_to :user
   has_many :comments

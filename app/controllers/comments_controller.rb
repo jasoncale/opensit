@@ -42,15 +42,12 @@ class CommentsController < ApplicationController
     @sit = Sit.find(params[:sit_id])
     @comment = @sit.comments.build(params[:comment])
     @comment.user_id = current_user.id
-    
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @sit, notice: 'Comment was successfully created.' }
-        format.json { render json: @comment, status: :created, location: @comment }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+
+    if @comment.save
+      flash[:notice] = 'Comment was successfully created.' 
+      redirect_to @sit
+    else
+      render action: "new"
     end
   end
   

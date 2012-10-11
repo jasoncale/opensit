@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007070830) do
+ActiveRecord::Schema.define(:version => 20121007162915) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -38,15 +38,16 @@ ActiveRecord::Schema.define(:version => 20121007070830) do
     t.string   "title"
     t.text     "body"
     t.integer  "user_id"
-    t.boolean  "allow_comments"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.boolean  "disable_comments"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "duration"
+    t.integer  "s_type"
   end
 
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "email"
-    t.string   "profile_pic"
     t.string   "first_name"
     t.string   "last_name"
     t.date     "dob"
@@ -57,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20121007070830) do
     t.text     "why"
     t.text     "style"
     t.text     "practice"
-    t.boolean  "public_diary"
+    t.boolean  "private_diary"
     t.integer  "default_sit_length"
     t.integer  "user_type"
     t.datetime "created_at",                                          :null => false

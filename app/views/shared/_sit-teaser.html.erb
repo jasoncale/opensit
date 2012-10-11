@@ -2,26 +2,34 @@
   
   <div class="side">
     <%= avatar(sit.user) %>
-    <a href="sit.html">S</a>
-    <a href="#" title="Add a comment"><i class="icon-pencil"></i></a>
-    <a href="#" title="Add to favourites"><i class="icon-heart"></i></a>
+    <!-- <div class="icons">
+      <a href="#" title="Send message to this user"><i class="icon-envelope"></i></a>
+      <a href="#" title="Follow this users updates"><i class="icon-plus-sign"></i></a>
+    </div> -->
   </div>
   
-  <header>
-    <span class="sit-badge">30 mins of Vipassana on 30/10/98</span>
-    <%= link_to sit.user.username, user_path(sit.user.id) %> 
-    <%= time_ago_in_words(sit.created_at) %> ago
-  </header>
+  <div class="sit-content">
+    
+    <div class="body"><%= sit.body %></div>
   
-  <div class="body"><%= sit.body %></div>
-
-  <div class="sit-meta">
-    <a href="#" title="Share"><i class="icon-share"></i></a>
-    <a href="#" title="Send message to this user"><i class="icon-envelope"></i>
-    <a href="#" title="Follow this users updates"><i class="icon-plus-sign"></i></a>
-  </div> <!-- end .sit-meta -->
-
-  <%= link_to 'Show', sit %>
-  <%= link_to 'Edit', edit_sit_path(sit) %>
-  <%= link_to 'Destroy', sit, confirm: 'Are you sure?', method: :delete %>
+    <header>
+      <% if sit.s_type.blank? %>
+        <i class="icon-fire"></i> <%= link_to 'Sit:', sit %> <%= username(sit.user) %> sat for <%= sit.duration %> (<%= sit.created_at %>)
+      <% elsif (sit.s_type == 1) %>
+        <i class="icon-book"></i> <%= link_to "Diary: #{sit.title}", sit %> (<%= sit.created_at %>)
+      <% else %>
+        <i class="icon-beaker"></i> <%= link_to "Article: #{sit.title}", sit %> (<%= sit.created_at %>)
+      <% end %>
+    
+      Posted <%= time_ago_in_words(sit.created_at) %> ago
+      <%= link_to 'Edit', edit_sit_path(sit) %>
+      <%= link_to 'Destroy', sit, confirm: 'Are you sure?', method: :delete %>
+    </header>
+    
+    <div class="sit-meta">
+      <i class="icon-comments"></i> <%= link_to "Comments (#{sit.comments.count})", sit_path(sit, :anchor => "comments") %>
+      <i class="icon-heart"></i> <%= link_to "Add to favourites", '#' %>
+      <i class="icon-share"></i> <%= link_to "Share", '#' %>
+    </div> <!-- end .sit-meta -->
+  </div>
 </article>

@@ -54,11 +54,10 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   
   attr_accessible :city, :country, :default_sit_length, :dob, 
-                  :email, :first_name, :gender, :last_login, :last_name, 
-                  :password, :practice, :profile_pic, :public_diary, :style, 
-                  :user_type, :username, :who, :why, :password_confirmation,
-                  :remember_me, :avatar
+                  :email, :first_name, :gender, :last_name, :practice, :private_diary, :style, 
+                  :user_type, :username, :who, :why, :password_confirmation, :remember_me, :avatar
 
+  # Overwrite Devise function to allow profile update with password requirement
   # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
   def update_with_password(params={}) 
     if params[:password].blank? 

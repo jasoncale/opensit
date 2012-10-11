@@ -1,10 +1,6 @@
 <!-- <h2>Edit <%= resource_name.to_s.humanize %></h2> -->
 
-<% if @user.avatar.blank? %>
-<%= image_tag 'http://placehold.it/100x100' %>
-<% else %>
-<%= image_tag @user.avatar.thumb %>
-<% end %>
+<%= avatar(@user, 1) %>
 
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => :true, :method => :put , :class => 'form-horizontal'}) do |f| %>
   <%= devise_error_messages! %>
@@ -44,8 +40,8 @@
   
   <%= f.input :default_sit_length %>
   
-  <%= f.input :public_diary,
-              :hint => 'Do you want other people to be able to see your sits?' %>
+  <%= f.input :private_diary,
+              :hint => 'Don\'t allow others to view my diary entries.' %>
 
   <%= f.submit "Update" %>
 
