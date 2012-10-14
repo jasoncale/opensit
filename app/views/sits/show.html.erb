@@ -1,4 +1,6 @@
-<div class="alert alert-success"><%= flash[:notice] %></div>
+<% if flash[:notice] -%>
+  <div class="alert alert-success"><%= flash[:notice] %></div>
+<% end %>
 
 <%= render :partial => 'shared/sit-full', :locals => { :sit => @sit } %>
 
@@ -9,7 +11,8 @@
   <h2 id="comments">Comments</h2>
   <div id="comments">
   <% @sit.comments.each do |comment| %>      
-    <p><%= link_to comment.user.username, user_path(comment.user_id) %>: <%= comment.body %><br> <%= time_ago_in_words(comment.created_at) %> ago</p>
+    <%= comment.body %><br>
+    <%= avatar(@sit.user) %> <%= username(@sit.user) %> <%= time_ago_in_words(comment.created_at) %> ago</p>
   <% end %>
   </div>
   
@@ -20,4 +23,4 @@
     <%= f.text_field :body %><br />
     <%= f.submit %>
   <% end %>
- <% end %>
+<% end %>

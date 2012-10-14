@@ -1,8 +1,9 @@
 <article class="sit-full">
 
-  <h4><%= sit.title %> by <%= link_to sit.user.username, user_path(sit.user.id) %></h4>
-
   <div class="body"><%= sit.body %></div>
+  
+  <h4><%= username(sit.user) %></h4>
+  <%= avatar(sit.user, 1) %>
   
   <%= link_to 'Edit', edit_sit_path(sit) %> |
   <%= link_to 'Back', sits_path %>

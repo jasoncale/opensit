@@ -13,15 +13,15 @@
     <div class="body"><%= sit.body %></div>
   
     <header>
-      <% if sit.s_type.blank? %>
-        <i class="icon-fire"></i> <%= link_to 'Sit:', sit %> <%= username(sit.user) %> sat for <%= sit.duration %> (<%= sit.created_at %>)
+      <% if sit.s_type == 0 %>
+        <i class="icon-fire"></i> <%= username(sit.user) %> logged <%= link_to "#{sit.duration} minutes", sit, :class => 'sit-link' %> of practice,
       <% elsif (sit.s_type == 1) %>
-        <i class="icon-book"></i> <%= link_to "Diary: #{sit.title}", sit %> (<%= sit.created_at %>)
+        <i class="icon-book"></i> <%= username(sit.user) %> added a new diary: <%= link_to "#{sit.title}", sit, :class => 'sit-link' %>,
       <% else %>
-        <i class="icon-beaker"></i> <%= link_to "Article: #{sit.title}", sit %> (<%= sit.created_at %>)
+        <i class="icon-beaker"></i> <%= username(sit.user) %> added a new article: <%= link_to "#{sit.title}", sit, :class => 'sit-link' %>,
       <% end %>
     
-      Posted <%= time_ago_in_words(sit.created_at) %> ago
+      <%= time_ago_in_words(sit.created_at) %> ago
       <%= link_to 'Edit', edit_sit_path(sit) %>
       <%= link_to 'Destroy', sit, confirm: 'Are you sure?', method: :delete %>
     </header>

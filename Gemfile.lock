@@ -192,7 +192,6 @@ DEPENDENCIES
   annotate (= 2.5.0)
   capybara
   carrierwave
-  coffee-rails (~> 3.2.1)
   country_select
   devise
   jquery-rails

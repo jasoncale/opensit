@@ -57,6 +57,7 @@ article.sit-teaser {
     font-size: 0.85em;
     padding-bottom: 5px;
     .body {
+      cursor: pointer;
       font-size: 1.5em;
       font-family: serif;
       line-height: 1.5em;
@@ -80,7 +81,17 @@ article.sit-teaser {
 }
 
 /* Sit full */
-article.sit-full .body {
-  font-size: 1.2em;
-  line-height: 1.5;  
+article.sit-full {
+  .body {
+    font-family: serif;
+    font-size: 1.8em;
+    line-height: 1.5;  
+  }
+}
+
+/* New sit */
+section.new-sit {
+  .title {
+    display: none;
+  }
 }
