@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   has_many :sits, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   
-  attr_accessible :city, :country, :default_sit_length, :dob, 
+  attr_accessible :city, :country, :default_sit_length, :dob, :password,
                   :email, :first_name, :gender, :last_name, :practice, :private_diary, :style, 
                   :user_type, :username, :who, :why, :password_confirmation, :remember_me, :avatar
 
