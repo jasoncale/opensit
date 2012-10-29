@@ -22,7 +22,10 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :username, :email, :password, :password_confirmation
+  attr_accessible :city, :country, :default_sit_length, :dob, :password,
+                  :email, :first_name, :gender, :last_name, :practice, :private_diary, :style, 
+                  :user_type, :username, :who, :why, :password_confirmation, :remember_me, :avatar
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
