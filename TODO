@@ -1,6 +1,8 @@
 CODE
+- Set up responsive grid. Framework or home-grown?
 Sit teaser
 - keep jquery div clickthru but make body only clickable w/ other links still going to their respective pages.
+@ - make .sit-link display: none in the relevant div
 New sit: 
 - clicking diary removes duration option & adds title option
 - optional title for sits? (have it there & auto filled out with date and duration unless you start typing in it?)
@@ -36,6 +38,7 @@ FEATURES
 - Shared terminology / vocabulary? Maintained through wiki contribution. (mindtrainingterms.com) People can help contribute to and refine first person terminology through their reports. Adding first person examples of each term (i.e. unknowing event)
 - Update anywhere - iPhone, android.
 - Standalone application - export to XML and load your SitStream into other software packages. Also load other peoples for offline browsing etc.
+- Link to any sutta with Access To Insight plugin?
 
 Partners: mind and life, Buddhist geeks, buddhify etc.
 

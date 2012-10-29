@@ -7,15 +7,126 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "app/views/layouts/application.html.erb",
+			"settings":
+			{
+				"buffer_size": 820,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/sits_controller.rb",
+			"settings":
+			{
+				"buffer_size": 1948,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "body {\n  padding: 50px 0 0 0;\n}\n\n.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {\n  width: 960px;\n}\n\n#main-header {\n  ul a {\n    font-size: 0.9em;\n  }\n  .btn {\n    font-size: 0.9em;\n    margin-right: 10px;\n  }\n}\n\nlabel {\n  display: inline;\n}\n\n#main-footer {\npadding-top: 20px;\n  nav {\n    margin-bottom: 0;\n  }\n  .container {\n    width: 960px; \n    margin: 0 auto;\n  }\n}\n\n/**\n *   SITS\n */\n\n/* Sit teaser */\narticle.sit-teaser {\n  float: left;\n  width: 100%;\n  border-bottom: 1px dotted #666;\n  &:hover {\n   background: #e2e2e2;\n  }\n  .side {\n    float: left;\n    padding: 13px 2% 5px 5px;\n    .icons {\n      clear: left;\n      padding-top: 5px;\n    }\n  }\n  .sit-content {\n    width: 90%;\n    float: left;\n    font-size: 0.85em;\n    padding-bottom: 5px;\n    .body {\n      cursor: pointer;\n      font-size: 1.5em;\n      font-family: serif;\n      line-height: 1.5em;\n      padding: 10px 0;\n    }\n    header {\n      display: inline;\n    }\n    .sit-meta {\n      float: right;\n      opacity: 0.5;\n      a,\n      i {\n        padding-right: 5px;\n      }\n      &:hover {\n        opacity: 1;\n      }\n    }\n  }\n}\n\n/* Sit full */\narticle.sit-full {\n  .body {\n    font-family: serif;\n    font-size: 1.8em;\n    line-height: 1.5;  \n  }\n}\n\n/* New sit */\nsection.new-sit {\n  .title {\n    display: none;\n  }\n}\n",
+			"file": "app/assets/stylesheets/opensit.css.scss",
+			"file_size": 1353,
+			"file_write_time": 1351357989000000,
+			"settings":
+			{
+				"buffer_size": 1351,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/shared/_sit-teaser.html.erb",
+			"settings":
+			{
+				"buffer_size": 1469,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/users/show.html.erb",
+			"settings":
+			{
+				"buffer_size": 663,
+				"line_ending": "Unix"
+			}
+		}
 	],
-	"build_system": "",
+	"build_system": "Packages/User/Rails.sublime-build",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"git st",
+				"Git: Status"
+			],
+			[
+				"git",
+				"Git: Commit history"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"git: status",
+				"Git: Status"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"brack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"set syntax: s",
+				"Set Syntax: Sass"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"git:",
+				"Git: Commit history"
+			],
+			[
+				"gi",
+				"Git: Gui"
+			],
+			[
+				"SNI",
+				"Set Syntax: Ruby on Rails"
+			],
+			[
+				"SNIP",
+				"Snippet: singleton_class()"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"",
+				"Package Control: Discover Packages"
+			]
 		],
-		"width": 0.0
+		"width": 518.0
 	},
 	"console":
 	{
@@ -32,25 +143,38 @@
 	},
 	"file_history":
 	[
+		"/home/dan/opensit/app/models/user.rb",
+		"/home/dan/opensit/app/views/registrations/edit.html.erb",
+		"/home/dan/opensit/app/views/users/index.html.erb",
+		"/home/dan/opensit/app/views/users/show.html.erb",
+		"/home/dan/opensit/config/initializers/rails_admin.rb",
 		"/home/dan/opensit/TODO",
+		"/home/dan/opensit/app/views/shared/_sit-teaser.html.erb",
+		"/home/dan/opensit/.gitignore",
+		"/home/dan/opensit/app/assets/stylesheets/opensit.css.scss",
 		"/home/dan/opensit/app/controllers/users_controller.rb",
 		"/home/dan/opensit/Gemfile",
+		"/home/dan/opensit/app/controllers/application_controller.rb",
+		"/home/dan/.config/sublime-text-2/Packages/User/Rails.sublime-build",
+		"/home/dan/opensit/test/functional/users_controller_test.rb",
+		"/home/dan/opensit/public/font/fontawesome-webfont.svg",
+		"/home/dan/.config/sublime-text-2/Packages/User/Distraction Free.sublime-settings",
+		"/home/dan/opensit/config/application.rb",
 		"/home/dan/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
 		"/home/dan/opensit/opensit.sublime-workspace",
-		"/home/dan/opensit/config/application.rb",
 		"/home/dan/opensit/app/views/layouts/_footer.html.erb",
-		"/home/dan/opensit/app/models/user.rb",
 		"/home/dan/opensit/opensit.sublime-project"
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
 		"height": 0.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -58,6 +182,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"gender",
+			"font",
+			"stylesheet_link_tag",
+			"float",
+			"i",
+			"User",
+			"user",
+			"username",
+			"\"><%= ",
+			"body",
+			" .",
+			"user",
+			"avatar"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -75,8 +212,155 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app/views/layouts/application.html.erb",
+					"settings":
+					{
+						"buffer_size": 820,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								552,
+								552
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/controllers/sits_controller.rb",
+					"settings":
+					{
+						"buffer_size": 1948,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								372,
+								372
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "app/assets/stylesheets/opensit.css.scss",
+					"settings":
+					{
+						"buffer_size": 1351,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								157,
+								157
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/views/shared/_sit-teaser.html.erb",
+					"settings":
+					{
+						"buffer_size": 1469,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/views/users/show.html.erb",
+					"settings":
+					{
+						"buffer_size": 663,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								242,
+								242
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -86,7 +370,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 33.0
 	},
 	"layout":
 	{
@@ -97,11 +381,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -111,6 +402,18 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.find_results":
+	{
+		"height": 112.0
+	},
+	"output.git":
+	{
+		"height": 112.0
+	},
 	"replace":
 	{
 		"height": 0.0
@@ -122,12 +425,84 @@
 		"selected_items":
 		[
 			[
+				"show",
+				"app/views/users/show.html.erb"
+			],
+			[
+				"to",
+				"TODO"
+			],
+			[
+				"sit",
+				"app/views/shared/_sit-teaser.html.erb"
+			],
+			[
+				"",
+				".gitignore"
+			],
+			[
+				"opensit",
+				"app/assets/stylesheets/opensit.css.scss"
+			],
+			[
+				"st",
+				"app/views/shared/_sit-teaser.html.erb"
+			],
+			[
+				"sc",
+				"app/controllers/sits_controller.rb"
+			],
+			[
+				"ge",
+				"Gemfile"
+			],
+			[
+				"ap",
+				"app/views/layouts/application.html.erb"
+			],
+			[
+				"a",
+				"app/controllers/application_controller.rb"
+			],
+			[
+				"sit-",
+				"app/views/shared/_sit-teaser.html.erb"
+			],
+			[
 				"uc",
 				"app/controllers/users_controller.rb"
 			],
 			[
+				"ope",
+				"app/assets/stylesheets/opensit.css.scss"
+			],
+			[
+				"user",
+				"app/models/user.rb"
+			],
+			[
+				"use",
+				"app/models/user.rb"
+			],
+			[
+				"teaser",
+				"test/functional/users_controller_test.rb"
+			],
+			[
 				"appli",
 				"config/application.rb"
+			],
+			[
+				"helper",
+				"app/helpers/sits_helper.rb"
+			],
+			[
+				"sit-t",
+				"app/views/shared/_sit-teaser.html.erb"
+			],
+			[
+				"todo",
+				"TODO"
 			],
 			[
 				"gem",
@@ -142,16 +517,20 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"",
+				"/home/dan/db/db.sublime-project"
+			]
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 150.0,
 	"status_bar_visible": true
 }
