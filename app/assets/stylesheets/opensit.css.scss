@@ -1,39 +1,37 @@
+@import 'grid';
+
+/* Semantic.gs setup */
+$column-width: 60px;
+$gutter-width: 20px;
+$columns: 12;
+$total-width: 100%;
+
+#base-container {
+  @include column(12);
+}
+
+.front-page {
+  section,
+  footer {
+    float: left;
+    clear: left;
+  }
+}
+
+.sidebar {
+  @include column(3);
+}
+.profile {
+  @include column(9);
+}
+
 body {
-  padding: 50px 0 0 0;
+  background: #fff;
+  font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #444;
+  -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+  -webkit-text-size-adjust: 100%;
 }
-
-.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-  width: 960px;
-}
-
-#main-header {
-  ul a {
-    font-size: 0.9em;
-  }
-  .btn {
-    font-size: 0.9em;
-    margin-right: 10px;
-  }
-}
-
-label {
-  display: inline;
-}
-
-#main-footer {
-  padding-top: 20px;
-  nav {
-    margin-bottom: 0;
-  }
-  .container {
-    width: 960px; 
-    margin: 0 auto;
-  }
-}
-
-/**
- *   SITS
- */
 
 /* Sit teaser */
 article.sit-teaser {
@@ -41,7 +39,7 @@ article.sit-teaser {
   width: 100%;
   border-bottom: 1px dotted #666;
   &:hover {
-   background: #e2e2e2;
+    background: #e2e2e2;
   }
   .side {
     float: left;
