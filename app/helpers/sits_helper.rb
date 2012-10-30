@@ -12,7 +12,7 @@ module SitsHelper
 
   # Return a hyperlinked username
   def username(user)
-    if user.first_name.empty?
+    if user.first_name.blank?
       link_to user.username, user_path(user.id)
     else
       link_to "#{user.first_name} #{user.last_name}", user_path(user.id)
