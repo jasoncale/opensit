@@ -13,12 +13,14 @@
 
   <%= f.input :s_type, :collection => [['Sit', 0], ['Diary', 1], ['Article', 2]], :as => :radio_buttons, :item_wrapper_class => 'inline', :checked => '0' %>
   
-  <div class="title">
+  <div class="new-sit-title">
     <%= f.input :title %>
   </div>
-  
-  <%= f.input :duration, :input_html => { :value => current_user.default_sit_length } %>
-  
+
+  <div class="new-sit-duration">
+    <%= f.input :duration, :input_html => { :value => current_user.default_sit_length } %>
+  </div>
+
   <%= f.input :body, :input_html => { :rows => 10, :class => "span6" } %>
 
   <%= f.input :disable_comments %>
