@@ -24,6 +24,11 @@
 
     <div class="body"><%= @sit.body %></div>
 
+    <div class="action-bar">
+      <span class="previous"><i class="icon-arrow-left"></i> <%= link_to 'Previous', sit_path(@sit.prev) %></span>
+      <span class="next"><%= link_to 'Next', sit_path(@sit.next) %> <i class="icon-arrow-right"></i></span>
+    </div>
+
     <div class="comments">
       <% if @sit.disable_comments %>
         <p>Comments have been disabled for this sit.</p>

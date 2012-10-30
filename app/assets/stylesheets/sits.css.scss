@@ -50,6 +50,24 @@ article.sit {
     font-size: 1.8em;
     line-height: 1.5;  
   }
+  .action-bar {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    background: #e2e2e2;
+    border-radius: 5px;
+    font-size: 1.3em;
+    margin: 40px 0 0 0;
+    a {
+      color: black;
+    }
+    .previous {
+      float: left;
+    }
+    .next {
+      float: right;
+    }
+  }
   .comments {
     padding: 30px 0;
     float: left;
