@@ -4,13 +4,36 @@
 $column-width: 60px;
 $gutter-width: 20px;
 $columns: 12;
-$total-width: 100%;
+$total-width: 1000px;
 
+/* Base Layout */
 #base-container {
-  @include column(12);
+  width: $total-width;
+  margin: 0 auto;
+}
+
+/* Pull navbar in to width of base layout */
+.navbar-inner .container {
+  width: $total-width;
+}
+
+/* Navbar text a bit smaller */
+#main-header {
+  ul a {
+    font-size: 0.9em;
+  }
+  .btn {
+    font-size: 0.9em;
+    margin-right: 10px;
+  }
+}
+
+.section {
+  float: left;
 }
 
 .front-page {
+  float: left;
   section,
   footer {
     float: left;
@@ -18,14 +41,33 @@ $total-width: 100%;
   }
 }
 
+footer {
+  float: left;
+  margin-top: 20px;
+}
+
+/* View profile */
 .sidebar {
   @include column(3);
 }
+
 .profile {
   @include column(9);
 }
 
-body {
+@media screen and (max-width: 960px) {
+   .sidebar {
+      @include column(12);
+   }
+   .profile {
+      @include column(12);
+   }
+}
+
+/* Look and feel */
+body { 
+  width: 100%; 
+  padding-top: 50px;
   background: #fff;
   font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #444;

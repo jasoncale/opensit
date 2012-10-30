@@ -1,34 +1,33 @@
-<p id="notice"><%= notice %></p>
+<div class="section">
+  <p id="notice"><%= notice %></p>
 
-<section class="sidebar">
-  <%= avatar(@user, 1) %>
-  <p><%= @user.first_name %> <%= @user.last_name %> (<b><%= @user.username %></b>)</p>
-  <p><%= @user.city %>, <%= @user.country %></p>
-</section>
+  <section class="sidebar">
+    <%= avatar(@user, 1) %>
+    <p><%= @user.first_name %> <%= @user.last_name %> (<b><%= @user.username %></b>)</p>
+    <p><%= @user.city %>, <%= @user.country %></p>
+  </section>
 
-<section class="profile">
-  
-  <p>
-    <b>Who:</b>
-    <%= @user.who %>
-  </p>
+  <section class="profile">
+    
+    <p>
+      <b>Who:</b>
+      <%= @user.who %>
+    </p>
 
-  <p>
-    <b>Why:</b>
-    <%= @user.why %>
-  </p>
+    <p>
+      <b>Why:</b>
+      <%= @user.why %>
+    </p>
 
-  <p>
-    <b>Practice:</b>
-    <%= @user.practice %>
-  </p>
+    <p>
+      <b>Practice:</b>
+      <%= @user.practice %>
+    </p>
 
-  <p>
-    <b>Style:</b>
-    <%= @user.style %>
-  </p>
+    <p>
+      <b>Style:</b>
+      <%= @user.style %>
+    </p>
 
-</section>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  </section>
+</div>
