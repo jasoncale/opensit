@@ -22,25 +22,29 @@
 #
 
 class User < ActiveRecord::Base
+  attr_accessible :city, :country, :default_sit_length, :dob, :password,
+                  :email, :first_name, :gender, :last_name, :practice, :private_diary, :style, 
+                  :user_type, :username, :who, :why, :password_confirmation, :remember_me, :avatar
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+
   # CarrierWave
   mount_uploader :avatar, AvatarUploader
-  
+
   has_many :sits, :dependent => :destroy
   has_many :comments, :dependent => :destroy
-  
+
   # Overwrite Devise function to allow profile update with password requirement
   # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
-  def update_with_password(params={}) 
-    if params[:password].blank? 
-      params.delete(:password) 
-      params.delete(:password_confirmation) if params[:password_confirmation].blank? 
-    end 
-    update_attributes(params) 
+  def update_with_password(params={})
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    update_attributes(params)
   end
 end
