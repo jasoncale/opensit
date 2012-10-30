@@ -14,6 +14,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'faker'
+  gem 'annotate', '2.5.0'
 end
 
 # Gems used only for assets and not required
@@ -40,9 +41,6 @@ gem 'devise'
 # Classier solution for file uploads for Rails
 gem 'carrierwave'
 gem 'mini_magick'
-
-# Annotate your rails models
-gem 'annotate', '2.5.0', group: :development
 
 # Simple form with country select
 gem 'simple_form'

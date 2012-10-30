@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   # View user page
   def show
     @user = User.find(params[:id])
-    @sits = Sit.where(:user_id => current_user.id).order("created_at DESC").limit(10)
+    @sits = @user.sits.limit(10)
   end
   
   # GET /users/new

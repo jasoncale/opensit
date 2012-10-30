@@ -18,6 +18,7 @@ class Sit < ActiveRecord::Base
   has_many :comments
   
   validates :body, :presence => true
+  validates :s_type, :presence => true
 
   def next
     user.sits.where("id > ?", id).first
