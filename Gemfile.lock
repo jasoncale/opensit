@@ -64,6 +64,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faker (1.1.2)
+      i18n (~> 0.5)
     ffi (1.1.5)
     haml (3.1.7)
     hike (1.2.1)
@@ -194,6 +196,7 @@ DEPENDENCIES
   carrierwave
   country_select
   devise
+  faker
   jquery-rails
   mini_magick
   rails (= 3.2.3)
