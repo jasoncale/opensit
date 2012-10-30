@@ -8,17 +8,19 @@
 $column-width: 60px;
 $gutter-width: 20px;
 $columns: 12;
-$total-width: 1000px;
+$total-width: 100%;
+$max-width: 1000px;
 
 /* Centred-aligned main container */
 #base-container {
   width: $total-width;
+  max-width: $max-width;
   margin: 0 auto;
 }
 
 /* Pull navbar in to width of base layout */
 .navbar-inner .container {
-  width: $total-width;
+  max-width: $max-width !important;
 }
 
 /* Navbar text a bit smaller */
@@ -35,10 +37,12 @@ $total-width: 1000px;
 /* Section container for pages that have more than one column */
 .section {
   float: left;
+  width: 100%;
 }
 
 /* Footer */
 footer {
+  width: 100%;
   float: left;
   margin-top: 20px;
 }
@@ -49,7 +53,6 @@ footer {
 
 /* Front page */
 .front-page {
-  float: left;
   section,
   footer {
     float: left;
@@ -60,21 +63,35 @@ footer {
   }
 }
 
+/* View sit */
+.view-sit {
+  padding-top: 10px; /* no h1 at top so */
+  section {
+    @include column(3);
+  }
+  .sit {
+    @include column(9);
+  }
+}
+
 /* View profile */
-.sidebar {
-  @include column(3);
+.view-profile {
+  .sidebar {
+    @include column(3);
+  }
+  .profile {
+    @include column(9);
+  }
 }
 
-.profile {
-  @include column(9);
-}
-
-/* Responsive test */
-@media screen and (max-width: 960px) {
-   .sidebar {
+/* View profile: responsive test */
+@media screen and (max-width: 700px) {
+  .view-profile {
+    .sidebar {
       @include column(12);
-   }
-   .profile {
+    }
+    .profile {
       @include column(12);
-   }
+    }
+  }
 }

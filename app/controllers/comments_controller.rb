@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     if @comment.save
-      flash[:notice] = 'Comment was successfully created.' 
+      flash[:notice] = 'Your comment was added.' 
       redirect_to @sit
     else
       render action: "new"
@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to @comment, notice: 'Your comment has been updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,37 +1,31 @@
 class SitsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :edit, :update, :destroy]
   
-  # GET /sits
-  # GET /sits.json
+  # Index
   def index
     @sits = Sit.order("created_at DESC").all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @sits }
-    end
   end
 
-  # GET /sits/1
-  # GET /sits/1.json
+  # View sit
   def show
     @sit = Sit.find(params[:id])
+    @type = sit_type(@sit)
+  end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @sit }
+  # Returns sit type; sit, diary or article.
+  def sit_type(sit)
+    if sit.s_type == 0
+      'sit'
+    elsif sit.s_type == 1
+      'diary'
+    else
+      'article'
     end
   end
 
   # GET /sits/new
-  # GET /sits/new.json
   def new
     @sit = Sit.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @sit }
-    end
   end
 
   # GET /sits/1/edit
@@ -40,47 +34,33 @@ class SitsController < ApplicationController
   end
 
   # POST /sits
-  # POST /sits.json
   def create
     @user = current_user
     @sit = @user.sits.new(params[:sit])
 
-    respond_to do |format|
-      if @sit.save
-        format.html { redirect_to @sit, notice: 'Sit was successfully created.' }
-        format.json { render json: @sit, status: :created, location: @sit }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @sit.errors, status: :unprocessable_entity }
-      end
+    if @sit.save
+      redirect_to @sit, notice: 'Sit was successfully created.'
+    else
+      render action: "new"
     end
   end
 
   # PUT /sits/1
-  # PUT /sits/1.json
   def update
     @sit = Sit.find(params[:id])
 
-    respond_to do |format|
-      if @sit.update_attributes(params[:sit])
-        format.html { redirect_to @sit, notice: 'Sit was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @sit.errors, status: :unprocessable_entity }
-      end
+    if @sit.update_attributes(params[:sit])
+      redirect_to @sit, notice: 'Sit was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
   # DELETE /sits/1
-  # DELETE /sits/1.json
   def destroy
     @sit = Sit.find(params[:id])
     @sit.destroy
 
-    respond_to do |format|
-      format.html { redirect_to sits_url }
-      format.json { head :no_content }
-    end
+    redirect_to sits_url
   end
 end

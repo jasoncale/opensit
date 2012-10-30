@@ -44,11 +44,28 @@ article.sit-teaser {
 }
 
 /* Sit full */
-article.sit-full {
+article.sit {
   .body {
     font-family: serif;
     font-size: 1.8em;
     line-height: 1.5;  
+  }
+  .comments {
+    padding: 30px 0;
+    float: left;
+    width: 100%;
+    .comment { 
+      float: left;
+      width: 100%;
+      padding: 10px;
+      border-top: 1px solid #CCC;
+      .comment-body {}
+      .user {
+        float: right;
+        font-size: 0.85em;
+        opacity: 0.7;
+      }
+    }
   }
 }
 

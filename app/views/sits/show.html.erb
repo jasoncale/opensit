@@ -1,26 +1,55 @@
-<% if flash[:notice] -%>
-  <div class="alert alert-success"><%= flash[:notice] %></div>
-<% end %>
-
-<%= render :partial => 'shared/sit-full', :locals => { :sit => @sit } %>
-
-<% if @sit.disable_comments %>
-  <%= "Comments disabled for this sit." %>
+<div class="section view-sit">
   
-<% else %>
-  <h2 id="comments">Comments</h2>
-  <div id="comments">
-  <% @sit.comments.each do |comment| %>      
-    <%= comment.body %><br>
-    <%= avatar(@sit.user) %> <%= username(@sit.user) %> <%= time_ago_in_words(comment.created_at) %> ago</p>
+  <% if flash[:notice] -%>
+    <div class="alert alert-success"><%= flash[:notice] %></div>
   <% end %>
-  </div>
-  
-  <h1>Post Comment</h1>
-  
-  <%= form_for [@sit, @sit.comments.build] do |f| %>
-    <%= f.label :comment, 'Your comment' %>:
-    <%= f.text_field :body %><br />
-    <%= f.submit %>
-  <% end %>
-<% end %>
+
+  <section class="sidebar">
+    <%= avatar(@sit.user) %>
+    <h4><%= username(@sit.user) %></h4>
+    <%= location(@sit.user) %>
+  </section>
+
+  <article class="sit">
+
+    <header>
+    <% if (@type == 'sit') %>
+        <h3><i class="icon-time"></i> <%= @sit.duration %> minute sit on  <%= localize(@sit.created_at, :format => :short) %></h3>
+    <% elsif (@type == 'diary') %>
+        <h3><i class="icon-book"></i> <%= @sit.title %></h3>
+    <% else %>
+        <h3><i class="icon-beaker"></i> Article</h3>
+    <% end %>
+    </header>
+
+    <div class="body"><%= @sit.body %></div>
+
+    <div class="comments">
+      <% if @sit.disable_comments %>
+        <p>Comments have been disabled for this sit.</p>
+      <% else %>
+        <h4>Comments</h4>
+        <% if (@sit.comments.count == 0) %>
+          <p>No one has posted a comment yet; be the first!</p>
+        <% else %>
+          <% @sit.comments.each do |comment| %>      
+            <div class="comment">
+              <div class="comment-body"><%= comment.body %></div>
+              <div class="user"><%= username(@sit.user) %>, <%= time_ago_in_words(comment.created_at) %> ago</div>
+            </div>
+          <% end %>
+        <% end %>
+    </div>
+
+      <% if @sit.comments.count > 1 %>
+        <h4>Add a comment</h4>
+      <% end %>
+      <%= simple_form_for [@sit, @sit.comments.build] do |f| %>
+        <%= f.input :body, :label => false, :input_html => { :rows => 5, :class => 'span6' } %>
+        <%= f.submit 'Add comment' %>
+      <% end %>
+    <% end %>
+
+  </article>
+
+</div>

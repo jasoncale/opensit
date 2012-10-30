@@ -1,4 +1,5 @@
 CODE
+Standardise means of confirmation/warning messages (:Flash?)
 Sit teaser
 - keep jquery div clickthru but make body only clickable w/ other links still going to their respective pages.
 @ - make .sit-link display: none in the relevant div
