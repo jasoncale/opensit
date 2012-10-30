@@ -16,3 +16,9 @@ body {
 label {
   display: inline !important;
 }
+
+/* Fix strange bug with bootstrap radio buttons */
+.radio input[type="radio"], .checkbox input[type="checkbox"] {
+    float: none !important;
+    margin: 0 5px 4px -18px;
+}
