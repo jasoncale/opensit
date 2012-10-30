@@ -1,0 +1,60 @@
+/* Sit teaser */
+article.sit-teaser {
+  float: left;
+  width: 100%;
+  border-bottom: 1px dotted #666;
+  &:hover {
+    background: #e2e2e2;
+  }
+  .side {
+    float: left;
+    padding: 13px 2% 5px 5px;
+    .icons {
+      clear: left;
+      padding-top: 5px;
+    }
+  }
+  .sit-content {
+    width: 90%;
+    float: left;
+    font-size: 0.85em;
+    padding-bottom: 5px;
+    .body {
+      cursor: pointer;
+      font-size: 1.5em;
+      font-family: serif;
+      line-height: 1.5em;
+      padding: 10px 0;
+    }
+    header {
+      display: inline;
+    }
+    .sit-meta {
+      float: right;
+      opacity: 0.5;
+      a,
+      i {
+        padding-right: 5px;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/* Sit full */
+article.sit-full {
+  .body {
+    font-family: serif;
+    font-size: 1.8em;
+    line-height: 1.5;  
+  }
+}
+
+/* New sit */
+section.new-sit {
+  .title {
+    display: none;
+  }
+}
