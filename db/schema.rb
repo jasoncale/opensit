@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007162915) do
+ActiveRecord::Schema.define(:version => 20121031090234) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20121007162915) do
     t.string   "country"
     t.text     "who"
     t.text     "why"
-    t.text     "style"
+    t.string   "style",                :limit => 100
     t.text     "practice"
     t.boolean  "private_diary"
     t.integer  "default_sit_length"

@@ -47,6 +47,11 @@ footer {
   margin-top: 20px;
 }
 
+/* Forms */
+.basic-form {
+  @include column(10);
+}
+
 /**
  * MAIN PAGES
  ****************/

@@ -23,16 +23,17 @@
     <%= f.input :country %>
     
     <h2>Bio</h2>
-    <%= f.input :who, :label => 'Who are you?', :input_html => { :rows => 10 } %>
+    <%= f.input :who, :label => 'Who are you?', :input_html => { :rows => 3, :class => 'basic-form' },
+                :hint => 'Tell us about yourself in under 140 characters' %>
     
     <h2>Contemplative Profile</h2>
-    <%= f.input :style, :label => 'Style', :input_html => { :rows => 10 },
+    <%= f.input :style, :label => 'Style', 
                 :hint => 'What style does your practice stem from or most closely resemble?' %>
     
-    <%= f.input :why, :label => 'Why do you practice?', :input_html => { :rows => 10 },
+    <%= f.input :why, :label => 'Why do you practice?', :input_html => { :rows => 10, :class => 'basic-form' },
                 :hint => 'What inspires you to meditate regularly? What do you hope to achieve?' %>
     
-    <%= f.input :practice, :label => 'What do you practice?', :input_html => { :rows => 10 },
+    <%= f.input :practice, :label => 'What do you practice?', :input_html => { :rows => 10, :class => 'basic-form' },
                 :hint => 'No two sits are the same, but tell us a little about your core meditation practice.<br />
                 What do you actually do when sit down on the cushion and shut your eyes?' %>
     
