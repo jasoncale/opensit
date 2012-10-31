@@ -50,6 +50,7 @@ footer {
 /* Forms */
 .basic-form {
   @include column(10);
+  margin: 0 10px 0 0;
 }
 
 /**
