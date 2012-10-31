@@ -17,6 +17,23 @@ label {
   display: inline !important;
 }
 
+/* Navbar text a bit smaller */
+#main-header {
+  ul a {
+    font-size: 0.9em;
+  }
+  .btn {
+    font-size: 0.9em;
+    margin-right: 10px;
+  }
+  .explore {
+    font-weight: bold;
+  }
+  .logout {
+    font-size: 1.2em;
+  }
+}
+
 /* Fix strange bug with bootstrap radio buttons */
 .radio input[type="radio"], .checkbox input[type="checkbox"] {
   float: none !important;

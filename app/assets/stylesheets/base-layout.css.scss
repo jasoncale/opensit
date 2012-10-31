@@ -23,17 +23,6 @@ $max-width: 1000px;
   max-width: $max-width !important;
 }
 
-/* Navbar text a bit smaller */
-#main-header {
-  ul a {
-    font-size: 0.9em;
-  }
-  .btn {
-    font-size: 0.9em;
-    margin-right: 10px;
-  }
-}
-
 /* Section container for pages that have more than one column */
 .section {
   float: left;

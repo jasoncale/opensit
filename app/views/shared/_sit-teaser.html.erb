@@ -20,9 +20,15 @@
     <div class="body"><%= sit.body %></div>
     
     <div class="sit-meta">
-      <i class="icon-comments"></i> <%= link_to "(#{sit.comments.count})", sit_path(sit, :anchor => "comments") %>
-      <i class="icon-star"></i> <%= link_to "Mark", '#' %>
-      <i class="icon-share"></i> <%= link_to "Share", '#' %>
+      <%= link_to(sit_path(sit, :anchor => "comments")) do %>
+        <i class="icon-comments"></i> <%= sit.comments.count %>
+      <% end %>
+      <%= link_to('#') do %>
+        <i class="icon-star-empty"></i>
+      <% end %>
+      <%= link_to('#') do %>
+        <i class="icon-share"></i>
+      <% end %>
     </div> <!-- end .sit-meta -->
 
   </div> <!-- end .sit-content -->

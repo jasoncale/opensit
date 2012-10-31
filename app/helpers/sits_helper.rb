@@ -21,7 +21,14 @@ module SitsHelper
 
   # Return location
   def location(user)
-    "#{user.city}, #{user.country}"
+    if !user.city.blank? && !user.country.blank?
+      "#{user.city}, #{user.country}"
+    elsif !user.city.blank?
+      "#{user.city}"
+    elsif !user.country.blank?
+      "#{user.country}"
+    else
+    end
   end
   
 end
