@@ -1,4 +1,5 @@
 CODE
+Add website field to users model
 Pagination for my sits etc.
 Add tag functionality
 Standardise means of confirmation/warning messages (:Flash?)

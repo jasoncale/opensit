@@ -3,11 +3,11 @@
 
   <section class="sidebar">
     <%= avatar(@user, 1) %>
-    <p><%= @user.first_name %> <%= @user.last_name %> (<b><%= @user.username %></b>)</p>
-    <p><%= @user.city %>, <%= @user.country %></p>
+    <h4><%= username(@user) %></h4>
+    <%= location(@user) %>
   </section>
 
-  <section class="profile">
+  <section class="content profile">
     
     <p>
       <b>Who:</b>

@@ -1,66 +1,29 @@
-<div class="row-fluid">
-  <section class="my-sits">
-    <h2>My sits</h2>
+<div class="section me">
+
+  <section class="sidebar">
+    <h4>Hi <%= username(@user) %>!</h4>
+
+    <small>You (<strong><%= current_user.username %></strong>) registered <strong><%= time_ago_in_words(current_user.created_at) %> ago</strong> 
+    with the email address <strong><%= current_user.email %></strong></small>
+  </section>
+  
+  <section class="content socialstream">
+    <ul class="nav nav-pills">
+      <li class="active">
+        <a href="#">Following</a>
+      </li>
+      <li><a href="#">Groups</a></li>
+      <li><a href="#">Messages</a></li>
+      <li><a href="#">Favourites</a></li>
+    </ul>
     
-    <p>Search my sits: <input type="text" /></p>
+    <p>Latest updates from all of the <%= link_to "people I follow", '#' %>.</p>
     
-    <% @mysits.each do |sit| %>
-    
+    <% @sits.each do |sit| %>
+
       <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
-    
+
     <% end %>
-    
   </section>
-</div>
 
-<div class="row-fluid">
-  <section class="my-groups">
-    <h2>My groups</h2>
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Group name</th>
-        <th>Latest activity</th>
-        <th>New since last visit?</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>Zen kids</td>
-        <td><a href="#">Meetup</a></td>
-        <td>2 new post since last visit</td>
-      </tr>
-      </tbody>
-    </table>
-  </section>
-</div>
-
-<div class="row-fluid">
-  <section class="my-favourites">
-    <h2>My favourites</h2>
-    <p>You can favourite sits, users, threads, replys, private messages and blogposts and then find them all here!</p>
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th>Type</th>
-        <th>Saved</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td><a href="sit.html">Whoosh!</a></td>
-        <td>Sit</td>
-        <td>13th April, 2012</td>
-      </tr>
-      </tbody>
-    </table>
-  </section>
-</div>
-
-<div class="row-fluid">
-  <p>You (<strong><%= current_user.username %></strong>) registered <strong><%= time_ago_in_words(current_user.created_at) %> ago</strong> 
-    with the email address <strong><%= current_user.email %></strong>
-
-  <%= link_to 'Back', users_path %>
 </div>

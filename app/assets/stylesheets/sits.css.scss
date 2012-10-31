@@ -2,32 +2,25 @@
 article.sit-teaser {
   float: left;
   width: 100%;
-  border-bottom: 1px dotted #666;
-  &:hover {
-    background: #e2e2e2;
-  }
+  /* Avatar */
   .side {
     float: left;
-    padding: 13px 2% 5px 5px;
-    .icons {
-      clear: left;
-      padding-top: 5px;
-    }
+    padding: 25px 2% 5px 5px;
   }
   .sit-content {
     width: 90%;
     float: left;
     font-size: 0.85em;
     padding-bottom: 5px;
-    .body {
-      cursor: pointer;
-      font-size: 1.5em;
-      font-family: serif;
-      line-height: 1.5em;
-      padding: 10px 0;
+    .time-ago {
+      font-size: 0.9em;
+      opacity: 0.6;
     }
-    header {
-      display: inline;
+    .sit-header {
+      font-size: 15px;
+    }
+    .body {
+      padding: 5px 0;
     }
     .sit-meta {
       float: right;

@@ -1,8 +1,8 @@
 jQuery(document).ready(function($) {
-  $('.sit-teaser').click(function() {
-    window.location=$(this).find("a.sit-link").attr("href"); 
-    return false;
-  })
+  // $('.sit-teaser').click(function() {
+  //   window.location=$(this).find("a.sit-link").attr("href"); 
+  //   return false;
+  // })
 
   $('.radio_buttons').click(function(){
     if ($(this).attr("id") == "sit_s_type_0")

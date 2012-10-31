@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= f.input :s_type, :collection => [['Sit', 0], ['Diary', 1], ['Article', 2]], :as => :radio_buttons, :item_wrapper_class => 'inline', :checked => '0' %>
+  <%= f.input :s_type, :label => false, :collection => [['Sit', 0], ['Diary', 1], ['Article', 2]], :as => :radio_buttons, :item_wrapper_class => 'inline', :checked => '0' %>
   
   <div class="new-sit-title">
     <%= f.input :title %>

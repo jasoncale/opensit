@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
+  
+  # Me page (default)
+  def me
+    if !user_signed_in?
+      redirect_to front_path
+    else
+      @user = current_user
+      @mysits = @user.sits.limit(10)
+      @sits = Sit.order("created_at DESC").limit(10)
     end
   end
 
@@ -16,16 +17,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @sits = @user.sits.limit(10)
   end
+
+  # GET /users
+  def index
+    @users = User.all
+  end
   
   # GET /users/new
-  # GET /users/new.json
   def new
     @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-    end
   end
 
   # GET /users/1/edit
@@ -38,14 +38,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      redirect_to @user, notice: 'User was successfully created.'
+    else
+      render action: "new"
     end
   end
 
@@ -54,14 +50,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update_attributes(params[:user])
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -71,14 +63,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
 
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
-  end
-  
-  # Me page
-  def me
-    @mysits = Sit.where(:user_id => current_user.id).order("created_at DESC")
+    redirect_to users_url
   end
 end

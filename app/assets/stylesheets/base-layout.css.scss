@@ -38,6 +38,12 @@ $max-width: 1000px;
 .section {
   float: left;
   width: 100%;
+  .sidebar {
+    @include column(3);
+  }
+  .content {
+    @include column(9);
+  }
 }
 
 /* Footer */
@@ -72,31 +78,15 @@ footer {
 /* View sit */
 .view-sit {
   padding-top: 10px; /* no h1 at top so */
-  section {
-    @include column(3);
-  }
-  .sit {
-    @include column(9);
-  }
-}
-
-/* View profile */
-.view-profile {
-  .sidebar {
-    @include column(3);
-  }
-  .profile {
-    @include column(9);
-  }
 }
 
 /* View profile: responsive test */
 @media screen and (max-width: 700px) {
-  .view-profile {
+  .section {
     .sidebar {
       @include column(12);
     }
-    .profile {
+    .content {
       @include column(12);
     }
   }

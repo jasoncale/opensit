@@ -6,23 +6,22 @@
   
   <div class="sit-content">
     
-    <div class="body"><%= sit.body %></div>
-  
-    <header>
+    <div class="time-ago"><%= time_ago_in_words(sit.created_at) %> ago</div>
+    <div class="sit-header">
       <% if sit.s_type == 0 %>
-        <i class="icon-fire"></i> <%= username(sit.user) %> logged <%= link_to "#{sit.duration} minutes", sit, :class => 'sit-link' %> of practice,
+        <%= username(sit.user) %> sat for <%= link_to "#{sit.duration} minutes", sit, :class => 'sit-link' %>
       <% elsif (sit.s_type == 1) %>
-        <i class="icon-book"></i> <%= username(sit.user) %> added a new diary: <%= link_to "#{sit.title}", sit, :class => 'sit-link' %>,
+        <%= username(sit.user) %> added a new diary: <%= link_to "#{sit.title}", sit, :class => 'sit-link' %>
       <% else %>
-        <i class="icon-beaker"></i> <%= username(sit.user) %> added a new article: <%= link_to "#{sit.title}", sit, :class => 'sit-link' %>,
+        <%= username(sit.user) %> added a new article: <%= link_to "#{sit.title}", sit, :class => 'sit-link' %>
       <% end %>
-    
-      <%= time_ago_in_words(sit.created_at) %> ago
-    </header>
+    </div>
+
+    <div class="body"><%= sit.body %></div>
     
     <div class="sit-meta">
-      <i class="icon-comments"></i> <%= link_to "Comments (#{sit.comments.count})", sit_path(sit, :anchor => "comments") %>
-      <i class="icon-heart"></i> <%= link_to "Add to favourites", '#' %>
+      <i class="icon-comments"></i> <%= link_to "(#{sit.comments.count})", sit_path(sit, :anchor => "comments") %>
+      <i class="icon-star"></i> <%= link_to "Mark", '#' %>
       <i class="icon-share"></i> <%= link_to "Share", '#' %>
     </div> <!-- end .sit-meta -->
 
