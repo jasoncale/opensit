@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   # View user page
   def show
     @user = User.find(params[:id])
-    @sits = @user.sits.limit(10)
+    @sits = @user.sits.order("created_at DESC").limit(10)
   end
 
   def bio
