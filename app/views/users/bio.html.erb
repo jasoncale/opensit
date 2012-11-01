@@ -1,0 +1,27 @@
+ <div class="section view-profile">
+  <p id="notice"><%= notice %></p>
+
+  <section class="sidebar">
+    <%= avatar(@user, 1) %>
+    <h4><%= username(@user) %></h4>
+    <%= location(@user) %>
+  </section>
+
+  <section class="content bio">
+    
+    <%= render :partial => 'shared/other-pills' %>
+
+    <p class="lead"><%= @user.who %></p>
+
+    <p>
+      <b>Why do you practice?</b><br />
+      <%= @user.why %>
+    </p>
+
+    <p>
+      <b>What do you practice?</b><br />
+      <%= @user.practice %>
+    </p>
+
+  </section>
+</div>

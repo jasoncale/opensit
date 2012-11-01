@@ -21,6 +21,10 @@ class UsersController < ApplicationController
     @sits = @user.sits.limit(10)
   end
 
+  def bio
+    @user = User.find(params[:id])
+  end 
+
   # GET /users
   def index
     @users = User.all
