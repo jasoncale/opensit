@@ -2,17 +2,12 @@ CODE
 Add website field to users model
 Pagination for my sits etc.
 Add tag functionality
-Standardise means of confirmation/warning messages (:Flash?)
 Sit teaser
-- keep jquery div clickthru but make body only clickable w/ other links still going to their respective pages.
-@ - make .sit-link display: none in the relevant div
+- keep jquery div clickthru but make body only clickable w/ other links still going to their respective pages (make .sit-link display: none in the relevant div)
 New sit: 
-- clicking diary removes duration option & adds title option
 - optional title for sits? (have it there & auto filled out with date and duration unless you start typing in it?)
-Keep options to diary/sit at the moment. Create articles and markers from other areas of the site.
-Basic view sit page, with next/previous links
+How to add markers?
 Research basic rich text editor for new lines, headings, links, bold, italic etc.
-Basic user profile view showing profile details and sits.
 Set up following/followers
 Add favourites functionality
 Add blog
@@ -20,43 +15,33 @@ Research group and forums
 - https://github.com/gitt/forum_monster
 - write your own!
 
-NETWORK
-Go over OpenSit text and tidy up / incorporate mention of new features.
-Contact Al re: OpenSit & sitnow
-
-BRAND
-wireframe. Main (social stream), Portal (favs, my sits etc), Settings (edit profile)
-Go through UX process for OS; key words, themes, ideas.
-The best interface is no interface - voice dictate your sits! plug in to biofeedback machines and automatically record that. Auto-location, auto-mood...! sit together and auto transcribe any dialog into sit report.
-
 FEATURES
 - Tags: add ‘A&P’ tag to your sit, or 'vipassana' or 'retreat'. view all sits you’ve also tagged ‘A&P’, and potentially search the entire site for practitioners who have tagged a certain sit ‘A&P’. also 
-- Duration and style as types of tag, with ability for users to define other types of tags. Really gives users the ability to create what they want but more development work.
-- Individual glossary
-- Ability to quickref sits and include them in posts/articles, like gist from github. Ability to quick link to previous sits/articles in a new sit/article. Just my sits or others as well?
-- User reputation /upvote system - upvotes for helping others out & writing quality content
-- Sit together - sit "with" someone online. Share thoughts, communicate via audio/visual. Perfect for teaching
+- Individual glossary, with rollovers on defined terms.
+- Ability to quick link to previous sits/articles in a new sit/article. Just my sits or others as well?
+
+FUTURE
+- iPhone/android app
 - Adding geo-location stuff so people can search for practitioners near them and arrange meet ups.
+- The best interface is no interface - voice dictate your sits! plug in to biofeedback machines and automatically record that. Auto-location, auto-mood...! sit together and auto transcribe any dialog into sit report.
+- Duration and style as types of tag, with ability for users to define other types of tags. Really gives users the ability to create what they want but more development work.
+- User reputation /upvote system - upvotes for helping others out & writing quality content?
+- Sit together - sit "with" someone online. Share thoughts, communicate via audio/visual. Perfect for teaching
 - OpenSit could provide statistics and feedback on your practice - qualitative content analysis of written reports, and quantitative assessments regarding sitting trends (e.g. always getting drunk and missing weekend sits).
-- Shared terminology / vocabulary? Maintained through wiki contribution. (mindtrainingterms.com) People can help contribute to and refine first person terminology through their reports. Adding first person examples of each term (i.e. unknowing event)
-- Update anywhere - iPhone, android.
+- Shared terminology / vocabulary? Maintained through wiki contribution. (mindtrainingterms.com) People can help contribute to and refine first person terminology through their reports. linking to 1st person reports of each term (i.e. unknowing event)
 - Standalone application - export to XML and load your SitStream into other software packages. Also load other peoples for offline browsing etc.
 - Link to any sutta with Access To Insight plugin?
 
-Partners: mind and life, Buddhist geeks, buddhify etc.
-
-API: Software reading directly from live database
+Group forums
 
 Group types: Hidden (only members can see it), Closed (everyone can see it, but users must manually be added), Open (anyone can join), and Request (users can request to be added by the Group Leader).
-
-Group forums
 
 Read/unread for each user & thread - you can keep a separate database table to keep a record for every topic X every user if the user has read it (no record if the user hasn't), and then automatically assume after 30 days that the topic is read, which allows you to prune this table to prevent overgrowth. Keeping a separate table like this is pretty standard practice, and unless this forum is super popular (always plan for popularity I guess), I doubt you'll run into space or CPU limits.
 
 For example, table topics_read has fields user_id, topic_id, and when. Storing two ints and a date is only a few bytes for each row.
 
 Thread vs response/post
-I'd recommend having parent_id null if its a top level thread, it makes more sense
+Same type, top level thread just has parent_id of null
 
 Multiple forums?
 i.e. different forums within each group page (i.e. Meetups, Introductions, Technical)
