@@ -5,10 +5,13 @@ class UsersController < ApplicationController
     if !user_signed_in?
       redirect_to front_path
     else
-      @user = current_user
-      @mysits = @user.sits.limit(10)
       @sits = Sit.order("created_at DESC").limit(10)
     end
+  end
+
+  def my_sits
+    @user = current_user
+    @my_sits = @user.sits.limit(10)
   end
 
   # GET /users/1

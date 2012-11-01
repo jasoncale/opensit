@@ -1,7 +1,7 @@
-<div class="section me">
+<div class="section my-sits">
 
   <section class="sidebar">
-    <h4>Hi <%= username(current_user) %>!</h4>
+    <h4>Hi <%= username(@user) %>!</h4>
 
     <small>You (<strong><%= current_user.username %></strong>) registered <strong><%= time_ago_in_words(current_user.created_at) %> ago</strong> 
     with the email address <strong><%= current_user.email %></strong></small>
@@ -9,15 +9,12 @@
   
   <section class="content socialstream">
 
-    <%= render :partial => 'shared/nav-pills', :locals => { :active => 'me' } %>
-    
-    <p>Latest updates from all of the <%= link_to "people I follow", '#' %>.</p>
-    
-    <% @sits.each do |sit| %>
+  	<%= render :partial => 'shared/nav-pills', :locals => { :active => 'my_sits' } %>
+  	
+  	<% @my_sits.each do |sit| %>
 
       <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
 
     <% end %>
   </section>
-
-</div>
+ </div>

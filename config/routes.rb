@@ -11,7 +11,8 @@ Opensit::Application.routes.draw do
 
   resources :users
   match 'me' => "users#me"
-  
+  match 'my' => "users#my_sits"
+
   resources :sits do
     resources :comments
   end

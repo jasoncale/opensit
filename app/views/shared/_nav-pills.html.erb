@@ -1,0 +1,6 @@
+<ul class="nav nav-pills">
+  <li <%='class=active' if params[:action] == "me" %>><%= link_to 'Following', me_path %></li>
+  <li <%='class=active' if params[:action] == "my_sits" %>><%= link_to 'My sits', my_path %></li>
+  <li><a href="#">My groups</a></li>
+  <li><a href="#">My favourites</a></li>
+</ul>
