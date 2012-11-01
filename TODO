@@ -1,16 +1,28 @@
 CODE
-Add website field to users model
-Pagination for my sits etc.
-Add tag functionality
+Favourite functionality - ability to add/delete various objects (sits, comments, blog posts, forum posts etc)
+Follow/following functionality
+Tag functionality
+Pagination for sits, comments etc.
+Add website field to users model & form to edit profile page
+
 Sit teaser
 - keep jquery div clickthru but make body only clickable w/ other links still going to their respective pages (make .sit-link display: none in the relevant div)
 New sit: 
+ADD SIT
 - optional title for sits? (have it there & auto filled out with date and duration unless you start typing in it?)
-How to add markers?
-Research basic rich text editor for new lines, headings, links, bold, italic etc.
-Set up following/followers
-Add favourites functionality
+-Basic lightweight rich text editor:
+preserve new lines
+headings
+links
+bold
+italic
+block quotes
+possibility of adding custom functionality i.e. linking to other users, & previous sit reports
+- Date to add old sits
+- Add tags
+
 Add blog
+How to add markers?
 Research group and forums
 - https://github.com/gitt/forum_monster
 - write your own!
@@ -19,18 +31,6 @@ FEATURES
 - Tags: add ‘A&P’ tag to your sit, or 'vipassana' or 'retreat'. view all sits you’ve also tagged ‘A&P’, and potentially search the entire site for practitioners who have tagged a certain sit ‘A&P’. also 
 - Individual glossary, with rollovers on defined terms.
 - Ability to quick link to previous sits/articles in a new sit/article. Just my sits or others as well?
-
-FUTURE
-- iPhone/android app
-- Adding geo-location stuff so people can search for practitioners near them and arrange meet ups.
-- The best interface is no interface - voice dictate your sits! plug in to biofeedback machines and automatically record that. Auto-location, auto-mood...! sit together and auto transcribe any dialog into sit report.
-- Duration and style as types of tag, with ability for users to define other types of tags. Really gives users the ability to create what they want but more development work.
-- User reputation /upvote system - upvotes for helping others out & writing quality content?
-- Sit together - sit "with" someone online. Share thoughts, communicate via audio/visual. Perfect for teaching
-- OpenSit could provide statistics and feedback on your practice - qualitative content analysis of written reports, and quantitative assessments regarding sitting trends (e.g. always getting drunk and missing weekend sits).
-- Shared terminology / vocabulary? Maintained through wiki contribution. (mindtrainingterms.com) People can help contribute to and refine first person terminology through their reports. linking to 1st person reports of each term (i.e. unknowing event)
-- Standalone application - export to XML and load your SitStream into other software packages. Also load other peoples for offline browsing etc.
-- Link to any sutta with Access To Insight plugin?
 
 Group forums
 

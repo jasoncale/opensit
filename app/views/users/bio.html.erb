@@ -4,7 +4,8 @@
   <section class="sidebar">
     <%= avatar(@user, 1) %>
     <h4><%= username(@user) %></h4>
-    <%= location(@user) %>
+    <p><%= location(@user) %></p>
+    <p><em>Style:</em> <%= @user.style %></p>
   </section>
 
   <section class="content bio">

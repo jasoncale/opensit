@@ -87,3 +87,13 @@ Requirements Definition
 * OpenSit news/blog.
 * Search functionality for users, content, groups.
 * Administration area to moderate users and groups, and view statistics.
+
+Future!
+-------
+* iPhone/android app
+* Geo-location functionality so people can search for practitioners near them and arrange meet ups.
+* The best interface is no interface - voice dictate your sits! Plug in to biofeedback machines and automatically record that. Auto-location, auto-mood...! 
+* Sit together (real time).
+* User reputation/upvote system - upvotes for helping others out & writing quality content? Unsure about this.
+* Shared terminology / vocabulary? Maintained through wiki contribution. (mindtrainingterms.com) People can help contribute to and refine first person terminology through their reports. Each entry can contain links to first person reports of the term (i.e. unknowing event, dark night, chakra energetics)
+* Standalone application - export to XML and load your SitStream into other software packages. Also load other peoples for offline browsing etc.

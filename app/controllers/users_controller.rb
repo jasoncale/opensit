@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def my_sits
     @user = current_user
-    @my_sits = @user.sits.limit(10)
+    @my_sits = @user.sits.order("created_at DESC").limit(10)
   end
 
   # GET /users/1
