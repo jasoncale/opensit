@@ -1,3 +1,0 @@
-== OpenSit
-
-OpenSit is a contemplative expression platform, currently under development.
