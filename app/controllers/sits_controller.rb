@@ -9,6 +9,7 @@ class SitsController < ApplicationController
   # View sit
   def show
     @sit = Sit.find(params[:id])
+    @user = @sit.user
     @type = sit_type(@sit)
   end
 

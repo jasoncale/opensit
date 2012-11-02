@@ -2,10 +2,7 @@
 <div class="section my-sits">
 
   <section class="sidebar">
-    <h4>Hi <%= username(@user) %>!</h4>
-
-    <small>You (<strong><%= current_user.username %></strong>) registered <strong><%= time_ago_in_words(current_user.created_at) %> ago</strong> 
-    with the email address <strong><%= current_user.email %></strong></small>
+    <%= render :partial => 'shared/sidebar-me' %>
   </section>
   
   <section class="content socialstream">

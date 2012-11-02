@@ -5,9 +5,7 @@
   <% end %>
 
   <section class="sidebar">
-    <%= avatar(@sit.user) %>
-    <h4><%= username(@sit.user) %></h4>
-    <%= location(@sit.user) %>
+    <%= render :partial => 'shared/sidebar-other' %>
   </section>
 
   <article class="content sit">

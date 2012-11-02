@@ -2,11 +2,7 @@
   <p id="notice"><%= notice %></p>
 
   <section class="sidebar">
-    <%= avatar(@user, 1) %>
-    <h4><%= username(@user) %></h4>
-    <p><%= location(@user) %></p>
-    <p><em>Style:</em> <%= @user.style %></p>
-    <%= link_to 'Read full bio...', '/users/' + params[:id] + '/bio' %>
+    <%= render :partial => 'shared/sidebar-other' %>
   </section>
 
   <section class="content profile">
