@@ -17,7 +17,7 @@
       <% end %>
     </div>
 
-    <div class="body"><%= sit.body %></div>
+    <div class="body"><%= truncate(sit.body, :length => 400, :omission => " ...").html_safe %></div>
     
     <div class="sit-meta">
       <%= link_to(sit_path(sit, :anchor => "comments")) do %>
