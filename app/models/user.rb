@@ -35,6 +35,9 @@ class User < ActiveRecord::Base
   # CarrierWave
   mount_uploader :avatar, AvatarUploader
 
+  # Pagination: sits per page
+  self.per_page = 10
+
   has_many :sits, :dependent => :destroy
   has_many :comments, :dependent => :destroy
 

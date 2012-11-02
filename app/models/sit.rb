@@ -20,6 +20,9 @@ class Sit < ActiveRecord::Base
   validates :body, :presence => true
   validates :s_type, :presence => true
 
+  # Pagination: sits per page
+  self.per_page = 10
+
   def next
     user.sits.where("id > ?", id).first
   end

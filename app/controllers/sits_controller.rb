@@ -1,9 +1,9 @@
 class SitsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :edit, :update, :destroy]
-  
+
   # Index
   def index
-    @sits = Sit.order("created_at DESC").all
+    @sits = Sit.paginate(:page => params[:page]).order("created_at DESC").all
   end
 
   # View sit

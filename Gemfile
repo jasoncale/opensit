@@ -37,6 +37,8 @@ gem 'bootstrap-wysihtml5-rails'
 
 gem 'jquery-rails'
 
+gem 'will_paginate'
+
 # Devise authentication
 gem 'devise'
 

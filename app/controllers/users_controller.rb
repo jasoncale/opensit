@@ -5,20 +5,20 @@ class UsersController < ApplicationController
     if !user_signed_in?
       redirect_to front_path
     else
-      @sits = Sit.order("created_at DESC").limit(10)
+      @sits = Sit.paginate(:page => params[:page]).order("created_at DESC").limit(10)
     end
   end
 
   def my_sits
     @user = current_user
-    @my_sits = @user.sits.order("created_at DESC").limit(10)
+    @my_sits = @user.sits.paginate(:page => params[:page]).order("created_at DESC").limit(10)
   end
 
   # GET /users/1
   # View user page
   def show
     @user = User.find(params[:id])
-    @sits = @user.sits.order("created_at DESC").limit(10)
+    @sits = @user.sits.paginate(:page => params[:page]).order("created_at DESC").limit(10)
   end
 
   def bio
