@@ -23,8 +23,17 @@
     <div class="body"><%= @sit.body.html_safe %></div>
 
     <div class="action-bar">
-      <span class="previous"><i class="icon-arrow-left"></i> <%= link_to 'Previous', sit_path(@sit.prev) %></span>
-      <span class="next"><%= link_to 'Next', sit_path(@sit.next) %> <i class="icon-arrow-right"></i></span>
+      <% if current_page?(sit_path(@sit.prev)) %>
+        <span class="previous no-more" title="This is the first entry"><i class="icon-arrow-left"></i> Previous</span>
+      <% else %>
+        <span class="previous"><i class="icon-arrow-left"></i> <%= link_to 'Previous', sit_path(@sit.prev) %></span>
+      <% end %>
+
+      <% if current_page?(sit_path(@sit.next)) %>
+        <span class="next no-more" title="This is the latest entry">Next <i class="icon-arrow-right"></i></span>
+      <% else %>
+        <span class="next"><%= link_to 'Next', sit_path(@sit.next) %> <i class="icon-arrow-right"></i></span>
+      <% end %>
     </div>
 
     <div class="comments">
