@@ -22,7 +22,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :city, :country, :default_sit_length, :dob, :password,
+  attr_accessible :city, :country, :website, :default_sit_length, :dob, :password,
                   :email, :first_name, :gender, :last_name, :practice, :private_diary, :style, 
                   :user_type, :username, :who, :why, :password_confirmation, :remember_me, :avatar
   

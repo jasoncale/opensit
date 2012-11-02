@@ -31,4 +31,11 @@ module SitsHelper
     end
   end
   
+  def style(user)
+    user.style
+  end
+
+  def website(user)
+    link_to user.website, user.website
+  end
 end

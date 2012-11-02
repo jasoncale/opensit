@@ -1,5 +1,12 @@
 <%= avatar(@user, 1) %>
 <h4><%= username(@user) %></h4>
-<p><%= location(@user) %></p>
-<p><em>Style:</em> <%= @user.style %></p>
+<% if !@user.city.blank? || !@user.country.blank? %>
+	<p><i class="icon-flag"></i> <%= location(@user) %></p>
+<% end %>
+<% if !@user.style.blank? %>
+	<p><i class="icon-bolt"></i> &nbsp;<%= style(@user) %></p>
+<% end %>
+<% if !@user.website.blank? %>
+	<p><i class="icon-link"></i> <%= website(@user) %></p>
+<% end %>
 <%= link_to 'Read full bio...', '/users/' + params[:id] + '/bio' %>
