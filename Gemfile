@@ -33,6 +33,8 @@ group :test do
   gem 'capybara'
 end
 
+gem 'bootstrap-wysihtml5-rails'
+
 gem 'jquery-rails'
 
 # Devise authentication
