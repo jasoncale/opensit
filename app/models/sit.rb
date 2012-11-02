@@ -28,6 +28,6 @@ class Sit < ActiveRecord::Base
   end
 
   def prev
-    user.sits.where("id < ?", id).first
+    user.sits.where("id < ?", id).last
   end
 end                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        # 
