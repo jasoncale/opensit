@@ -1,0 +1,26 @@
+<% provide(:title, @title) %>
+<div class="section me">
+
+  <section class="sidebar">
+    <% if current_user == @user %>
+      <%= render :partial => 'shared/sidebar-me' %>
+    <% else %>
+      <%= render :partial => 'shared/sidebar-other' %>
+    <% end %>
+  </section>
+
+  <section class="content <%= @title %>">
+
+    <%= render :partial => 'shared/me-pills' %>
+    
+    <% if @users.any? %>
+      <div class="user_avatars">
+        <% @users.each do |user| %>
+          <%= link_to avatar(user), user %>
+        <% end %>
+      </div>
+    <% end %>
+  
+  </section>
+  
+</div>

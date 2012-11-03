@@ -10,3 +10,7 @@
 	<p><i class="icon-link"></i> <%= website(@user) %></p>
 <% end %>
 <%= link_to 'Read full bio...', '/users/' + params[:id] + '/bio' %>
+
+<%= render 'shared/stats' %>
+
+<%= render 'shared/follow-button' %>

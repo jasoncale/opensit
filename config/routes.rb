@@ -9,7 +9,14 @@ Opensit::Application.routes.draw do
   match 'about' => "static_pages#about"
   match 'help' => "static_pages#help"
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+  
+  resources :relationships, only: [:create, :destroy]
+
   match 'me' => "users#me"
   match 'my' => "users#my_sits"
   match "/users/:id/bio" => "users#bio"

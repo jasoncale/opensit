@@ -40,6 +40,12 @@ class User < ActiveRecord::Base
 
   has_many :sits, :dependent => :destroy
   has_many :comments, :dependent => :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :reverse_relationships, foreign_key: "followed_id",
+                                   class_name:  "Relationship",
+                                   dependent:   :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
 
   # Overwrite Devise function to allow profile update with password requirement
   # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
@@ -49,5 +55,17 @@ class User < ActiveRecord::Base
       params.delete(:password_confirmation) if params[:password_confirmation].blank?
     end
     update_attributes(params)
+  end
+
+  def following?(other_user)
+    relationships.find_by_followed_id(other_user.id)
+  end
+
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    relationships.find_by_followed_id(other_user.id).destroy
   end
 end

@@ -2,3 +2,6 @@
 
 <small>You registered <strong><%= time_ago_in_words(current_user.created_at) %> ago</strong> 
 with the email address <strong><%= current_user.email %></strong></small>
+
+<%= render 'shared/stats' %>
+
