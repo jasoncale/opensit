@@ -9,16 +9,16 @@
     
     <%= render :partial => 'shared/other-pills' %>
 
-    <p class="lead"><%= @user.who %></p>
+    <p class="lead"><%= @user.who.html_safe %></p>
 
     <p>
       <b>Why do you practice?</b><br />
-      <%= @user.why %>
+      <%= @user.why.html_safe %>
     </p>
 
     <p>
       <b>What do you practice?</b><br />
-      <%= @user.practice %>
+      <%= @user.practice.html_safe %>
     </p>
 
   </section>
