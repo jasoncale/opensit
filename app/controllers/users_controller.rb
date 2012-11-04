@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if !user_signed_in?
       redirect_to front_path
     else
-      @sits = Sit.paginate(:page => params[:page]).order("created_at DESC").limit(10)
+      @feed_items = current_user.feed.paginate(:page => params[:page]).order("created_at DESC").limit(10)
     end
   end
 

@@ -11,13 +11,13 @@
     
     <p>Latest updates from all of the <%= link_to "people I follow", '#' %>.</p>
     
-    <% @sits.each do |sit| %>
+    <% @feed_items.each do |sit| %>
 
       <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
 
     <% end %>
 
-    <%= will_paginate @sits, :class => 'pagination pagination-centered' %>
+    <%= will_paginate @feed_items, :class => 'pagination pagination-centered' %>
   </section>
 
 </div>
