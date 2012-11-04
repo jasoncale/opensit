@@ -34,6 +34,16 @@ label {
   }
 }
 
+.sidebar {
+  img {
+    padding: 3px;
+    border: 1px solid #CCC;
+    -moz-box-shadow: 5px 5px 3px #888;
+    -webkit-box-shadow: 5px 5px 3px #888;
+    box-shadow: 5px 5px 3px #888;
+  }
+}
+
 /* Fix strange bug with bootstrap radio buttons */
 .radio input[type="radio"], .checkbox input[type="checkbox"] {
   float: none !important;
