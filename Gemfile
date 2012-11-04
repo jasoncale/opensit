@@ -15,6 +15,13 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'faker'
   gem 'annotate', '2.5.0'
+  # Guard shizzle
+  gem 'rb-inotify', '~> 0.8.8' # Only needed on Linux. May need to install libnotify with OS's package manager
+  gem 'guard'
+  gem 'guard-rails' # Reloads Rails server when cached files like those in /config change
+  gem 'guard-livereload' # Sends signal to Livereload extension in browser to reload page
+  gem 'guard-migrate' # Automatically runs migrations when needed
+  gem 'guard-bundler' # Automatically installs/updates budler gems
 end
 
 # Gems used only for assets and not required
