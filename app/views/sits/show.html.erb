@@ -11,9 +11,9 @@
   <article class="content sit">
 
     <header>
-    <% if (@type == 'sit') %>
+    <% if (@sit.type == 'sit') %>
         <h3><i class="icon-time"></i> <%= @sit.duration %> minute sit on  <%= localize(@sit.created_at, :format => :short) %></h3>
-    <% elsif (@type == 'diary') %>
+    <% elsif (@sit.type == 'diary') %>
         <h3><i class="icon-book"></i> <%= @sit.title %></h3>
     <% else %>
         <h3><i class="icon-beaker"></i> Article</h3>

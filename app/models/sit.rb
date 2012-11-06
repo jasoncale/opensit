@@ -15,13 +15,27 @@ class Sit < ActiveRecord::Base
   attr_accessible :disable_comments, :duration, :s_type, :body, :title, :user_id
   
   belongs_to :user
-  has_many :comments
+  has_many :comments, :dependent => :destroy
   
   validates :body, :presence => true
   validates :s_type, :presence => true
 
+  # Scopes
+  scope :newest_first, order("created_at DESC")
+  
   # Pagination: sits per page
   self.per_page = 10
+
+  # Returns sit type; sit, diary or article.
+  def type
+    if s_type == 0
+      'sit'
+    elsif s_type == 1
+      'diary'
+    else
+      'article'
+    end
+  end
 
   def next
     user.sits.where("id > ?", id).first

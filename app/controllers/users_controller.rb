@@ -5,22 +5,23 @@ class UsersController < ApplicationController
     if !user_signed_in?
       redirect_to front_path
     else
-      @feed_items = current_user.feed.paginate(:page => params[:page]).order("created_at DESC").limit(10)
+      @feed_items = current_user.feed.newest_first.paginate(:page => params[:page])
     end
   end
 
   def my_sits
     @user = current_user
-    @my_sits = @user.sits.paginate(:page => params[:page]).order("created_at DESC").limit(10)
+    @my_sits = @user.sits.newest_first.paginate(:page => params[:page]).
   end
 
   # GET /users/1
   # View user page
   def show
     @user = User.find(params[:id])
-    @sits = @user.sits.paginate(:page => params[:page]).order("created_at DESC").limit(10)
+    @sits = @user.sits.newest_first.paginate(:page => params[:page]).
   end
 
+  # GET /user/:id/bio
   def bio
     @user = User.find(params[:id])
   end 

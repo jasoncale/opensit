@@ -57,6 +57,18 @@ class User < ActiveRecord::Base
     update_attributes(params)
   end
 
+  # Return location
+  def location
+    if !self.city.blank? && !self.country.blank?
+      "#{self.city}, #{self.country}"
+    elsif !self.city.blank?
+      "#{self.city}"
+    elsif !self.country.blank?
+      "#{self.country}"
+    else
+    end
+  end
+  
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id)
   end

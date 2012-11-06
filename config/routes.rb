@@ -19,7 +19,7 @@ Opensit::Application.routes.draw do
 
   match 'me' => "users#me"
   match 'my' => "users#my_sits"
-  match "/users/:id/bio" => "users#bio"
+  match "/users/:id/bio" => "users#bio", :as => :bio
 
   resources :sits do
     resources :comments

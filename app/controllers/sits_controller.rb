@@ -1,27 +1,16 @@
 class SitsController < ApplicationController
+  # Authenticate (devise) for adding, editing, updating or removing sits
   before_filter :authenticate_user!, :only => [:new, :edit, :update, :destroy]
 
   # Index
   def index
-    @sits = Sit.paginate(:page => params[:page]).order("created_at DESC").all
+    @sits = Sit.newest_first.paginate(:page => params[:page])
   end
 
   # View sit
   def show
     @sit = Sit.find(params[:id])
     @user = @sit.user
-    @type = sit_type(@sit)
-  end
-
-  # Returns sit type; sit, diary or article.
-  def sit_type(sit)
-    if sit.s_type == 0
-      'sit'
-    elsif sit.s_type == 1
-      'diary'
-    else
-      'article'
-    end
   end
 
   # GET /sits/new
