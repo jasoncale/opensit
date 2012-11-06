@@ -11,14 +11,14 @@ class UsersController < ApplicationController
 
   def my_sits
     @user = current_user
-    @my_sits = @user.sits.newest_first.paginate(:page => params[:page]).
+    @my_sits = @user.sits.newest_first.paginate(:page => params[:page])
   end
 
   # GET /users/1
   # View user page
   def show
     @user = User.find(params[:id])
-    @sits = @user.sits.newest_first.paginate(:page => params[:page]).
+    @sits = @user.sits.newest_first.paginate(:page => params[:page])
   end
 
   # GET /user/:id/bio
