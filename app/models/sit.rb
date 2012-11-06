@@ -19,6 +19,8 @@ class Sit < ActiveRecord::Base
   
   validates :body, :presence => true
   validates :s_type, :presence => true
+  validates :title, :presence => true, :if => "s_type != 0"
+  validates :duration, :presence => true, :if => "s_type == 0"
 
   # Scopes
   scope :newest_first, order("created_at DESC")

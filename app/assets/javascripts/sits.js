@@ -7,12 +7,12 @@ jQuery(document).ready(function($) {
   $('.new-sit .radio_buttons input').click(function(){
     // If the 'sit' button was pressed
     if($(this).attr('id') == 'sit_s_type_0'){
-      // Hide the title and show the duration selector
+      // Show the duration if 'sit' is selected
       $('.new-sit-title').hide();
-      $('.new-sit-duration').show();
+      $('.new-sit-duration').fadeIn();
     }else{
-      $(".new-sit-title").show();
       $('.new-sit-duration').hide();
+      $('.new-sit-title').fadeIn();
     }
   });
 
