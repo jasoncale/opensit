@@ -50,6 +50,12 @@
 
   <% end %>
 
+  <h3>Export your SitStream</h3>
+  <ul>
+    <li><%= link_to "All sits in XML format", "/users/#{current_user.id}/export.xml" %></li>
+    <li><%= link_to "All sits in JSON format", "/users/#{current_user.id}/export.json" %></li>
+  </ul>
+
   <h3>Cancel my account</h3>
 
     (<a href="#">Change my email address</a>)

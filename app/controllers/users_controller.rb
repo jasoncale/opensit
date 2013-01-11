@@ -56,7 +56,6 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(params[:user])
 
@@ -68,7 +67,6 @@ class UsersController < ApplicationController
   end
 
   # PUT /users/1
-  # PUT /users/1.json
   def update
     @user = User.find(params[:id])
 
@@ -80,11 +78,20 @@ class UsersController < ApplicationController
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
     @user.destroy
 
     redirect_to users_url
+  end
+
+  def export
+    @sits = Sit.where(:user_id => params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @sits }
+      format.xml { render xml: @sits }
+    end
   end
 end

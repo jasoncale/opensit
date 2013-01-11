@@ -21,6 +21,8 @@ Opensit::Application.routes.draw do
   match 'my' => "users#my_sits"
   match "/users/:id/bio" => "users#bio", :as => :bio
 
+  match '/users/:id/export' => "users#export"
+
   resources :sits do
     resources :comments
   end
