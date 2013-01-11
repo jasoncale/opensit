@@ -1,6 +1,10 @@
 <% provide(:title, 'Home') %>
 <div class="section me">
 
+  <% if flash[:notice] -%>
+    <div class="alert alert-success"><%= flash[:notice] %></div>
+  <% end %>
+
   <section class="sidebar">
     <%= render :partial => 'shared/sidebar-me' %>
   </section>

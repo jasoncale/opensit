@@ -3,5 +3,6 @@
 class RegistrationsController < Devise::RegistrationsController
   def update
     super
+    flash[:notice] = 'Your profile has been updated.'
   end
 end
