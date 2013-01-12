@@ -41,9 +41,11 @@ group :test do
 end
 
 gem 'bootstrap-wysihtml5-rails'
+gem 'bootstrap-datepicker-rails'
 
 gem 'jquery-rails'
 
+# Pagination
 gem 'will_paginate'
 
 # Devise authentication

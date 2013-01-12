@@ -12,7 +12,7 @@
 
     <header>
     <% if (@sit.type == 'sit') %>
-        <h3><i class="icon-time"></i> <%= @sit.duration %> minute sit on  <%= localize(@sit.created_at, :format => :short) %></h3>
+        <h3><i class="icon-time"></i> <%= @sit.duration %> minute sit on  <%= @sit.date %></h3>
     <% elsif (@sit.type == 'diary') %>
         <h3><i class="icon-book"></i> <%= @sit.title %></h3>
     <% else %>

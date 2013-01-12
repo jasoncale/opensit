@@ -2,17 +2,20 @@
 #
 # Table name: sits
 #
-#  id             :integer          not null, primary key
-#  title          :string(255)
-#  body           :text
-#  user_id        :integer
-#  allow_comments :boolean
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id               :integer          not null, primary key
+#  title            :string(255)
+#  body             :text
+#  user_id          :integer
+#  disable_comments :boolean
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  duration         :integer
+#  s_type           :integer
+#  custom_date      :date
 #
 
 class Sit < ActiveRecord::Base
-  attr_accessible :disable_comments, :duration, :s_type, :body, :title, :user_id
+  attr_accessible :disable_comments, :duration, :s_type, :body, :title, :created_at, :user_id
   
   belongs_to :user
   has_many :comments, :dependent => :destroy
@@ -28,7 +31,11 @@ class Sit < ActiveRecord::Base
   # Pagination: sits per page
   self.per_page = 10
 
-  # Returns sit type; sit, diary or article.
+  def date
+    created_at.strftime("%d %B %Y")
+  end
+
+  # Return sit type
   def type
     if s_type == 0
       'sit'

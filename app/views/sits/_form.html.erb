@@ -18,7 +18,11 @@
   </div>
 
   <div class="new-sit-duration">
-    <%= f.input :duration, :input_html => { :value => current_user.default_sit_length } %>
+    <%= f.input :duration, :as => 'string', :input_html => { :value => current_user.default_sit_length } %>
+  </div>
+
+  <div class="new-sit-date">
+    <%= f.input :created_at, :as => 'string', :label => 'Date', :input_html => { :placeholder => 'Just now.', :label => 'none', :id => 'datepicker' } %>
   </div>
 
   <%= f.input :body, :input_html => { :rows => 10, :class => "basic-form" } %>

@@ -2,13 +2,16 @@
 #
 # Table name: sits
 #
-#  id             :integer          not null, primary key
-#  title          :string(255)
-#  body           :text
-#  user_id        :integer
-#  allow_comments :boolean
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id               :integer          not null, primary key
+#  title            :string(255)
+#  body             :text
+#  user_id          :integer
+#  disable_comments :boolean
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  duration         :integer
+#  s_type           :integer
+#  custom_date      :date
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

@@ -5,7 +5,6 @@
 #  id                   :integer          not null, primary key
 #  username             :string(255)
 #  email                :string(255)
-#  profile_pic          :string(255)
 #  first_name           :string(255)
 #  last_name            :string(255)
 #  dob                  :date
@@ -14,9 +13,9 @@
 #  country              :string(255)
 #  who                  :text
 #  why                  :text
-#  style                :text
+#  style                :string(100)
 #  practice             :text
-#  public_diary         :boolean
+#  private_diary        :boolean
 #  default_sit_length   :integer
 #  user_type            :integer
 #  created_at           :datetime         not null
@@ -38,6 +37,8 @@
 #  failed_attempts      :integer          default(0)
 #  unlock_token         :string(255)
 #  locked_at            :datetime
+#  avatar               :string(255)
+#  website              :string(100)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

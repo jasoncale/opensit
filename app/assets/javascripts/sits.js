@@ -1,19 +1,21 @@
 jQuery(document).ready(function($) {
-  // $('.sit-teaser').click(function() {
-  //   window.location=$(this).find("a.sit-link").attr("href");
-  //   return false;
-  // })
 
-  $('.new-sit .radio_buttons input').click(function(){
-    // If the 'sit' button was pressed
-    if($(this).attr('id') == 'sit_s_type_0'){
+  // NEW SIT / title or duration
+  $('.new-sit .radio_buttons input').click( function() {
+    if ($(this).attr('id') == 'sit_s_type_0') {
       // Show the duration if 'sit' is selected
       $('.new-sit-title').hide();
       $('.new-sit-duration').fadeIn();
-    }else{
+    } else {
       $('.new-sit-duration').hide();
       $('.new-sit-title').fadeIn();
     }
+  });
+
+  // NEW SIT / datepicker
+  $('.new-sit #datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true,
   });
 
 });
