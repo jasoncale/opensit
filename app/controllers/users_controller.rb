@@ -21,6 +21,21 @@ class UsersController < ApplicationController
     @sits = @user.sits.newest_first.paginate(:page => params[:page])
   end
 
+  # GET /users/1/feed
+  # Atom feed for a users sitstream
+  def feed
+    @user = User.find(params[:id])
+    @title = "SitStream for #{@user.username}"
+    @sits = @user.sits.newest_first
+
+    # this will be our Feed's update timestamp
+    @updated = @sits.last.updated_at unless @sits.empty?
+
+    respond_to do |format|
+      format.atom
+    end
+  end
+
   # GET /user/:id/bio
   def bio
     @user = User.find(params[:id])

@@ -22,6 +22,7 @@ Opensit::Application.routes.draw do
   match "/users/:id/bio" => "users#bio", :as => :bio
 
   match '/users/:id/export' => "users#export"
+  match '/users/:id/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
 
   resources :sits do
     resources :comments

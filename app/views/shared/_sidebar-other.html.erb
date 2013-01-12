@@ -14,3 +14,7 @@
 <%= render 'shared/stats' %>
 
 <%= render 'shared/follow-button' %>
+
+<%= link_to(feed_path(@user)) do %>
+	<i class="icon-rss" id="sit-feed"></i>
+<% end %>

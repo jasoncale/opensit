@@ -9,17 +9,23 @@
     
     <%= render :partial => 'shared/other-pills' %>
 
-    <p class="lead"><%= @user.who.html_safe %></p>
+    <% if !@user.who.blank? %>    
+      <p class="lead"><%= @user.who.html_safe %></p>
+    <% end %>
 
-    <p>
-      <b>Why do you practice?</b><br />
-      <%= @user.why.html_safe %>
-    </p>
+    <% if !@user.why.blank? %>
+      <p>
+        <b>Why do you practice?</b><br />
+        <%= @user.why.html_safe %>
+      </p>
+    <% end %>
 
-    <p>
-      <b>What do you practice?</b><br />
-      <%= @user.practice.html_safe %>
-    </p>
+    <% if !@user.practice.blank? %>
+      <p>
+        <b>What do you practice?</b><br />
+        <%= @user.practice.html_safe %>
+      </p>
+    <% end %>
 
   </section>
 </div>
