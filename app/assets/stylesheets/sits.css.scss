@@ -39,8 +39,12 @@ article.sit-teaser {
 
 /* Sit full */
 article.sit {
+  .full-sit-date {
+    float: right;
+    color: #666;
+  }
   .body {
-    font-family: serif;
+    font-family: "Montaga";
     font-size: 1.8em;
     line-height: 1.5;  
   }

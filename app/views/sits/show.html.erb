@@ -11,29 +11,15 @@
   <article class="content sit">
 
     <header>
-    <% if (@sit.type == 'sit') %>
-        <h3><i class="icon-time"></i> <%= @sit.duration %> minute sit on  <%= @sit.date %></h3>
-    <% elsif (@sit.type == 'diary') %>
-        <h3><i class="icon-book"></i> <%= @sit.title %></h3>
-    <% else %>
-        <h3><i class="icon-beaker"></i> Article</h3>
-    <% end %>
+      <div class="full-sit-date"><%= @sit.date %></div>
+      <h3><%= @sit.full_title %></h3>
     </header>
 
     <div class="body"><%= @sit.body.html_safe %></div>
 
     <div class="action-bar">
-      <% if current_page?(sit_path(@sit.prev)) %>
-        <span class="previous no-more" title="This is the first entry"><i class="icon-arrow-left"></i> Previous</span>
-      <% else %>
-        <span class="previous"><i class="icon-arrow-left"></i> <%= link_to 'Previous', sit_path(@sit.prev) %></span>
-      <% end %>
-
-      <% if current_page?(sit_path(@sit.next)) %>
-        <span class="next no-more" title="This is the latest entry">Next <i class="icon-arrow-right"></i></span>
-      <% else %>
-        <span class="next"><%= link_to 'Next', sit_path(@sit.next) %> <i class="icon-arrow-right"></i></span>
-      <% end %>
+      <%= previous_sit(@sit) %>
+      <%= next_sit(@sit) %>
     </div>
 
     <div class="comments">

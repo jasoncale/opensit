@@ -31,20 +31,29 @@ class Sit < ActiveRecord::Base
   # Pagination: sits per page
   self.per_page = 10
 
+  ##
+  # VIRTUAL ATTRIBUTES
+  ##
+
+  # Nice date: 11 July 2012
   def date
     created_at.strftime("%d %B %Y")
   end
 
-  # Return sit type
-  def type
+  # For use on show sit pages
+  def full_title
     if s_type == 0
-      'sit'
+      "#{self.duration} minute sit"
     elsif s_type == 1
-      'diary'
+      self.title # Diary
     else
-      'article'
+      "Article: #{self.title}" # Article
     end
   end
+
+  ##
+  # METHODS
+  ##
 
   def next
     user.sits.where("id > ?", id).first

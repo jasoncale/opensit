@@ -67,16 +67,11 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
 
-  # Overwrite Devise function to allow profile update with password requirement
-  # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
-  def update_with_password(params={})
-    if params[:password].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation) if params[:password_confirmation].blank?
-    end
-    update_attributes(params)
-  end
+  ##
+  # VIRTUAL ATTRIBUTES
+  ##
 
+  # Location based on whether/if city and country have been entered
   def location
     if !self.city.blank? && !self.country.blank?
       "#{self.city}, #{self.country}"
@@ -87,7 +82,11 @@ class User < ActiveRecord::Base
     else
     end
   end
-  
+
+  ##
+  # METHODS
+  ##
+
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id)
   end
@@ -102,5 +101,15 @@ class User < ActiveRecord::Base
 
   def socialstream
     Sit.from_users_followed_by(self)
+  end
+
+  # Overwrite Devise function to allow profile update with password requirement
+  # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
+  def update_with_password(params={})
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    update_attributes(params)
   end
 end
