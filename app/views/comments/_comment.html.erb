@@ -1,6 +1,4 @@
-<% div_for comment do %>
-  <p>
-    <strong>Posted <% time_ago_in_words(comment.created_at) %> ago</strong><br />
-    <%= h(comment.body) %>
-  </p>
-<% end %>
+<div class="comment">
+  <div class="comment-body"><%= @comment.body.html_safe %></div>
+  <div class="user"><%= username(@sit.user) %>, <%= time_ago_in_words(@comment.created_at) %> ago</div>
+</div>

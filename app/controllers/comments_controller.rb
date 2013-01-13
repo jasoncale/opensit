@@ -1,14 +1,4 @@
 class CommentsController < ApplicationController
-  # GET /comments
-  # GET /comments.json
-  def index
-    @comments = Comment.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @comments }
-    end
-  end
 
   # GET /comments/1
   # GET /comments/1.json
@@ -37,17 +27,18 @@ class CommentsController < ApplicationController
   end
 
   # POST /comments
-  # POST /comments.json
   def create
     @sit = Sit.find(params[:sit_id])
     @comment = @sit.comments.build(params[:comment])
     @comment.user_id = current_user.id
 
-    if @comment.save
-      flash[:notice] = 'Your comment was added.' 
-      redirect_to @sit
-    else
-      render action: "new"
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @comment, notice: 'Your comment has been added.' }
+        format.js
+      else
+        render action: "new"
+      end
     end
   end
   

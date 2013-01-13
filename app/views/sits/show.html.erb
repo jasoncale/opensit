@@ -30,11 +30,9 @@
         <% if (@sit.comments.count == 0) %>
           <p>No one has posted a comment yet; be the first!</p>
         <% else %>
-          <% @sit.comments.each do |comment| %>
-            <div class="comment">
-              <div class="comment-body"><%= comment.body.html_safe %></div>
-              <div class="user"><%= username(@sit.user) %>, <%= time_ago_in_words(comment.created_at) %> ago</div>
-            </div>
+          <% @sit.comments.each do |comment| 
+            @comment = comment %>
+            <%= render 'comments/comment' %>
           <% end %>
         <% end %>
     </div>
@@ -42,7 +40,7 @@
       <% if @sit.comments.count > 1 %>
         <h4>Add a comment</h4>
       <% end %>
-      <%= simple_form_for [@sit, @sit.comments.build] do |f| %>
+      <%= simple_form_for [@sit, @sit.comments.build], :remote => 'true' do |f| %>
         <%= f.input :body, :label => false, :input_html => { :rows => 5, :class => 'span6' } %>
         <%= f.submit 'Add comment' %>
       <% end %>
