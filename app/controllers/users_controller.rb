@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  # Me page (default)
+  # GET /me page if logged in, /front if not
   def me
     if !user_signed_in?
       redirect_to front_path
@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /my
   def my_sits
     @user = current_user
     @my_sits = @user.sits.newest_first.paginate(:page => params[:page])
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
     @title = "SitStream for #{@user.username}"
     @sits = @user.sits.newest_first
 
-    # this will be our Feed's update timestamp
+    # This is the feed's update timestamp
     @updated = @sits.last.updated_at unless @sits.empty?
 
     respond_to do |format|
@@ -41,6 +42,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end 
 
+  # GET /user/:id/following
   def following
     @title = "Following"
     @user = User.find(params[:id])
@@ -48,6 +50,7 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  # GET /user/:id/followers
   def followers
     @title = "Followers"
     @user = User.find(params[:id])
@@ -55,51 +58,7 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  # GET /users
-  def index
-    @users = User.all
-  end
-  
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  # POST /users
-  def create
-    @user = User.new(params[:user])
-
-    if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
-    else
-      render action: "new"
-    end
-  end
-
-  # PUT /users/1
-  def update
-    @user = User.find(params[:id])
-
-    if @user.update_attributes(params[:user])
-      redirect_to @user, notice: 'User was successfully updated.'
-    else
-      render action: "edit"
-    end
-  end
-
-  # DELETE /users/1
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    redirect_to users_url
-  end
-
+  # GET /user/:id/export
   def export
     @sits = Sit.where(:user_id => params[:id])
 

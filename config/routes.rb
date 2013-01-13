@@ -1,32 +1,28 @@
 Opensit::Application.routes.draw do
   
   root :to => "users#me"
+
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   
   devise_for :users, :controllers => { :registrations => "registrations" }
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  match 'me' => "users#me"
+  match 'my' => "users#my_sits"
+  match '/users/:id' => "users#show", :as => :user
+  match '/users/:id/bio' => "users#bio", :as => :bio
+  match '/users/:id/following' => "users#following", :as => :following_user
+  match '/users/:id/followers' => "users#followers", :as => :followers_user
+  match '/users/:id/export' => "users#export"
+  match '/users/:id/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
 
   match 'front' => "static_pages#front"
   match 'about' => "static_pages#about"
   match 'help' => "static_pages#help"
 
-  resources :users do
-    member do
-      get :following, :followers
-    end
-  end
-  
-  resources :relationships, only: [:create, :destroy]
-
-  match 'me' => "users#me"
-  match 'my' => "users#my_sits"
-  match "/users/:id/bio" => "users#bio", :as => :bio
-
-  match '/users/:id/export' => "users#export"
-  match '/users/:id/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
-
   resources :sits do
     resources :comments
   end
+  
+  resources :relationships, only: [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
