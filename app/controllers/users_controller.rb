@@ -16,14 +16,13 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1
-  # View user page
   def show
     @user = User.find(params[:id])
     @sits = @user.sits.newest_first.paginate(:page => params[:page])
   end
 
   # GET /users/1/feed
-  # Atom feed for a users sitstream
+  # Atom feed for a users SitStream
   def feed
     @user = User.find(params[:id])
     @title = "SitStream for #{@user.username}"
@@ -37,12 +36,12 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /user/:id/bio
+  # GET /user/1/bio
   def bio
     @user = User.find(params[:id])
   end 
 
-  # GET /user/:id/following
+  # GET /user/1/following
   def following
     @title = "Following"
     @user = User.find(params[:id])
@@ -50,7 +49,7 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  # GET /user/:id/followers
+  # GET /user/1/followers
   def followers
     @title = "Followers"
     @user = User.find(params[:id])
@@ -58,7 +57,7 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  # GET /user/:id/export
+  # GET /user/1/export
   def export
     @sits = Sit.where(:user_id => params[:id])
 

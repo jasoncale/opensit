@@ -2,12 +2,12 @@ class SitsController < ApplicationController
   # Authenticate (devise) for adding, editing, updating or removing sits
   before_filter :authenticate_user!, :only => [:new, :edit, :update, :destroy]
 
-  # Index
+  # GET /sits
   def index
     @sits = Sit.newest_first.paginate(:page => params[:page])
   end
 
-  # View sit
+  # GET /sits/1
   def show
     @sit = Sit.find(params[:id])
     @user = @sit.user
