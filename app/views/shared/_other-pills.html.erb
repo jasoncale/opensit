@@ -1,4 +1,4 @@
-<ul class="nav nav-pills">
+<ul class="nav nav-tabs">
   <li <%='class=active' if params[:action] == "show" %>><%= link_to 'Sits', user_path %></li>
   <li <%='class=active' if params[:action] == "bio" %>><%= link_to 'Bio', bio_path(@user) %></li>
 </ul>

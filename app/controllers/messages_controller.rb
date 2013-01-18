@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/1
   def show
+    @user = current_user
     @message = Message.find(params[:id])
     @from_user = User.find(@message.from_user_id)
   end

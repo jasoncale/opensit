@@ -5,15 +5,16 @@ html {
 
 body { 
   width: 100%; 
-  padding-top: 50px; /* Due to fixed nav bar */
+  padding-top: 60px; /* Due to fixed nav bar */
   background: #fff;
   font-family: "HelveticaNeue", "Helvetica Neue", Arial, sans-serif !important;
-  font-size: 85% !important;
+  font-size: 100% !important;
   color: #444;
   -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
   -webkit-text-size-adjust: 100%;
 }
 
+/* Bootstrap alignment fixes */
 label {
   display: inline !important;
 }
@@ -22,7 +23,7 @@ label {
   display: none;
 }
 
-/* Navbar text a bit smaller */
+/* Navbar */
 #main-header {
   ul a {
     font-size: 0.9em;
@@ -39,6 +40,7 @@ label {
   }
 }
 
+/* Sidebar */
 .sidebar {
   img {
     padding: 3px;

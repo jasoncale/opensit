@@ -44,7 +44,7 @@ article.sit {
     color: #666;
   }
   .body {
-    font-family: "Montaga";
+    font-family: "Georgia", serif;
     font-size: 1.8em;
     line-height: 1.5;  
   }
@@ -67,6 +67,9 @@ article.sit {
     }
     .no-more {
       color: #999;
+    }
+    i {
+      margin-top: 6px;
     }
   }
   .comments {

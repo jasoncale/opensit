@@ -105,6 +105,10 @@ class User < ActiveRecord::Base
     Sit.from_users_followed_by(self)
   end
 
+  def unread_count
+    messages_received.unread.count
+  end
+
   # Overwrite Devise function to allow profile update with password requirement
   # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
   def update_with_password(params={})

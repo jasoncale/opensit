@@ -6,6 +6,8 @@ class Message < ActiveRecord::Base
 
   validates :body, :from_user_id, :to_user_id, :presence => true
 
+  scope :unread, where(:read => false)
+
   def send_message(recipients)
     if recipients.is_a?(Array)
       recipients.each do |to|

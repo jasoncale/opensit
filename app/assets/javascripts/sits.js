@@ -16,6 +16,7 @@ jQuery(document).ready(function($) {
   $('.new-sit #datepicker').datepicker({
     format: 'yyyy-mm-dd',
     autoclose: true,
+    language: 'en',
   });
 
   $(".chzn-select").chosen();

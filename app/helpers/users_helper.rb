@@ -1,11 +1,27 @@
 module UsersHelper
-  # Display a user avatar
-  # default without size: 50x50
+  # Display a hyperlinked user avatar
+  # default size: 50x50
   def avatar(user, size = 0)
     if user.avatar.blank?
-      size.zero? ? image_tag('http://placehold.it/50x50') : image_tag('http://placehold.it/100x100')
+      if size.zero? 
+        link_to user_path(user) do
+          image_tag('http://placehold.it/50x50', :alt => user.username, :title => user.username)
+        end
+      else 
+        link_to user_path(user) do
+          image_tag('http://placehold.it/100x100', :alt => user.username, :title => user.username)
+        end
+      end
     else
-      size.zero? ? image_tag(user.avatar.small_thumb) : image_tag(user.avatar.thumb) 
+      if size.zero?
+        link_to user_path(user) do
+          image_tag(user.avatar.small_thumb, :alt => user.username, :title => user.username)
+        end
+      else
+        link_to user_path(user) do
+          image_tag(user.avatar.thumb, :alt => user.username, :title => user.username)
+        end
+      end
     end
   end
 

@@ -5,7 +5,8 @@
           <%= link_to "OpenSit", root_path, :class => 'brand' %>
          <% if user_signed_in? %>
           <a class="pull-left btn btn-primary" href="/sits/new"><i class="icon-plus icon-white"></i></a>
-          <a class="btn" href="<%= edit_user_registration_path %>"><i class="icon-user icon-white"></i> <%= current_user.username %></a>
+          <a class="btn btn-inverse" href="<%= edit_user_registration_path %>"><i class="icon-user icon-white"></i> <%= current_user.username %></a>
+          <a class="btn btn-inverse" href="<%= messages_path %>"><i class="icon-envelope"></i> <strong><%= current_user.unread_count %></strong></a>
           <ul class="nav pull-right">
             <li class="explore"><%= link_to "Explore", front_path %></li>
             <li><%= link_to "Help", help_path %></li>
