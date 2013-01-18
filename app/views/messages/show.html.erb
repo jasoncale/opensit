@@ -1,0 +1,17 @@
+<div class="section view-message">
+  
+  <% if flash[:notice] -%>
+    <div class="alert alert-success"><%= flash[:notice] %></div>
+  <% end %>
+
+  <section class="sidebar">
+    <%= render :partial => 'shared/sidebar-me' %>
+  </section>
+
+  <article class="content message">
+
+    <%= render 'message' %>
+
+  </article>
+
+</div>

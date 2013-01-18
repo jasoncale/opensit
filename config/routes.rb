@@ -21,6 +21,8 @@ Opensit::Application.routes.draw do
   resources :sits do
     resources :comments
   end
+
+  resources :messages, except: [:edit, :update]
   
   resources :relationships, only: [:create, :destroy]
 

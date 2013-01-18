@@ -1,0 +1,26 @@
+<div class="section messages">
+
+  <% if flash[:notice] -%>
+    <div class="alert alert-success"><%= flash[:notice] %></div>
+  <% end %>
+
+  <section class="sidebar">
+    <%= render 'shared/sidebar-me' %>
+  </section>
+  
+  <section class="content inbox">
+
+  	<%= render :partial => 'shared/me-pills' %>
+  	
+    <table>
+    	<% @messages.each do |msg| %>
+        <tr>
+          <td><%= avatar(@from_user) %></td>
+          <td><%= username(@from_user) %><br />
+          <%= link_to msg.subject.blank? ? truncate(msg.body, :length => 20, :omission => " ...").html_safe : msg.subject, msg %></td>
+        </tr>
+      <% end %>
+    </table>
+
+  </section>
+ </div>

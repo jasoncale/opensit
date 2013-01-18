@@ -15,6 +15,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'faker'
   gem 'annotate', '2.5.0'
+  gem 'meta_request', '0.2.1'
   # Guard shizzle
   gem 'rb-inotify', '~> 0.8.8' # Only needed on Linux. May need to install libnotify with OS's package manager
   gem 'guard'
@@ -58,6 +59,7 @@ gem 'mini_magick'
 # Simple form with country select
 gem 'simple_form'
 gem 'country_select'
+gem 'chosen-rails'
 
 # Rails admin
 gem 'rails_admin'

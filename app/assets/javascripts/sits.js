@@ -18,4 +18,6 @@ jQuery(document).ready(function($) {
     autoclose: true,
   });
 
+  $(".chzn-select").chosen();
+
 });

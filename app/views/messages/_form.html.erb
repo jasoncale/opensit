@@ -1,0 +1,22 @@
+<%= simple_form_for(@message, :html => { :class => 'form-horizontal'}) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this sit from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.input :to_user_id, :collection => @user.followed_users, :label => 'To', :label_method => 'username', :input_html => { :multiple => true, :data => {:placeholder => 'Choose a user'}, :class => 'chzn-select' } %>
+  
+  <%= f.input :subject %>
+
+  <%= f.input :body, :input_html => { :rows => 10, :class => "basic-form" } %>
+
+  <%= f.submit 'Send message' %>
+  
+<% end %>
