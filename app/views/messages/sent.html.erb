@@ -4,19 +4,17 @@
     <%= render 'sidebar-messages' %>
   </section>
   
-  <section class="content inbox">
+  <section class="content sent">
   	
     <table class="table msg-overview">
     	<% @messages.each do |msg| %>
         <tr>
-          <td class="unread"><%= unread_marker(msg) %></td>
-          <td class="msg-avatar"><%= avatar(msg.from_user) %></td>
+          <td class="msg-avatar"><%= avatar(msg.to_user) %></td>
           <td class="msg-content">
-            <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message?', :class => 'msg-delete' %>
             <a href="<%= message_path(msg) %>" class="clickable-row">
-            <div class="msg-username"><%= msg.from_user.username %> says:</div>
+            <div class="msg-username">To: <%= msg.to_user.username %></div>
             <div class="msg-content"><%= msg.subject.blank? ? truncate(msg.body, :length => 20, :omission => " ...").html_safe : msg.subject %></div>
-            <div class="msg-received">Received <%= time_ago_in_words(msg.created_at) %> ago</div>
+            <div class="msg-received">Sent <%= time_ago_in_words(msg.created_at) %> ago</div>
             </a>
           </td>
         </tr>

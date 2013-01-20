@@ -1,7 +1,7 @@
 <ul class="nav nav-list">
   <li class="nav-header">Compose</li>
-  <li><a href="/messages/new">New message</a></li>
+  <li><%= link_to 'New message', new_message_path %></li>
   <li class="nav-header">Messages</li>
-  <li><a href="/messages">Inbox (<%= @user.unread_count %>)</a></li>
-  <li><a href="#">Sent items</a></li>
+  <li><a href="/messages">Inbox <%= inbox_unread_count(@user) %></a></li>
+  <li><%= link_to 'Sent items', sent_messages_path %></li>
 </ul>

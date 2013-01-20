@@ -7,6 +7,24 @@ class Message < ActiveRecord::Base
   validates :body, :from_user_id, :to_user_id, :presence => true
 
   scope :unread, where(:read => false)
+  scope :newest_first, order("created_at DESC")
+
+  ##
+  # VIRTUAL ATTRIBUTES
+  ##
+
+  def received_at
+    created_at.strftime("%l:%M%P, %d %B %Y")
+  end
+
+  ##
+  # METHODS
+  ##
+
+  def mark_as_read
+    self.read = true
+    self.save
+  end
 
   def send_message(recipients)
     if recipients.is_a?(Array)

@@ -59,8 +59,8 @@ class User < ActiveRecord::Base
   self.per_page = 10
 
   has_many :sits, :dependent => :destroy
-  has_many :messages_received,  :class_name => 'Message', :foreign_key=> 'to_user_id'
-  has_many :messages_sent,      :class_name => 'Message', :foreign_key=> 'from_user_id'
+  has_many :messages_received,  :class_name => 'Message', :foreign_key=> 'to_user_id', :conditions => { :receiver_deleted => false }
+  has_many :messages_sent,      :class_name => 'Message', :foreign_key=> 'from_user_id', :conditions => { :sender_deleted => false }
   has_many :comments, :dependent => :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   end
 
   def unread_count
-    messages_received.unread.count
+    messages_received.unread.count unless messages_received.unread.count.zero?
   end
 
   # Overwrite Devise function to allow profile update with password requirement

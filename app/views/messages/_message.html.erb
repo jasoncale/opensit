@@ -1,5 +1,7 @@
-<div class="message">
-	<div class="from"><%= @message.from_user_id %></div>
-	<div class="title"><%= @message.subject %></div>
-	<div class="body"><%= @message.body %></div>
+<div>
+	<div class="title"><strong><%=@message.subject %></strong>
+	<div class="body"><%= @message.body.html_safe %></div>
+	<div class="from"><%= avatar(@message.from_user) %></div>
+	<div class="date">Sent at <%= @message.received_at %></div>
+	<div class="delete"><%= link_to 'Delete this message', message_path(@message), :method => :delete, :confirm => 'Are you sure?' %></div>
 </div>

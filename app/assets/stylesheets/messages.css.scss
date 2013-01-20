@@ -1,4 +1,10 @@
 .msg-overview {
+	.unread {
+		width: 30px;
+		padding-top: 22px;
+		font-size: 2em;
+		color: #08c;
+	}
 	.msg-avatar {
 		width: 55px;
 	}
@@ -9,5 +15,44 @@
 	.clickable-row {
 		display: block;
 		height: 50px;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	.msg-received {
+		float: right;
+		font-size: 0.8em;
+		color: #999;
+	}
+	.msg-delete {
+		float: right;
+		font-size: 0.7em;
+		font-weight: bold;
+		color: #ccc;
+	}
+}
+
+.view-message {
+	.body {
+		margin-top: 20px;
+	}
+	.from {
+		float: right;
+		margin-top: 20px;
+	}
+	.date {
+		float: right;
+		clear: right;
+		font-size: 0.8em;
+		font-weight: bold;
+		color: #999;
+	}
+	.delete {
+		float: right;
+		clear: right;
+		font-size: 0.8em;
+		a {
+			color: #999;
+		}
 	}
 }
