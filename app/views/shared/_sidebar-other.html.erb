@@ -4,11 +4,12 @@
 	<p><i class="icon-flag"></i> <%= @user.location %></p>
 <% end %>
 <% if !@user.style.blank? %>
-	<p><i class="icon-bolt"></i> &nbsp;<%= @user.style %></p>
+	<p><i class="icon-bolt"></i> <%= @user.style %></p>
 <% end %>
 <% if !@user.website.blank? %>
 	<p><i class="icon-link"></i> <%= website(@user) %></p>
 <% end %>
+
 <%= link_to 'Read full bio...', bio_path(@user) %>
 
 <%= render 'shared/stats' %>

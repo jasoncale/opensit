@@ -32,7 +32,8 @@ class Message < ActiveRecord::Base
         msg = self.clone
         msg.id = nil # Prevent non-unique primary key
         msg.to_user_id = to
-        msg.save
+        return true if msg.save
+        return false
       end
     end
   end
