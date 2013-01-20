@@ -47,13 +47,22 @@ class MessagesController < ApplicationController
 
   # DELETE /messages/1
   def destroy
+    @user = current_user
     @message = Message.find(params[:id])
-    @message.destroy
+
+    if @user.id == @message.from_user_id
+      @message.sender_deleted = true
+    else
+      @message.receiver_deleted = true
+    end
+
+    @message.save
+    @message.destroy if @message.sender_deleted && @message.receiver_deleted
 
     redirect_to messages_url
   end
 
-  # Is the current user allowed to see this message?
+  # Is the current user allowed to view this message?
   def access_message?
     @user = current_user
     @message = Message.find(params[:id])

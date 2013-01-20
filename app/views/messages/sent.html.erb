@@ -11,6 +11,7 @@
         <tr>
           <td class="msg-avatar"><%= avatar(msg.to_user) %></td>
           <td class="msg-content">
+            <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message from your sent items?', :class => 'msg-delete' %>
             <a href="<%= message_path(msg) %>" class="clickable-row">
             <div class="msg-username">To: <%= msg.to_user.username %></div>
             <div class="msg-content"><%= msg.subject.blank? ? truncate(msg.body, :length => 20, :omission => " ...").html_safe : msg.subject %></div>
