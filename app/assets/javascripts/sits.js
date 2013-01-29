@@ -21,4 +21,6 @@ jQuery(document).ready(function($) {
 
   $(".chzn-select").chosen();
 
+  // $.pjax('a', '#pjax-container');
+
 });

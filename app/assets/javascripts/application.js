@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require chosen-jquery
+//= require pjax
 //= require bootstrap-wysihtml5
 //= require bootstrap-datepicker
 //= require_tree .

@@ -2,7 +2,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "OpenSit", root_path, :class => 'brand' %>
+          <%= link_to 'OpenSit', root_path, :class => 'brand' %>
          <% if user_signed_in? %>
           <a class="pull-left btn btn-primary" href="/sits/new"><i class="icon-plus icon-white"></i></a>
           <a class="btn btn-inverse" href="<%= messages_path %>"><i class="icon-envelope"></i> <strong><%= current_user.unread_count %></strong></a>

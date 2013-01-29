@@ -12,18 +12,20 @@
   
   <body>
 
-  <div id="base-container">
+  <div class="base-container">
     
     <%= render 'layouts/header' %>
 
-    <% if flash[:notice] -%>
-      <div class="alert alert-success"><%= flash[:notice] %></div>
-    <% end %>
-    <% if flash[:error] -%>
-      <div class="alert alert-error"><%= flash[:notice] %></div>
-    <% end %>
-     
-    <%= yield %>
+    <div class="page-content" data-pjax-container>
+      <% if flash[:notice] -%>
+        <div class="alert alert-success"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:error] -%>
+        <div class="alert alert-error"><%= flash[:notice] %></div>
+      <% end %>
+       
+      <%= yield %>
+    </div>
     
     <%= render 'layouts/footer' %>
   
