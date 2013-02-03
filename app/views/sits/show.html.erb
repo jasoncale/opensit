@@ -13,6 +13,14 @@
 
     <div class="body"><%= @sit.body.html_safe %></div>
 
+    <div class="actions">
+      <ul>
+        <li>Clickable tag buttons</li>
+        <li><a href="#">Add-to/remove-from favourites</a></li>
+        <li>Permalink to this sit</li>
+      </ul>
+    </div>
+
     <div class="action-bar">
       <%= previous_sit(@sit) %>
       <%= next_sit(@sit) %>
@@ -31,7 +39,6 @@
             <%= render 'comments/comment' %>
           <% end %>
         <% end %>
-    </div>
 
       <% if @sit.comments.count > 1 %>
         <h4>Add a comment</h4>
@@ -41,6 +48,7 @@
         <%= f.submit 'Add comment' %>
       <% end %>
     <% end %>
+    </div>
 
   </article>
 

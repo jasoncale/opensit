@@ -16,7 +16,6 @@ Opensit::Application.routes.draw do
 
   match 'front' => "static_pages#front"
   match 'about' => "static_pages#about"
-  match 'help' => "static_pages#help"
 
   resources :sits do
     resources :comments
