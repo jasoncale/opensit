@@ -16,6 +16,7 @@ class SitsController < ApplicationController
   # GET /sits/new
   def new
     @sit = Sit.new
+    @user = current_user
   end
 
   # GET /sits/1/edit

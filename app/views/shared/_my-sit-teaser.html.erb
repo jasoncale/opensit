@@ -1,14 +1,10 @@
 <article class="sit-teaser">
   
-  <div class="side">
-    <%= avatar(sit.user) %>
-  </div>
-  
   <div class="sit-content">
     
-    <div class="time-ago"><%= time_ago_in_words(sit.created_at) %> ago</div>
+    <div class="time-ago"><%= time_ago_in_words(sit.created_at) %> ago <strong>edit | delete</strong></div>
     <div class="sit-header">
-      <%= username(sit.user) %> <%= teaser_title(sit) %>
+      You <%= teaser_title(sit) %>
     </div>
 
     <div class="body"><%= truncate(sit.body, :length => 400, :omission => " ...").html_safe %></div>

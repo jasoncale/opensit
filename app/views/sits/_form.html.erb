@@ -11,21 +11,21 @@
     </div>
   <% end %>
 
-  <%= f.input :s_type, :label => false, :collection => [['Sit', 0], ['Diary', 1], ['Article', 2]], :as => :radio_buttons, :item_wrapper_class => 'inline', :checked => '0' %>
+   <div class="control-group radio_buttons required"><div class="controls"><label class="radio"><input checked="checked" class="radio_buttons required" id="sit_s_type_0" name="sit[s_type]" type="radio" value="0" />I just sat for <input class="string optional" id="sit_duration" name="sit[duration]" size="50" type="text" value="<%= @user.default_sit_length %> "> minutes</label><br><label class="radio"><input class="radio_buttons required" id="sit_s_type_1" name="sit[s_type]" type="radio" value="1" />This is a journal.</label></div></div>
   
   <div class="new-sit-title">
     <%= f.input :title %>
   </div>
 
   <div class="new-sit-duration">
-    <%= f.input :duration, :as => 'string', :input_html => { :value => current_user.default_sit_length } %>
+    
   </div>
 
   <div class="new-sit-date">
     <%= f.input :created_at, :as => 'string', :label => 'Date', :input_html => { :placeholder => 'Just now.', :label => 'none', :id => 'datepicker' } %>
   </div>
 
-  <%= f.input :body, :input_html => { :rows => 10, :class => "basic-form" } %>
+  <%= f.input :body, :label => 'What\'s happening?', :input_html => { :rows => 10, :class => "basic-form" } %>
 
   <%= f.input :disable_comments %>
 

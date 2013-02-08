@@ -60,7 +60,7 @@ gem 'chosen-rails'
 # Rails admin
 gem 'rails_admin'
 
-gem 'pjax-rails'
+gem 'turbolinks'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
