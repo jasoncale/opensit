@@ -21,6 +21,9 @@ Opensit::Application.routes.draw do
     resources :comments
   end
 
+  match '/tags/', to: 'tags#index', as: :tags
+  match '/tags/:id', to: 'tags#show', as: :tag
+
   match '/messages/sent' => "messages#sent", :as => :sent_messages
   resources :messages, except: [:edit, :update]
   
