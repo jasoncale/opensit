@@ -11,7 +11,7 @@
       <%= username(sit.user) %> <%= teaser_title(sit) %>
     </div>
 
-    <div class="body"><%= truncate(sit.body, :length => 400, :omission => " ...").html_safe %></div>
+    <div class="body"><%= Sanitize.clean(truncate(sit.body, :length => 300, :omission => " ...")) %></div>
 
     <div class="sit-meta">
       <%= link_to(sit_path(sit, :anchor => "comments")) do %>

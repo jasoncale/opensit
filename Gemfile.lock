@@ -187,6 +187,8 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     rubyzip (0.9.9)
+    sanitize (2.0.3)
+      nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -251,6 +253,7 @@ DEPENDENCIES
   rails_admin
   rb-inotify (~> 0.8.8)
   rspec-rails
+  sanitize
   sass-rails (~> 3.2.3)
   simple_form
   sqlite3
