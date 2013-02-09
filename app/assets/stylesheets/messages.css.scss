@@ -56,3 +56,15 @@
 		}
 	}
 }
+
+#new_message {
+	.control-label {
+		width: 70px;
+	}
+	.controls {
+		margin-left: 100px;
+	}
+	input[type="submit"] {
+		float: right;
+	}
+}
