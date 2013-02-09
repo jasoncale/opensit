@@ -62,8 +62,6 @@ gem 'rails_admin'
 
 gem 'turbolinks'
 
-gem 'sanitize'
-
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
