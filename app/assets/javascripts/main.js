@@ -19,6 +19,11 @@ function pageInit() {
     });
   });
 
+  // SIT TEASER / Click through
+  $('.sit-teaser').click( function() {
+    Turbolinks.visit($(this).find('.sit-link').attr('href'));
+  });
+
   // NEW SIT / title or duration
   $('.new-sit .radio_buttons input').click( function() {
     if ($(this).attr('id') == 'sit_s_type_0') {

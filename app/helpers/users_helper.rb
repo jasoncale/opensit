@@ -43,11 +43,6 @@ module UsersHelper
     end
   end
 
-  # Unlinked username / name
-  def full_name(user)
-
-  end
-
   # Return link to website
   def website(user)
     link_to user.website, user.website

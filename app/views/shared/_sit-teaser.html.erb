@@ -1,15 +1,11 @@
 <article class="sit-teaser">
-  
   <div class="side">
     <%= avatar(sit.user) %>
   </div>
   
   <div class="sit-content">
     
-    <div class="time-ago"><%= time_ago_in_words(sit.created_at) %> ago</div>
-    <div class="sit-header">
-      <%= username(sit.user) %> <%= teaser_title(sit) %>
-    </div>
+    <div class="top"><%= username(sit.user) %> <%= teaser_title(sit) %> <span class="pull-right"><%= time_ago_in_words(sit.created_at) %> ago</span></div>
 
     <div class="body"><%= strip_tags(truncate(sit.body, :length => 300, :omission => " ...")) %></div>
 
@@ -20,4 +16,5 @@
     </div> end .sit-meta -->
 
   </div> <!-- end .sit-content -->
+  
 </article>
