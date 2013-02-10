@@ -5,15 +5,13 @@
   
   <div class="sit-content">
     
-    <div class="top"><%= username(sit.user) %> <%= teaser_title(sit) %> <span class="pull-right"><%= time_ago_in_words(sit.created_at) %> ago</span></div>
+    <div class="top"><%= username(sit.user) %> <%= teaser_title(sit) %> 
+    <% if sit.comments.count > 0 %>
+      &bull; <%= pluralize(sit.comments.count, 'comment') %>
+    <% end %>
+      <span class="pull-right"><%= time_ago_in_words(sit.created_at) %> ago</span></div>
 
     <div class="body"><%= strip_tags(truncate(sit.body, :length => 300, :omission => " ...")) %></div>
-
-    <!-- <div class="sit-meta">
-      <%= link_to(sit_path(sit, :anchor => "comments")) do %>
-        <i class="icon-comments"></i> <%= sit.comments.count %>
-      <% end %>
-    </div> end .sit-meta -->
 
   </div> <!-- end .sit-content -->
   
