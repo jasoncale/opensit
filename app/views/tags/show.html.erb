@@ -1,0 +1,6 @@
+<h2>Most recent sits tagged '<%= params[:id] %>'</h2>
+<% @sits.each do |sit| %>
+
+  <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
+
+<% end %>

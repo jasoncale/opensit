@@ -8,18 +8,23 @@
 
     <header>
       <div class="full-sit-date"><%= @sit.date %></div>
+      <% if @sit.mine?(current_user) %>
+        <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
+      <% end %>
       <h3><%= @sit.full_title %></h3>
     </header>
 
     <div class="body"><%= @sit.body.html_safe %></div>
 
+    <% if !@sit.tags.empty? %>
+      <div class="tags">
+        <i class="icon-tag"></i><%= tag_labels(@sit.tags) %>
+      </div>
+    <% end %>
+
     <div class="actions">
-      <ul>
-        <li>Clickable tag buttons</li>
-        <li><a href="#">Add-to/remove-from favourites</a></li>
-        <li>Permalink to this sit</li>
-        <li><b>If user owns the sit:</b> buttons to edit or delete</li>
-      </ul>
+      <i class="icon-star-empty"></i>
+      <i class="icon-link"></i>
     </div>
 
     <div class="action-bar">

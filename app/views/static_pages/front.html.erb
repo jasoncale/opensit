@@ -20,14 +20,12 @@
   
   <section id="global-sitstream">
     <h1>Global SitStream</h1>
-    <h3>Join 240,000 users logging over 1 million hours of practice</h3>
     
     <% @sits.each do |sit| %>
  
       <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
 
     <% end %>
-    
   </section> <!-- end section#global_sitstream -->
 
 </div> <!-- end div.front-page -->

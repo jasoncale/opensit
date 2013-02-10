@@ -2,14 +2,17 @@
 article.sit-teaser {
   float: left;
   width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+  padding: 7px;
   /* Avatar */
   .side {
     float: left;
     padding: 25px 2% 5px 5px;
   }
   .sit-content {
-    width: 90%;
-    float: left;
+    margin-left: 70px;
     font-size: 0.85em;
     padding-bottom: 5px;
     .time-ago {
@@ -43,12 +46,23 @@ article.sit {
     float: right;
     color: #666;
   }
+  .my-actions {
+    clear: both;
+    float: right;
+  }
   .body {
     font-family: "Georgia", serif;
     font-size: 1.8em;
     line-height: 1.5;  
   }
+  .tags {
+    float: right;
+    .tag-label {
+      margin-left: 5px;
+    }
+  }
   .actions {
+    clear: both;
     float: right;
     margin: 10px 0;
   }

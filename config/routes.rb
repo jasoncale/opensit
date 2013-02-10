@@ -16,10 +16,13 @@ Opensit::Application.routes.draw do
 
   match 'front' => "static_pages#front"
   match 'about' => "static_pages#about"
+  match 'explore' => "static_pages#explore"
 
   resources :sits do
     resources :comments
   end
+
+  match '/tags/:id' => 'tags#show', :as => :tag
 
   match '/messages/sent' => "messages#sent", :as => :sent_messages
   resources :messages, except: [:edit, :update]

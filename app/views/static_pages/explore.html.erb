@@ -1,0 +1,23 @@
+<div class="section explore">
+  
+  <section class="global-sitstream">
+    <h1>Global SitStream</h1>
+    
+    <% @sits.each do |sit| %>
+ 
+      <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
+
+    <% end %>
+  </section> <!-- end section#global_sitstream -->
+
+  <section class="tags">
+    <h1>Tags</h1>
+
+    <div id="tag_cloud">
+      <% tag_cloud Sit.tag_counts, %w[s m l] do |tag, css_class| %>
+        <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+      <% end %>
+    </div>
+  </section>
+  
+</div> <!-- end div.explore -->
