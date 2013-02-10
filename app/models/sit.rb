@@ -58,6 +58,10 @@ class Sit < ActiveRecord::Base
   # METHODS
   ##
 
+  def mine?(current)
+    return true if self.user_id == current.id
+  end
+
   def next
     user.sits.where("id > ?", id).first
   end
@@ -86,7 +90,7 @@ class Sit < ActiveRecord::Base
   end
 
   def tag_list
-    tags.map(&:name).join(", ")
+    tags.map(&:name).join(', ')
   end
 
   def tag_list=(names)

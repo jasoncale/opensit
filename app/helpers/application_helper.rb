@@ -16,4 +16,8 @@ module ApplicationHelper
 	    yield(tag, classes[index.round])
 	  end
 	end
+
+  def tag_labels(tags)
+    raw tags.map { |t| link_to t.name, tag_path(t.name), :class => 'label tag-label' }.join
+  end
 end
