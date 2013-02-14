@@ -22,6 +22,7 @@ class SitsController < ApplicationController
   # GET /sits/1/edit
   def edit
     @sit = Sit.find(params[:id])
+    @user = current_user
   end
 
   # POST /sits

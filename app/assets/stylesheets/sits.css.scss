@@ -108,7 +108,8 @@ article.sit {
 }
 
 /* New sit */
-section.new-sit {
+.new-sit,
+.edit-sit {
   .new-sit-title {
     display: none;
   }
