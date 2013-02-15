@@ -14,7 +14,8 @@
     
     <%= f.input :dob, :as => :date, :label => 'Date of birth', :start_year => Date.today.year - 90,
                             :end_year => Date.today.year - 12, :order => [:day, :month, :year],
-                            :input_html => { :class => 'span1' } %>
+                            :include_blank => true, :input_html => { :class => 'span1' }
+                             %>
     
     <%= f.input :gender, :collection => [['Male', 0], ['Female', 1], ['Transgender', 2]], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
     
