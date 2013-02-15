@@ -22,6 +22,7 @@ class SitsController < ApplicationController
   # GET /sits/1/edit
   def edit
     @sit = Sit.find(params[:id])
+    @user = current_user
   end
 
   # POST /sits
@@ -52,6 +53,6 @@ class SitsController < ApplicationController
     @sit = Sit.find(params[:id])
     @sit.destroy
 
-    redirect_to sits_url
+    redirect_to me_path
   end
 end

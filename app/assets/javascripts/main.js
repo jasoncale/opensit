@@ -9,7 +9,7 @@ $(window).bind('page:change', function() {
 function pageInit() {
   $.each($('textarea'), function(index, el){
     $(el).wysihtml5({
-      "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+      "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
       "emphasis": true, //Italics, bold, etc. Default true
       "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
       "html": false, //Button which allows you to edit the generated HTML. Default false
@@ -37,7 +37,7 @@ function pageInit() {
   });
 
   // NEW SIT / datepicker
-  $('.new-sit #datepicker').datepicker({
+  $('#datepicker').datepicker({
     format: 'yyyy-mm-dd',
     autoclose: true,
     language: 'en',

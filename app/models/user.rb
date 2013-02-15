@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
   end
 
   def socialstream
-    Sit.from_users_followed_by(self)
+    Sit.from_users_followed_by(self).newest_first
   end
 
   def unread_count
