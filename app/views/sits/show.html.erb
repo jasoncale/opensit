@@ -8,7 +8,7 @@
 
     <header>
       <div class="full-sit-date"><%= @sit.date %></div>
-      <% if @sit.mine?(@user) %>
+      <% if current_user and @sit.mine?(current_user) %>
         <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
       <% end %>
       <h3><%= @sit.full_title %></h3>

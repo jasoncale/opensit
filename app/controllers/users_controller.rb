@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if !user_signed_in?
       redirect_to front_path
     else
-      @feed_items = current_user.socialstream.newest_first.paginate(:page => params[:page])
+      @feed_items = current_user.socialstream.paginate(:page => params[:page])
     end
   end
 

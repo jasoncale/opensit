@@ -53,6 +53,6 @@ class SitsController < ApplicationController
     @sit = Sit.find(params[:id])
     @sit.destroy
 
-    redirect_to sits_url
+    redirect_to me_path
   end
 end
