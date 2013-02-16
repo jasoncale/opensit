@@ -44,4 +44,10 @@ function pageInit() {
   });
 
   $(".chzn-select").chosen();
+
+  // FAVOURITES / add and remove
+  $('#favourite_button').on('click', '.toggle-favourite', function(e) {
+    e.preventDefault();
+    $(this).closest('form').submit();
+  });
 }

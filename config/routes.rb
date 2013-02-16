@@ -13,6 +13,7 @@ Opensit::Application.routes.draw do
   match '/users/:id/followers' => "users#followers", :as => :followers_user
   match '/users/:id/export' => "users#export"
   match '/users/:id/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
+  match 'favs' => "favourites#index", :as => :favs
 
   match 'front' => "static_pages#front"
   match 'about' => "static_pages#about"
@@ -28,5 +29,7 @@ Opensit::Application.routes.draw do
   resources :messages, except: [:edit, :update]
   
   resources :relationships, only: [:create, :destroy]
+
+  resources :favourites, only: [:create, :destroy]
 
 end

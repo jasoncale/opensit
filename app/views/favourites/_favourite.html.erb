@@ -1,0 +1,7 @@
+<% # After AJAX load, form has no access to @sit so reload it 
+@sit ||= Sit.find(params[:favourite][:favourable_id]) %>
+<%= form_for(@sit.favourites.create, remote: true) do |f| %>
+    <div><%= f.hidden_field :favourable_id, :value => @sit.id %></div>
+    <div><%= f.hidden_field :favourable_type, :value => 'Sit' %></div>
+  <%= link_to 'Add to favs <i class="icon-heart"></i>'.html_safe, '#', :title => 'Add to favourites', :class => 'toggle-favourite btn' %>
+<% end %>

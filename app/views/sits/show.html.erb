@@ -23,11 +23,11 @@
     <% end %>
 
     <div class="actions">
-      <i class="icon-star-empty"></i>
-      <i class="icon-link"></i>
+      <a href="#" class="btn share-link">Share <i class="icon-link"></i></a>
+      <%= render :partial => 'shared/favourite-button' %>
     </div>
 
-    <div class="action-bar">
+    <div class="prev-next">
       <%= previous_sit(@sit) %>
       <%= next_sit(@sit) %>
     </div>
@@ -51,7 +51,7 @@
       <% end %>
       <%= simple_form_for [@sit, @sit.comments.build], :remote => 'true' do |f| %>
         <%= f.input :body, :label => false, :input_html => { :rows => 5, :class => 'span6' } %>
-        <%= f.submit 'Add comment' %>
+        <%= f.submit 'Add comment', :class => 'btn pull-right' %>
       <% end %>
     <% end %>
     </div>

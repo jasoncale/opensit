@@ -21,6 +21,7 @@ class Sit < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :taggings
   has_many :tags, through: :taggings
+  has_many :favourites, :as => :favourable
 
   
   validates :body, :presence => true
