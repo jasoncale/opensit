@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130209135229) do
+ActiveRecord::Schema.define(:version => 20130216111857) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(:version => 20130209135229) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
+
+  create_table "favourites", :force => true do |t|
+    t.integer  "favourable_id"
+    t.string   "favourable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "favourites", ["favourable_id"], :name => "index_favourites_on_favourable_id"
+  add_index "favourites", ["user_id"], :name => "index_favourites_on_user_id"
 
   create_table "messages", :force => true do |t|
     t.string   "subject"

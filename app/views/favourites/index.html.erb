@@ -1,0 +1,15 @@
+<div class="section favourites">
+
+  <section class="sidebar">
+    <%= render 'shared/sidebar-me' %>
+  </section>
+  
+  <section class="content favourites-index">
+    <%= render :partial => 'shared/me-pills' %>
+  	
+  	<% @favs.each do |f| %>
+      <%= render :partial => 'shared/sit-teaser', :locals => { :sit => f } %>
+    <% end %>
+
+  </section>
+ </div>

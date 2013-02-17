@@ -68,6 +68,7 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :favourites
 
   ##
   # VIRTUAL ATTRIBUTES
@@ -107,6 +108,47 @@ class User < ActiveRecord::Base
 
   def unread_count
     messages_received.unread.count unless messages_received.unread.count.zero?
+  end
+
+  # Has this user favourited this sit?
+  def favourited?(id)
+    @sit = Sit.find_by_id(id)
+    @sit.favourites.where(:user_id => self.id).exists?
+  end
+
+  # Return a users favourites.
+  # Options:
+  #  :type (string) - defaults to Sit
+  #  :id (int) - select by favourable_id
+  #  :delve (bool) - return the favourited objects themselves
+  def get_favourites(opts={})
+  
+    type = opts[:type] ? opts[:type] : :sit
+    type = type.to_s.capitalize
+
+    con = ["user_id = ? AND favourable_type = ?", self.id, type]
+    
+    if opts[:id]
+      con[0] += " AND favourable_id = ?"
+      con << opts[:id].to_s
+    end
+   
+    favs = Favourite.all(:conditions => con)
+    
+    case opts[:delve]
+    when nil, false, :false
+      return favs
+    when true, :true
+      # Get a list of all favourited object ids
+      fav_ids = favs.collect{|f| f.favourable_id}
+
+      if fav_ids.size > 0
+        type_class = type.constantize
+        return type_class.find(fav_ids)
+      else
+        return []
+      end
+    end       
   end
 
   # Overwrite Devise function to allow profile update with password requirement
