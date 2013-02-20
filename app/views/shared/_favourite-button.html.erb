@@ -1,6 +1,6 @@
-<% unless current_user.id == @sit.user_id || !current_user %>
+<% unless (current_user and current_user.id == @sit.user_id) or !current_user %>
 	<span id="favourite_button">
-    <% if current_user.favourited?(@sit.id) %>
+    <% if current_user and current_user.favourited?(@sit.id) %>
       <%= render 'favourites/unfavourite' %>
     <% else %>
       <%= render 'favourites/favourite' %>
