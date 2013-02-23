@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!, :only => [:my_sits]
   
   # GET /me page if logged in, /front if not
   def me
@@ -12,7 +13,15 @@ class UsersController < ApplicationController
   # GET /my
   def my_sits
     @user = current_user
-    @my_sits = @user.sits.newest_first.paginate(:page => params[:page])
+    @links = @user.stream_range
+
+    if params[:y] && params[:m]
+      @my_sits = @user.sits_by_month(params[:y], params[:m]).newest_first
+    elsif params[:y]
+      @my_sits = @user.sits_by_year(params[:y]).newest_first
+    else
+      @my_sits = @user.sits.newest_first.paginate(:page => params[:page])
+    end
   end
 
   # GET /users/1

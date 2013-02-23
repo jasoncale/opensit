@@ -9,7 +9,13 @@
     <% if sit.comments.count > 0 %>
       &bull; <%= pluralize(sit.comments.count, 'comment') %>
     <% end %>
-      <span class="pull-right"><%= time_ago_in_words(sit.created_at) %> ago</span></div>
+      <span class="pull-right">
+      <% if request.fullpath =~ /my/ %>
+        <%= sit.date %>
+      <% else %>
+       <%= time_ago_in_words(sit.created_at) %> ago
+      <% end %>
+      </span></div>
 
     <div class="body"><%= strip_tags(truncate(sit.body, :length => 300, :omission => " ...")) %></div>
 

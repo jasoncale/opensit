@@ -100,6 +100,49 @@ class User < ActiveRecord::Base
       year.to_s, month.to_s.rjust(2, '0'), self.id)
   end
 
+  def stream_range
+    first_sit = Sit.where("user_id = ?", self.id).order(:created_at).first.created_at.strftime("%Y %m").split(' ')
+    year, month = Time.now.strftime("%Y %m").split(' ')
+    dates = []
+    
+    # Build list of all months from first lsit to current date
+    while [year.to_s, month.to_s.rjust(2, '0')] != first_sit
+      month = month.to_i
+      year = year.to_i
+      if month != 0
+        dates << [year, month]
+        month -= 1
+      else
+        year -= 1
+        month = 12
+      end
+    end
+
+    # Add first sit month
+    dates << [first_sit[0].to_i, first_sit[1].to_i]
+
+    # Filter out any months with no activity
+    pointer = 1900
+    links = []
+    dates.each do |m|
+      year, month = m
+      month_total = self.sits_by_month(year, month).count
+
+      if pointer != year
+        year_total = self.sits_by_year(year).count
+        links <<  [year, year_total]
+      end
+      
+      if month_total != 0
+        links << [month, month_total]
+      end
+      
+      pointer = year
+    end
+    
+    return links
+  end
+
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id)
   end

@@ -47,4 +47,17 @@ module UsersHelper
   def website(user)
     link_to user.website, user.website
   end
+
+  def timeline(dates)
+    current_year = 2013
+    dates.map do |l|
+      type, count = l
+      if type.to_s.size == 4
+        current_year = type
+        '<div class="year">' + link_to("#{type}", "?y=#{type}") + " <span class=\"count\">(#{count})</span></div>"
+      else
+        "<li>" + link_to("#{Date::MONTHNAMES[type]}", "?y=#{current_year}&m=#{type}") + " <span class=\"count\">(#{count})</span></li>"
+      end
+    end.join(' ').html_safe
+  end
 end
