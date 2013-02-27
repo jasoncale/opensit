@@ -5,13 +5,7 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# Heroku gives you a nice free Postgres DB
-group :production do
-  gem 'pg'
-end
-
 group :development, :test do
-  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'faker'
   gem 'annotate', '2.5.0'
@@ -19,7 +13,7 @@ group :development, :test do
   # Guard shizzle
   gem 'rb-inotify', '~> 0.8.8' # Only needed on Linux. May need to install libnotify with OS's package manager
   gem 'guard'
-  gem 'guard-rails' # Reloads Rails server when cached files like those in /config change
+  gem 'guard-rails'   # Reloads Rails server when cached files like those in /config change
   gem 'guard-livereload' # Sends signal to Livereload extension in browser to reload page
   gem 'guard-migrate' # Automatically runs migrations when needed
   gem 'guard-bundler' # Automatically installs/updates budler gems
@@ -36,6 +30,8 @@ end
 group :test do
   gem 'capybara'
 end
+
+gem 'pg'
 
 gem 'bootstrap-wysihtml5-rails'
 gem 'bootstrap-datepicker-rails'

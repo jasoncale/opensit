@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20130216111857) do
     t.integer  "item"
     t.string   "table"
     t.integer  "month",      :limit => 2
-    t.integer  "year",       :limit => 5
+    t.integer  "year",       :limit => 8
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(:version => 20130216111857) do
     t.text     "body"
     t.integer  "user_id"
     t.boolean  "disable_comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "duration"
     t.integer  "s_type"
   end
