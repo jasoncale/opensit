@@ -15,11 +15,11 @@ module UsersHelper
     else
       if size.zero?
         link_to user_path(user) do
-          image_tag(user.avatar.small_thumb, :alt => user.username, :title => user.username)
+          image_tag(user.avatar.url(:small_thumb), :alt => user.username, :title => user.username)
         end
       else
         link_to user_path(user) do
-          image_tag(user.avatar.thumb, :alt => user.username, :title => user.username)
+          image_tag(user.avatar.url(:thumb), :alt => user.username, :title => user.username)
         end
       end
     end

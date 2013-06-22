@@ -45,7 +45,8 @@ gem 'will_paginate'
 gem 'devise'
 
 # Classier solution for file uploads for Rails
-gem 'carrierwave'
+gem 'paperclip'
+gem 'aws-sdk'
 gem 'mini_magick'
 
 # Simple form with country select
