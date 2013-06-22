@@ -21,7 +21,7 @@ function pageInit() {
 
   // SIT TEASER / Click through
   $('.sit-teaser').click( function() {
-    Turbolinks.visit($(this).find('.sit-link').attr('href'));
+    window.location = $(this).find('.sit-link').attr('href');
   });
 
   // NEW SIT / title or duration
