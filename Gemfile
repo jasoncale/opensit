@@ -24,10 +24,11 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'bootstrap-sass'
-  gem 'font-awesome-sass-rails'
   gem 'therubyracer'
   gem 'uglifier', '>= 1.0.3'
 end
+
+gem 'font-awesome-sass-rails'
 
 group :test do
   gem 'capybara'
