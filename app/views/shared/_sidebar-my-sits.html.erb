@@ -1,4 +1,10 @@
-<ul>
-<%= timeline(@links) %>
-</ul>
+<% if !@user.sits.empty? %>
+	<ul>
+	<%= timeline(@links) %>
+	</ul>
+<% else %>
+	<div class="well">
+		<p>You will be able to browse your sits by month and year here.</p>
+	</div>
+<% end %>
 

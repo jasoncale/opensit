@@ -49,7 +49,7 @@ module UsersHelper
   end
 
   def timeline(dates)
-    current_year = 2013
+    current_year = Time.now.year
     dates.map do |l|
       type, count = l
       if type.to_s.size == 4

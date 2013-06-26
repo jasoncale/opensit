@@ -6,8 +6,16 @@
   </section>
   
   <section class="content socialstream">
-
   	<%= render :partial => 'shared/me-pills' %>
+
+    <% if @my_sits.empty? %>
+      <div class="well well-large empty-message">
+        <h1>You haven't logged any practice yet!</h1>
+        <p>Share your practice with others, <%= link_to 'add a sit or diary', new_sit_path %>.</p>
+      </div>
+    <% end %>
+
+    <h1 class="range-title"><%= @range_title %></h1>
   	
   	<% @my_sits.each do |sit| %>
 
@@ -18,5 +26,6 @@
     <% if !params[:y] %>
       <%= will_paginate @my_sits, :class => 'pagination pagination-centered' %>
     <% end %>
+
   </section>
  </div>

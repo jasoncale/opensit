@@ -6,21 +6,30 @@
   
   <section class="content sent">
   	
-    <table class="table msg-overview">
-    	<% @messages.each do |msg| %>
-        <tr>
-          <td class="msg-avatar"><%= avatar(msg.to_user) %></td>
-          <td class="msg-content">
-            <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message from your sent items?', :class => 'msg-delete' %>
-            <a href="<%= message_path(msg) %>" class="clickable-row">
-            <div class="msg-username">To: <%= msg.to_user.username %></div>
-            <div class="msg-content"><%= msg.subject.blank? ? truncate(msg.body, :length => 20, :omission => " ...").html_safe : msg.subject %></div>
-            <div class="msg-received">Sent <%= time_ago_in_words(msg.created_at) %> ago</div>
-            </a>
-          </td>
-        </tr>
-      <% end %>
-    </table>
+    <% if @messages.empty? %>
+      <div class="well well-large empty-message">
+        <h1>You haven't sent any messages.</h1>
+        <p>Why don't you send someone a message? Hint: you can only send messages to people you follow.</p>
+      </div>
+    <% else %>
+    
+      <table class="table msg-overview">
+      	<% @messages.each do |msg| %>
+          <tr>
+            <td class="msg-avatar"><%= avatar(msg.to_user) %></td>
+            <td class="msg-content">
+              <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message from your sent items?', :class => 'msg-delete' %>
+              <a href="<%= message_path(msg) %>" class="clickable-row">
+              <div class="msg-username">To: <%= msg.to_user.username %></div>
+              <div class="msg-content"><%= msg.subject.blank? ? truncate(msg.body, :length => 20, :omission => " ...").html_safe : msg.subject %></div>
+              <div class="msg-received">Sent <%= time_ago_in_words(msg.created_at) %> ago</div>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+    <% end %>
 
   </section>
  </div>

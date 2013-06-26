@@ -1,7 +1,7 @@
 <div class="section view-sit">
 
   <section class="sidebar">
-    <%= render :partial => 'shared/sidebar-other' %>
+    <%= render :partial => 'shared/sidebar-user' %>
   </section>
 
   <article class="content sit">
@@ -11,7 +11,7 @@
       <% if current_user and @sit.mine?(current_user) %>
         <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
       <% end %>
-      <h3><%= @sit.full_title %></h3>
+      <h1 class="sit-title"><%= @sit.full_title %></h1>
     </header>
 
     <div class="body"><%= @sit.body.html_safe %></div>
@@ -23,7 +23,7 @@
     <% end %>
 
     <div class="actions">
-      <a href="#" class="btn share-link">Share <i class="icon-link"></i></a>
+      <!-- <a href="#" class="btn share-link">Share <i class="icon-link"></i></a> -->
       <%= render :partial => 'shared/favourite-button' %>
     </div>
 

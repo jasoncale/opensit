@@ -5,6 +5,13 @@
   </section>
   
   <section class="content inbox">
+
+  <% if @messages.empty? %>
+    <div class="well well-large empty-message">
+      <h1>Your inbox is empty.</h1>
+      <p>I'm sure someone is thinking of you...</p>
+    </div>
+  <% else %>
   	
     <table class="table msg-overview">
     	<% @messages.each do |msg| %>
@@ -22,6 +29,8 @@
         </tr>
       <% end %>
     </table>
+
+  <% end %>
 
   </section>
  </div>

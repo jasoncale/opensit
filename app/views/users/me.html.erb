@@ -2,14 +2,18 @@
 <div class="section me">
 
   <section class="sidebar">
-    <%= render :partial => 'shared/sidebar-me' %>
+    <%= render :partial => 'shared/sidebar-user' %>
   </section>
   
   <section class="content socialstream">
-
     <%= render :partial => 'shared/me-pills' %>
-    
-    <p>Latest updates from all of the <%= link_to "people I follow", '#' %>.</p>
+
+    <% if @feed_items.empty? %>
+    <div class="well well-large empty-message">
+        <h1>You're not following anyone yet!</h1>
+        <p>Once you follow someone you'll be able to see all their updates here.</p>
+      </div>
+    <% end %>
     
     <% @feed_items.each do |sit| %>
 

@@ -5,13 +5,24 @@ html {
 
 body { 
   width: 100%; 
-  padding-top: 60px; /* Due to fixed nav bar */
+  padding-top: 80px; /* Due to fixed nav bar */
   background: #fff;
-  font-family: "HelveticaNeue", "Helvetica Neue", Arial, sans-serif !important;
-  font-size: 100% !important;
+  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Arial, sans-serif !important;
   color: #444;
   -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
   -webkit-text-size-adjust: 100%;
+}
+
+// .btn-primary {
+//   background: #e66f69;
+// }
+// a {
+//   color: #e66f69;
+// }
+
+h1 {
+  font-weight: normal;
+  font-size: 1.8em;
 }
 
 /* Bootstrap alignment fixes */
@@ -25,6 +36,12 @@ label {
 
 /* Navbar */
 #main-header {
+  .navbar-inner {
+    height: 60px;
+    .container {
+      margin-top: 10px;
+    }
+  }
   ul a {
     font-size: 0.9em;
   }
@@ -40,6 +57,16 @@ label {
   }
 }
 
+/* Logo */
+.brand {
+  font-family: 'Pacifico';
+  padding: 7px 37px 10px 35px !important;
+  font-size: 32px !important;
+  // color: #e66f69 !important;
+  text-shadow: 0 1px 0 #666 !important;
+}
+
+
 /* Sidebar */
 .sidebar {
   img {
@@ -49,8 +76,14 @@ label {
     -webkit-box-shadow: 5px 5px 3px #888;
     box-shadow: 5px 5px 3px #888;
   }
-  #sit-feed {
-    font-size: 20px;
+}
+
+/* Message wells */
+.well {
+  h1 {
+    font-weight: normal;
+    font-size: 1.5em;
+    margin: 0 0 15px;
   }
 }
 

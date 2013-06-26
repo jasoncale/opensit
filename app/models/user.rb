@@ -58,6 +58,8 @@ class User < ActiveRecord::Base
   end
 
   def stream_range
+    return false if self.sits.empty?
+
     first_sit = Sit.where("user_id = ?", self.id).order(:created_at).first.created_at.strftime("%Y %m").split(' ')
     year, month = Time.now.strftime("%Y %m").split(' ')
     dates = []

@@ -1,12 +1,24 @@
  <div class="section view-profile">
 
   <section class="sidebar">
-    <%= render :partial => 'shared/sidebar-other' %>
+    <%= render :partial => 'shared/sidebar-user' %>
   </section>
   
   <section class="content bio">
     
     <%= render :partial => 'shared/other-pills' %>
+
+    <% if @user.who.blank? && @user.why.blank? && @user.practice.blank? %>
+      <div class="well well-large empty-message">
+        <% if current_user == @user %>
+          <h1>You've not filled in your profile yet!</h1>
+          <p>Tell us a bit more about yourself.</p>
+        <% else %>
+          <h1>Empty profile!</h1>
+          <p>This person hasn't filled out their profile yet.</p>
+        <% end %>
+      </div> 
+    <% end %>
 
     <% if !@user.who.blank? %>    
       <p class="lead"><%= @user.who.html_safe %></p>

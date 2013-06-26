@@ -3,5 +3,5 @@
 <%= form_for(@sit.favourites.find_by_user_id(current_user.id),
 html: { method: :delete}, remote: true) do |f| %>
 	<div><%= f.hidden_field :favourable_id, :value => @sit.id %></div>
-  <%= link_to 'Remove from favs <i class="icon-heart-empty"></i>'.html_safe, '#', :title => 'Remove from favourites', :class => 'toggle-favourite btn' %>
+  <%= link_to '<i class="icon-heart"></i>'.html_safe, '#', :title => 'Remove from favourites', :class => 'toggle-favourite btn' %>
 <% end %>

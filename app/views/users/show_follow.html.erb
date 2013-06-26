@@ -2,22 +2,23 @@
 <div class="section me">
 
   <section class="sidebar">
-    <% if current_user == @user %>
-      <%= render :partial => 'shared/sidebar-me' %>
-    <% else %>
-      <%= render :partial => 'shared/sidebar-other' %>
-    <% end %>
+    <%= render :partial => 'shared/sidebar-user' %>
   </section>
 
-  <section class="content <%= @title %>">
+  <section class="content">
 
-    <%= render :partial => 'shared/me-pills' %>
+    <h1><%= @title %></h1>
+    <hr>
     
     <% if @users.any? %>
       <div class="user_avatars">
         <% @users.each do |user| %>
           <%= link_to avatar(user), user %>
         <% end %>
+      </div>
+    <% else %>
+      <div class="well">
+        <p>No connections yet!</p>
       </div>
     <% end %>
   

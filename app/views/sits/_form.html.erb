@@ -14,9 +14,9 @@
   <% if current_page? new_sit_path(@sit) %>
     <div class="control-group radio_buttons required"><div class="controls">
     <label class="radio"><input checked class="radio_buttons required" id="sit_s_type_0" name="sit[s_type]" type="radio" value="0" />I just sat for <input class="string optional" id="sit_duration" name="sit[duration]" size="50" type="text" value="<%= current_page?(new_sit_path(@sit)) ? @user.default_sit_length : @sit.duration %>"> minutes</label>
-    <br>
+    <br><br>
     <label class="radio"><input class="radio_buttons required" id="sit_s_type_1" name="sit[s_type]" type="radio" value="1" />This is a diary entry.</label></div></div>
-
+    <br>
     <div class="new-sit-title">
       <%= f.input :title %>
     </div>
@@ -35,6 +35,7 @@
   <%= if !current_page?(new_sit_path(@sit)) 
     link_to 'Delete this event', sit_path(@sit), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger'
     end %>
-  <%= f.submit :class => 'btn pull-right' %>
+  
+  <%= f.submit :class => 'btn btn-large pull-right' %>
   
 <% end %>

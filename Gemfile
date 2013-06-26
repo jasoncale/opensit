@@ -35,7 +35,6 @@ gem 'pg'
 
 gem 'bootstrap-wysihtml5-rails'
 gem 'bootstrap-datepicker-rails'
-
 gem 'jquery-rails'
 
 # Pagination

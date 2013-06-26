@@ -1,25 +1,54 @@
 .sidebar {
-	.stats {
-		padding: 20px;
-	  overflow: auto;
-	  a {
-	    float: left;
-	    padding: 0 10px;
-	    border-left: 1px solid #CCC;
-	    color: gray;
-	    &:first-child {
-	      padding-left: 0;
-	      border: 0;
-	    }
-	    &:hover {
-	      text-decoration: none;
-	      color: #08C;
-	    }
-	  }
-	  strong {
-	    display: block;
-	  }
-	}
+	.sidebar-content {
+    padding-left: 10px;
+    font-size: 14px;
+    .username {
+      margin: 25px 0 15px;
+      font-size: 1.7em;
+      font-weight: normal;
+    }
+    .user-info {
+      float: left;
+      margin: 5px 0;
+      .icon {
+        width: 20px;
+        float: left;
+      }
+      .detail {
+        float: left;
+      }
+    }
+		.stats {
+			float: left;
+			padding: 20px;
+		  overflow: auto;
+		  a {
+		    float: left;
+		    padding: 0 10px;
+		    border-left: 1px solid #CCC;
+		    color: gray;
+		    &:first-child {
+		      padding-left: 0;
+		      border: 0;
+		    }
+		    &:hover {
+		      text-decoration: none;
+		      color: #08C;
+		    }
+		  }
+		  strong {
+		    display: block;
+		  }
+		}
+		#follow_form {
+			float: left;
+		}
+		.sit-feed {
+			float: left;
+			clear: left;
+      font-size: 20px;
+    }
+  }
 }
 
 .my-profile {

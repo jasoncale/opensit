@@ -7,6 +7,7 @@ class UsersController < ApplicationController
       redirect_to front_path
     else
       @feed_items = current_user.socialstream.paginate(:page => params[:page])
+      @user = current_user
     end
   end
 
@@ -17,11 +18,15 @@ class UsersController < ApplicationController
 
     if params[:y] && params[:m]
       @my_sits = @user.sits_by_month(params[:y], params[:m]).newest_first
+      @range_title = "#{Date::MONTHNAMES[params[:m].to_i]}, #{params[:y]}"
     elsif params[:y]
       @my_sits = @user.sits_by_year(params[:y]).newest_first
+      @range_title = "All sits in #{params[:y]}"
     else
       @my_sits = @user.sits.newest_first.paginate(:page => params[:page])
     end
+
+    
   end
 
   # GET /users/1
@@ -52,17 +57,17 @@ class UsersController < ApplicationController
 
   # GET /user/1/following
   def following
-    @title = "Following"
     @user = User.find(params[:id])
     @users = @user.followed_users
+    @title = "People who #{@user.username} follows"
     render 'show_follow'
   end
 
   # GET /user/1/followers
   def followers
-    @title = "Followers"
     @user = User.find(params[:id])
     @users = @user.followers
+        @title = "People who follow #{@user.username}"
     render 'show_follow'
   end
 

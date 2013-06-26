@@ -1,12 +1,23 @@
 <div class="section view-profile">
 
   <section class="sidebar">
-    <%= render :partial => 'shared/sidebar-other' %>
+    <%= render :partial => 'shared/sidebar-user' %>
   </section>
 
   <section class="content profile">
-    
     <%= render :partial => 'shared/other-pills' %>
+
+    <% if @sits.empty? %>
+      <div class="well well-large empty-message">
+        <% if current_user == @user %>
+          <h1>You haven't logged any practice yet!</h1>
+          <p>Share your practice with others, <%= link_to 'add a sit or diary', new_sit_path %>.</p>
+        <% else %>
+          <h1>Zzzz..</h1>
+          <p>This user hasn't logged any practice yet.</p>
+        <% end %>
+      </div> 
+    <% end %>
 
     <% @sits.each do |sit| %>
  
