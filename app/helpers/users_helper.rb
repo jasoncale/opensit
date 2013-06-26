@@ -5,21 +5,21 @@ module UsersHelper
     if user.avatar.blank?
       if size.zero? 
         link_to user_path(user) do
-          image_tag('http://placehold.it/50x50', :alt => user.username, :title => user.username)
+          image_tag 'http://placehold.it/50x50', size: "50x50", alt: user.username, title: user.username, class: 'img-circle'
         end
       else 
         link_to user_path(user) do
-          image_tag('http://placehold.it/100x100', :alt => user.username, :title => user.username)
+          image_tag 'http://placehold.it/200x200', size: "200x200", alt: user.username, title: user.username
         end
       end
     else
       if size.zero?
         link_to user_path(user) do
-          image_tag(user.avatar.url(:small_thumb), :alt => user.username, :title => user.username)
+          image_tag user.avatar.url(:small_thumb), size: "50x50", alt: user.username, title: user.username, class: 'img-circle'
         end
       else
         link_to user_path(user) do
-          image_tag(user.avatar.url(:thumb), :alt => user.username, :title => user.username)
+          image_tag user.avatar.url(:thumb), size: "200x200", alt: user.username, title: user.username
         end
       end
     end
