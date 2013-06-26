@@ -1,21 +1,27 @@
-<h2>Sign up</h2>
+<div class="section sign-up">
+  <div class="well">
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+    <h1>Sign up</h1>
 
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+      <div><%= f.label 'Choose a username' %><br />
+      <%= f.text_field :username %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+      <div><%= f.label 'Enter your email' %><br />
+      <%= f.email_field :email %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+      <div><%= f.label :password %><br />
+      <%= f.password_field :password %></div>
 
-  <div><%= f.submit "Sign up", :class => 'btn btn-primary' %></div>
-<% end %>
+      <div><%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %></div>
 
-<%= render "devise/shared/links" %>
+      <div><%= f.submit "Sign up", :class => 'btn btn-primary btn-large' %></div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+
+  </div>
+</div>

@@ -37,20 +37,16 @@ label {
 /* Navbar */
 #main-header {
   .navbar-inner {
-    height: 60px;
+    height: 65px;
     .container {
-      margin-top: 10px;
+      padding-top: 10px;
     }
   }
   ul a {
     font-size: 0.9em;
   }
   .btn {
-    font-size: 0.9em;
     margin-right: 10px;
-  }
-  .explore {
-    font-weight: bold;
   }
   .logout {
     font-size: 1.2em;
@@ -60,7 +56,7 @@ label {
 /* Logo */
 .brand {
   font-family: 'Pacifico';
-  padding: 7px 37px 10px 35px !important;
+  padding: 7px 37px 10px 0px !important;
   font-size: 32px !important;
   // color: #e66f69 !important;
   text-shadow: 0 1px 0 #666 !important;
@@ -87,8 +83,40 @@ label {
   }
 }
 
+/* Sign in/up */
+.sign-in,
+.sign-up {
+  .well {
+    float: none;
+    margin: 0 auto;
+    width: 35%;
+    overflow: hidden;
+  }
+  input[type="email"],
+  input[type="text"],
+  input[type="password"] {
+    line-height: 20px;
+    font-size: 20px;
+    height: 30px;
+    width: 300px;
+  }
+  label {
+    margin-bottom: 10px;
+  }
+  #user_remember_me {
+    margin-top: -1px;
+  }
+  form div {
+    margin: 15px 0;
+  }
+}
+
 /* Fix strange bug with bootstrap radio buttons */
-.radio input[type="radio"], .checkbox input[type="checkbox"] {
+.radio input[type="radio"] {
   float: none !important;
   margin: 0 5px 4px -18px;
+}
+.checkbox input[type="checkbox"] {
+  float: none !important;
+  margin: 9px 5px 4px -18px;
 }
