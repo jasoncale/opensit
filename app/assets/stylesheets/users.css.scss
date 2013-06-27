@@ -54,9 +54,47 @@
 
 .my-profile {
 	.avatar-box {
+		width: 42%;
+		text-align: center;
 		float: right;
+		p {
+			margin-bottom: 20px;
+		}
+		input {
+			margin: 20px 0 0 90px;
+			@extend .btn;
+		}
 	}
 	.control-group {
-		clear: right !important;
+		float: left;
+		clear: left;
+	}
+	.update-details {
+		float: left;
+		width: 100%;
+		text-align: center;
+		margin: 20px 0;
+		.btn-large {
+			margin: 0 auto;
+			float: none;
+			clear: left;
+		}
+	}
+	.contemplative-profile {
+		float: left;
+		width: 100%;
+		.control-group {
+			margin: 20px 0;
+			width: 100%;
+		}
+		.help-block {
+			font-size: 0.9em;
+			color: #666;
+			float: left;
+			clear: left;
+		}
+		.wysihtml5-toolbar {
+			display: none;
+		}
 	}
 }

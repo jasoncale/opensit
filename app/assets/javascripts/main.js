@@ -7,7 +7,7 @@ $(window).bind('page:change', function() {
 })
 
 function pageInit() {
-  $.each($('textarea'), function(index, el){
+  $.each($('.rich-textarea'), function(index, el){
     $(el).wysihtml5({
       "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
       "emphasis": true, //Italics, bold, etc. Default true
