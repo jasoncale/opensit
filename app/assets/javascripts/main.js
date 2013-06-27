@@ -1,12 +1,4 @@
 $(document).ready(function(){
-  pageInit();
-});
-
-$(window).bind('page:change', function() {
-  pageInit();
-})
-
-function pageInit() {
   $.each($('.rich-textarea'), function(index, el){
     $(el).wysihtml5({
       "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
@@ -21,7 +13,7 @@ function pageInit() {
 
   // SIT TEASER / Click through
   $('.sit-teaser').click( function() {
-    window.location = $(this).find('.sit-link').attr('href');
+    Turbolinks.visit($(this).find('.sit-link').attr('href'));
   });
 
   // NEW SIT / title or duration
@@ -50,4 +42,13 @@ function pageInit() {
     e.preventDefault();
     $(this).closest('form').submit();
   });
-}
+});
+
+// Loading indicator and Google Analytics
+$(document).on('page:fetch', function() {
+  $(".loading-indicator").show();
+});
+
+$(document).on('page:change', function() {
+  $(".loading-indicator").hide();
+});

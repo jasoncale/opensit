@@ -35,13 +35,8 @@ group :test do
 end
 
 gem 'pg'
-
-gem 'bootstrap-wysihtml5-rails'
-gem 'bootstrap-datepicker-rails'
-gem 'jquery-rails'
-
-# Pagination
-gem 'will_paginate'
+gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 # Devise authentication
 gem 'devise'
@@ -55,6 +50,12 @@ gem 'mini_magick'
 gem 'simple_form'
 gem 'country_select'
 gem 'chosen-rails'
+gem 'bootstrap-wysihtml5-rails'
+gem 'bootstrap-datepicker-rails'
+gem 'jquery-rails'
+
+# Pagination
+gem 'will_paginate'
 
 # Rails admin
 gem 'rails_admin'
