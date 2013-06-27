@@ -42,15 +42,21 @@ label {
       padding-top: 10px;
     }
   }
-  ul a {
-    font-size: 0.9em;
-  }
   .btn {
-    font-size: 0.9em;
     margin-right: 10px;
   }
   .logout {
     font-size: 1.2em;
+  }
+  .nav.pull-right {
+    margin-right: -30px;
+  }
+  .dropdown-toggle {
+    margin: -1px 10px 0 20px;
+    .caret {
+      border-top-color: #333;
+      border-bottom-color: #333;
+    }
   }
 }
 
