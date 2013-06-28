@@ -6,23 +6,6 @@ html {
 body { 
   width: 100%; 
   padding-top: 80px; /* Due to fixed nav bar */
-  background: #fff;
-  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Arial, sans-serif !important;
-  color: #444;
-  -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
-  -webkit-text-size-adjust: 100%;
-}
-
-// .btn-primary {
-//   background: #e66f69;
-// }
-// a {
-//   color: #e66f69;
-// }
-
-h1 {
-  font-weight: normal;
-  font-size: 1.8em;
 }
 
 /* Bootstrap alignment fixes */
@@ -53,10 +36,11 @@ label {
   }
   .dropdown-toggle {
     margin: -1px 10px 0 20px;
-    .caret {
-      border-top-color: #333;
-      border-bottom-color: #333;
-    }
+    // Black caret
+    // .caret {
+    //   border-top-color: #333;
+    //   border-bottom-color: #333;
+    // }
   }
 }
 
@@ -65,8 +49,7 @@ label {
   font-family: 'Pacifico';
   padding: 7px 37px 10px 0px !important;
   font-size: 32px !important;
-  // color: #e66f69 !important;
-  text-shadow: 0 1px 0 #666 !important;
+  text-shadow: 0 2px 0 #CCC !important;
 }
 
 
