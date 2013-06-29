@@ -11,11 +11,33 @@ $columns: 12;
 $total-width: 100%;
 $max-width: 1000px;
 
+/* Sticky footer */
+$footer-height: 155px;
+
+html, body {
+  height: 100%;
+}
+
+/* Stop width-jumps by putting scrollbars on all pages */
+html {
+  overflow-y: scroll;
+}
+
+body { 
+  width: 100%; 
+}
+
 /* Centred-aligned main container */
 .base-container {
-  width: $total-width;
-  max-width: $max-width;
-  margin: 0 auto;
+  min-height: 100%;
+  .page-content {
+    padding-top: 80px; /* Due to fixed nav bar */
+    overflow:auto;
+    padding-bottom: $footer-height;
+    width: $total-width;
+    max-width: $max-width;
+    margin: 0 auto;
+  }
 }
 
 /* Pull navbar in to width of base layout */
@@ -32,14 +54,54 @@ $max-width: 1000px;
   }
   .content {
     @include column(9);
+    .pagination-container {
+      margin: 20px 0 0 0;
+      width: 100%;
+      float: left;
+      text-align: center;
+    }
   }
+}
+
+/* Give content some padding between footer without breaking sticky footer */
+.spacer {
+  float: left;
+  clear: both;
+  // width: 0px;
+  height: 40px;
 }
 
 /* Footer */
 footer {
-  width: 100%;
-  float: left;
-  margin-top: 50px;
+  // width: 100%;
+  // float: left;
+  background: #f2f2f2;
+  border-top: 1px solid #CCC;
+  position: relative;
+  margin-top: -$footer-height; /* negative value of footer height */
+  height: $footer-height - 1;
+  clear: both;
+  .footer-container {
+    width: $total-width;
+    max-width: $max-width;
+    margin: 0 auto;
+    text-align: center;
+    .footer-brand {
+      font-family: 'Pacifico';
+      font-size: 2em;
+      margin: 20px 0;
+    }
+    .footer-text {
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .footer-links { 
+      margin: 20px 0;
+      li {
+        display: inline;
+      }
+    }
+  }
 }
 
 /* Forms */

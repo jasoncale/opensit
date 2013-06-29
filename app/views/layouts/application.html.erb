@@ -46,12 +46,14 @@
       <% end %>
        
       <%= yield %>
+      
+      <div class="spacer"></div>
     </div>
     
-    <%= render 'layouts/footer' %>
-    <%= render 'layouts/analytics' %>
-  
   </div> <!-- end #base-container -->
+    
+  <%= render 'layouts/footer' %>
+  <%= render 'layouts/analytics' %>
       
   </body>
 </html>
