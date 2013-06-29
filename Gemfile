@@ -10,6 +10,8 @@ group :development, :test do
   gem 'faker'
   gem 'annotate', '2.5.0'
   gem 'meta_request', '0.2.1'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   # Guard shizzle
   gem 'rb-inotify', '~> 0.8.8' # Only needed on Linux. May need to install libnotify with OS's package manager
   gem 'guard'
