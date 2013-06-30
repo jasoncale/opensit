@@ -36,24 +36,21 @@
       <% if @sit.disable_comments %>
         <p>Comments have been disabled for this sit.</p>
       <% else %>
-        <h4>Comments</h4>
-        <% if (@sit.comments.count == 0) %>
-          <p>No one has posted a comment yet; be the first!</p>
-        <% else %>
+        <h3>Comments</h3>
+        <div class="comments-list">
           <% @sit.comments.each do |comment| 
             @comment = comment %>
             <%= render 'comments/comment' %>
           <% end %>
-        <% end %>
+        </div>
+      <% end %>
 
-      <% if @sit.comments.count > 1 %>
-        <h4>Add a comment</h4>
-      <% end %>
-      <%= simple_form_for [@sit, @sit.comments.build], :remote => 'true' do |f| %>
-        <%= f.input :body, :label => false, :input_html => { :rows => 5, :class => 'span9 rich-textarea' } %>
-        <%= f.submit 'Add comment', :class => 'btn pull-right' %>
-      <% end %>
-    <% end %>
+      <div class="new-comment">
+        <%= simple_form_for [@sit, @sit.comments.build], :remote => 'true' do |f| %>
+          <%= f.input :body, :label => false, :input_html => { :rows => 3, :class => 'rich-textarea span9', :placeholder => 'Have your say.' } %>
+          <%= f.submit 'Add comment', :class => 'btn btn-primary pull-right' %>
+        <% end %>
+      </div>
     </div>
 
   </article>

@@ -1,36 +1,27 @@
-<div class="sidebar-me well well-small">
-	<div class="top-row">
-		<div class="my-avatar"><%= avatar(@user) %></div>
-		<div class="my-basics"><span class="username"><%= username(@user) %></span>
-			<% if !@user.city.blank? || !@user.country.blank? %>
-				<div class="my-location"><%= @user.location %></div>
-			<% end %>
-		</div>
-	</div>
-
-	<%= render 'shared/stats' %>
-
-	<%= render 'shared/follow-button' %>
-</div>
+<%= render 'shared/me-header' %>
 
 <div class="my-latest well well-small">
-	<p><strong>My Latest</strong></p>
-	<% for sit in @my_latest %>
-		<div class="event">
-			<div class="title">
-				<% if sit.s_type == 0 %>
-					<i class="icon-user"></i>
-				<% else %>
-					<i class="icon-book"></i>
-				<% end %>
-				<strong><%= teaser_title(sit, 'latest') %></strong>
+	<% if @my_latest.empty? %>
+		<div class="add-a-sit"><%= link_to '<i class="icon-plus"></i> Add your first sit'.html_safe, new_sit_path %></p>
+	<% else %>
+		<p><strong>My Latest</strong></p>
+		<% for sit in @my_latest %>
+			<div class="event">
+				<div class="title">
+					<% if sit.s_type == 0 %>
+						<i class="icon-user"></i>
+					<% else %>
+						<i class="icon-book"></i>
+					<% end %>
+					<strong><%= teaser_title(sit, 'latest') %></strong>
+				</div>
+				<div class="body">
+					<%= teaser(sit, 100) %>
+				</div>
+				<div class="date muted">
+					<%= time_ago_in_words(sit.created_at) %> ago
+				</div>
 			</div>
-			<div class="body">
-				<%= teaser(sit, 100) %>
-			</div>
-			<div class="date muted">
-				<%= time_ago_in_words(sit.created_at) %> ago
-			</div>
-		</div>
+		<% end %>
 	<% end %>
 </div>

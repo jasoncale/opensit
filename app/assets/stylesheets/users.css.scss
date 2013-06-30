@@ -51,9 +51,10 @@
 
 // My sidebar
 .sidebar-me {
+	box-sizing: border-box;
 	font-size: 12px;
 	float: left;
-	width: 90%;
+	width: 100%;
 	.top-row {
 		float: left;
 		width: 100%;
@@ -83,17 +84,29 @@
 }
 
 .my-latest {
+	box-sizing: border-box;
 	font-size: 12px;
+	width: 100%;
 	float: left;
 	clear: left;
+	background: #fff;
 	p {
 		font-size: 16px;
 		margin-bottom: 10px;
+	}
+	.add-a-sit {
+		width: 100%;
+		font-size: 1.5em;
+		text-align: center;
+		margin-top: 7px;
 	}
 	.event {
 		margin: 5px 0;
 		float: left;
 		width: 100%;
+		.body {
+			margin: 5px;
+		}
 		.date {
 			float: right;
 			font-size: 0.9em;

@@ -1,13 +1,14 @@
-<h4>My SitStream</h4>
-<hr>
+<%= render 'shared/me-header' %>
 
-<% if !@user.sits.empty? %>
-	<ul>
-	<%= timeline(@links) %>
-	</ul>
-<% else %>
-	<div class="well">
-		<p>You will be able to browse your sits by month and year here.</p>
-	</div>
-<% end %>
+<div class="well my-timeline">
+	<% if !@user.sits.empty? %>
+		<ul>
+		<%= timeline(@links) %>
+		</ul>
+	<% else %>
+		<div class="well no-sits-yet">
+			<p>You will be able to browse your sits by month and year here.</p>
+		</div>
+	<% end %>
+</div>
 

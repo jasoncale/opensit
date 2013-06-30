@@ -95,24 +95,29 @@ article.sit {
       margin-top: 6px;
     }
   }
-  #new_comment {
-    float: left;
-    margin-top: 30px;
-  }
   .comments {
     padding: 30px 0;
     float: left;
     width: 100%;
+    h3 {
+      margin-bottom: 20px;
+    }
     .comment { 
       float: left;
       width: 100%;
       padding: 10px;
       border-top: 1px solid #CCC;
-      .comment-body {}
       .user {
         float: right;
         font-size: 0.85em;
         opacity: 0.7;
+      }
+    }
+    .new_comment {
+      float: right;
+      margin: 20px auto 0 auto;
+      .wysihtml5-toolbar {
+        display: none;
       }
     }
   }
@@ -163,5 +168,13 @@ article.sit {
     font-size: 1.5em;
     float: right;
     margin: 0 0 20px;
+  }
+  .my-timeline {
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+  }
+  .no-sits-yet {
+    float: left;
   }
 }

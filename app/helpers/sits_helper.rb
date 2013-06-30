@@ -6,10 +6,10 @@ module SitsHelper
 	def teaser_title(sit, type = false) 
 		if sit.s_type == 0
       title = "#{link_to "#{sit.duration} minutes", sit, :class => 'sit-link'}".html_safe
-			title << " sat for " if !type 
+			title.insert(0, " sat for ") if !type 
 		elsif sit.s_type == 1
 			title = "#{link_to "#{sit.title}", sit, :class => 'sit-link'}".html_safe
-			title << " added a new diary: " if !type
+			title.insert(0, " added a new diary: ") if !type
 		else
 			" added a new article: #{link_to "#{sit.title}", sit, :class => 'sit-link'}".html_safe
 		end
