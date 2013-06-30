@@ -1,4 +1,8 @@
+<%= link_to(feed_path(@user), :title => 'Subscribe to this users updates', :class => 'user-sit-feed') do %>
+  <i class="icon-rss"></i>
+<% end %>
+
 <ul class="nav nav-tabs">
   <li <%='class=active' if params[:action] == "show" %>><%= link_to 'Sits', user_path %></li>
-  <li <%='class=active' if params[:action] == "bio" %>><%= link_to 'Bio', bio_path(@user) %></li>
+  <li <%='class=active' if params[:action] == "profile" %>><%= link_to 'Profile', profile_path(@user) %></li>
 </ul>

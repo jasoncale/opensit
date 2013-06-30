@@ -2,12 +2,16 @@
 <div class="section me">
 
   <section class="sidebar">
-    <%= render :partial => 'shared/sidebar-user' %>
+    <% if @my_favs %>
+      <%= render :partial => 'shared/sidebar-me' %>
+    <% else %>
+      <%= render :partial => 'shared/sidebar-user' %>
+    <% end %>
   </section>
 
   <section class="content">
 
-    <h1><%= @title %></h1>
+    <h3><%= @title %></h3>
     <hr>
     
     <% if @users.any? %>

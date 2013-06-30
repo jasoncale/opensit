@@ -32,10 +32,6 @@
 		      padding-left: 0;
 		      border: 0;
 		    }
-		    &:hover {
-		      text-decoration: none;
-		      color: #08C;
-		    }
 		  }
 		  strong {
 		    display: block;
@@ -43,16 +39,94 @@
 		}
 		#follow_form {
 			float: left;
+			width: 75%;
+			text-align: center;
 		}
-		.sit-feed {
-			float: left;
-			clear: left;
-      font-size: 20px;
-    }
+  }
+  .avatar-container {
+  	width: 200px;
+  	height: 200px;
   }
 }
 
-.my-profile {
+// My sidebar
+.sidebar-me {
+	font-size: 12px;
+	float: left;
+	width: 90%;
+	.top-row {
+		float: left;
+		width: 100%;
+		text-align: right;
+		.my-avatar {
+			float: left;
+			height: 50px;
+			width: 50px;
+		}
+		.my-basics {
+			float: right;
+			width: 135px;
+			.username {
+				float: right;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.my-location {
+				float: right;
+				clear: left;
+			}
+		}
+	}
+	.stats {
+		float: right;
+	}	
+}
+
+.my-latest {
+	font-size: 12px;
+	float: left;
+	clear: left;
+	p {
+		font-size: 16px;
+		margin-bottom: 10px;
+	}
+	.event {
+		margin: 5px 0;
+		float: left;
+		width: 100%;
+		.date {
+			float: right;
+			font-size: 0.9em;
+			font-style: italic;
+		}
+	}
+}
+
+// Feed icon on sits / bio
+.user-sit-feed {
+	float: right;
+	clear: left;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+// View profile
+.view-profile {
+	.edit-profile-btn {
+		float: right;
+		margin: 0 0 10px 0;
+	}
+	.lead {
+		clear: both;
+		margin: 0 20px 30px 20px;
+	}
+	.profile-field {
+		margin: 20px;
+	}
+}
+
+// Edit profile
+.edit-profile {
 	.avatar-box {
 		width: 42%;
 		text-align: center;

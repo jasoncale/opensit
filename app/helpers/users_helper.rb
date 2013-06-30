@@ -28,19 +28,8 @@ module UsersHelper
   # Return a hyperlinked username / name
   # Pass plain for an unlinked name
   def username(user, plain = false)
-    if plain
-      if user.first_name.blank?
-        user.username
-      else
-        "#{user.first_name} #{user.last_name}"
-      end
-    else
-      if user.first_name.blank?
-        link_to user.username, user_path(user.id)
-      else
-        link_to "#{user.first_name} #{user.last_name}", user_path(user.id)
-      end
-    end
+    user.display_name if plain = false
+    link_to "#{user.display_name}", user_path(user.id)
   end
 
   # Return link to website

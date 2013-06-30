@@ -43,9 +43,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  def display_name
+    if self.first_name.blank?
+      self.username
+    else
+      "#{self.first_name} #{self.last_name}"
+    end
+  end
+
   ##
   # METHODS
   ##
+
+  def latest_sits
+    self.sits.limit(3).newest_first
+  end
 
   def sits_by_year(year)
     Sit.where("EXTRACT(year FROM created_at) = ? AND user_id = ?", 

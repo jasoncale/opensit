@@ -1,4 +1,4 @@
-<%= avatar(@user, 1) %>
+<div class="avatar-container"><%= avatar(@user, 1) %></div>
 <div class="sidebar-content">
 	<div class="username"><%= username(@user) %></div>
 	<% if !@user.city.blank? || !@user.country.blank? %>
@@ -18,14 +18,10 @@
 	<% end %>
 
 	<div class="user-info">
-		<div class="icon"><i class="icon-link"></i></div><div class="detail"><%= link_to 'Read full bio...', bio_path(@user) %></div>
+		<div class="icon"><i class="icon-user"></i></div><div class="detail"><%= link_to 'View profile', profile_path(@user) %></div>
 	</div>
 
 	<%= render 'shared/stats' %>
 
 	<%= render 'shared/follow-button' %>
-
-	<%= link_to(feed_path(@user), :class => 'sit-feed') do %>
-		<i class="icon-rss"></i>
-	<% end %>
 </div>

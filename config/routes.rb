@@ -8,7 +8,7 @@ Opensit::Application.routes.draw do
   match 'me' => "users#me"
   match 'my' => "users#my_sits"
   match '/users/:id' => "users#show", :as => :user
-  match '/users/:id/bio' => "users#bio", :as => :bio
+  match '/users/:id/profile' => "users#profile", :as => :profile
   match '/users/:id/following' => "users#following", :as => :following_user
   match '/users/:id/followers' => "users#followers", :as => :followers_user
   match '/users/:id/export' => "users#export"

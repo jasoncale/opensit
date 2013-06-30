@@ -4,9 +4,13 @@
     <%= render :partial => 'shared/sidebar-user' %>
   </section>
   
-  <section class="content bio">
+  <section class="content profile">
     
     <%= render :partial => 'shared/other-pills' %>
+
+    <% if current_user == @user %>
+      <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-mini' %>
+    <% end %>
 
     <% if @user.who.blank? && @user.why.blank? && @user.practice.blank? %>
       <div class="well well-large empty-message">
@@ -25,15 +29,15 @@
     <% end %>
 
     <% if !@user.why.blank? %>
-      <p>
-        <b>Why do you practice?</b><br />
+      <p class="profile-field">
+        <em>Why do you practice?</em><br />
         <%= @user.why.html_safe %>
       </p>
     <% end %>
 
     <% if !@user.practice.blank? %>
-      <p>
-        <b>What do you practice?</b><br />
+      <p class="profile-field">
+        <em>What do you practice?</em><br />
         <%= @user.practice.html_safe %>
       </p>
     <% end %>

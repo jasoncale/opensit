@@ -11,12 +11,17 @@ label {
 #main-header {
   .navbar-inner {
     height: 65px;
+    font-size: 12px;
     .container {
       padding-top: 10px;
+    }
+    .dropdown-menu a {
+      font-size: 12px;
     }
   }
   .btn {
     margin-right: 10px;
+    font-size: 12px;
   }
   .logout {
     font-size: 1.2em;

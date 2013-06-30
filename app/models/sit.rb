@@ -43,6 +43,10 @@ class Sit < ActiveRecord::Base
   # METHODS
   ##
 
+  def body_br_strip
+    self.body.gsub(/<br>/, ' ')
+  end
+
   def mine?(current)
     return true if self.user_id == current.id
   end

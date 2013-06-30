@@ -11,11 +11,11 @@ $columns: 12;
 $total-width: 100%;
 $max-width: 1000px;
 
-/* Sticky footer */
-$footer-height: 155px;
+
 
 html, body {
   height: 100%;
+  width: 100%; 
 }
 
 /* Stop width-jumps by putting scrollbars on all pages */
@@ -23,9 +23,8 @@ html {
   overflow-y: scroll;
 }
 
-body { 
-  width: 100%; 
-}
+/* Sticky footer */
+$footer-height: 145px;
 
 /* Centred-aligned main container */
 .base-container {
@@ -67,14 +66,11 @@ body {
 .spacer {
   float: left;
   clear: both;
-  // width: 0px;
   height: 40px;
 }
 
 /* Footer */
 footer {
-  // width: 100%;
-  // float: left;
   background: #f2f2f2;
   border-top: 1px solid #CCC;
   position: relative;
@@ -97,6 +93,7 @@ footer {
     }
     .footer-links { 
       margin: 20px 0;
+      font-size: 12px;
       li {
         display: inline;
       }
