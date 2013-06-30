@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   def followers
     @user = User.find(params[:id])
     @users = @user.followers
-    @my_latest = current_user.sits.limit(5)
+    @my_latest = @user.latest_sits
 
     if @user == current_user
       @my_favs = true
