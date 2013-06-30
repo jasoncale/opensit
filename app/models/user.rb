@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
     thumb: '200x200#',
   }
 
+  scope :newest_first, order("created_at DESC")
+
   ##
   # VIRTUAL ATTRIBUTES
   ##
@@ -173,6 +175,14 @@ class User < ActiveRecord::Base
         return []
       end
     end       
+  end
+
+  ##
+  # CLASS METHODS
+  ##
+
+  def self.newest_users(count = 5)
+    self.limit(count).newest_first
   end
 
   # Overwrite Devise function to allow profile update with password requirement

@@ -134,6 +134,7 @@ footer {
   }
 }
 
+/* Explore */
 .explore {
   .global-sitstream {
     @include column(6);
@@ -141,8 +142,21 @@ footer {
       width: 95%;
     }
   }
-  .tags {
+  .right-column {
     @include column(6);
+    .new-arrivals {
+      width: 100%;
+      margin-top: 30px;
+      float: left;
+      .user {
+        float: left;
+        width: 100%;
+        margin: 5px 0;
+        img {
+          margin-right: 10px;
+        }
+      }
+    }
   }
 }
 #tag_cloud {
