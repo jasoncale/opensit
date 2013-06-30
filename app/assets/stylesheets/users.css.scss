@@ -93,6 +93,7 @@
 	p {
 		font-size: 16px;
 		margin-bottom: 10px;
+		float: right;
 	}
 	.add-a-sit {
 		width: 100%;
@@ -100,10 +101,14 @@
 		text-align: center;
 		margin-top: 7px;
 	}
-	.event {
-		margin: 5px 0;
+	.sit-teaser {
+		padding: 5px;
+		margin-left: -9px;
 		float: left;
-		width: 100%;
+		width: 104%;
+		.title {
+			font-size: 14px;
+		}
 		.body {
 			margin: 5px;
 		}
@@ -112,6 +117,10 @@
 			font-size: 0.9em;
 			font-style: italic;
 		}
+	}
+	.sit-teaser:hover {
+		cursor: pointer;
+		background: #eee;	
 	}
 }
 
