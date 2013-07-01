@@ -11,8 +11,6 @@ $columns: 12;
 $total-width: 100%;
 $max-width: 1000px;
 
-
-
 html, body {
   height: 100%;
   width: 100%; 
@@ -26,9 +24,10 @@ html {
 /* Sticky footer */
 $footer-height: 145px;
 
-/* Centred-aligned main container */
+/* Global container */
 .base-container {
   min-height: 100%;
+  /* All content */
   .page-content {
     padding-top: 80px; /* Due to fixed nav bar */
     overflow:auto;
@@ -85,14 +84,14 @@ footer {
     .footer-brand {
       font-family: 'Pacifico';
       font-size: 2em;
-      margin: 20px 0;
+      margin: 30px 0 15px;
     }
     .footer-text {
       font-size: 12px;
       font-weight: bold;
     }
     .footer-links { 
-      margin: 20px 0;
+      margin: 10px 0;
       font-size: 12px;
       li {
         display: inline;
@@ -121,21 +120,61 @@ footer {
 
 /* Front page */
 .front-page {
-  section,
-  footer {
+  .hero-unit {
+    margin: 30px 0;
     float: left;
-    clear: left;
+    padding: 60px 50px 30px 50px;
+    .left {
+      float: left;
+      width: 60%;
+      h1 {
+        margin-bottom: 30px;
+      }
+    }
+    .right {
+      float: right;
+      width: 40%;
+      form {
+        margin-top: 12px;
+        float: right;
+        div {
+          margin: 10px 0;
+        }
+        input[type="email"],
+        input[type="text"],
+        input[type="password"] {
+          border-radius: 10px;
+          line-height: 26px;
+          font-size: 20px;
+          height: 40px;
+          width: 300px;
+        }
+      }
+    }
   }
-  .three-panes div {
-    @include column(4);
+  .three-panes {
+    float: left; 
+    margin: 30px 0;
+    .pane {
+      box-sizing: border-box;
+      padding: 10px 20px;
+      text-align: center;
+      @include column(4);
+      i {
+        color: #695c8c;
+        font-size: 5em;
+      }
+    }
   }
-  #global-sitstream {
+  .explore {
     margin-top: 2em;
   }
 }
 
-/* Explore */
+/* Explore module */
 .explore {
+  float: left;
+  width: 100%;
   .global-sitstream {
     @include column(6);
     .sit-teaser {
@@ -159,6 +198,8 @@ footer {
     }
   }
 }
+
+/* Tag cloud */
 #tag_cloud {
   line-height: 1.6em;
   .s { font-size: 1em; }

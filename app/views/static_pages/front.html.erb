@@ -4,28 +4,46 @@
     <section id="branding">
       
       <div class="hero-unit">
-        <h1>Where meditators meet.</h1>
-        <p>OpenSit is a place where people who meditate can record their experiences and connect with each other.</p>
-        <p><%= link_to "Join today!", new_user_registration_path, { :class => "btn btn-primary btn-large" } %></p>
+        
+        <div class="left"><h1>Where meditators meet.</h1>
+          <p>OpenSit is a place where people who meditate can record their experiences and connect with each other.</p>
+        </div>
+        
+        <div class="right">
+          <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+
+            <div><%= f.text_field :username, placeholder: 'Pick a username' %></div>
+
+            <div><%= f.email_field :email, placeholder: 'Enter your email' %></div>
+
+            <div><%= f.password_field :password, placeholder: 'Choose a password' %></div>
+
+            <!-- <div><%= f.password_field :password_confirmation, placeholder: 'Confirm password' %></div> -->
+
+            <div><%= f.submit "Sign up", :class => 'pull-right btn btn-primary btn-large' %></div>
+          <% end %>
+        </div>
       </div>
       
       <div class="three-panes">
-        <div><h2>Start streaming today</h2>What do you practice and how has it changed you? Share your practice or start a private stream.</div>
-        <div><h2>Connect with others</h2>Follow friends and discover new practitioners.</div>
-        <div><h2>Improve your practice</h2>Be inspired by others, support each other, and give your practice a boost.</div>
+        <div class="pane">
+          <i class="icon-book"></i>
+          <h3>Start streaming today</h3>
+          What do you practice and how has it changed you? Share your practice or start a private stream.</div>
+        <div class="pane">
+          <i class="icon-globe"></i>
+          <h3>Connect with others</h3>
+          Follow friends and discover new practitioners from different countries, cultures and traditions.</div>
+        <div class="pane">
+          <i class="icon-bolt"></i>
+          <h3>Improve your practice</h3>
+          Keeping a practice log encourages us. Support each other, be inspired by each other, and give your practice a boost.</div>
       </div>
       
     </section> <!-- end section#branding -->
   <% end %>
   
-  <section id="global-sitstream">
-    <h1>Global SitStream</h1>
-    
-    <% @sits.each do |sit| %>
- 
-      <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
-
-    <% end %>
-  </section> <!-- end section#global_sitstream -->
+  <%#= render 'shared/explore' %>
 
 </div> <!-- end div.front-page -->

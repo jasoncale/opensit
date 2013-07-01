@@ -57,6 +57,11 @@ label {
     -webkit-box-shadow: 5px 5px 3px #888;
     box-shadow: 5px 5px 3px #888;
   }
+  .nav-module {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #e3e3e3;
+  }
 }
 
 /* Message wells */
@@ -73,26 +78,28 @@ label {
 .sign-up {
   .well {
     float: none;
-    margin: 0 auto;
+    margin: 50px auto 0 auto;
     width: 35%;
     overflow: hidden;
   }
   input[type="email"],
   input[type="text"],
   input[type="password"] {
-    line-height: 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    line-height: 26px;
     font-size: 20px;
-    height: 30px;
+    height: 40px;
     width: 300px;
   }
   label {
     margin-bottom: 10px;
   }
+  .remember {
+    margin: 10px 0 20px;
+  }
   #user_remember_me {
     margin-top: -1px;
-  }
-  form div {
-    margin: 15px 0;
   }
 }
 

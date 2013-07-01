@@ -123,16 +123,6 @@ article.sit {
   }
 }
 
-.timeline {
-  .year {
-    font-size: 1.4em;
-    margin: 15px 0;
-  }
-  .count {
-    opacity: 0.3;
-  }
-}
-
 /* New sit */
 .new-sit,
 .edit-sit {
@@ -170,7 +160,6 @@ article.sit {
     margin: 0 0 20px;
   }
   .my-timeline {
-    box-sizing: border-box;
     float: left;
     width: 100%;
   }

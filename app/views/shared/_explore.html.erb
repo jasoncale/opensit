@@ -1,0 +1,31 @@
+<div class="explore">
+  <section class="global-sitstream">
+    <h1>Global SitStream</h1>
+    <hr>
+    
+    <% @sits.each do |sit| %>
+
+      <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
+
+    <% end %>
+  </section> <!-- end section#global_sitstream -->
+
+  <section class="right-column">
+    <h1>Tags</h1>
+    <hr>
+
+    <div id="tag_cloud">
+      <% tag_cloud Sit.tag_counts, %w[s m l] do |tag, css_class| %>
+        <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+      <% end %>
+    </div>
+
+    <div class="new-arrivals">
+      <h1>New arrivals</h1>
+      <hr>
+      <% for u in @newest_users %>
+        <div class="user"><%= avatar(u) %> <%= username(u) %> joined <%= time_ago_in_words(u.created_at) %> ago.</div>
+      <% end %>
+    </div>
+  </section>
+</div>

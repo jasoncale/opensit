@@ -8,9 +8,8 @@ class UsersController < ApplicationController
     else
       @feed_items = current_user.socialstream.paginate(:page => params[:page])
       @user = current_user
+      @my_latest = @user.latest_sits
     end
-
-    @my_latest = @user.latest_sits
   end
 
   # GET /my
