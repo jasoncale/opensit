@@ -1,22 +1,12 @@
-<div class="section favourites">
+<%= render :partial => 'shared/me-pills' %>
 
-  <section class="sidebar">
-    <%= render 'shared/sidebar-me' %>
-  </section>
-  
-  <section class="content favourites-index">
-    <%= render :partial => 'shared/me-pills' %>
+<% if @favs.empty? %>
+  <div class="well well-large empty-message">
+    <h1>You don't have any favourites yet!</h1>
+    <p>Add something to your favourites by clicking the heart <i class="icon-heart-empty"></i> icon.</p>
+  </div>
+<% end %>
 
-    <% if @favs.empty? %>
-      <div class="well well-large empty-message">
-        <h1>You don't have any favourites yet!</h1>
-        <p>Add something to your favourites by clicking the heart <i class="icon-heart-empty"></i> icon.</p>
-      </div>
-    <% end %>
-  	
-  	<% @favs.each do |f| %>
-      <%= render :partial => 'shared/sit-teaser', :locals => { :sit => f } %>
-    <% end %>
-
-  </section>
- </div>
+<% @favs.each do |f| %>
+  <%= render :partial => 'shared/sit-teaser', :locals => { :sit => f } %>
+<% end %>

@@ -1,46 +1,35 @@
- <div class="section view-profile">
+<%= render :partial => 'shared/other-pills' %>
 
-  <section class="sidebar">
-    <%= render :partial => 'shared/sidebar-user' %>
-  </section>
-  
-  <section class="content profile">
-    
-    <%= render :partial => 'shared/other-pills' %>
+<% if current_user == @user %>
+  <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-mini' %>
+<% end %>
 
+<% if @user.who.blank? && @user.why.blank? && @user.practice.blank? %>
+  <div class="well well-large empty-message">
     <% if current_user == @user %>
-      <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-mini' %>
+      <h1>You've not filled in your profile yet!</h1>
+      <p>Tell us a bit more about yourself.</p>
+    <% else %>
+      <h1>Empty profile!</h1>
+      <p>This person hasn't filled out their profile yet.</p>
     <% end %>
+  </div> 
+<% end %>
 
-    <% if @user.who.blank? && @user.why.blank? && @user.practice.blank? %>
-      <div class="well well-large empty-message">
-        <% if current_user == @user %>
-          <h1>You've not filled in your profile yet!</h1>
-          <p>Tell us a bit more about yourself.</p>
-        <% else %>
-          <h1>Empty profile!</h1>
-          <p>This person hasn't filled out their profile yet.</p>
-        <% end %>
-      </div> 
-    <% end %>
+<% if !@user.who.blank? %>    
+  <p class="lead"><%= @user.who.html_safe %></p>
+<% end %>
 
-    <% if !@user.who.blank? %>    
-      <p class="lead"><%= @user.who.html_safe %></p>
-    <% end %>
+<% if !@user.why.blank? %>
+  <p class="profile-field">
+    <em>Why do you practice?</em><br />
+    <%= @user.why.html_safe %>
+  </p>
+<% end %>
 
-    <% if !@user.why.blank? %>
-      <p class="profile-field">
-        <em>Why do you practice?</em><br />
-        <%= @user.why.html_safe %>
-      </p>
-    <% end %>
-
-    <% if !@user.practice.blank? %>
-      <p class="profile-field">
-        <em>What do you practice?</em><br />
-        <%= @user.practice.html_safe %>
-      </p>
-    <% end %>
-
-  </section>
-</div>
+<% if !@user.practice.blank? %>
+  <p class="profile-field">
+    <em>What do you practice?</em><br />
+    <%= @user.practice.html_safe %>
+  </p>
+<% end %>

@@ -1,31 +1,20 @@
-<% provide(:title, 'My sits') %>
-<div class="section my-sits">
+<%= render :partial => 'shared/me-pills' %>
 
-  <section class="sidebar timeline">
-    <%= render :partial => 'shared/sidebar-my-sits' %>
-  </section>
-  
-  <section class="content socialstream">
-  	<%= render :partial => 'shared/me-pills' %>
+<% if @my_sits.empty? %>
+  <div class="well well-large empty-message">
+    <h1>You haven't logged any practice yet!</h1>
+    <p>Share your practice with others, <%= link_to 'add a sit or diary', new_sit_path %>.</p>
+  </div>
+<% end %>
 
-    <% if @my_sits.empty? %>
-      <div class="well well-large empty-message">
-        <h1>You haven't logged any practice yet!</h1>
-        <p>Share your practice with others, <%= link_to 'add a sit or diary', new_sit_path %>.</p>
-      </div>
-    <% end %>
+<h1 class="range-title"><%= @range_title %></h1>
 
-    <h1 class="range-title"><%= @range_title %></h1>
-  	
-  	<% @my_sits.each do |sit| %>
+<% @my_sits.each do |sit| %>
 
-      <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
+  <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
 
-    <% end %>
+<% end %>
 
-    <% if !params[:y] %>
-      <%= will_paginate @my_sits, :class => 'pagination pagination-centered' %>
-    <% end %>
-
-  </section>
- </div>
+<% if !params[:y] %>
+  <%= will_paginate @my_sits, :class => 'pagination pagination-centered' %>
+<% end %>

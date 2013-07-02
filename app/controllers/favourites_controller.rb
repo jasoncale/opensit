@@ -1,11 +1,13 @@
 class FavouritesController < ApplicationController
-	before_filter :authenticate_user!, :only => [:new, :index, :destroy]
+	before_filter :authenticate_user!
 	
 	def index
 		@user = current_user
 		@favs = @user.get_favourites(:delve => true)
-
 		@my_latest = @user.latest_sits
+
+		@title = 'My favourites'
+		@page_class = 'favourites'
 	end
 
 	def create

@@ -2,10 +2,10 @@ module ApplicationHelper
   # Returns the full title on a per-page basis
   def full_title(page_title)
     base_title = "OpenSit"
-    if page_title.empty?
-      base_title
+    if page_title.nil?
+      "#{base_title} | Where Meditators Meet. Free Online Practice Journal"
     else
-      "#{base_title} | #{page_title}"
+      "#{page_title} | #{base_title}"
     end
   end
 

@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= full_title(yield(:title)) %></title>
+    <title><%= full_title(@title) %></title>
     
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700|Pacifico' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag    "application" %>
@@ -37,16 +37,28 @@
     
     <%= render 'layouts/header' %>
 
-    <div class="page-content">
+    <div class="page-content <%= @page_class %>">
       <% if flash[:notice] -%>
         <div class="alert alert-success"><%= flash[:notice] %></div>
       <% end %>
       <% if flash[:error] -%>
         <div class="alert alert-error"><%= flash[:notice] %></div>
       <% end %>
-       
-      <%= yield %>
-      
+
+      <% action = "#{controller.controller_name}/#{controller.action_name}" %>
+      <% if action.in? ['sits/new', 'sits/edit'] or controller.controller_name.in? ['registrations', 'tags', 'pages', 'sessions'] %>
+        <%= yield %>
+      <% else %>
+      <div class="row-fluid">
+        <div class="sidebar span3">
+          <%= render :partial => "shared/sidebar-#{controller.controller_name}" %>
+        </div>
+        <div class="span9">
+          <%= yield %>
+        </div>
+      </div>
+      <% end %>
+
       <div class="spacer"></div>
     </div>
     

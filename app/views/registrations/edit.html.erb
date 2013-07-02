@@ -1,93 +1,90 @@
-<div class="section edit-profile">
+<h1>The Basics</h1>
+<hr>
 
-  <h1>The Basics</h1>
-  <hr>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => :true, :method => :put , :class => 'form-horizontal'}) do |f| %>
+  <%= devise_error_messages! %>
 
-  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => :true, :method => :put , :class => 'form-horizontal'}) do |f| %>
-    <%= devise_error_messages! %>
-
-    <div class="avatar-box">
-      <p>To change your avatar, select a new picture through <em>Choose File</em>, and then click Update below.</p>
-      <%= image_tag @user.avatar.url(:thumb), size: "200x200", alt: @user.username, title: @user.username %>
-      <!-- <a href="#" class="change-my-avatar">Change my avatar</a> -->
-      <%= f.file_field :avatar %>
-    </div>
-
-    <%= f.input :first_name %>
-      
-    <%= f.input :last_name %>
-    
-    <%= f.input :dob, :as => :date, :label => 'Date of birth', :start_year => Date.today.year - 90,
-                            :end_year => Date.today.year - 12, :order => [:day, :month, :year],
-                            :include_blank => true, :input_html => { :class => 'span1' }
-                             %>
-    
-    <%= f.input :gender, :collection => [['Male', 0], ['Female', 1], ['Transgender', 2]], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
-    
-    <%= f.input :city %>
-    
-    <%= f.input :country %>
-
-    <%= f.input :website %>
-    
-    <%#= f.input :private_diary,
-                :hint => 'Don\'t allow others to view my diary entries.' %>
-
-    <div class="update-details well well-small">
-      <%= f.submit "Update", :class => 'btn btn-large btn-primary' %>
-    </div>
-
-    <div class="contemplative-profile">
-      <h1>Contemplative profile</h1>
-      <hr>
-
-      <%= f.input :who, :label => 'Who are you?', :input_html => { :rows => 3, :class => 'basic-form' },
-                  :hint => 'Tell us a little about yourself in one paragraph.' %>
-      
-      <%= f.input :style, :label => 'Style', 
-                  :hint => 'What style does your meditation practice stem from, or most closely resemble?' %>
-      
-      <%= f.input :why, :label => 'Why do you practice?', :input_html => { :rows => 7, :class => 'basic-form rich-textarea' },
-                  :hint => 'What inspires you to meditate? What do you hope to achieve?' %>
-      
-      <%= f.input :practice, :label => 'What do you practice?', :input_html => { :rows => 7, :class => 'basic-form rich-textarea' },
-                  :hint => 'No two sits are the same, but tell us a little about your core meditation practice.<br />
-                  What do you actually do when you sit down on the cushion and shut your eyes?' %>
-      
-      <%= f.input :default_sit_length %>
-    </div>
-
-    <div class="update-details well well-small">
-      <%= f.submit "Update", :class => 'btn btn-large btn-primary' %>
-    </div>
-
-  <% end %>
-
-  <div class="row account-misc">
-    
-    <div class="span4">
-      <h1>Export</h1>
-      <p>Download all my sits in:</p>
-      <ul>
-        <li><%= link_to "XML format", "/users/#{current_user.id}/export.xml" %></li>
-        <li><%= link_to "JSON format", "/users/#{current_user.id}/export.json" %></li>
-      </ul>
-    </div>
-
-    <div class="span4">
-      <h1>Account</h1>
-      <p>Warning: danger zone.</p>
-      <ul>
-        <li><a href="#">Change my email address</a></li>
-        <li>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</li>
-      </ul>
-    </div>
-
-    <div class="span4">
-      <h1>Feedback</h1>
-
-      <p>If you feel there's something we could do better, or you have a new idea, then please get in contact through the Feedback and Support tab below.</p>
-    </div>
-    
+  <div class="avatar-box">
+    <p>To change your avatar, select a new picture through <em>Choose File</em>, and then click Update below.</p>
+    <%= image_tag @user.avatar.url(:thumb), size: "200x200", alt: @user.username, title: @user.username %>
+    <!-- <a href="#" class="change-my-avatar">Change my avatar</a> -->
+    <%= f.file_field :avatar %>
   </div>
+
+  <%= f.input :first_name %>
+    
+  <%= f.input :last_name %>
+  
+  <%= f.input :dob, :as => :date, :label => 'Date of birth', :start_year => Date.today.year - 90,
+                          :end_year => Date.today.year - 12, :order => [:day, :month, :year],
+                          :include_blank => true, :input_html => { :class => 'span1' }
+                           %>
+  
+  <%= f.input :gender, :collection => [['Male', 0], ['Female', 1], ['Transgender', 2]], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
+  
+  <%= f.input :city %>
+  
+  <%= f.input :country %>
+
+  <%= f.input :website %>
+  
+  <%#= f.input :private_diary,
+              :hint => 'Don\'t allow others to view my diary entries.' %>
+
+  <div class="update-details well well-small">
+    <%= f.submit "Update", :class => 'btn btn-large btn-primary' %>
+  </div>
+
+  <div class="contemplative-profile">
+    <h1>Contemplative profile</h1>
+    <hr>
+
+    <%= f.input :who, :label => 'Who are you?', :input_html => { :rows => 3, :class => 'basic-form' },
+                :hint => 'Tell us a little about yourself in one paragraph.' %>
+    
+    <%= f.input :style, :label => 'Style', 
+                :hint => 'What style does your meditation practice stem from, or most closely resemble?' %>
+    
+    <%= f.input :why, :label => 'Why do you practice?', :input_html => { :rows => 7, :class => 'basic-form rich-textarea' },
+                :hint => 'What inspires you to meditate? What do you hope to achieve?' %>
+    
+    <%= f.input :practice, :label => 'What do you practice?', :input_html => { :rows => 7, :class => 'basic-form rich-textarea' },
+                :hint => 'No two sits are the same, but tell us a little about your core meditation practice.<br />
+                What do you actually do when you sit down on the cushion and shut your eyes?' %>
+    
+    <%= f.input :default_sit_length %>
+  </div>
+
+  <div class="update-details well well-small">
+    <%= f.submit "Update", :class => 'btn btn-large btn-primary' %>
+  </div>
+
+<% end %>
+
+<div class="row account-misc">
+  
+  <div class="span4">
+    <h1>Export</h1>
+    <p>Download all my sits in:</p>
+    <ul>
+      <li><%= link_to "XML format", "/users/#{current_user.id}/export.xml" %></li>
+      <li><%= link_to "JSON format", "/users/#{current_user.id}/export.json" %></li>
+    </ul>
+  </div>
+
+  <div class="span4">
+    <h1>Account</h1>
+    <p>Warning: danger zone.</p>
+    <ul>
+      <li><a href="#">Change my email address</a></li>
+      <li>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</li>
+    </ul>
+  </div>
+
+  <div class="span4">
+    <h1>Feedback</h1>
+
+    <p>If you feel there's something we could do better, or you have a new idea, then please get in contact through the Feedback and Support tab below.</p>
+  </div>
+  
 </div>

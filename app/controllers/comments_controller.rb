@@ -1,14 +1,5 @@
 class CommentsController < ApplicationController
-
-  # GET /comments/1
-  def show
-    @comment = Comment.find(params[:id])
-  end
-
-  # GET /comments/new
-  def new
-    @comment = Comment.new
-  end
+  before_filter :authenticate_user!
 
   # GET /comments/1/edit
   def edit

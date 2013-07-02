@@ -15,9 +15,9 @@ Opensit::Application.routes.draw do
   match '/users/:id/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
   match 'favs' => "favourites#index", :as => :favs
 
-  match 'front' => "static_pages#front"
-  match 'about' => "static_pages#about"
-  match 'explore' => "static_pages#explore"
+  match 'front' => "pages#front"
+  match 'about' => "pages#about"
+  match 'explore' => "pages#explore"
 
   resources :sits do
     resources :comments

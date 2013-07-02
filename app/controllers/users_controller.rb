@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :only => [:my_sits]
-  
+  before_filter :authenticate_user!, :only => [:my_sits, :export]
+
   # GET /me page if logged in, /front if not
   def me
     if !user_signed_in?
@@ -9,6 +9,9 @@ class UsersController < ApplicationController
       @feed_items = current_user.socialstream.paginate(:page => params[:page])
       @user = current_user
       @my_latest = @user.latest_sits
+    
+      @title = 'Home'
+      @page_class = 'me'
     end
   end
 
@@ -27,32 +30,25 @@ class UsersController < ApplicationController
       @my_sits = @user.sits.newest_first.paginate(:page => params[:page])
     end
     
+    @title = 'My Sits'
+    @page_class = 'my-sits'
   end
 
   # GET /users/1
   def show
     @user = User.find(params[:id])
     @sits = @user.sits.newest_first.paginate(:page => params[:page])
-  end
 
-  # GET /users/1/feed
-  # Atom feed for a users SitStream
-  def feed
-    @user = User.find(params[:id])
-    @title = "SitStream for #{@user.username}"
-    @sits = @user.sits.newest_first
-
-    # This is the feed's update timestamp
-    @updated = @sits.last.updated_at unless @sits.empty?
-
-    respond_to do |format|
-      format.atom
-    end
+    @title = "#{@user.display_name}\'s practice log"
+    @page_class = 'view-user'
   end
 
   # GET /user/1/profile
   def profile
     @user = User.find(params[:id])
+
+    @title = @user.display_name
+    @page_class = 'view-profile'
   end 
 
   # GET /user/1/following
@@ -67,6 +63,8 @@ class UsersController < ApplicationController
     else
       @title = "People who #{@user.display_name} follows"
     end
+
+    @page_class = 'following'
     render 'show_follow'
   end
 
@@ -82,7 +80,24 @@ class UsersController < ApplicationController
     else
       @title = "People who follow #{@user.display_name}"
     end
+
+    @page_class = 'followers'
     render 'show_follow'
+  end
+
+  # GET /users/1/feed
+  # Atom feed for a users SitStream
+  def feed
+    @user = User.find(params[:id])
+    @title = "SitStream for #{@user.username}"
+    @sits = @user.sits.newest_first
+
+    # This is the feed's update timestamp
+    @updated = @sits.last.updated_at unless @sits.empty?
+
+    respond_to do |format|
+      format.atom
+    end
   end
 
   # GET /user/1/export

@@ -1,9 +1,5 @@
 class TagsController < ApplicationController
 
-  # GET /tags
-  def index
-  end
-
   # GET /tags/:id
   def show
 		if Tag.find_by_name(params[:id]) != nil
@@ -11,6 +7,9 @@ class TagsController < ApplicationController
 		else
 			redirect_to front_path
 		end
+
+    @title = "Tag: #{params[:id]}"
+    @page_class = 'view-tag'
   end
 
 end

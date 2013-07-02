@@ -7,6 +7,9 @@ class MessagesController < ApplicationController
   def index
     @user = current_user
     @messages = @user.messages_received.newest_first.limit(10)
+
+    @title = 'Inbox'
+    @page_class = 'inbox'
   end
 
   # GET /messages/1
@@ -17,18 +20,27 @@ class MessagesController < ApplicationController
 
     # Only mark as read if the recipient is reading
     @message.mark_as_read unless @user.id == @from_user.id
+
+    @title = "Message from #{@from_user.display_name}"
+    @page_class = "view-message"
   end
 
   # GET /messages/new
   def new
     @user = current_user
     @message = Message.new
+
+    @title = 'New message'
+    @page_class = 'new-message'
   end
 
   # GET /messages/sent
   def sent
     @user = current_user
     @messages = @user.messages_sent.newest_first.limit(10)
+
+    @title = 'Sent items'
+    @page_class = 'sent-items'
   end
 
   # POST /messages

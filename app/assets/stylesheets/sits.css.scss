@@ -36,7 +36,15 @@ article.sit-teaser {
 }
 
 /* Sit full */
-article.sit {
+.view-sit {
+  padding-top: 10px; /* no h1 at top so */
+  h1.sit-title {
+    font-weight: normal;
+    padding-bottom: 20px;
+  }
+  .icon-tag {
+    font-size: 19px;
+  }
   .full-sit-date {
     float: right;
     color: #666;
@@ -139,18 +147,6 @@ article.sit {
   }
 }
 
-/* View sit */
-.view-sit {
-  padding-top: 10px; /* no h1 at top so */
-  h1.sit-title {
-    font-weight: normal;
-    padding-bottom: 20px;
-  }
-  .icon-tag {
-    font-size: 19px;
-  }
-}
-
 /* My Sits */
 .my-sits {
   h1.range-title {
@@ -158,10 +154,6 @@ article.sit {
     font-size: 1.5em;
     float: right;
     margin: 0 0 20px;
-  }
-  .my-timeline {
-    float: left;
-    width: 100%;
   }
   .no-sits-yet {
     float: left;

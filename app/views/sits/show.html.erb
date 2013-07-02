@@ -1,58 +1,46 @@
-<div class="section view-sit">
+<header>
+  <div class="full-sit-date"><%= @sit.date %></div>
+  <% if current_user and @sit.mine?(current_user) %>
+    <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
+  <% end %>
+  <h1 class="sit-title"><%= @sit.full_title %></h1>
+</header>
 
-  <section class="sidebar">
-    <%= render :partial => 'shared/sidebar-user' %>
-  </section>
+<div class="body"><%= @sit.body.html_safe %></div>
 
-  <article class="content sit">
+<% if !@sit.tags.empty? %>
+  <div class="tags">
+    <i class="icon-tag"></i><%= tag_labels(@sit.tags) %>
+  </div>
+<% end %>
 
-    <header>
-      <div class="full-sit-date"><%= @sit.date %></div>
-      <% if current_user and @sit.mine?(current_user) %>
-        <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
+<div class="actions">
+  <!-- <a href="#" class="btn share-link">Share <i class="icon-link"></i></a> -->
+  <%= render :partial => 'shared/favourite-button' %>
+</div>
+
+<div class="prev-next">
+  <%= previous_sit(@sit) %>
+  <%= next_sit(@sit) %>
+</div>
+
+<div class="comments">
+  <% if @sit.disable_comments %>
+    <p>Comments have been disabled for this sit.</p>
+  <% else %>
+    <h3>Comments</h3>
+    <div class="comments-list">
+      <% @sit.comments.each do |comment| 
+        @comment = comment %>
+        <%= render 'comments/comment' %>
       <% end %>
-      <h1 class="sit-title"><%= @sit.full_title %></h1>
-    </header>
+    </div>
+  <% end %>
 
-    <div class="body"><%= @sit.body.html_safe %></div>
-
-    <% if !@sit.tags.empty? %>
-      <div class="tags">
-        <i class="icon-tag"></i><%= tag_labels(@sit.tags) %>
-      </div>
+  <div class="new-comment">
+    <%= simple_form_for [@sit, @sit.comments.build], :remote => 'true' do |f| %>
+      <%= f.input :body, :label => false, :input_html => { :rows => 3, :class => 'rich-textarea span9', :placeholder => 'Have your say.' } %>
+      <%= f.submit 'Add comment', :class => 'btn btn-primary pull-right' %>
     <% end %>
-
-    <div class="actions">
-      <!-- <a href="#" class="btn share-link">Share <i class="icon-link"></i></a> -->
-      <%= render :partial => 'shared/favourite-button' %>
-    </div>
-
-    <div class="prev-next">
-      <%= previous_sit(@sit) %>
-      <%= next_sit(@sit) %>
-    </div>
-
-    <div class="comments">
-      <% if @sit.disable_comments %>
-        <p>Comments have been disabled for this sit.</p>
-      <% else %>
-        <h3>Comments</h3>
-        <div class="comments-list">
-          <% @sit.comments.each do |comment| 
-            @comment = comment %>
-            <%= render 'comments/comment' %>
-          <% end %>
-        </div>
-      <% end %>
-
-      <div class="new-comment">
-        <%= simple_form_for [@sit, @sit.comments.build], :remote => 'true' do |f| %>
-          <%= f.input :body, :label => false, :input_html => { :rows => 3, :class => 'rich-textarea span9', :placeholder => 'Have your say.' } %>
-          <%= f.submit 'Add comment', :class => 'btn btn-primary pull-right' %>
-        <% end %>
-      </div>
-    </div>
-
-  </article>
-
+  </div>
 </div>
