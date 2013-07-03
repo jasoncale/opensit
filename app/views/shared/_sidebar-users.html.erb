@@ -1,6 +1,6 @@
 <% if controller.action_name.in? ['my_sits'] %>
 	<%= render 'shared/me-header' %>
-	<div class="well my-timeline">
+	<div class="nav-module my-timeline">
 		<% if !@user.sits.empty? %>
 			<ul>
 			<%= timeline(@links) %>
@@ -20,7 +20,7 @@
 	
 <% else %>
 	<%= render 'shared/me-header' %>
-	<div class="my-latest well well-small">
+	<div class="nav-module my-latest">
 		<% if @my_latest.empty? %>
 			<div class="add-a-sit"><%= link_to '<i class="icon-plus"></i> Add your first sit'.html_safe, new_sit_path %></p>
 		<% else %>

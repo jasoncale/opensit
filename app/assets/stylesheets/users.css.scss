@@ -83,10 +83,7 @@
 }
 
 .my-latest {
-	box-sizing: border-box;
 	font-size: 12px;
-	width: 100%;
-	float: left;
 	clear: left;
 	background: #fff;
 	p {
@@ -121,6 +118,10 @@
 		cursor: pointer;
 		background: #eee;	
 	}
+}
+
+.my-timeline {
+
 }
 
 // Feed icon on sits / bio

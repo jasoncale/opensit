@@ -11,6 +11,10 @@
  *= require bootstrap-wysihtml5
  *= require bootstrap-datepicker
  *= require chosen
- *= require_self
- *= require_tree .
-*/
+ *= require grid
+ *= require opensit-layout
+ *= require opensit-style
+ *= require sits
+ *= require users
+ *= require messages
+ */

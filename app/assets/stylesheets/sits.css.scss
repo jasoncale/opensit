@@ -1,9 +1,10 @@
+@import 'opensit-mixins';
+
 /* Sit teaser */
 article.sit-teaser {
-  font-family: "Open Sans";
+  @include box-model;
   float: left;
   width: 100%;
-  box-sizing: border-box;
   margin-bottom: 10px;
   border: 1px solid #e2e2e2;
   border-radius: 5px;

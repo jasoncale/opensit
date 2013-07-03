@@ -1,4 +1,5 @@
 @import 'grid';
+@import 'opensit-mixins';
 
 /**
  * GLOBAL LAYOUT
@@ -56,6 +57,14 @@ $footer-height: 145px;
   float: left;
   clear: both;
   height: 40px;
+}
+
+/* Sidebar modules */
+.nav-module {
+  @include box-model;
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 /* Footer */
@@ -146,9 +155,9 @@ footer {
     float: left; 
     margin: 30px 0;
     .pane {
+      @include box-model;
       float: left;
-      width: 30%;
-      box-sizing: border-box;
+      width: 33%;
       padding: 10px 20px;
       text-align: center;
       i {
