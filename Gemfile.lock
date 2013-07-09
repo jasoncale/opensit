@@ -155,6 +155,7 @@ GEM
     net-ssh (2.6.2)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
+    newrelic_rpm (3.5.7.59)
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
     paperclip (3.4.2)
@@ -292,6 +293,7 @@ DEPENDENCIES
   jquery-turbolinks
   meta_request (= 0.2.1)
   mini_magick
+  newrelic_rpm
   paperclip
   pg
   rails (= 3.2.3)

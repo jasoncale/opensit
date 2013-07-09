@@ -59,8 +59,9 @@ gem 'jquery-rails'
 # Pagination
 gem 'will_paginate'
 
-# Rails admin
+# Admin/tracking
 gem 'rails_admin'
+gem 'newrelic_rpm'
 
 # Deploy with Capistrano
 gem 'capistrano'
