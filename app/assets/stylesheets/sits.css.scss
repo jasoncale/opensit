@@ -48,11 +48,13 @@ article.sit-teaser {
   }
   .full-sit-date {
     float: right;
+    margin: 12px;
     color: #666;
   }
   .my-actions {
-    clear: both;
-    float: right;
+    float: left;
+    width: 100%;
+    text-align: center;
     margin-top: 9px;
   }
   .body {

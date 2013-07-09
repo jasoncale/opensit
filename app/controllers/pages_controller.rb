@@ -18,4 +18,9 @@ class PagesController < ApplicationController
     @title = 'About'
     @page_class = 'about'
   end
+
+  def contact
+    @title = 'Contact'
+    @page_class = 'contact'
+  end
 end

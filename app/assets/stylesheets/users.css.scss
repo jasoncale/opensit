@@ -52,6 +52,7 @@
 // Me page
 .sidebar .user-summary {
 	font-size: 12px;
+	padding: 8px;
 	float: left;
 	background: #f5f5f5;
 	.top-row {
@@ -86,9 +87,8 @@
 	font-size: 12px;
 	clear: left;
 	background: #fff;
-	p {
-		font-size: 16px;
-		margin-bottom: 10px;
+	h4 {
+		margin: 10px 10px;
 		float: right;
 	}
 	.add-a-sit {
@@ -98,10 +98,11 @@
 		margin-top: 7px;
 	}
 	.sit-teaser {
-		padding: 5px;
-		margin-left: -9px;
+		padding: 5px 15px;
 		float: left;
-		width: 104%;
+		width: 100%;
+		border: 0;
+		border-radius: 0;
 		.title {
 			font-size: 14px;
 		}
@@ -121,6 +122,10 @@
 }
 
 .my-timeline {
+	padding: 8px;
+	ul {
+		list-style-type: circle;
+	}
 	.year {
 		font-size: 1.8em;
 		margin: 20px 0 10px 0;

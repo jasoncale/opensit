@@ -17,6 +17,7 @@ Opensit::Application.routes.draw do
 
   match 'front' => "pages#front"
   match 'about' => "pages#about"
+  match 'contact' => "pages#contact"
   match 'explore' => "pages#explore"
 
   resources :sits do

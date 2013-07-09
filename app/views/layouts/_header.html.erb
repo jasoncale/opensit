@@ -3,13 +3,14 @@
       <div class="navbar-inner">
         <div class="container">
           <%= link_to 'OpenSit', root_path, :class => 'brand' %>
+          <span class="alpha pull-left">alpha</span>
           
           <% if user_signed_in? %>
-            <%= link_to(new_sit_path, class: 'pull-left btn btn-primary', 'data-push' => true) do %>
+            <%= link_to(new_sit_path, class: 'pull-left btn btn-primary') do %>
               <i class="icon-plus icon-white"></i> New Sit
             <% end %>
             <!-- <a class="btn" href="#"><i class="icon-globe"></i> -->
-            <%= link_to(messages_path, class: 'pull-left btn', 'data-push' => true) do %>
+            <%= link_to(messages_path, class: 'pull-left btn') do %>
               <i class="icon-envelope"></i> <strong><%= current_user.unread_count %></strong>
           <% end %>
 
@@ -39,7 +40,8 @@
           
          <% else %>
           <ul class="nav">
-            <li><%= link_to "Sign in", new_user_session_path %></li>
+            <li class="sign-up-link"><%= link_to "Sign up for free", new_user_registration_path %></li>
+            <li><%= link_to "Login", new_user_session_path %></li>
           </ul>
          <% end %>
         </div>

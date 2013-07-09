@@ -24,9 +24,9 @@
 		<% if @my_latest.empty? %>
 			<div class="add-a-sit"><%= link_to '<i class="icon-plus"></i> Add your first sit'.html_safe, new_sit_path %></p>
 		<% else %>
-			<p><strong>My Latest</strong></p>
+			<h4>My Recent Activity</h4>
 			<% for sit in @my_latest %>
-				<div class="sit-teaser">
+				<article class="sit-teaser">
 					<div class="title">
 						<% if sit.s_type == 0 %>
 							<i class="icon-user"></i>
@@ -41,7 +41,7 @@
 					<div class="date muted">
 						<%= time_ago_in_words(sit.created_at) %> ago
 					</div>
-				</div>
+				</article>
 			<% end %>
 		<% end %>
 	</div>

@@ -46,6 +46,13 @@ label {
   font-size: 32px !important;
   text-shadow: 0 2px 0 #CCC !important;
 }
+.alpha {
+  margin: -5px 20px 0 -30px;
+  color: #695c8c;
+}
+.sign-up-link {
+  font-weight: bold;
+}
 
 
 /* Sidebar */
@@ -56,11 +63,6 @@ label {
     -moz-box-shadow: 5px 5px 3px #888;
     -webkit-box-shadow: 5px 5px 3px #888;
     box-shadow: 5px 5px 3px #888;
-  }
-  .nav-module {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #e3e3e3;
   }
 }
 
@@ -103,9 +105,16 @@ label {
   }
 }
 
-/* About page padding */
-.about-page {
-  margin: 0 4em;
+/* About and Contact */
+.about,
+.contact {
+  .lead {
+    font-size: 140%;
+  }
+  p {
+    line-height: 1.7em;
+    font-size: 120%;
+  }
 }
 
 /* Fix strange bug with bootstrap radio buttons */
