@@ -7,8 +7,4 @@ class ApplicationController < ActionController::Base
     	redirect_to('/users/sign_in')
     end
 	end
-
-	def authenticate_admin_user!
-		raise SecurityError unless current_user.try(:admin?)
-	end
 end
