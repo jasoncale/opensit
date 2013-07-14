@@ -54,13 +54,13 @@ gem 'country_select'
 gem 'chosen-rails'
 gem 'bootstrap-wysihtml5-rails'
 gem 'bootstrap-datepicker-rails'
-gem 'jquery-rails'
+gem "jquery-rails", "2.3.0"
 
 # Pagination
 gem 'will_paginate'
 
 # Admin/tracking
-gem 'rails_admin'
+gem 'activeadmin'
 gem 'newrelic_rpm'
 
 # Deploy with Capistrano

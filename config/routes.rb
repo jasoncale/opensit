@@ -1,9 +1,9 @@
 Opensit::Application.routes.draw do
-  
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   root :to => "users#me"
 
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-  
   devise_for :users, :controllers => { :registrations => "registrations" }
   match 'me' => "users#me"
   match 'my' => "users#my_sits"
@@ -32,5 +32,7 @@ Opensit::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   resources :favourites, only: [:create, :destroy]
+
+  ActiveAdmin.routes(self)
 
 end
