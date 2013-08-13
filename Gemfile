@@ -13,7 +13,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   # Guard shizzle
-  gem 'rb-inotify', '~> 0.8.8' # Only needed on Linux. May need to install libnotify with OS's package manager
+  gem 'rb-inotify', '~> 0.9' # Only needed on Linux. May need to install libnotify with OS's package manager
   gem 'guard'
   gem 'guard-rails'   # Reloads Rails server when cached files like those in /config change
   gem 'guard-livereload' # Sends signal to Livereload extension in browser to reload page
@@ -53,7 +53,6 @@ gem 'simple_form'
 gem 'country_select'
 gem 'chosen-rails'
 gem 'bootstrap-wysihtml5-rails'
-gem 'bootstrap-datepicker-rails'
 gem "jquery-rails", "2.3.0"
 
 # Pagination

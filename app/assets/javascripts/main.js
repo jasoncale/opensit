@@ -28,11 +28,9 @@ $(document).ready(function(){
     }
   });
 
-  // NEW SIT / datepicker
-  $('#datepicker').datepicker({
-    format: 'yyyy-mm-dd',
-    autoclose: true,
-    language: 'en',
+  $( ".datepicker" ).datepicker({
+    changeMonth: true,
+    changeYear: true
   });
 
   $(".chzn-select").chosen();

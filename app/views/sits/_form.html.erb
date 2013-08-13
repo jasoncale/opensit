@@ -25,7 +25,7 @@
   <%= f.input :body, :label => 'What\'s happening?', :input_html => { :rows => 10, :class => "basic-form rich-textarea" } %>
 
   <div class="new-sit-date">
-    <%= f.input :created_at, :as => 'string', :label => 'Date', :input_html => { :placeholder => 'Just now.', :value => current_page?(new_sit_path(@sit)) ? @sit.created_at : @sit.created_at.strftime('%Y-%m-%d'), :label => 'none', :id => 'datepicker' } %>
+    <%= f.input :created_at, :as => 'string', :label => 'Date', :input_html => { :placeholder => 'Just now.', :value => current_page?(new_sit_path(@sit)) ? @sit.created_at : @sit.created_at.strftime('%Y-%m-%d'), :label => 'none', :class => 'datepicker' } %>
   </div>
 
   <%= f.input :tag_list, :as => 'string', :label => 'Tags (separate by commas)' %>

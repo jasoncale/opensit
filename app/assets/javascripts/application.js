@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require chosen-jquery
 //= require bootstrap-wysihtml5
-//= require bootstrap-datepicker
 //= require bootstrap-dropdown
 //= require turbolinks
 //= require_tree .
