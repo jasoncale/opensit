@@ -1,28 +1,25 @@
 <% if controller.action_name.in? ['my_sits'] %>
 	<%= render 'shared/me-header' %>
-	<div class="nav-module my-timeline">
-		<% if !@user.sits.empty? %>
+	
+	<% if !@user.sits.empty? %>
+		<div class="nav-module my-timeline">
 			<ul>
 			<%= timeline(@links) %>
 			</ul>
-		<% else %>
-			<div class="well no-sits-yet">
-				<p>You will be able to browse your sits by month and year here.</p>
-			</div>
-		<% end %>
-	</div>
+		</div>
+	<% end %>
 
 <% elsif @my_favs %>
 	 <%= render 'shared/me-header' %>
 
 <% elsif controller.action_name.in? ['profile', 'show', 'following', 'followers'] %>
-<%= render 'shared/sidebar-sits' %>
+	<%= render 'shared/sidebar-sits' %>
 	
 <% else %>
 	<%= render 'shared/me-header' %>
 	<div class="nav-module my-latest">
 		<% if @my_latest.empty? %>
-			<div class="add-a-sit"><%= link_to '<i class="icon-plus"></i> Add your first sit'.html_safe, new_sit_path %></p>
+			<div class="add-a-sit"><%= link_to '<i class="icon-plus"></i> Add your first sit'.html_safe, new_sit_path %></div>
 		<% else %>
 			<h4>My Recent Activity</h4>
 			<% for sit in @my_latest %>
