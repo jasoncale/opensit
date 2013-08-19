@@ -52,11 +52,11 @@ class Sit < ActiveRecord::Base
   end
 
   def next
-    user.sits.where("id > ?", id).first
+    user.sits.where("created_at > ?", self.created_at).first
   end
 
   def prev
-    user.sits.where("id < ?", id).last
+    user.sits.where("created_at < ?", self.created_at).first
   end
 
   # Returns sits from the users being followed by the given user.
