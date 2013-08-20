@@ -14,6 +14,25 @@ label {
     font-size: 12px;
     .container {
       padding-top: 10px;
+      .icons { 
+        a {
+          width: 45px;
+          height: 55px;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+        a:last-child {
+          width: 70px;
+        }
+        .unread-count {
+          font-size: 0.8em;
+        }
+        i {
+          font-size: 2.2em;
+          padding: 8px;
+        }
+      }
     }
     .dropdown-menu a {
       font-size: 12px;
@@ -54,6 +73,9 @@ label {
   font-weight: bold;
 }
 
+h3.title {
+  line-height: 5px;
+}
 
 /* Sidebar */
 .sidebar {

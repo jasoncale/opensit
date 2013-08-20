@@ -42,6 +42,8 @@ article.sit-teaser {
   h1.sit-title {
     font-weight: normal;
     padding-bottom: 20px;
+    margin-left: 30px;
+    text-align: center;
   }
   .icon-tag {
     font-size: 19px;
@@ -60,54 +62,25 @@ article.sit-teaser {
   .body {
     font-family: "Open Sans";
     font-size: 1.3em;
-    line-height: 1.5;  
+    line-height: 1.5; 
+    margin-left: 30px;
+    li {
+      margin: 10px 0;
+    }
   }
   .tags {
-    margin-top: 25px;
+    margin: 5px 0;
     text-align: center;
     .tag-label {
       padding: 5px;
-      margin-left: 5px;
+      margin: 5px;
       font-size: 14px;
       font-weight: normal;
     }
   }
-  .actions {
-    clear: both;
-    text-align: center;
-    margin: 10px 0;
-    .share-link {
-      float: right;
-    }
-    #favourite_button {
-      float: right;
-      margin-right: 10px;
-    }
-  }
-  .prev-next {
-    float: left;
-    width: 100%;
-    padding: 10px 0;
-    font-size: 1.1em;
-    margin: 20px 0 0 0;
-    a {
-      color: black;
-    }
-    .previous {
-      float: left;
-    }
-    .next {
-      float: right;
-    }
-    .no-more {
-      color: #999;
-    }
-    i {
-      margin-top: 6px;
-    }
-  }
   .comments {
-    padding: 30px 0;
+    @include box-model;
+    padding: 10px 0 30px 30px;
     float: left;
     width: 100%;
     h3 {
@@ -126,9 +99,8 @@ article.sit-teaser {
       }
     }
     .new_comment {
-      padding-top: 30px;
-      float: right;
-      width: 95%;
+      width: 98%;
+      margin-left: 9px;
       .wysihtml5-toolbar {
         display: none;
       }
@@ -162,5 +134,50 @@ article.sit-teaser {
   }
   .no-sits-yet {
     float: left;
+  }
+}
+
+.sidebar .sit-meta {
+  .date {
+    text-align: center;
+    font-size: 21px;
+    margin: 15px;
+  }
+  .pager { 
+    li a {
+      display: inline-block;
+      width: 88px;
+      height: 29px;
+      padding: 12px 14px 5px 14px;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      border-left: 0;
+      border-right: 0;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
+      &:hover {
+        background: #eee;
+      }
+    }
+    .disabled {
+      color: #999;
+      background-color: #eee;
+      height: 34px;
+      padding-top: 14px;
+    }
+    .previous .disabled {
+      width: 88px;
+      height: 29px;
+      padding: 14px 14px 5px 14px; 
+      float: left;
+    }
+  }
+  .sit-tags {
+    margin-bottom: 15px;
+  }
+  #favourite_button {
+    text-align: center;
   }
 }

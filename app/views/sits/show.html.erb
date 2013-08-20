@@ -1,5 +1,4 @@
 <header>
-  <div class="full-sit-date"><%= @sit.date %></div>
   <h1 class="sit-title"><%= @sit.full_title %></h1>
 </header>
 
@@ -7,22 +6,6 @@
   <% if current_user and @sit.mine?(current_user) %>
     <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
   <% end %>
-
-<% if !@sit.tags.empty? %>
-  <div class="tags">
-    <i class="icon-tag"></i><%= tag_labels(@sit.tags) %>
-  </div>
-<% end %>
-
-<div class="actions">
-  <!-- <a href="#" class="btn share-link">Share <i class="icon-link"></i></a> -->
-  <%= render :partial => 'shared/favourite-button' %>
-</div>
-
-<div class="prev-next">
-  <%= previous_sit(@sit) %>
-  <%= next_sit(@sit) %>
-</div>
 
 <% if !@sit.disable_comments %>
   <div class="comments">

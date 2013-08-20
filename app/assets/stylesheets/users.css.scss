@@ -1,3 +1,17 @@
+#follow_form {
+	margin-top: 10px;
+	float: left;
+	text-align: right;
+	clear: both;
+	width: 100%;
+	form {
+		margin-bottom: 5px;
+		input.btn {
+			font-size: 12px;
+		}
+	}
+}
+
 .sidebar {
 	.sidebar-content {
     padding-left: 10px;
@@ -83,7 +97,7 @@
 	}	
 }
 
-.my-latest {
+.recent-activity {
 	font-size: 12px;
 	clear: left;
 	background: #fff;

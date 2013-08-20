@@ -18,17 +18,17 @@ module SitsHelper
 
 	def previous_sit(sit)
 		if current_page?(sit_path(sit.prev))
-			'<span class="previous no-more" title="This is the first entry"><i class="icon-arrow-left"></i> Previous</span>'.html_safe
+			"<li class='previous'><div class=\"disabled\" title=\"This is the first entry\">&larr; Previous</div></li>".html_safe
 		else
-			"<span class='previous'><i class='icon-arrow-left'></i> #{link_to 'Previous', sit_path(@sit.prev)} </span>".html_safe
+			"<li class='previous'><a href=\"#{sit_path(@sit.prev)}\">&larr; Previous</a></li>".html_safe
 		end
 	end
 
 	def next_sit(sit)
 		if current_page?(sit_path(sit.next))
-    	'<span class="next no-more" title="This is the latest entry">Next <i class="icon-arrow-right"></i></span>'.html_safe
+    	"<li class='next'><div class=\"disabled\" title=\"This is the latest entry\">Next &rarr;</div></li>".html_safe
     else
-      "<span class='next'> #{link_to 'Next', sit_path(@sit.next)} <i class='icon-arrow-right'></i></span>".html_safe
+      "<li class='next'><a href=\"#{sit_path(@sit.next)}\">Next &rarr;</a></li>".html_safe
 		end
 	end
 end

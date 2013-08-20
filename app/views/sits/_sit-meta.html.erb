@@ -1,0 +1,17 @@
+<div class="nav-module sit-meta">
+	<div class="date"><%= @sit.date %></div>
+  <ul class="pager">
+	  <%= previous_sit(@sit) %>
+	  <%= next_sit(@sit) %>
+	</ul>
+  
+  <% if !@sit.tags.empty? %>
+		<div class="sit-tags">
+		  <div class="tags">
+		    <i class="icon-tag"></i><%= tag_labels(@sit.tags) %>
+		  </div>
+		</div>
+	<% end %>
+ 
+  <%= render :partial => 'shared/favourite-button' %>
+</div>

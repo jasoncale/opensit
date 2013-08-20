@@ -6,13 +6,21 @@
           <span class="alpha pull-left">alpha</span>
           
           <% if user_signed_in? %>
-            <%= link_to(new_sit_path, class: 'pull-left btn btn-primary') do %>
-              <i class="icon-plus icon-white"></i> New Sit
-            <% end %>
-            <!-- <a class="btn" href="#"><i class="icon-globe"></i> -->
-            <%= link_to(messages_path, class: 'pull-left btn') do %>
-              <i class="icon-envelope"></i> <strong><%= current_user.unread_count %></strong>
-          <% end %>
+            <span class="icons">
+              <%= link_to(new_sit_path, class: 'pull-left', title: 'Add sit') do %>
+                <i class="icon-plus icon-white"></i>
+              <% end %>
+              <%= link_to(my_path, class: 'pull-left', title: 'My sits') do %>
+                <i class="icon-user"></i>
+              <% end %>
+              <!-- <a class="btn" href="#"><i class="icon-globe"></i> -->
+              <%= link_to(favs_path, class: 'pull-left', title: 'My favourites') do %>
+                <i class="icon-heart"></i>
+              <% end %>
+              <%= link_to(messages_path, class: 'pull-left', title: 'Inbox') do %>
+                <i class="icon-envelope"> <span class="unread-count"><%= current_user.unread_count %></span></i>
+              <% end %>
+            </span>
 
           <ul class="nav pull-right">
             <li><%= link_to "Explore", explore_path %></li>

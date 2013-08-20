@@ -1,27 +1,2 @@
-<div class="avatar-container"><%= avatar(@user, 1) %></div>
-<div class="sidebar-content">
-	<div class="username"><%= username(@user) %></div>
-	<% if !@user.city.blank? || !@user.country.blank? %>
-		<div class="user-info">
-			<div class="icon"><i class="icon-flag"></i></div><div class="detail"><%= @user.location %></div>
-		</div>
-	<% end %>
-	<% if !@user.style.blank? %>
-		<div class="user-info">
-			<div class="icon"><i class="icon-bolt"></i></div><div class="detail"> <%= @user.style %></div>
-		</div>
-	<% end %>
-	<% if !@user.website.blank? %>
-		<div class="user-info">
-			<div class="icon"><i class="icon-link"></i></div><div class="detail"> <%= website(@user) %></div>
-		</div>
-	<% end %>
-
-	<div class="user-info">
-		<div class="icon"><i class="icon-user"></i></div><div class="detail"><%= link_to 'View profile', profile_path(@user) %></div>
-	</div>
-
-	<%= render 'shared/stats' %>
-
-	<%= render 'shared/follow-button' %>
-</div>
+<%= render 'shared/user-summary' %>
+<%= render 'sits/sit-meta' %>
