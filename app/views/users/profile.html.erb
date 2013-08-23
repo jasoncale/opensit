@@ -21,15 +21,21 @@
 <% end %>
 
 <% if !@user.why.blank? %>
-  <p class="profile-field">
-    <em>Why do you practice?</em><br />
+  <div class="profile-field">
+    <div class="title">Why do you practice?</div>
     <%= @user.why.html_safe %>
-  </p>
+  </div>
 <% end %>
 
 <% if !@user.practice.blank? %>
-  <p class="profile-field">
-    <em>What do you practice?</em><br />
+  <div class="profile-field">
+    <div class="title">What do you practice?</div>
     <%= @user.practice.html_safe %>
-  </p>
+  </div>
+<% end %>
+
+<% if !@user.website.blank? %>
+  <div class="user-website">
+    <i class="icon-home"></i> <%= website(@user) %>
+  </div>
 <% end %>

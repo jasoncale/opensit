@@ -170,6 +170,13 @@
 	}
 	.profile-field {
 		margin: 20px;
+		.title {
+			font-weight: bold;
+			margin-bottom: 15px;
+		}
+	}
+	.user-website {
+		margin-left: 20px; 
 	}
 }
 
