@@ -13,7 +13,8 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   # Guard shizzle
-  gem 'rb-inotify', '~> 0.9' # Only needed on Linux. May need to install libnotify with OS's package manager
+  gem 'rb-inotify', '~> 0.9', require: false # Only needed on Linux. May need to install libnotify with OS's package manager
+  gem 'rb-fsevent', require: false # For OS X
   gem 'guard'
   gem 'guard-rails'   # Reloads Rails server when cached files like those in /config change
   gem 'guard-livereload' # Sends signal to Livereload extension in browser to reload page
