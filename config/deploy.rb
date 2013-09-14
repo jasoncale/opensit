@@ -29,10 +29,12 @@ default_run_options[:pty] = true
  
 # Passenger
 namespace :deploy do
-	after :update_code, :precompile_assets
-	task :precompile_assets do
-		run "cd #{release_path}; rake assets:precompile RAILS_ENV=production"
-	end
+  after :update_code, :symlink_db
+  after :update_code, :precompile_assets
+
+  task :precompile_assets do
+    run "cd #{release_path}; rake assets:precompile RAILS_ENV=production"
+  end
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
