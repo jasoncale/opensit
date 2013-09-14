@@ -19,3 +19,6 @@
 /public/uploads
 
 /config/initializers/s3_login.rb
+
+* Ignore database.yml
+/config/database.yml
