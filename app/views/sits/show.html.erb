@@ -9,9 +9,7 @@
 
 <% if !@sit.disable_comments %>
   <div class="comments">
-    <% if @sit.comments.empty? %>
-      <h3 class="first-comment">No comments yet.</h3>
-    <% else %>
+    <% if !@sit.comments.empty? %>
       <h3>Comments</h3>
     <% end %>
     <div class="comments-list">

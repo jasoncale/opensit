@@ -17,4 +17,10 @@ class Comment < ActiveRecord::Base
   attr_accessible :body, :sit_id, :user_id
 
   validates :body, :presence => true
+
+  scope :newest_first, order("created_at DESC")
+
+  def self.latest(count = 5)
+    self.limit(count).newest_first
+  end
 end
