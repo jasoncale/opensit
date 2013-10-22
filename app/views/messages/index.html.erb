@@ -4,12 +4,12 @@
     <p>I'm sure someone is thinking of you...</p>
   </div>
 <% else %>
-	
+
   <table class="table msg-overview">
   	<% @messages.each do |msg| %>
       <tr>
         <td class="unread"><%= unread_marker(msg) %></td>
-        <td class="msg-avatar"><%= avatar(msg.from_user) %></td>
+        <td class="msg-avatar"><%= small_avatar_of(msg.from_user) %></td>
         <td class="msg-content">
           <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message?', :class => 'msg-delete' %>
           <a href="<%= message_path(msg) %>" class="clickable-row">

@@ -2,7 +2,7 @@
   <section class="global-sitstream">
     <h1>Global SitStream</h1>
     <hr>
-    
+
     <% @sits.each do |sit| %>
 
       <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
@@ -24,7 +24,7 @@
       <h1>New arrivals</h1>
       <hr>
       <% for u in @newest_users %>
-        <div class="user"><%= avatar(u) %> <%= username(u) %> joined <%= time_ago_in_words(u.created_at) %> ago.</div>
+        <div class="user"><%= small_avatar_of(u) %> <%= username(u) %> joined <%= time_ago_in_words(u.created_at) %> ago.</div>
       <% end %>
     </div>
 
