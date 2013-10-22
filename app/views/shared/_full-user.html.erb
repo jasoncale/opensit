@@ -1,4 +1,4 @@
-<div class="avatar-container"><%= avatar(@user, 1) %></div>
+<div class="avatar-container"><%= large_avatar_of(@user) %></div>
 <div class="sidebar-content">
 	<div class="username"><%= username(@user) %></div>
 	<% if !@user.city.blank? || !@user.country.blank? %>

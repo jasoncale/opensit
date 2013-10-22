@@ -1,11 +1,11 @@
 <article class="sit-teaser">
   <div class="side">
-    <%= avatar(sit.user) %>
+    <%= small_avatar_of(sit.user) %>
   </div>
-  
+
   <div class="sit-content">
-    
-    <div class="top"><%= username(sit.user) %> <%= teaser_title(sit) %> 
+
+    <div class="top"><%= username(sit.user) %> <%= teaser_title(sit) %>
     <% if sit.comments.count > 0 %>
       &bull; <%= pluralize(sit.comments.count, 'comment') %>
     <% end %>
@@ -20,5 +20,5 @@
     <div class="body"><%= teaser(sit) %></div>
 
   </div> <!-- end .sit-content -->
-  
+
 </article>

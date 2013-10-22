@@ -8,7 +8,7 @@
   <table class="table msg-overview">
   	<% @messages.each do |msg| %>
       <tr>
-        <td class="msg-avatar"><%= avatar(msg.to_user) %></td>
+        <td class="msg-avatar"><%= small_avatar_of(msg.to_user) %></td>
         <td class="msg-content">
           <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message from your sent items?', :class => 'msg-delete' %>
           <a href="<%= message_path(msg) %>" class="clickable-row">
