@@ -7,7 +7,7 @@
 		<% else %>
 			<h4><%= @user.display_name %>'s Activity</h4>
 		<% end %>
-		<% for sit in @my_latest %>
+		<% @my_latest.each do |sit| %>
 			<article class="sit-teaser">
 				<div class="title">
 					<% if sit.s_type == 0 %>
