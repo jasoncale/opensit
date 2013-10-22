@@ -7,7 +7,7 @@ gem 'rails', '3.2.3'
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'faker'
+  gem 'factory_girl_rails'
   gem 'annotate', '2.5.0'
   gem 'meta_request', '0.2.1'
   gem 'better_errors'
@@ -17,6 +17,7 @@ group :development, :test do
   gem 'rb-inotify', '~> 0.9', require: false # Only needed on Linux. May need to install libnotify with OS's package manager
   gem 'rb-fsevent', require: false # For OS X
   gem 'guard'
+  gem 'guard-rspec' # Automatically runs specs when corresponding files change
   gem 'guard-rails'   # Reloads Rails server when cached files like those in /config change
   gem 'guard-livereload' # Sends signal to Livereload extension in browser to reload page
   gem 'guard-migrate' # Automatically runs migrations when needed
@@ -36,6 +37,9 @@ gem 'font-awesome-sass-rails'
 
 group :test do
   gem 'capybara'
+  gem 'database_cleaner'
+  gem 'faker' # Generates names, emails and other placeholders for factories
+  gem 'shoulda-matchers'
 end
 
 gem 'pg'
