@@ -12,6 +12,7 @@ group :development, :test do
   gem 'meta_request', '0.2.1'
   gem 'better_errors'
   gem 'binding_of_caller'
+
   # Guard shizzle
   gem 'rb-inotify', '~> 0.9', require: false # Only needed on Linux. May need to install libnotify with OS's package manager
   gem 'rb-fsevent', require: false # For OS X

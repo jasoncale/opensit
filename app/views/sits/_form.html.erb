@@ -32,10 +32,12 @@
 
   <%= f.input :disable_comments %>
 
-  <%= if !current_page?(new_sit_path(@sit)) 
+  <%= if !current_page?(new_sit_path(@sit))
     link_to 'Delete this event', sit_path(@sit), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger'
     end %>
-  
-  <%= f.submit :class => 'btn btn-large btn-primary pull-right' %>
-  
+
+  <div class="controls">
+    <%= f.submit :class => 'btn btn-large btn-primary pull-left' %>
+  </div>
+
 <% end %>
