@@ -23,18 +23,18 @@
     <div class="new-arrivals">
       <h1>New arrivals</h1>
       <hr>
-      <% for u in @newest_users %>
-        <div class="user"><%= small_avatar_of(u) %> <%= username(u) %> joined <%= time_ago_in_words(u.created_at) %> ago.</div>
+      <% @newest_users.each do |user| %>
+        <div class="user"><%= small_avatar_of(user) %> <%= username(user) %> joined <%= time_ago_in_words(user.created_at) %> ago.</div>
       <% end %>
     </div>
 
     <div class="recent-comments">
       <h1>Recent comments</h1>
       <hr>
-      <% for c in @comments %>
+      <% @comments.each do |comment| %>
         <div class="comment">
-          <div class="comment-info"><%= username(c.user) %> commented on <%= username(c.sit.user) %>'s <%= link_to c.sit.full_title, sit_path(c.sit_id) %> (<%= time_ago_in_words(c.created_at) %> ago) </div>
-          <blockquote><%= c.body.html_safe %></blockquote>
+          <div class="comment-info"><%= username(comment.user) %> commented on <%= username(comment.sit.user) %>'s <%= link_to comment.sit.full_title, sit_path(comment.sit_id) %> (<%= time_ago_in_words(comment.created_at) %> ago) </div>
+          <blockquote><%= comment.body.html_safe %></blockquote>
         </div>
       <% end %>
     </div>
