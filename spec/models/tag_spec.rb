@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe Tag do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:taggings) }
+  it { should have_many(:sits).through(:taggings) }
+
+  it { should respond_to(:name) }
 end
