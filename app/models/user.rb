@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   ##
 
   def latest_sits
-    self.sits.limit(3).newest_first
+    self.sits.newest_first.limit(3)
   end
 
   def sits_by_year(year)

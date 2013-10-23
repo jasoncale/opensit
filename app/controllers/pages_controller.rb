@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   def explore
   	@sits = Sit.newest_first.limit(10).all
   	@newest_users = User.newest_users
-    @comments = Comment.latest(10)
+    @comments = Comment.latest(5)
 
     @title = 'Explore'
     @page_class = 'explore'

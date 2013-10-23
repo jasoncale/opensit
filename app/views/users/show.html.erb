@@ -1,4 +1,4 @@
-<%= render :partial => 'shared/other-pills' %>
+<%= render :partial => 'shared/other_pills' %>
 
 <% if @sits.empty? %>
   <div class="well well-large empty-message">
@@ -14,7 +14,7 @@
 
 <% @sits.each do |sit| %>
 
-  <%= render :partial => 'shared/sit-teaser', :locals => { :sit => sit } %>
+  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => sit } %>
 
 <% end %>
 

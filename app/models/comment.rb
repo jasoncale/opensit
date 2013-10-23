@@ -21,6 +21,6 @@ class Comment < ActiveRecord::Base
   scope :newest_first, order("created_at DESC")
 
   def self.latest(count = 5)
-    self.limit(count).newest_first
+    self.newest_first.limit(count)
   end
 end

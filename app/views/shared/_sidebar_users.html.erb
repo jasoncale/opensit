@@ -1,5 +1,5 @@
 <% if controller.action_name.in? ['my_sits'] %>
-	<%= render 'shared/user-summary' %>
+	<%= render 'shared/user_summary' %>
 	
 	<% if !@user.sits.empty? %>
 		<div class="nav-module my-timeline">
@@ -10,9 +10,9 @@
 	<% end %>
 
 <% elsif controller.action_name.in? ['profile', 'show'] %>
-	<%= render 'shared/full-user' %>
+	<%= render 'shared/full_user' %>
 	
 <% else %>
-	<%= render 'shared/user-summary' %>
-	<%= render 'shared/recent-activity' %>
+	<%= render 'shared/user_summary' %>
+	<%= render 'shared/recent_activity' %>
 <% end %>

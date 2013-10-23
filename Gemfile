@@ -1,41 +1,35 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
-gem 'rack', '1.4.1' # Locked to this version to disable Rspec security warning.
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rails', '4.0.0'
+gem 'rack'
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'quiet_assets'
 end
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'annotate', '2.5.0'
-  gem 'meta_request', '0.2.1'
+  gem 'meta_request', '0.2.6'
 
   # Guard shizzle
   gem 'rb-inotify', '~> 0.9', require: false # Only needed on Linux. May need to install libnotify with OS's package manager
   gem 'rb-fsevent', require: false # For OS X
-  gem 'guard'
+  gem 'guard', '>=2.1.0'
   gem 'guard-rspec' # Automatically runs specs when corresponding files change
   gem 'guard-rails'   # Reloads Rails server when cached files like those in /config change
   gem 'guard-livereload' # Sends signal to Livereload extension in browser to reload page
   gem 'guard-migrate' # Automatically runs migrations when needed
-  gem 'guard-bundler' # Automatically installs/updates budler gems
 end
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'bootstrap-sass'
-  gem 'therubyracer'
-  gem 'uglifier', '>= 1.0.3'
-end
+# Previously assets group
+gem 'sass-rails'
+gem 'bootstrap-sass'
+gem 'therubyracer'
+gem 'uglifier', '>= 1.0.3'
 
 gem 'font-awesome-sass-rails'
 
@@ -49,6 +43,7 @@ end
 gem 'pg'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
+gem 'protected_attributes' # Smoother upgrade to rails 4, provides attr_accessible
 
 # Devise authentication
 gem 'devise'
@@ -62,6 +57,7 @@ gem 'mini_magick'
 gem 'simple_form'
 gem 'country_select'
 gem 'chosen-rails'
+gem 'compass-rails', github: 'Compass/compass-rails' # Required by chosen, needs to be explicit
 gem 'bootstrap-wysihtml5-rails'
 gem "jquery-rails", "2.3.0"
 
@@ -69,7 +65,7 @@ gem "jquery-rails", "2.3.0"
 gem 'will_paginate'
 
 # Admin/tracking
-gem 'activeadmin'
+gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'newrelic_rpm'
 
 # Deploy with Capistrano
