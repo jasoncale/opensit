@@ -1,22 +1,27 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
+gem 'rack', '1.4.1' # Locked to this version to disable Rspec security warning.
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'faker'
-  gem 'annotate', '2.5.0'
-  gem 'meta_request', '0.2.1'
+group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'annotate', '2.5.0'
+  gem 'meta_request', '0.2.1'
 
   # Guard shizzle
   gem 'rb-inotify', '~> 0.9', require: false # Only needed on Linux. May need to install libnotify with OS's package manager
   gem 'rb-fsevent', require: false # For OS X
   gem 'guard'
+  gem 'guard-rspec' # Automatically runs specs when corresponding files change
   gem 'guard-rails'   # Reloads Rails server when cached files like those in /config change
   gem 'guard-livereload' # Sends signal to Livereload extension in browser to reload page
   gem 'guard-migrate' # Automatically runs migrations when needed
@@ -36,6 +41,9 @@ gem 'font-awesome-sass-rails'
 
 group :test do
   gem 'capybara'
+  gem 'database_cleaner'
+  gem 'faker' # Generates names, emails and other placeholders for factories
+  gem 'shoulda-matchers'
 end
 
 gem 'pg'

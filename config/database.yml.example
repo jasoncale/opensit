@@ -1,7 +1,7 @@
-# The following are example database settings. 
+# The following are example database settings.
 # In order to get OpenSit working properly on your machine,
 # please create a new file: config/database.yml, then take the contents of this file,
-# copy them in to the new file. After that, update all of the settings 
+# copy them in to the new file. After that, update all of the settings
 # so as to work properly with your machine.
 
 development:
