@@ -6,8 +6,8 @@ class Message < ActiveRecord::Base
 
   validates :body, :from_user_id, :to_user_id, :presence => true
 
-  scope :unread, where(:read => false)
-  scope :newest_first, order("created_at DESC")
+  scope :unread, -> { where(read: false) }
+  scope :newest_first, -> { order("created_at DESC") }
 
   ##
   # VIRTUAL ATTRIBUTES

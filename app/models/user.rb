@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
     thumb: '200x200#',
   }
 
-  scope :newest_first, order("created_at DESC")
+  scope :newest_first, -> { order("created_at DESC") }
 
   ##
   # VIRTUAL ATTRIBUTES

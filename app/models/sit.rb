@@ -14,7 +14,7 @@ class Sit < ActiveRecord::Base
   validates :duration, :presence => true, :if => "s_type == 0"
 
   # Scopes
-  scope :newest_first, order("created_at DESC")
+  scope :newest_first, -> { order("created_at DESC") }
   
   # Pagination: sits per page
   self.per_page = 10

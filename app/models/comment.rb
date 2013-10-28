@@ -18,7 +18,7 @@ class Comment < ActiveRecord::Base
 
   validates :body, :presence => true
 
-  scope :newest_first, order("created_at DESC")
+  scope :newest_first, -> { order("created_at DESC") }
 
   def self.latest(count = 5)
     self.newest_first.limit(count)
