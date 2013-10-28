@@ -1,6 +1,8 @@
+require 'nokogiri'
+
 module SitsHelper
 	def teaser(sit, length = 300)
-		strip_tags(truncate(sit.body_br_strip, :length => length, :omission => " ..."))
+		truncate(strip_tags(sit.custom_strip), :length => length, :omission => " ...")
 	end 
 
 	def teaser_title(sit, type = false) 

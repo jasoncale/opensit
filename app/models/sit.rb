@@ -43,8 +43,10 @@ class Sit < ActiveRecord::Base
   # METHODS
   ##
 
-  def body_br_strip
-    self.body.gsub(/<br>/, ' ')
+  # Remove <br>'s and &nbsp's
+  def custom_strip
+    no_brs = self.body.gsub(/<br>/, ' ')
+    no_brs.gsub('&nbsp;', ' ')
   end
 
   def mine?(current)
