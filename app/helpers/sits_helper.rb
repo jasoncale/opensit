@@ -17,7 +17,7 @@ module SitsHelper
 	end
 
 	def previous_sit(sit)
-		if current_page?(sit_path(sit.prev))
+		if sit.prev.nil?
 			"<li class='previous'><div class=\"disabled\" title=\"This is the first entry\">&larr; Previous</div></li>".html_safe
 		else
 			"<li class='previous'><a href=\"#{sit_path(@sit.prev)}\">&larr; Previous</a></li>".html_safe
@@ -25,7 +25,7 @@ module SitsHelper
 	end
 
 	def next_sit(sit)
-		if current_page?(sit_path(sit.next))
+		if sit.next.nil?
     	"<li class='next'><div class=\"disabled\" title=\"This is the latest entry\">Next &rarr;</div></li>".html_safe
     else
       "<li class='next'><a href=\"#{sit_path(@sit.next)}\">Next &rarr;</a></li>".html_safe
