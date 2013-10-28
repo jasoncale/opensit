@@ -71,3 +71,6 @@ gem 'newrelic_rpm'
 # Deploy with Capistrano
 gem 'capistrano'
 gem 'rvm-capistrano'
+
+# Heroku assets and logging
+gem 'rails_12factor', group: :production
