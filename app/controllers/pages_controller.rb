@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
   def front
-    @sits = Sit.newest_first.limit(5).all
+    @sits = Sit.newest_first.limit(10).all
     @newest_users = User.newest_users
+    @comments = Comment.latest(5)
 
     @page_class = 'front-page'
   end
