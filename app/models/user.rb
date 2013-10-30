@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   
   # Devise :validatable (above) covers validation of email and password
   validates :username, length: {minimum: 3, maximum: 10}
+  validates_uniqueness_of :username
 
   # Pagination: sits per page
   self.per_page = 10
