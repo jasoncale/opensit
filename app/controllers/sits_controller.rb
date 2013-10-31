@@ -12,7 +12,7 @@ class SitsController < ApplicationController
 
   # GET /sits/new
   def new
-    @sit = Sit.new
+    @sit ||= Sit.new
     @user = current_user
 
     @title = 'New sit'
@@ -36,6 +36,7 @@ class SitsController < ApplicationController
     if @sit.save
       redirect_to @sit, notice: 'Sit was successfully created.'
     else
+      @page_class = 'new-sit'
       render action: "new"
     end
   end

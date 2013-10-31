@@ -12,6 +12,7 @@ class Sit < ActiveRecord::Base
   validates :s_type, :presence => true
   validates :title, :presence => true, :if => "s_type != 0"
   validates :duration, :presence => true, :if => "s_type == 0"
+  validates_numericality_of :duration, greater_than: 0, only_integer: true
 
   # Scopes
   scope :newest_first, -> { order("created_at DESC") }
