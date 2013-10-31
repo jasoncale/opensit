@@ -1,4 +1,4 @@
-<% unless (current_user == @user) || !current_user %>
+<% unless !current_user %>
   <% @user ||= current_user %>
   <div class="stats">
     <a href="<%= following_user_path(@user) %>">
