@@ -3,6 +3,15 @@
 		<h1>Sign in</h1>
 
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+ 		<% if flash.any? %>
+			<div class="alert alert-danger">
+			<%- flash.each do |name, msg| -%>
+	          <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+			<%- end -%>
+			</div>
+		<% end %>
+
 		  <div><%= f.email_field :email, placeholder: 'Your email' %></div>
 
 		  <div><%= f.password_field :password, placeholder: 'Password' %></div>

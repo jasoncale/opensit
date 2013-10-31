@@ -114,7 +114,7 @@ h3.title {
     line-height: 26px;
     font-size: 20px;
     height: 40px;
-    width: 300px;
+    width: 95%;
   }
   label {
     margin-bottom: 10px;
@@ -124,6 +124,12 @@ h3.title {
   }
   #user_remember_me {
     margin-top: -1px;
+  }
+}
+
+.sign-up {
+  .btn-large {
+    margin-top: 20px;
   }
 }
 

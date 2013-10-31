@@ -1,5 +1,3 @@
-require 'nokogiri'
-
 module SitsHelper
 	def teaser(sit, length = 300)
 		truncate(strip_tags(sit.custom_strip), :length => length, :omission => " ...")
