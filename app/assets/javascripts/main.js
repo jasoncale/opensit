@@ -35,7 +35,7 @@ $(document).ready(function(){
     changeYear: true
   });
 
-  $(".chzn-select").chosen();
+  $(".chzn-select").chosen({max_selected_options: 1});
 
   // FAVOURITES / add and remove
   $('#favourite_button').on('click', '.toggle-favourite', function(e) {

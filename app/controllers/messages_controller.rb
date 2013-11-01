@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @user = current_user
-    @message = Message.new
+    @message ||= Message.new
 
     @title = 'New message'
     @page_class = 'new-message'
@@ -47,13 +47,16 @@ class MessagesController < ApplicationController
   def create
     @user = current_user
     @message = Message.new(params[:message])
-    params[:message][:to_user_id].shift # remove blank
+
+    params[:message][:to_user_id].shift # remove random blank that always appears
+    @message.to_user_id = params[:message][:to_user_id].map { |s| s }.join
     @message.from_user_id = @user.id
 
-    if @message.send_message(params[:message][:to_user_id])
-      redirect_to @message, notice: 'Your message has been sent.' 
-    else
+    if !@message.valid?
       render action: "new"
+    else
+      @message.send_message(params[:message][:to_user_id])
+      redirect_to @message, notice: 'Your message has been sent.' 
     end
   end
 
