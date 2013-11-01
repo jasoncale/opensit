@@ -30,7 +30,7 @@
   <%= f.input :body, :label => 'What\'s happening?', :input_html => { :rows => 10, :autofocus => true, :class => "basic-form rich-textarea" } %>
 
   <div class="new-sit-date">
-    <%= f.input :created_at, :as => 'string', :label => 'Date', :input_html => { :placeholder => 'Just now.', :value => current_page?(new_sit_path(@sit)) ? @sit.created_at : @sit.created_at.strftime('%Y-%m-%d %H:%M'), :label => 'none', :class => 'datepicker' } %>
+    <%= f.input :created_at, :as => 'string', :label => 'Date', :input_html => { :placeholder => 'Just now.', :value => current_page?(edit_sit_path(@sit)) ? @sit.created_at.strftime('%Y-%m-%d %H:%M') : '', :label => 'none', :class => 'datepicker' } %>
   </div>
 
   <%= f.input :tag_list, :as => 'string', :label => 'Tags (separate by commas)' %>
