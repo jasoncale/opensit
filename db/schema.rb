@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20131101162208) do
   end
 
   create_table "notification_types", force: true do |t|
-    t.string "type"
+    t.string "event"
     t.string "text"
   end
 

@@ -8,7 +8,7 @@ class AddNotificationsTable < ActiveRecord::Migration
 	  end
 
 	  create_table(:notification_types) do |t|
-	  	t.string :type
+	  	t.string :event
 	  	t.string :text
 	  end
   end
