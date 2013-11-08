@@ -68,6 +68,7 @@ gem 'will_paginate'
 # Admin/tracking
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'newrelic_rpm'
+gem 'airbrake'
 
 # Deploy with Capistrano
 gem 'capistrano'

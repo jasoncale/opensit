@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="bUUwYz6cKVuhYbL7PtFunzsGV67I56tGyDldiHJgs7k" />
     <title><%= full_title(@title) %></title>
-    
+
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700|Pacifico' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+    <%= airbrake_javascript_notifier %>
 
     <!-- UserVoice JavaScript SDK (only needed once on a page) -->
     <script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/k0P7h6HxJQhRGClPw5M4kg.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
   </head>
-  
+
   <body>
     <!-- A tab to launch the UserVoice Classic Widget -->
     <script>
@@ -36,7 +37,7 @@
     </script>
 
   <div class="base-container">
-    
+
     <%= render 'layouts/header' %>
 
     <div class="page-content <%= @page_class %>">
@@ -63,12 +64,11 @@
 
       <div class="spacer"></div>
     </div>
-    
+
   </div> <!-- end #base-container -->
-    
+
   <%= render 'layouts/footer' %>
   <%= render 'layouts/analytics' %>
-      
+
   </body>
 </html>
- 
