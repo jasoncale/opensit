@@ -16,5 +16,6 @@
 //= require chosen-jquery
 //= require bootstrap-wysihtml5
 //= require bootstrap-dropdown
+//= require bootstrap-tooltip
 //= require turbolinks
 //= require_tree .

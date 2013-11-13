@@ -1,3 +1,29 @@
-// Place all the styles related to the Notifications controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.new-notifications {
+	margin-top: -33px;
+	margin-left: 16px;
+	float: left;
+	color: white;
+	font-weight: bold;
+	position: relative;
+}
+
+.notifications {
+	.new-notification {
+		font-weight: bold;
+	}
+	.avatar {
+		width: 65px;
+	}
+	.clickable-row {
+		display: block;
+		height: 40px;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	.time-ago {
+		float: right;
+		font-size: 0.8em;
+		color: #999;
+	}
+}

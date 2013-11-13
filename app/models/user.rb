@@ -182,6 +182,10 @@ class User < ActiveRecord::Base
     end       
   end
 
+  def new_notifications
+    notifications.unread.count unless notifications.unread.count.zero?
+  end
+
   ##
   # CLASS METHODS
   ##

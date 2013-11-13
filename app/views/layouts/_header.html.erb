@@ -7,6 +7,9 @@
           
           <% if user_signed_in? %>
             <span class="icons">
+              <%= link_to(notifications_path, class: 'pull-left', title: 'Notifications') do %>
+                <%= new_notifications(current_user) %>
+              <% end %>
               <%= link_to(new_sit_path, class: 'pull-left', title: 'Add sit') do %>
                 <i class="icon-plus icon-white"></i>
               <% end %>

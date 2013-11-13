@@ -138,8 +138,7 @@ GEM
     faker (1.2.0)
       i18n (~> 0.5)
     ffi (1.9.0)
-    font-awesome-sass-rails (3.0.2.2)
-      railties (>= 3.1.1)
+    font-awesome-sass (4.0.2)
       sass-rails (>= 3.1.1)
     formatador (0.2.4)
     formtastic (2.3.0.rc2)
@@ -349,7 +348,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
-  font-awesome-sass-rails
+  font-awesome-sass
   guard (>= 2.1.0)
   guard-livereload
   guard-migrate

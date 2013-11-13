@@ -20,4 +20,13 @@ module ApplicationHelper
   def tag_labels(tags)
     raw tags.map { |t| link_to t.name, tag_path(t.name), :class => 'label tag-label' }.join
   end
+
+  def new_notifications(user)
+    if user.notifications.unread.count.zero?
+      '<i class="fa fa-circle-o"></i>'.html_safe
+    else
+      count = '<i class="fa fa-circle"></i><span class="new-notifications">' + current_user.new_notifications.to_s + '</span>'
+      count.html_safe
+    end
+  end
 end

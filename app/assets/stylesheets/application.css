@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *= require bootstrap-sass
  *= require bootstrap-wysihtml5
+ *= require font-awesome
  *= require chosen
  *= require grid
  *= require opensit-layout
@@ -16,4 +17,5 @@
  *= require sits
  *= require users
  *= require messages
+ *= require notifications
  */

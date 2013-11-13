@@ -83,10 +83,13 @@ ActiveRecord::Schema.define(version: 20131101162208) do
   end
 
   create_table "notifications", force: true do |t|
-    t.integer "user_id"
-    t.integer "notification_type"
-    t.boolean "viewed"
-    t.string  "meta"
+    t.integer  "user_id"
+    t.string   "message"
+    t.string   "link"
+    t.integer  "initiator"
+    t.boolean  "viewed",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "rails_admin_histories", force: true do |t|

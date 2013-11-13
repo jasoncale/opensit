@@ -14,6 +14,7 @@ Opensit::Application.routes.draw do
   get '/users/:id/export' => "users#export"
   get '/users/:id/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
   get '/favs' => "favourites#index", :as => :favs
+  get '/notifications' => "notifications#index"
 
   get 'front' => "pages#front"
   get 'about' => "pages#about"

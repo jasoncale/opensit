@@ -32,7 +32,7 @@ gem 'bootstrap-sass'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'
 
-gem 'font-awesome-sass-rails'
+gem 'font-awesome-sass'
 
 group :test do
   gem 'capybara'
