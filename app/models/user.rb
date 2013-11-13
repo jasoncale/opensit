@@ -127,6 +127,7 @@ class User < ActiveRecord::Base
 
   def follow!(other_user)
     relationships.create!(followed_id: other_user.id)
+    Notification.send_notification('NewFollower', other_user.id, { follower: self })
   end
 
   def unfollow!(other_user)

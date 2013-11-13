@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
 
 	def index
 		@user = current_user
-		@notifications = @user.notifications
+		@notifications = @user.notifications.paginate(:page => params[:page])
 
 		@title = 'My notifications'
 		@page_class = 'notifications'

@@ -8,6 +8,8 @@ class Notification < ActiveRecord::Base
   default_scope { order('created_at DESC') }
   scope :unread, -> { where(viewed: false) }
 
+  self.per_page = 10
+
   def self.send_notification(notification_type, user_id, meta)
 
 	  case notification_type
@@ -21,6 +23,16 @@ class Notification < ActiveRecord::Base
 		  		user_id: user_id,
 		  		link: "/sits/#{sit_id}\#comment-#{comment_id}",
 		  		initiator: commenter_id
+		  	)
+
+		  when 'NewFollower'
+		  	username = meta[:follower].display_name
+		  	follower_id = meta[:follower].id
+		  	notify = Notification.create(
+		  		message: "#{username} is now following you!", 
+		  		user_id: user_id,
+		  		link: "/users/#{follower_id}",
+		  		initiator: follower_id
 		  	)
 		  end
 

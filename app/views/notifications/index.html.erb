@@ -16,4 +16,8 @@
     <% end %>
   </table>
 
+<div class="pagination-container">
+  <%= will_paginate @feed_items, :class => 'pagination pagination-centered' %>
+</div>
+
 <% end %>
