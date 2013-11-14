@@ -3,5 +3,5 @@
 <%= form_for(@sit.favourites.create, remote: true) do |f| %>
     <div><%= f.hidden_field :favourable_id, :value => @sit.id %></div>
     <div><%= f.hidden_field :favourable_type, :value => 'Sit' %></div>
-  <%= link_to '<i class="icon-heart-empty"></i> Add to favourites'.html_safe, '#', :title => 'Add to favourites', :class => 'toggle-favourite btn' %>
+  <%= link_to '<i class="fa fa-heart-empty"></i> Add to favourites'.html_safe, '#', :title => 'Add to favourites', :class => 'toggle-favourite btn' %>
 <% end %>

@@ -1,7 +1,7 @@
 module MessagesHelper
 	def unread_marker(msg)
 		if !msg.read
-			'<i class="icon-asterisk"></i>'.html_safe
+			'<i class="fa fa-asterisk"></i>'.html_safe
 		end
 	end
 

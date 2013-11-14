@@ -16,12 +16,11 @@
               <%= link_to(my_path, class: 'pull-left', title: 'My sits') do %>
                 <i class="fa fa-user"></i>
               <% end %>
-              <!-- <a class="btn" href="#"><i class="icon-globe"></i> -->
               <%= link_to(favs_path, class: 'pull-left', title: 'My favourites') do %>
-                <i class="icon-heart"></i>
+                <i class="fa fa-heart"></i>
               <% end %>
               <%= link_to(messages_path, class: 'pull-left', title: 'Inbox') do %>
-                <i class="icon-envelope"> <span class="unread-count"><%= current_user.unread_count %></span></i>
+                <i class="fa fa-envelope"> <span class="unread-count"><%= current_user.unread_count %></span></i>
               <% end %>
             </span>
 
@@ -32,21 +31,21 @@
 
             <div class="btn-group pull-right">
               <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="icon-cogs"></i>
+                <i class="fa fa-cogs"></i>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to edit_user_registration_path do %>
-              <i class="icon-user icon-white"></i> Edit profile <% end %></li>
+              <i class="fa fa-user"></i> &nbsp;Edit profile <% end %></li>
                 <div class="divider"></div>
                 <li><%= link_to(destroy_user_session_path, :method => :delete) do %> 
-              <i class="icon-signout"></i> Sign out <% end %></li>
+              <i class="fa fa-sign-out"></i> &nbsp;Sign out <% end %></li>
               </ul>
             </div>
           </ul>
 
           <div class="loading-indicator">
-            <i class="icon-spinner icon-spin icon-large"></i>
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
           </div>
           
          <% else %>
