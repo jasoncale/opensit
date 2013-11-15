@@ -13,7 +13,7 @@
 class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :sit
-  
+
   attr_accessible :body, :sit_id, :user_id
 
   validates :body, :presence => true
