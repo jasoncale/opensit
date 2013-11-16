@@ -11,8 +11,6 @@ development:
   encoding: unicode
   pool: 5
   timeout: 5000
-  username: username_goes_here
-  password: password_goes_here
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,8 +20,6 @@ test:
   database: opensit_test
   pool: 5
   timeout: 5000
-  username: username_goes_here
-  password: password_goes_here
 
 production:
   adapter: postgresql
