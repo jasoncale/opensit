@@ -3,17 +3,17 @@
 	<div class="username"><%= username(@user) %></div>
 	<% if !@user.city.blank? || !@user.country.blank? %>
 		<div class="user-info">
-			<div class="icon"><i class="icon-flag"></i></div><div class="detail"><%= @user.location %></div>
+			<div class="icon"><i class="fa fa-flag"></i></div><div class="detail"><%= @user.location %></div>
 		</div>
 	<% end %>
 	<% if !@user.style.blank? %>
 		<div class="user-info">
-			<div class="icon"><i class="icon-bolt"></i></div><div class="detail"> <%= @user.style %></div>
+			<div class="icon"><i class="fa fa-bolt"></i></div><div class="detail"> <%= @user.style %></div>
 		</div>
 	<% end %>
 
 	<div class="user-info">
-		<div class="icon"><i class="icon-user"></i></div><div class="detail"><%= link_to 'View profile', profile_path(@user) %></div>
+		<div class="icon"><i class="fa fa-user"></i></div><div class="detail"><%= link_to 'View profile', profile_path(@user) %></div>
 	</div>
 
 	<%= render 'shared/stats' %>

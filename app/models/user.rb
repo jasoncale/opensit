@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
                   :user_type, :username, :who, :why, :password_confirmation, :remember_me, :avatar
 
   has_many :sits, :dependent => :destroy
-  has_many :messages_received,  :class_name => 'Message', :foreign_key=> 'to_user_id', :conditions => { :receiver_deleted => false }
-  has_many :messages_sent,      :class_name => 'Message', :foreign_key=> 'from_user_id', :conditions => { :sender_deleted => false }
+  has_many :messages_received, -> { where receiver_deleted: false }, class_name: 'Message', foreign_key: 'to_user_id'
+  has_many :messages_sent, -> { where sender_deleted: false }, class_name: 'Message', foreign_key: 'from_user_id'
   has_many :comments, :dependent => :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -158,20 +158,18 @@ class User < ActiveRecord::Base
     type = opts[:type] ? opts[:type] : :sit
     type = type.to_s.capitalize
 
-    con = ["user_id = ? AND favourable_type = ?", self.id, type]
-    
+    favs = Favourite.where(user_id: self.id).where(favourable_type: type)
+
     if opts[:id]
-      con[0] += " AND favourable_id = ?"
-      con << opts[:id].to_s
+      favs.where(favourable_id: opts[:id].to_s)
     end
-   
-    favs = Favourite.all(:conditions => con)
     
     case opts[:delve]
     when nil, false, :false
       return favs
     when true, :true
       # Get a list of all favourited object ids
+      # TODO: somehow order these by order in which they were favourited!
       fav_ids = favs.collect{|f| f.favourable_id}
 
       if fav_ids.size > 0
