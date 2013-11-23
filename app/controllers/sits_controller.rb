@@ -7,7 +7,7 @@ class SitsController < ApplicationController
     redirect_to me_path if @sit.private == true && @sit.user_id != current_user.id
     
     @user = @sit.user
-    @title = "#{@user.display_name}\'s practice log"
+    @title = "#{@sit.full_title} by #{@user.display_name}"
     @page_class = 'view-sit'
   end
 
