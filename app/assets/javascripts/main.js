@@ -29,6 +29,10 @@ $(document).ready(function(){
     $('.new-sit-title').show();
   };
 
+  $('.privacy-button').click( function() {
+    $('.privacy-options').slideToggle();
+  });
+
   $( ".datepicker" ).datepicker({
     dateFormat: 'yy-mm-dd', 
     changeMonth: true,

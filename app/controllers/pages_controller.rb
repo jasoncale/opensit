@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   end
 
   def explore
-  	@sits = Sit.newest_first.limit(10).all
+  	@sits = Sit.public.newest_first.limit(10).all
   	@newest_users = User.newest_users
     @comments = Comment.latest(5)
 

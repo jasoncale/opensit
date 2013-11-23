@@ -34,6 +34,10 @@ article.sit-teaser {
       width: 97%;
     }
   }
+  /* Lock icon for private events */
+  .private-event {
+    margin-top: -15px;
+  }
 }
 
 /* Sit full */
@@ -78,6 +82,12 @@ article.sit-teaser {
       font-size: 14px;
       font-weight: normal;
     }
+  }
+  .private-warning {
+    width: 85%;
+    text-align: center;
+    margin: 0px 25px 25px 25px;
+    font-weight: bold;
   }
   .comments {
     @include box-model;
@@ -124,6 +134,29 @@ article.sit-teaser {
     width: 50px;
     height: 34px;
     font-size: 30px;
+  }
+  .privacy-pane {
+    float: right;
+    .privacy-button {
+      float: right;
+    }
+    .privacy-options {
+      display: none;
+      clear: both;
+      label {
+        font-size: 0.8em;
+        margin-bottom: 0;
+      }
+      .control-group {
+        margin-bottom: 0;
+      }
+      .controls {
+        margin-left: 165px;
+      }
+    }
+  }
+  .delete-entry {
+    margin-left: 10px;
   }
 }
 

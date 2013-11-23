@@ -1,13 +1,18 @@
+<% if @sit.private %>
+  <div class="private-warning alert alert-warning"><i class="fa fa-lock"></i> This is a private entry. Only you can see it!</div>
+<% end %>
+
 <header>
   <h1 class="sit-title"><%= @sit.full_title %></h1>
 </header>
 
 <div class="body"><%= @sit.body.html_safe %></div>
-  <% if current_user and @sit.mine?(current_user) %>
-    <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
-  <% end %>
 
-<% if !@sit.disable_comments %>
+<% if current_user and @sit.mine?(current_user) %>
+  <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
+<% end %>
+
+<% if !@sit.disable_comments && !@sit.private %>
   <div class="comments">
     <% if !@sit.comments.empty? %>
       <h3>Comments</h3>

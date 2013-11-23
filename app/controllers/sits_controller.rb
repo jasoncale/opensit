@@ -4,8 +4,9 @@ class SitsController < ApplicationController
   # GET /sits/1
   def show
     @sit = Sit.find(params[:id])
+    redirect_to me_path if @sit.private == true && @sit.user_id != current_user.id
+    
     @user = @sit.user
-
     @title = "#{@user.display_name}\'s practice log"
     @page_class = 'view-sit'
   end

@@ -9,8 +9,17 @@
   <% end %>
 
   <%= if current_page?(edit_sit_path(@sit))
-    link_to 'Delete', sit_path(@sit), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-small btn-danger pull-right'
+    link_to 'Delete', sit_path(@sit), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-small btn-danger delete-entry pull-right'
     end %>
+
+    <div class="privacy-pane">
+      <button type="button" class="btn btn-small privacy-button"><i class="fa fa-cog"></i> Privacy</button>
+      <div class="privacy-options">
+        <%= f.input :private, label: 'Make this entry <strong>private</strong>'.html_safe %>
+        <%= f.input :disable_comments %>
+      </div>
+    </div>
+
     <div class="sit_type control-group radio_buttons required">
       <div class="controls">
         <label class="radio sit_label">
@@ -22,6 +31,7 @@
         </label>
       </div>
     </div>
+    
     <br>
     <div class="new-sit-title">
       <%= f.input :title %>
@@ -34,9 +44,7 @@
   </div>
 
   <%= f.input :tag_list, :as => 'string', :label => 'Tags (separate by commas)' %>
-
-  <%= f.input :disable_comments %>
-
+  
   <div class="controls">
     <%= f.submit :class => 'btn btn-large btn-primary pull-left' %>
   </div>

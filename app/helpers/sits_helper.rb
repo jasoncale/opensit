@@ -17,18 +17,24 @@ module SitsHelper
 	end
 
 	def previous_sit(sit)
-		if sit.prev.nil?
+		if sit.prev(current_user).nil?
 			"<li class='previous'><div class=\"disabled\" title=\"This is the first entry\">&larr; Previous</div></li>".html_safe
 		else
-			"<li class='previous'><a href=\"#{sit_path(@sit.prev)}\">&larr; Previous</a></li>".html_safe
+			"<li class='previous'><a href=\"#{sit_path(@sit.prev(current_user))}\">&larr; Previous</a></li>".html_safe
 		end
 	end
 
 	def next_sit(sit)
-		if sit.next.nil?
+		if sit.next(current_user).nil?
     	"<li class='next'><div class=\"disabled\" title=\"This is the latest entry\">Next &rarr;</div></li>".html_safe
     else
-      "<li class='next'><a href=\"#{sit_path(@sit.next)}\">Next &rarr;</a></li>".html_safe
+      "<li class='next'><a href=\"#{sit_path(@sit.next(current_user))}\">Next &rarr;</a></li>".html_safe
+		end
+	end
+
+	def display_lock_if_private(sit)
+		if sit.private
+			'<div class="private-event pull-right" title="This is a private entry. Only you can see it."><i class="fa fa-lock"></i></div>'.html_safe
 		end
 	end
 end

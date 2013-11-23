@@ -1,5 +1,5 @@
 class Sit < ActiveRecord::Base
-  attr_accessible :disable_comments, :tag_list, :duration, :s_type, :body, :title, :created_at, :user_id
+  attr_accessible :private, :disable_comments, :tag_list, :duration, :s_type, :body, :title, :created_at, :user_id
   
   belongs_to :user
   has_many :comments, :dependent => :destroy
@@ -14,6 +14,7 @@ class Sit < ActiveRecord::Base
   validates_numericality_of :duration, greater_than: 0, only_integer: true
 
   # Scopes
+  scope :public, -> { where(private: false) } 
   scope :newest_first, -> { order("created_at DESC") }
   
   # Pagination: sits per page
@@ -53,26 +54,31 @@ class Sit < ActiveRecord::Base
     return true if self.user_id == current.id
   end
 
-  def next
-    user.sits.where("created_at > ?", self.created_at).order('created_at ASC').first
+  def next(current_user)
+    next_sit = user.sits.where("created_at > ?", self.created_at).order('created_at ASC')
+    return next_sit.first if self.user_id == current_user.id
+    return next_sit.public.first
   end
 
-  def prev
-    user.sits.where("created_at < ?", self.created_at).order('created_at ASC').last
+  def prev(current_user)
+    prev_sit = user.sits.where("created_at < ?", self.created_at).order('created_at ASC')
+    return prev_sit.last if self.user_id == current_user.id
+    return prev_sit.public.last
   end
 
   # Returns sits from the users being followed by the given user.
   def self.from_users_followed_by(user)
     followed_user_ids = "SELECT followed_id FROM relationships
                          WHERE follower_id = :user_id"
-    where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", 
+    
+    where("(user_id IN (#{followed_user_ids}) AND private = false) OR user_id = :user_id", 
           user_id: user.id)
   end
 
   # Tags
 
   def self.tagged_with(name)
-    Tag.find_by_name!(name).sits
+    Tag.find_by_name!(name).sits.public
   end
 
   def self.tag_counts
