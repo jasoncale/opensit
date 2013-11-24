@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131123090109) do
+ActiveRecord::Schema.define(version: 20131123135133) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -160,9 +160,9 @@ ActiveRecord::Schema.define(version: 20131123090109) do
     t.boolean  "private_diary"
     t.integer  "default_sit_length",               default: 30
     t.integer  "user_type"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.string   "encrypted_password",   limit: 128, default: "", null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.string   "encrypted_password",   limit: 128, default: "",    null: false
     t.string   "password_salt"
     t.string   "authentication_token"
     t.string   "confirmation_token"
@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(version: 20131123090109) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "private_stream",                   default: false
   end
 
 end

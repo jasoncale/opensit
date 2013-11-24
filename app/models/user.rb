@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
-  attr_accessible :city, :country, :website, :default_sit_length, :dob, :password,
-                  :email, :first_name, :gender, :last_name, :practice, :private_diary, :style, 
-                  :user_type, :username, :who, :why, :password_confirmation, :remember_me, :avatar
+  attr_accessible :city, :country, :website, :default_sit_length, :dob,
+                  :password, :email, :first_name, :gender, :last_name, 
+                  :practice, :private_diary, :style, :user_type, :username, 
+                  :who, :why, :password_confirmation, :remember_me, :avatar,
+                  :private_stream
 
   has_many :sits, :dependent => :destroy
   has_many :messages_received, -> { where receiver_deleted: false }, class_name: 'Message', foreign_key: 'to_user_id'
@@ -174,7 +176,7 @@ class User < ActiveRecord::Base
 
       if fav_ids.size > 0
         type_class = type.constantize
-        return type_class.find(fav_ids)
+        return type_class.where(id: fav_ids).where(private: false)
       else
         return []
       end
@@ -183,6 +185,15 @@ class User < ActiveRecord::Base
 
   def new_notifications
     notifications.unread.count unless notifications.unread.count.zero?
+  end
+
+  def private_stream=(value)
+    if value == '1'
+      self.sits.update_all(private: true)
+    elsif value == '0'
+      self.sits.update_all(private: false)
+    end
+    write_attribute(:private_stream, value)
   end
 
   ##

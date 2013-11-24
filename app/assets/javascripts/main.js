@@ -46,6 +46,17 @@ $(document).ready(function(){
     e.preventDefault();
     $(this).closest('form').submit();
   });
+
+  // EDIT PROFILE / private stream warning
+  $('.edit-profile .private-stream input').click( function() {
+    if ($(this).is(':checked')) {
+      $('.private-stream-warning-unticked').hide();
+      $('.private-stream-warning-ticked').show();
+    } else {
+      $('.private-stream-warning-ticked').hide();
+      $('.private-stream-warning-unticked').show();
+    }
+  });
 });
 
 // Loading indicator and Google Analytics

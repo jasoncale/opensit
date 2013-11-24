@@ -2,9 +2,6 @@
   <% if @sit.errors.any? %>
     <div class="alert alert-danger">
       Please fill in the required fields.
-      <%# @sit.errors.full_messages.each do |msg| %>
-        <%#= msg %>
-      <%# end %>
     </div>
   <% end %>
 
@@ -13,11 +10,15 @@
     end %>
 
     <div class="privacy-pane">
-      <button type="button" class="btn btn-small privacy-button"><i class="fa fa-cog"></i> Privacy</button>
-      <div class="privacy-options">
-        <%= f.input :private, label: 'Make this entry <strong>private</strong>'.html_safe %>
-        <%= f.input :disable_comments %>
-      </div>
+      <% if !current_user.private_stream %>
+        <button type="button" class="btn btn-small privacy-button"><i class="fa fa-cog"></i> Privacy</button>
+        <div class="privacy-options">
+          <%= f.input :private, label: 'Make this entry <strong>private</strong>'.html_safe %>
+          <%= f.input :disable_comments %>
+        </div>
+      <% else %>
+        <i class="fa fa-lock"></i> Your stream is private.
+      <% end %>
     </div>
 
     <div class="sit_type control-group radio_buttons required">

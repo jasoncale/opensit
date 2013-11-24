@@ -84,10 +84,11 @@ article.sit-teaser {
     }
   }
   .private-warning {
-    width: 85%;
+    float: left;
     text-align: center;
-    margin: 0px 25px 25px 25px;
-    font-weight: bold;
+    font-size: 0.9em;
+    padding: 10px;
+    background: #f5f5f5;
   }
   .comments {
     @include box-model;
@@ -143,6 +144,8 @@ article.sit-teaser {
     .privacy-options {
       display: none;
       clear: both;
+      background: #efefef;
+      border-radius: 10px 0px 10px 10px;
       label {
         font-size: 0.8em;
         margin-bottom: 0;

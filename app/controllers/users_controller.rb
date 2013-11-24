@@ -37,7 +37,11 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
+    
     @sits = @user.sits.newest_first.paginate(:page => params[:page])
+    if @user.id != current_user.id
+      @sits = @sits.public
+    end
 
     @title = "#{@user.display_name}\'s practice log"
     @page_class = 'view-user'

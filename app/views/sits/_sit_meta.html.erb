@@ -1,3 +1,9 @@
+<% if @sit.user.private_stream %>
+  <div class="private-warning nav-module"><i class="fa fa-lock"></i> Your stream is private.</div>
+<% elsif @sit.private %>
+  <div class="private-warning nav-module"><i class="fa fa-lock"></i> This is a private entry. Only you can see it!</div>
+<% end %>
+
 <div class="nav-module sit-meta">
 	<div class="date"><%= @sit.date %></div>
   <ul class="pager">

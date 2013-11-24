@@ -5,6 +5,9 @@
     <% if current_user == @user %>
       <h1>You haven't logged any practice yet!</h1>
       <p>Share your practice with others, <%= link_to 'add a sit or diary', new_sit_path %>.</p>
+    <% elsif @user.private_stream %>
+      <h1>Oops.</h1>
+      <p>This is a private stream!</p>
     <% else %>
       <h1>Zzzz..</h1>
       <p>This user hasn't logged any practice yet.</p>

@@ -33,6 +33,7 @@ class SitsController < ApplicationController
   def create
     @user = current_user
     @sit = @user.sits.new(params[:sit])
+    @sit.private = true if @user.private_stream
 
     if @sit.save
       redirect_to @sit, notice: 'Sit was successfully created.'

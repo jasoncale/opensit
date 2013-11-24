@@ -1,5 +1,6 @@
 class Sit < ActiveRecord::Base
-  attr_accessible :private, :disable_comments, :tag_list, :duration, :s_type, :body, :title, :created_at, :user_id
+  attr_accessible :private, :disable_comments, :tag_list, :duration, :s_type, 
+                  :body, :title, :created_at, :user_id
   
   belongs_to :user
   has_many :comments, :dependent => :destroy
