@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     
     @sits = @user.sits.newest_first.paginate(:page => params[:page])
-    if @user.id != current_user.id
+    if current_user && @user.id != current_user.id
       @sits = @sits.public
     end
 
