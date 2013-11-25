@@ -57,13 +57,13 @@ class Sit < ActiveRecord::Base
 
   def next(current_user)
     next_sit = user.sits.where("created_at > ?", self.created_at).order('created_at ASC')
-    return next_sit.first if self.user_id == current_user.id
+    return next_sit.first if current_user && (self.user_id == current_user.id)
     return next_sit.public.first
   end
 
   def prev(current_user)
     prev_sit = user.sits.where("created_at < ?", self.created_at).order('created_at ASC')
-    return prev_sit.last if self.user_id == current_user.id
+    return prev_sit.last if current_user && (self.user_id == current_user.id)
     return prev_sit.public.last
   end
 
