@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :only => [:my_sits, :export]
+  before_filter :authenticate_user!, :only => [:my_sits, :export, :following, :followers]
 
   # GET /me page if logged in, /front if not
   def me
