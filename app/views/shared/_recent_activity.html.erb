@@ -1,13 +1,13 @@
 <div class="nav-module recent-activity">
-	<% if @my_latest.empty? %>
+	<% if @latest.empty? %>
 		<div class="add-a-sit"><%= link_to '<i class="icon-plus"></i> Add your first sit'.html_safe, new_sit_path %></div>
 	<% else %>
-		<% if current_user.id == @user.id %>
+		<% if current_user && (current_user.id == @user.id) %>
 			<h4>My Recent Activity</h4>
 		<% else %>
 			<h4><%= @user.display_name %>'s Activity</h4>
 		<% end %>
-		<% @my_latest.each do |sit| %>
+		<% @latest.each do |sit| %>
 			<article class="sit-teaser">
 				<div class="title">
 					<% if sit.s_type == 0 %>

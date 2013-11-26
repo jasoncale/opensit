@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     else
       @feed_items = current_user.socialstream.paginate(:page => params[:page])
       @user = current_user
-      @my_latest = @user.latest_sits
+      @latest = @user.latest_sits
     
       @title = 'Home'
       @page_class = 'me'
@@ -59,13 +59,13 @@ class UsersController < ApplicationController
   def following
     @user = User.find(params[:id])
     @users = @user.followed_users
-    @my_latest = @user.latest_sits
 
     if @user == current_user
-      @my_favs = true
       @title = "People I follow"
+      @latest = @user.latest_sits
     else
       @title = "People who #{@user.display_name} follows"
+      @latest = @user.sits.public.limit(3)
     end
 
     @page_class = 'following'
@@ -76,13 +76,13 @@ class UsersController < ApplicationController
   def followers
     @user = User.find(params[:id])
     @users = @user.followers
-    @my_latest = @user.latest_sits
 
     if @user == current_user
-      @my_favs = true
       @title = "People who follow me"
+      @latest = @user.latest_sits
     else
       @title = "People who follow #{@user.display_name}"
+      @latest = @user.sits.public.limit(3)
     end
 
     @page_class = 'followers'
