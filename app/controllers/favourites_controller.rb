@@ -4,7 +4,7 @@ class FavouritesController < ApplicationController
 	def index
 		@user = current_user
 		@favs = @user.get_favourites(:delve => true)
-		@latest = @user.latest_sits
+		@latest = @user.latest_sits(current_user)
 
 		@title = 'My favourites'
 		@page_class = 'favourites'

@@ -64,8 +64,10 @@ class User < ActiveRecord::Base
   # METHODS
   ##
 
-  def latest_sits
-    self.sits.newest_first.limit(3)
+  def latest_sits(current)
+    sits = self.sits.newest_first.limit(3)
+    return sits if current.id == self.id
+    return sits.public
   end
 
   def sits_by_year(year)

@@ -1,7 +1,11 @@
-<div class="nav-module recent-activity">
-	<% if @latest.empty? %>
-		<div class="add-a-sit"><%= link_to '<i class="icon-plus"></i> Add your first sit'.html_safe, new_sit_path %></div>
-	<% else %>
+<% if @latest.empty? %>
+	<% if current_user && (current_user.id == @user.id) %>
+		<div class="nav-module recent-activity">
+			<div class="add-a-sit"><%= link_to '<i class="fa fa-plus"></i> Add your first sit'.html_safe, new_sit_path %></div>
+		</div>
+	<% end %>
+<% else %>
+	<div class="nav-module recent-activity">
 		<% if current_user && (current_user.id == @user.id) %>
 			<h4>My Recent Activity</h4>
 		<% else %>
@@ -25,5 +29,5 @@
 				</div>
 			</article>
 		<% end %>
-	<% end %>
-</div>
+	</div>
+<% end %>
