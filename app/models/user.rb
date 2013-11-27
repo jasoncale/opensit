@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   # Devise :validatable (above) covers validation of email and password
-  validates :username, length: {minimum: 3, maximum: 10}
+  validates :username, length: {minimum: 3, maximum: 20}
   validates_uniqueness_of :username
 
   # Pagination: sits per page
