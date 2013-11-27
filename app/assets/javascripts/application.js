@@ -17,5 +17,6 @@
 //= require bootstrap-wysihtml5
 //= require bootstrap-dropdown
 //= require bootstrap-tooltip
+//= require bootstrap-modal
 //= require turbolinks
 //= require_tree .

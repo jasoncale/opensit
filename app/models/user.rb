@@ -190,9 +190,9 @@ class User < ActiveRecord::Base
   end
 
   def private_stream=(value)
-    if value == '1'
+    if value == 'true'
       self.sits.update_all(private: true)
-    elsif value == '0'
+    elsif value == 'false'
       self.sits.update_all(private: false)
     end
     write_attribute(:private_stream, value)
