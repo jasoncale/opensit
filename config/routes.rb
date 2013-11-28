@@ -6,7 +6,6 @@ Opensit::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations" }
   get 'me' => "users#me"
-  get 'my' => "users#my_sits"
   get '/users/:id' => "users#show", :as => :user
   get '/users/:id/profile' => "users#profile", :as => :profile
   get '/users/:id/following' => "users#following", :as => :following_user

@@ -15,33 +15,26 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /my
-  def my_sits
-    @user = current_user
-    @links = @user.stream_range
-
-    if params[:y] && params[:m]
-      @my_sits = @user.sits_by_month(params[:y], params[:m]).newest_first
-      @range_title = "#{Date::MONTHNAMES[params[:m].to_i]}, #{params[:y]}"
-    elsif params[:y]
-      @my_sits = @user.sits_by_year(params[:y]).newest_first
-      @range_title = "All sits in #{params[:y]}"
-    else
-      @my_sits = @user.sits.newest_first.paginate(:page => params[:page])
-    end
-    
-    @title = 'My Sits'
-    @page_class = 'my-sits'
-  end
-
   # GET /users/1
   def show
     @user = User.find(params[:id])
     
-    @sits = @user.sits.newest_first.paginate(:page => params[:page])
-    if current_user && @user.id != current_user.id
-      @sits = @sits.public
+    @links = @user.stream_range
+
+    if params[:y] && params[:m]
+      @sits = @user.sits_by_month(params[:y], params[:m]).newest_first
+      @range_title = "#{Date::MONTHNAMES[params[:m].to_i]}, #{params[:y]}"
+    elsif params[:y]
+      @sits = @user.sits_by_year(params[:y]).newest_first
+      @range_title = "All sits in #{params[:y]}"
+    else
+      @sits = @user.sits.newest_first.paginate(:page => params[:page])
     end
+
+    # @sits = @user.sits.newest_first.paginate(:page => params[:page])
+    # if current_user && @user.id != current_user.id
+    #   @sits = @sits.public
+    # end
 
     @title = "#{@user.display_name}\'s practice log"
     @page_class = 'view-user'
@@ -50,6 +43,7 @@ class UsersController < ApplicationController
   # GET /user/1/profile
   def profile
     @user = User.find(params[:id])
+    @latest = @user.latest_sits(current_user)
 
     @title = @user.display_name
     @page_class = 'view-profile'
