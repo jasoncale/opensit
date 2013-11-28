@@ -1,4 +1,4 @@
-<% if controller.action_name.in? ['show'] %>
+<% if controller.action_name.in? ['show', 'profile'] %>
 	<%= render 'shared/full_user' %>
 	
 	<% if !@user.sits.empty? %>
@@ -11,7 +11,6 @@
 
 <% elsif controller.action_name.in? ['followers', 'following'] %>
 	<%= render 'shared/full_user' %>
-	<%= render 'shared/recent_activity' %>
 <% else %>
 	<%= render 'shared/user_summary' %>
 	<%= render 'shared/recent_activity' %>

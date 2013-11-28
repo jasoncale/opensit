@@ -177,6 +177,11 @@ footer {
 .explore-module {
   float: left;
   width: 100%;
+  h2 {
+    font-size: 20px;
+    line-height: 25px;
+    margin: 0 0 10px;
+  }
   .global-sitstream {
     @include column(6);
     .sit-teaser {

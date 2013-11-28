@@ -20,7 +20,7 @@ Opensit::Application.routes.draw do
   get 'front' => "pages#front"
   get 'about' => "pages#about"
   get 'contact' => "pages#contact"
-  get 'explore' => "pages#explore"
+  get 'explore' => "users#explore"
 
   resources :sits do
     resources :comments

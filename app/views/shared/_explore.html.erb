@@ -1,7 +1,6 @@
 <div class="explore-module">
   <section class="global-sitstream">
-    <h1>Global SitStream</h1>
-    <hr>
+    <h2>Global SitStream</h2>
 
     <% @sits.each do |sit| %>
 
@@ -11,8 +10,7 @@
   </section> <!-- end section#global_sitstream -->
 
   <section class="right-column">
-    <h1>Tags</h1>
-    <hr>
+    <h2>Tags</h2>
 
     <div id="tag_cloud">
       <% tag_cloud Sit.tag_counts, %w[s m l] do |tag, css_class| %>
@@ -21,16 +19,16 @@
     </div>
 
     <div class="new-arrivals">
-      <h1>New arrivals</h1>
-      <hr>
+      <h2>New arrivals</h2>
+
       <% @newest_users.each do |user| %>
         <div class="user"><%= small_avatar_of(user) %> <%= username(user) %> joined <%= time_ago_in_words(user.created_at) %> ago.</div>
       <% end %>
     </div>
 
     <div class="recent-comments">
-      <h1>Recent comments</h1>
-      <hr>
+      <h2>Recent comments</h2>
+
       <% @comments.each do |comment| %>
         <div class="comment">
           <div class="comment-info"><%= username(comment.user) %> commented on <%= username(comment.sit.user) %>'s <%= link_to comment.sit.full_title, sit_path(comment.sit_id) %> (<%= time_ago_in_words(comment.created_at) %> ago) </div>

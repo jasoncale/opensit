@@ -18,7 +18,6 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
-    
     @links = @user.stream_range
 
     if params[:y] && params[:m]
@@ -28,13 +27,12 @@ class UsersController < ApplicationController
       @sits = @user.sits_by_year(params[:y]).newest_first
       @range_title = "All sits in #{params[:y]}"
     else
-      @sits = @user.sits.newest_first.paginate(:page => params[:page])
+      if current_user && @user.id == current_user.id
+        @sits = @user.sits.newest_first.paginate(:page => params[:page])
+      else
+        @sits = @user.sits.public.newest_first.paginate(:page => params[:page])
+      end
     end
-
-    # @sits = @user.sits.newest_first.paginate(:page => params[:page])
-    # if current_user && @user.id != current_user.id
-    #   @sits = @sits.public
-    # end
 
     @title = "#{@user.display_name}\'s practice log"
     @page_class = 'view-user'
@@ -43,7 +41,7 @@ class UsersController < ApplicationController
   # GET /user/1/profile
   def profile
     @user = User.find(params[:id])
-    @latest = @user.latest_sits(current_user)
+    @links = @user.stream_range
 
     @title = @user.display_name
     @page_class = 'view-profile'
@@ -79,6 +77,18 @@ class UsersController < ApplicationController
 
     @page_class = 'followers'
     render 'show_follow'
+  end
+
+  def explore
+    @user = current_user
+    @latest = @user.latest_sits(current_user)
+    
+    @sits = Sit.public.newest_first.limit(10).all
+    @newest_users = User.newest_users
+    @comments = Comment.latest(5)
+
+    @title = 'Explore'
+    @page_class = 'explore'
   end
 
   # GET /users/1/feed
