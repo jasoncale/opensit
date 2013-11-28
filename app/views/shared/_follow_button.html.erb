@@ -1,9 +1,9 @@
-<% unless (current_user == @user) || !current_user %>
-	<div id="follow_form">
-  	<% if current_user.following?(@user) %>
-      <%= render 'users/unfollow' %>
+<% unless (current_user == user) || !current_user %>
+	<div class="follow_form" id="follow_form_<%=user.id%>">
+  	<% if current_user.following?(user) %>
+      <%= render 'users/unfollow', :user => user %>
     <% else %>
-      <%= render 'users/follow' %>
+      <%= render 'users/follow', :user => user %>
     <% end %>
   </div>
 <% end %>

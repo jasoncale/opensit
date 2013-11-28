@@ -1,6 +1,15 @@
 module SitsHelper
-	def teaser(sit, length = 300)
-		truncate(strip_tags(sit.custom_strip), :length => length, :omission => " ...")
+	def teaser(sit, length = 300, search = nil)
+		stripped = strip_tags(sit.custom_strip)
+		if search
+			excerpt = excerpt(stripped, search, radius: 200)
+			if !excerpt.blank?
+				return highlight(excerpt, search) 		
+			else
+				return truncate(stripped, :length => length, :omission => " ...")
+			end
+		end
+		return truncate(stripped, :length => length, :omission => " ...")
 	end 
 
 	def teaser_title(sit, type = false) 

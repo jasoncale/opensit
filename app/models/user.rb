@@ -1,3 +1,5 @@
+require 'textacular/searchable'
+
 class User < ActiveRecord::Base
   attr_accessible :city, :country, :website, :default_sit_length, :dob,
                   :password, :email, :first_name, :gender, :last_name, 
@@ -24,6 +26,9 @@ class User < ActiveRecord::Base
   # Devise :validatable (above) covers validation of email and password
   validates :username, length: {minimum: 3, maximum: 20}
   validates_uniqueness_of :username
+
+  # Textacular: search these columns only
+  extend Searchable(:username, :first_name, :last_name, :city, :country)
 
   # Pagination: sits per page
   self.per_page = 10

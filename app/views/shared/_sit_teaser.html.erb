@@ -17,7 +17,13 @@
       <% end %>
       </span></div>
 
-    <div class="body"><%= teaser(sit) %></div>
+    <div class="body">
+      <% if request.path =~ /search/ %>
+        <%= teaser(sit, 300, params[:q]) %>
+      <% else %>
+        <%= teaser(sit) %>
+      <% end %>
+    </div>
     <%= display_lock_if_private(sit) %>
 
   </div> <!-- end .sit-content -->

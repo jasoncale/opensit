@@ -1,0 +1,13 @@
+<%= render :partial => "big_search" %>
+
+<% if !@sits.empty? %>
+	<% @sits.each do |sit| %>
+	  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => sit } %>
+	<% end %>
+<% else %>
+	<div class="well"><h3>No matches</h3></div>
+<% end %>
+
+<div class="pagination-container">
+	<%= will_paginate @sits, :class => 'pagination pagination-centered' %>
+</div>

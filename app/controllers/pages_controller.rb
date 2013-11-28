@@ -15,7 +15,7 @@ class PagesController < ApplicationController
     @title = 'Explore'
     @page_class = 'explore'
   end
-  
+
   def about
     @title = 'About'
     @page_class = 'about'

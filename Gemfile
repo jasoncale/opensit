@@ -45,6 +45,7 @@ gem 'pg'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'protected_attributes' # Smoother upgrade to rails 4, provides attr_accessible
+gem 'textacular'
 
 # Devise authentication
 gem 'devise'

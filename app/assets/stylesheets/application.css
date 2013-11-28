@@ -18,4 +18,5 @@
  *= require users
  *= require messages
  *= require notifications
+ *= require search
  */

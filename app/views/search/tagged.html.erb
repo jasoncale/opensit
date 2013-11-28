@@ -1,0 +1,13 @@
+<%= render :partial => "big_search" %>
+
+<% if !@tagged.empty? %>
+	<% @tagged.each do |sit| %>
+	  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => sit } %>
+	<% end %>
+<% else %>
+	<div class="well"><h3>Nothing tagged '<%= params[:q] %>'</h3></div>
+<% end %>
+
+<div class="pagination-container">
+	<%= will_paginate @tagged, :class => 'pagination pagination-centered' %>
+</div>

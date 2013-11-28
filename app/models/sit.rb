@@ -1,3 +1,5 @@
+require 'textacular/searchable'
+
 class Sit < ActiveRecord::Base
   attr_accessible :private, :disable_comments, :tag_list, :duration, :s_type, 
                   :body, :title, :created_at, :user_id
@@ -20,6 +22,9 @@ class Sit < ActiveRecord::Base
   
   # Pagination: sits per page
   self.per_page = 10
+
+  # Textacular: search these columns only
+  extend Searchable(:title, :body)
 
   ##
   # VIRTUAL ATTRIBUTES
