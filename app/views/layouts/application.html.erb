@@ -49,7 +49,7 @@
       <% end %>
 
       <% action = "#{controller.controller_name}/#{controller.action_name}" %>
-      <% if action.in? ['sits/new', 'sits/edit', 'users/explore'] or controller.controller_name.in? ['registrations', 'tags', 'pages', 'sessions', 'notifications'] or request.path == '/sits' %>
+      <% if action.in? ['sits/new', 'sits/edit', 'users/explore'] or controller.controller_name.in? ['registrations', 'tags', 'pages', 'sessions', 'notifications', 'passwords'] or request.path == '/sits' %>
         <%= yield %>
       <% else %>
       <div class="row-fluid">
