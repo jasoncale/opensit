@@ -377,7 +377,8 @@ CREATE TABLE sits (
     updated_at timestamp without time zone NOT NULL,
     duration integer,
     s_type integer,
-    private boolean DEFAULT false
+    private boolean DEFAULT false,
+    views integer DEFAULT 0
 );
 
 
@@ -934,3 +935,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131123135133');
 INSERT INTO schema_migrations (version) VALUES ('20131128172220');
 
 INSERT INTO schema_migrations (version) VALUES ('20131205215618');
+
+INSERT INTO schema_migrations (version) VALUES ('20131205221003');

@@ -9,6 +9,12 @@ class SitsController < ApplicationController
       redirect_to me_path if current_user.nil? || (@sit.user_id != current_user.id)
     end
     
+    if current_user
+      @sit.increment!(:views, by = 1) if current_user.id != @sit.user_id
+    else
+      @sit.increment!(:views, by = 1)
+    end
+
     @user = @sit.user
     @title = "#{@sit.full_title} by #{@user.display_name}"
     @page_class = 'view-sit'
