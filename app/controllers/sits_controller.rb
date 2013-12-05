@@ -4,7 +4,10 @@ class SitsController < ApplicationController
   # GET /sits/1
   def show
     @sit = Sit.find(params[:id])
-    redirect_to me_path if @sit.private == true && @sit.user_id != current_user.id
+    
+    if @sit.private == true
+      redirect_to me_path if current_user.nil? || (@sit.user_id != current_user.id)
+    end
     
     @user = @sit.user
     @title = "#{@sit.full_title} by #{@user.display_name}"
