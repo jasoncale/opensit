@@ -96,7 +96,7 @@ class UsersController < ApplicationController
   def feed
     @user = User.find(params[:id])
     @title = "SitStream for #{@user.username}"
-    @sits = @user.sits.newest_first
+    @sits = @user.sits.public.newest_first
 
     # This is the feed's update timestamp
     @updated = @sits.last.updated_at unless @sits.empty?
