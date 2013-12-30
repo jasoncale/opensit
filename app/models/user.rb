@@ -22,10 +22,19 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+
   # Devise :validatable (above) covers validation of email and password
   validates :username, length: {minimum: 3, maximum: 20}
   validates_uniqueness_of :username
+
+  # Don't allow usernames that clash with an existing route
+  validate :route_clash?
+  def route_clash?
+    route = Rails.application.routes.recognize_path("/#{self.username}")
+    if route[:controller] != 'user' && route[:action] != 'show'
+      errors.add(:base, "'#{self.username}' is reserved.")
+    end
+  end
 
   # Textacular: search these columns only
   extend Searchable(:username, :first_name, :last_name, :city, :country)
@@ -40,6 +49,11 @@ class User < ActiveRecord::Base
   }
 
   scope :newest_first, -> { order("created_at DESC") }
+
+  # Used by url_helper to determine user path, eg; /buddha and /user/buddha
+  def to_param
+    username
+  end
 
   ##
   # VIRTUAL ATTRIBUTES

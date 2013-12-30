@@ -9,15 +9,15 @@ class UsersController < ApplicationController
       @feed_items = current_user.socialstream.paginate(:page => params[:page])
       @user = current_user
       @latest = @user.latest_sits(current_user)
-    
+
       @title = 'Home'
       @page_class = 'me'
     end
   end
 
-  # GET /users/1
+  # GET /users/buddha
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:username])
     @links = @user.stream_range
 
     if params[:y] && params[:m]
@@ -38,18 +38,18 @@ class UsersController < ApplicationController
     @page_class = 'view-user'
   end
 
-  # GET /user/1/profile
+  # GET /user/buddha/profile
   def profile
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:username])
     @links = @user.stream_range
 
     @title = @user.display_name
     @page_class = 'view-profile'
-  end 
+  end
 
-  # GET /user/1/following
+  # GET /user/buddha/following
   def following
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:username])
     @users = @user.followed_users
     @latest = @user.latest_sits(current_user)
 
@@ -63,9 +63,9 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  # GET /user/1/followers
+  # GET /user/buddha/followers
   def followers
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:username])
     @users = @user.followers
     @latest = @user.latest_sits(current_user)
 
@@ -82,7 +82,6 @@ class UsersController < ApplicationController
   def explore
     @user = current_user
     @latest = @user.latest_sits(current_user)
-    
     @sits = Sit.public.newest_first.limit(10).all
     @newest_users = User.newest_users
     @comments = Comment.latest(5)
@@ -91,10 +90,10 @@ class UsersController < ApplicationController
     @page_class = 'explore'
   end
 
-  # GET /users/1/feed
+  # GET /users/buddha/feed
   # Atom feed for a users SitStream
   def feed
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:username])
     @title = "SitStream for #{@user.username}"
     @sits = @user.sits.public.newest_first
 
@@ -106,9 +105,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /user/1/export
+  # GET /user/buddha/export
   def export
-    @sits = Sit.where(:user_id => params[:id])
+    @user = User.find_by_username(params[:username])
+    @sits = Sit.where(:user_id => @user.id)
 
     respond_to do |format|
       format.html
