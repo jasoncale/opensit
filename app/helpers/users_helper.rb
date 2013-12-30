@@ -18,7 +18,7 @@ module UsersHelper
   # Pass plain for an unlinked name
   def username(user, plain = false)
     user.display_name if plain == false
-    link_to "#{user.display_name}", user_path(user.id)
+    link_to "#{user.display_name}", user_path(user.username)
   end
 
   # Return link to website

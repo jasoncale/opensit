@@ -39,6 +39,8 @@ group :test do
   gem 'database_cleaner'
   gem 'faker' # Generates names, emails and other placeholders for factories
   gem 'shoulda-matchers'
+  gem 'poltergeist', '~> 1.4.0'
+  gem 'launchy'
 end
 
 gem 'pg'
