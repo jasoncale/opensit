@@ -14,13 +14,14 @@ Opensit::Application.routes.draw do
   get '/users/:username/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
   get '/favs' => "favourites#index", :as => :favs
   get '/notifications' => "notifications#index"
-  
+
   get '/search' => "search#main"
 
   get 'front' => "pages#front"
   get 'about' => "pages#about"
   get 'contact' => "pages#contact"
   get 'explore' => "users#explore"
+  get 'global-feed' => "users#feed", :defaults => { :format => 'atom', :scope => 'global' }
 
   get '/:username' => "users#show", :as => :user
   

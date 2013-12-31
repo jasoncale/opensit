@@ -14,4 +14,11 @@ describe User do
       "Validation failed: 'front' is reserved."
     )
   end
+
+  it "should not allow spaces in the username" do
+    expect { create :user, username: 'dan bartlett', email: 'dan@dan.com' }.to raise_error(
+      ActiveRecord::RecordInvalid,
+      "Validation failed: Username cannot contain spaces."
+    )
+  end
 end

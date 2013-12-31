@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   # GET /users/buddha
   def show
-    @user = User.find_by_username(params[:username])
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @links = @user.stream_range
 
     if params[:y] && params[:m]
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   # GET /user/buddha/profile
   def profile
-    @user = User.find_by_username(params[:username])
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @links = @user.stream_range
 
     @title = @user.display_name
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
   # GET /user/buddha/following
   def following
-    @user = User.find_by_username(params[:username])
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followed_users
     @latest = @user.latest_sits(current_user)
 
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 
   # GET /user/buddha/followers
   def followers
-    @user = User.find_by_username(params[:username])
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followers
     @latest = @user.latest_sits(current_user)
 
@@ -90,12 +90,16 @@ class UsersController < ApplicationController
     @page_class = 'explore'
   end
 
-  # GET /users/buddha/feed
-  # Atom feed for a users SitStream
+  # Generate atom feed for user or all public content (global)
   def feed
-    @user = User.find_by_username(params[:username])
-    @title = "SitStream for #{@user.username}"
-    @sits = @user.sits.public.newest_first
+    if params[:scope] == 'global'
+      @sits = Sit.public.newest_first.limit(50)
+      @title = "Global SitStream - opensit.com"
+    else
+      @user = User.find_by_username(params[:username])
+      @title = "SitStream for #{@user.username}"
+      @sits = @user.sits.public.newest_first.limit(20)
+    end
 
     # This is the feed's update timestamp
     @updated = @sits.last.updated_at unless @sits.empty?
@@ -107,7 +111,7 @@ class UsersController < ApplicationController
 
   # GET /user/buddha/export
   def export
-    @user = User.find_by_username(params[:username])
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @sits = Sit.where(:user_id => @user.id)
 
     respond_to do |format|
@@ -116,4 +120,5 @@ class UsersController < ApplicationController
       format.xml { render xml: @sits }
     end
   end
+
 end
