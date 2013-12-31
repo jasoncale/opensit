@@ -96,7 +96,7 @@ class UsersController < ApplicationController
       @sits = Sit.public.newest_first.limit(50)
       @title = "Global SitStream - opensit.com"
     else
-      @user = User.find_by_username(params[:username])
+      @user = User.where("lower(username) = lower(?)", params[:username]).first!
       @title = "SitStream for #{@user.username}"
       @sits = @user.sits.public.newest_first.limit(20)
     end
