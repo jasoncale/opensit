@@ -6,12 +6,12 @@ Opensit::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations" }
   get 'me' => "users#me"
-  get '/users/:username' => "users#show"
-  get '/users/:username/profile' => "users#profile", :as => :profile
-  get '/users/:username/following' => "users#following", :as => :following_user
-  get '/users/:username/followers' => "users#followers", :as => :followers_user
-  get '/users/:username/export' => "users#export"
-  get '/users/:username/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
+  get '/u/:username' => "users#show"
+  get '/u/:username/profile' => "users#profile", :as => :profile
+  get '/u/:username/following' => "users#following", :as => :following_user
+  get '/u/:username/followers' => "users#followers", :as => :followers_user
+  get '/u/:username/export' => "users#export"
+  get '/u/:username/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
   get '/favs' => "favourites#index", :as => :favs
   get '/notifications' => "notifications#index"
 
@@ -23,7 +23,6 @@ Opensit::Application.routes.draw do
   get 'explore' => "users#explore"
   get 'global-feed' => "users#feed", :defaults => { :format => 'atom', :scope => 'global' }
 
-  get '/:username' => "users#show", :as => :user
   
   resources :sits do
     resources :comments
@@ -40,4 +39,5 @@ Opensit::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
+  get '/:username' => "users#show", :as => :user
 end

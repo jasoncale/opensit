@@ -46,6 +46,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  # Render views in controller tests otherwise you get a blank response.body
+  config.render_views = true
+  
   # Database Cleaner
   # Note that transactions cause the seed data to not be seen by capybara. Thus the use of
   # truncation instead.

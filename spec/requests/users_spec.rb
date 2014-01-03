@@ -27,12 +27,30 @@ describe 'Users' do
 
       should have_content "Signed in successfully."
     end
+    
   end
 
-  describe 'user data' do
-    it "should show the user's page" do
-      visit user_path(@buddha)
-      status_code.should == 200
+  describe 'username urls' do
+    context 'existing users' do
+      it 'with /u' do
+        visit "/u/buddha"
+        expect(status_code).to eq 200
+      end
+      
+      it 'naked' do
+        visit '/buddha'
+        expect(status_code).to eq 200
+      end
+
+      it 'case insensitive' do
+        visit '/BuDdHa'
+        expect(status_code).to eq 200
+      end
+    end
+
+    it 'should return 404 for non-existent users' do
+      visit '/jesus'
+      expect(status_code).to eq 404
     end
   end
 

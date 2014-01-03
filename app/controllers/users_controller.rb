@@ -15,9 +15,15 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/buddha
+  # GET /u/buddha or /buddha
   def show
-    @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    begin
+      @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    rescue ActiveRecord::RecordNotFound
+      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
+      render 'public/404', status: 404, layout: false
+      return false
+    end
     @links = @user.stream_range
 
     if params[:y] && params[:m]
@@ -38,18 +44,30 @@ class UsersController < ApplicationController
     @page_class = 'view-user'
   end
 
-  # GET /user/buddha/profile
+  # GET /u/buddha/profile
   def profile
-    @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    begin
+      @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    rescue ActiveRecord::RecordNotFound
+      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
+      render 'public/404', status: 404, layout: false
+      return false
+    end
     @links = @user.stream_range
 
     @title = @user.display_name
     @page_class = 'view-profile'
   end
 
-  # GET /user/buddha/following
+  # GET /u/buddha/following
   def following
-    @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    begin
+      @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    rescue ActiveRecord::RecordNotFound
+      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
+      render 'public/404', status: 404, layout: false
+      return false
+    end
     @users = @user.followed_users
     @latest = @user.latest_sits(current_user)
 
@@ -63,9 +81,15 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  # GET /user/buddha/followers
+  # GET /u/buddha/followers
   def followers
-    @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    begin
+      @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    rescue ActiveRecord::RecordNotFound
+      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
+      render 'public/404', status: 404, layout: false
+      return false
+    end
     @users = @user.followers
     @latest = @user.latest_sits(current_user)
 
@@ -82,7 +106,7 @@ class UsersController < ApplicationController
   def explore
     @user = current_user
     @latest = @user.latest_sits(current_user)
-    @sits = Sit.public.newest_first.limit(10).all
+    @sits = Sit.public.newest_first.limit(10)
     @newest_users = User.newest_users
     @comments = Comment.latest(5)
 
@@ -96,7 +120,13 @@ class UsersController < ApplicationController
       @sits = Sit.public.newest_first.limit(50)
       @title = "Global SitStream - opensit.com"
     else
-      @user = User.where("lower(username) = lower(?)", params[:username]).first!
+      begin
+        @user = User.where("lower(username) = lower(?)", params[:username]).first!
+      rescue ActiveRecord::RecordNotFound
+        # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
+        render 'public/404', status: 404, layout: false
+        return false        
+      end
       @title = "SitStream for #{@user.username}"
       @sits = @user.sits.public.newest_first.limit(20)
     end
@@ -109,9 +139,15 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /user/buddha/export
+  # GET /u/buddha/export
   def export
-    @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    begin
+      @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    rescue ActiveRecord::RecordNotFound
+      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
+      render 'public/404', status: 404, layout: false
+      return false
+    end
     @sits = Sit.where(:user_id => @user.id)
 
     respond_to do |format|
