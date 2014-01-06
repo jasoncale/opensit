@@ -81,6 +81,12 @@ class Sit < ActiveRecord::Base
           user_id: user.id)
   end
 
+  def commenters
+    ids = self.comments.map {|c| c.user.id}.uniq # uniq removes dupe ids if someone's posted multiple times
+    ids.delete(self.user.id) # remove owners id
+    return ids
+  end
+
   # Tags
 
   def self.tagged_with(name)

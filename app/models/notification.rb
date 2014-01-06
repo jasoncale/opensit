@@ -10,6 +10,7 @@ class Notification < ActiveRecord::Base
 
   self.per_page = 10
 
+  # user_id = ID of the RECIPIENT
   def self.send_notification(notification_type, user_id, meta)
 
     case notification_type
@@ -18,10 +19,20 @@ class Notification < ActiveRecord::Base
         commenter_id = meta[:commenter].id
         sit_id = meta[:sit_link]
         comment_id = meta[:comment_id]
+        sit_owner = meta[:sit_owner]
+        if meta[:mine]
+          message = "#{username} commented on your sit."
+        else
+          if sit_owner == username
+            message = "#{username} also commented on their own sit."  
+          else
+            message = "#{username} also commented on #{sit_owner}'s sit." 
+          end
+        end
         # No need to notify the user if they've just commented on their own sit
         if commenter_id != user_id
           notify = Notification.create(
-            message: "#{username} commented on your sit.",
+            message: message,
             user_id: user_id,
             link: "/sits/#{sit_id}\#comment-#{comment_id}",
             initiator: commenter_id

@@ -20,14 +20,24 @@ class Comment < ActiveRecord::Base
 
   scope :newest_first, -> { order("created_at DESC") }
 
-  after_save :add_notification
+  after_save :create_notification
 
   def self.latest(count = 5)
     self.newest_first.limit(count)
   end
 
   private
-    def add_notification
-      Notification.send_notification('NewComment', self.sit.user.id, { commenter: self.user, sit_link: self.sit.id, comment_id: self.id })
+    def create_notification
+      commenters = self.sit.commenters
+
+      # Notify the owner of the sit
+      Notification.send_notification('NewComment', self.sit.user.id, { commenter: self.user, sit_link: self.sit.id, comment_id: self.id, mine: true })
+      
+      # And any other commenters
+      if !commenters.empty?
+        commenters.each do |c| 
+          Notification.send_notification('NewComment', c, { commenter: self.user, sit_link: self.sit.id, comment_id: self.id, sit_owner: self.sit.user.display_name })
+        end
+      end
     end
 end
