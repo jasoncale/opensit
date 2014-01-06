@@ -29,8 +29,12 @@ $(document).ready(function(){
     $('.new-sit-title').show();
   };
 
-  $('.privacy-button').click( function() {
-    $('.privacy-options').slideToggle();
+  // Privacy dropdown
+  $('.new-sit .dropdown-menu').click(function(e) {
+      e.stopPropagation();
+  });
+  $('.edit-sit .dropdown-menu').click(function(e) {
+      e.stopPropagation();
   });
 
   $( ".datepicker" ).datepicker({

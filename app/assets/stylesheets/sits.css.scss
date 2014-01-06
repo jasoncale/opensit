@@ -136,26 +136,9 @@ article.sit-teaser {
     height: 34px;
     font-size: 30px;
   }
-  .privacy-pane {
-    float: right;
-    .privacy-button {
-      float: right;
-    }
-    .privacy-options {
-      display: none;
-      clear: both;
-      background: #efefef;
-      border-radius: 10px 0px 10px 10px;
-      label {
-        font-size: 0.8em;
-        margin-bottom: 0;
-      }
-      .control-group {
-        margin-bottom: 0;
-      }
-      .controls {
-        margin-left: 165px;
-      }
+  .privacy-options {
+    .control-group {
+      margin: 0 7px;
     }
   }
   .delete-entry {
