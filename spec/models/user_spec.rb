@@ -54,6 +54,39 @@ describe User do
     end
   end #prevent_empty_spaces
 
+  describe "#location" do
+    let(:user) {build(:user, city: "New York", country: "United States")}
+     context "when a user has both a city and country" do
+        it "returns both the city and country" do
+          expect(user.location).to eq("New York, United States")
+        end
+     end
+
+     context "when a user has a city but no country" do
+        before { user.country = nil }
+        it "returns only the city" do
+          expect(user.location).to eq("New York")
+        end
+     end
+
+     context "when a user has a country but no city" do
+        before { user.city = nil }
+        it "returns only the country" do
+          expect(user.location).to eq("United States")
+        end
+     end
+
+     context "when a user neither has a city nor a country" do
+        before do
+          user.city = nil
+          user.country = nil
+        end
+        it "returns nil" do
+          expect(user.location).to be(nil)
+        end
+     end
+  end #location
+
   describe "#display_name" do
     context "when a user has no first name" do
       let(:user) { build(:user, :no_first_name, username: "Buddha") }
