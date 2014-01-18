@@ -6,6 +6,34 @@ describe User do
   end
   let(:user) { build(:user) }
 
+  describe "associations" do
+    it { should have_many(:sits).dependent(:destroy) }
+    it { should have_many(:messages_received)
+          .conditions(receiver_deleted: false)
+          .class_name("Message")
+          .with_foreign_key("to_user_id") }
+    it { should have_many(:messages_sent)
+          .conditions(sender_deleted: false)
+          .class_name("Message")
+          .with_foreign_key("from_user_id") }
+    it { should have_many(:comments).dependent(:destroy) }
+    it { should have_many(:relationships)
+          .with_foreign_key("follower_id")
+          .dependent(:destroy) }
+    it { should have_many(:followed_users)
+          .through(:relationships)
+          .source(:followed) }
+    it { should have_many(:reverse_relationships)
+          .with_foreign_key("followed_id")
+          .class_name("Relationship")
+          .dependent(:destroy) }
+    it { should have_many(:followers)
+          .through(:reverse_relationships)
+          .source(:follower) }
+    it { should have_many(:favourites) }
+    it { should have_many(:notifications).dependent(:destroy) }
+  end
+
   it 'should create a user' do
     create :user
     user = User.first
