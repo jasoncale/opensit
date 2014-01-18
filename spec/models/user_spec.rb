@@ -34,25 +34,23 @@ describe User do
     it { should have_many(:notifications).dependent(:destroy) }
   end
 
-  it 'should create a user' do
-    create :user
-    user = User.first
-    expect(User.count).to eq 1
-    expect(user.username).to eq 'buddha'
-  end
+  describe "validations" do
+    it { should ensure_length_of(:username).is_at_least(3).is_at_most(20) }
+    it { should validate_uniqueness_of(:username) }
 
-  it "should not allow username's that match a route name" do
-    expect { create :user, username: 'front' }.to raise_error(
-      ActiveRecord::RecordInvalid,
-      "Validation failed: 'front' is reserved."
-    )
-  end
+    it "should not allow spaces in the username" do
+      expect { create :user, username: 'dan bartlett', email: 'dan@dan.com' }.to raise_error(
+        ActiveRecord::RecordInvalid,
+        "Validation failed: Username cannot contain spaces."
+      )
+    end
 
-  it "should not allow spaces in the username" do
-    expect { create :user, username: 'dan bartlett', email: 'dan@dan.com' }.to raise_error(
-      ActiveRecord::RecordInvalid,
-      "Validation failed: Username cannot contain spaces."
-    )
+    it "should not allow usernames that match a route name" do
+      expect { create :user, username: 'front' }.to raise_error(
+        ActiveRecord::RecordInvalid,
+        "Validation failed: 'front' is reserved."
+      )
+    end
   end
 
   describe "#prevent_empty_spaces" do
