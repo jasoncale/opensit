@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe User do
+  it "has a valid factory" do
+    expect(build(:user)).to be_valid
+  end
+  let(:user) { build(:user) }
+
   it 'should create a user' do
     create :user
     user = User.first
@@ -21,6 +26,35 @@ describe User do
       "Validation failed: Username cannot contain spaces."
     )
   end
+
+  describe "#prevent_empty_spaces" do
+    context "when given a username with spaces" do
+      let(:user_with_spaces) { build(:user, username: "name with spaces")}
+      it "increments the number of errors on a user" do
+        expect { user_with_spaces.prevent_empty_spaces }
+          .to change { user_with_spaces.errors.size }
+          .from(0).to(1)
+      end
+
+      it "returns an array containing: 'cannot contain spaces'" do
+        expect(user_with_spaces.prevent_empty_spaces).to match_array(["cannot contain spaces."])
+      end
+    end
+
+    context "when given a username with no spaces" do
+      it "does not increment the number of errors on a user" do
+        expect { user.prevent_empty_spaces }
+          .not_to change { user.errors.size }
+          .from(0).to(1)
+      end
+
+      it "returns nil" do
+        expect(user.prevent_empty_spaces).to be(nil)
+      end
+    end
+  end #prevent_empty_spaces
+
+
 end
 
 # == Schema Information

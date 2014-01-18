@@ -2,8 +2,8 @@ require 'textacular/searchable'
 
 class User < ActiveRecord::Base
   attr_accessible :city, :country, :website, :default_sit_length, :dob,
-                  :password, :email, :first_name, :gender, :last_name, 
-                  :practice, :private_diary, :style, :user_type, :username, 
+                  :password, :email, :first_name, :gender, :last_name,
+                  :practice, :private_diary, :style, :user_type, :username,
                   :who, :why, :password_confirmation, :remember_me, :avatar,
                   :private_stream
 
@@ -26,19 +26,17 @@ class User < ActiveRecord::Base
   # Devise :validatable (above) covers validation of email and password
   validates :username, length: {minimum: 3, maximum: 20}
   validates_uniqueness_of :username
-  validate :check_empty_space
+  validate :prevent_empty_spaces
   validate :route_clash?
-  
+
   # Don't allow any spaces in usernames
-  def check_empty_space
-    if self.username.match(/\s+/)
-      errors.add(:username, "cannot contain spaces.")
-    end
+  def prevent_empty_spaces
+    errors.add(:username, "cannot contain spaces.") if username.match(/\s+/)
   end
 
   # Don't allow usernames that clash with an existing route
   def route_clash?
-    # Skip if it has a space, the check_empty_space will catch it
+    # Skip if it has a space, the prevent_empty_spaces will catch it
     if !self.username.match(/\s+/)
       route = Rails.application.routes.recognize_path("/#{self.username}")
       if route[:controller] != 'user' && route[:action] != 'show'
@@ -101,7 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def sits_by_year(year)
-    Sit.where("EXTRACT(year FROM created_at) = ? AND user_id = ?", 
+    Sit.where("EXTRACT(year FROM created_at) = ? AND user_id = ?",
       year.to_s, self.id)
   end
 
@@ -116,7 +114,7 @@ class User < ActiveRecord::Base
     first_sit = Sit.where("user_id = ?", self.id).order(:created_at).first.created_at.strftime("%Y %m").split(' ')
     year, month = Time.now.strftime("%Y %m").split(' ')
     dates = []
-    
+
     # Build list of all months from first lsit to current date
     while [year.to_s, month.to_s.rjust(2, '0')] != first_sit
       month = month.to_i
@@ -144,14 +142,14 @@ class User < ActiveRecord::Base
         year_total = self.sits_by_year(year).count
         links <<  [year, year_total]
       end
-      
+
       if month_total != 0
         links << [month, month_total]
       end
-      
+
       pointer = year
     end
-    
+
     return links
   end
 
@@ -188,7 +186,7 @@ class User < ActiveRecord::Base
   #  :id (int) - select by favourable_id
   #  :delve (bool) - return the favourited objects themselves
   def get_favourites(opts={})
-  
+
     type = opts[:type] ? opts[:type] : :sit
     type = type.to_s.capitalize
 
@@ -197,7 +195,7 @@ class User < ActiveRecord::Base
     if opts[:id]
       favs.where(favourable_id: opts[:id].to_s)
     end
-    
+
     case opts[:delve]
     when nil, false, :false
       return favs
@@ -212,7 +210,7 @@ class User < ActiveRecord::Base
       else
         return []
       end
-    end       
+    end
   end
 
   def new_notifications
