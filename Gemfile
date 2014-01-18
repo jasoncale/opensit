@@ -13,7 +13,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'annotate', '2.5.0'
+  gem 'annotate'
   gem 'meta_request', '0.2.6'
 
   # Guard shizzle
