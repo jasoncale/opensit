@@ -54,6 +54,38 @@ describe User do
     end
   end #prevent_empty_spaces
 
+  describe "#has_city?" do
+    context "when a user has a city" do
+      let(:user) { build(:user, :has_city) }
+      it "returns true" do
+        expect(user.has_city?).to be(true)
+      end
+    end
+
+    context "when a user doesn't have a city" do
+      let(:user) { build(:user, :no_city) }
+      it "returns false" do
+        expect(user.has_city?).to be(false)
+      end
+    end
+  end
+
+  describe "#has_country?" do
+    context "when a user has a country" do
+      let(:user) { build(:user, :has_country) }
+      it "returns true" do
+        expect(user.has_country?).to be(true)
+      end
+    end
+
+    context "when a user doesn't have a country" do
+      let(:user) { build(:user, :no_country) }
+      it "returns false" do
+        expect(user.has_country?).to be(false)
+      end
+    end
+  end
+
   describe "#location" do
     let(:user) {build(:user, city: "New York", country: "United States")}
      context "when a user has both a city and country" do

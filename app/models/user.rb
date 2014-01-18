@@ -64,6 +64,13 @@ class User < ActiveRecord::Base
     username
   end
 
+  def has_city?
+    !city.blank?
+  end
+
+  def has_country?
+    !country.blank?
+  end
   ##
   # VIRTUAL ATTRIBUTES
   ##

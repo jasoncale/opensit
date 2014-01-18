@@ -20,6 +20,21 @@ FactoryGirl.define do
       last_name nil
     end
 
+    trait :has_city do
+      city { Faker::Address.city }
+    end
+
+    trait :no_city do
+      city nil
+    end
+
+    trait :has_country do
+      country { Faker::Address.country }
+    end
+
+    trait :no_country do
+      country nil
+    end
   end
 end
 
