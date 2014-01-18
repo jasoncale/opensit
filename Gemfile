@@ -24,6 +24,7 @@ group :development, :test do
   gem 'guard-rails'   # Reloads Rails server when cached files like those in /config change
   gem 'guard-livereload' # Sends signal to Livereload extension in browser to reload page
   gem 'guard-migrate' # Automatically runs migrations when needed
+  gem 'terminal-notifier-guard', require: false
 end
 
 # Previously assets group
