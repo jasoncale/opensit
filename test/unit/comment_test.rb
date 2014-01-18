@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: comments
-#
-#  id         :integer          not null, primary key
-#  body       :text
-#  sit_id     :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer
-#
-
 require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
@@ -17,3 +5,15 @@ class CommentTest < ActiveSupport::TestCase
   #   assert true
   # end
 end
+
+# == Schema Information
+#
+# Table name: comments
+#
+#  body       :text
+#  created_at :datetime
+#  id         :integer          not null, primary key
+#  sit_id     :integer
+#  updated_at :datetime
+#  user_id    :integer
+#

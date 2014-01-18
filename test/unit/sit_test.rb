@@ -1,19 +1,3 @@
-# == Schema Information
-#
-# Table name: sits
-#
-#  id               :integer          not null, primary key
-#  title            :string(255)
-#  body             :text
-#  user_id          :integer
-#  disable_comments :boolean
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  duration         :integer
-#  s_type           :integer
-#  custom_date      :date
-#
-
 require 'test_helper'
 
 class SitTest < ActiveSupport::TestCase
@@ -21,3 +5,20 @@ class SitTest < ActiveSupport::TestCase
   #   assert true
   # end
 end
+
+# == Schema Information
+#
+# Table name: sits
+#
+#  body             :text
+#  created_at       :datetime
+#  disable_comments :boolean
+#  duration         :integer
+#  id               :integer          not null, primary key
+#  private          :boolean          default(FALSE)
+#  s_type           :integer
+#  title            :string(255)
+#  updated_at       :datetime
+#  user_id          :integer
+#  views            :integer          default(0)
+#

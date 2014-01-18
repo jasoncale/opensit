@@ -5,3 +5,15 @@ FactoryGirl.define do
     body "lol, yeah, you're enlightened now!!1"
   end
 end
+
+# == Schema Information
+#
+# Table name: comments
+#
+#  body       :text
+#  created_at :datetime
+#  id         :integer          not null, primary key
+#  sit_id     :integer
+#  updated_at :datetime
+#  user_id    :integer
+#
