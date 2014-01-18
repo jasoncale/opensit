@@ -77,9 +77,9 @@ class User < ActiveRecord::Base
 
   # Location based on whether/if city and country have been entered
   def location
-    return "#{city}, #{country}" if !city.blank? && !country.blank?
-    return city if !city.blank?
-    return country if !country.blank?
+    return "#{city}, #{country}" if has_city? && has_country?
+    return city if has_city?
+    return country if has_country?
   end
 
   def display_name
