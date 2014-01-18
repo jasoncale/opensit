@@ -54,6 +54,29 @@ describe User do
     end
   end #prevent_empty_spaces
 
+  describe "#display_name" do
+    context "when a user has no first name" do
+      let(:user) { build(:user, :no_first_name, username: "Buddha") }
+      it "returns the users' username" do
+        expect(user.display_name).to eq("Buddha")
+      end
+    end
+
+    context "when a user has a first name but no last name" do
+      let(:user) { build(:user, :no_last_name, first_name: "John") }
+      it "returns the users' first name" do
+        expect(user.display_name).to eq("John")
+      end
+    end
+
+    context "when a user has both a first name and last name" do
+      let(:user) { build(:user, first_name: "John", last_name: "Smith") }
+      it "returns the users' first name and last name" do
+        expect(user.display_name).to eq("John Smith")
+      end
+    end
+  end #display_name
+
 
 end
 

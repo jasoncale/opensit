@@ -81,11 +81,9 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    if self.first_name.blank?
-      self.username
-    else
-      "#{self.first_name} #{self.last_name}"
-    end
+    return username if first_name.blank?
+    return first_name if last_name.blank?
+    "#{first_name} #{last_name}"
   end
 
   ##
