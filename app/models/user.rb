@@ -24,21 +24,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Devise :validatable (above) covers validation of email and password
-  validates :username, length: {minimum: 3, maximum: 20}
+  validates :username, length: { minimum: 3, maximum: 20 }
   validates_uniqueness_of :username
   validates :username, no_empty_spaces: true
-  validate :route_clash?
-
-  # Don't allow usernames that clash with an existing route
-  def route_clash?
-    # Skip if it has a space, the prevent_empty_spaces will catch it
-    if !self.username.match(/\s+/)
-      route = Rails.application.routes.recognize_path("/#{self.username}")
-      if route[:controller] != 'user' && route[:action] != 'show'
-        errors.add(:base, "'#{self.username}' is reserved.")
-      end
-    end
-  end
+  validates :username, unique_page_name: true
 
   # Textacular: search these columns only
   extend Searchable(:username, :first_name, :last_name, :city, :country)

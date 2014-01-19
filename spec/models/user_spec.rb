@@ -48,7 +48,7 @@ describe User do
     it "should not allow usernames that match a route name" do
       expect { create :user, username: 'front' }.to raise_error(
         ActiveRecord::RecordInvalid,
-        "Validation failed: 'front' is reserved."
+        "Validation failed: Username 'front' is reserved"
       )
     end
   end
