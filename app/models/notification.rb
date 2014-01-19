@@ -40,12 +40,12 @@ class Notification < ActiveRecord::Base
         end
 
       when 'NewFollower'
-        username = meta[:follower].display_name
+        user = meta[:follower]
         follower_id = meta[:follower].id
         notify = Notification.create(
-          message: "#{username} is now following you!",
+          message: "#{user.display_name} is now following you!",
           user_id: user_id,
-          link: "#{username}",
+          link: "#{user.username}",
           initiator: follower_id
         )
     end
