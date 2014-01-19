@@ -132,6 +132,7 @@ GEM
       http_parser.rb (~> 0.5.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    excon (0.31.0)
     execjs (2.0.2)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -167,6 +168,15 @@ GEM
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    heroku (3.2.2)
+      heroku-api (~> 0.3.7)
+      launchy (>= 0.3.2)
+      netrc (~> 0.7.7)
+      rest-client (~> 1.6.1)
+      rubyzip
+    heroku-api (0.3.16)
+      excon (~> 0.27)
+      multi_json (~> 1.8.2)
     highline (1.6.20)
     hike (1.2.3)
     http_parser.rb (0.5.3)
@@ -215,6 +225,7 @@ GEM
     net-ssh (2.7.0)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    netrc (0.7.7)
     newrelic_rpm (3.6.8.168)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
@@ -275,6 +286,8 @@ GEM
     ref (1.0.5)
     responders (1.0.0)
       railties (>= 3.2, < 5)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -291,6 +304,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    rubyzip (1.1.0)
     rvm-capistrano (1.5.1)
       capistrano (~> 2.15.4)
     sass (3.2.12)
@@ -369,6 +383,7 @@ DEPENDENCIES
   guard-migrate
   guard-rails
   guard-rspec
+  heroku
   jquery-rails (= 2.3.0)
   jquery-turbolinks
   launchy
