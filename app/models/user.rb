@@ -17,7 +17,9 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
-  has_many :favourites
+  has_many :favourites, dependent: :destroy
+  has_many :likes, dependent: :destroy
+
   has_many :notifications, :dependent => :destroy
 
   devise :database_authenticatable, :registerable,
@@ -205,6 +207,21 @@ class User < ActiveRecord::Base
 
   def new_notifications
     notifications.unread.count unless notifications.unread.count.zero?
+  end
+
+  # LIKES
+
+  def like!(obj)
+    Like.create!(likeable_id: obj.id, likeable_type: obj.class.name, user_id: self.id)
+  end
+
+  def likes?(obj)
+    Like.where(likeable_id: obj.id, likeable_type: obj.class.name, user_id: self.id).present?
+  end
+
+  def unlike!(obj)
+    like = Like.where(likeable_id: obj.id, likeable_type: obj.class.name, user_id: self.id).first
+    like.destroy
   end
 
   def private_stream=(value)

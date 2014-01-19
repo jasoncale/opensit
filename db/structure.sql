@@ -22,20 +22,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
---
--- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
-
-
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -185,6 +171,37 @@ ALTER SEQUENCE favourites_id_seq OWNED BY favourites.id;
 
 
 --
+-- Name: likes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE likes (
+    id integer NOT NULL,
+    likeable_id integer,
+    likeable_type character varying(255),
+    user_id integer
+);
+
+
+--
+-- Name: likes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE likes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: likes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE likes_id_seq OWNED BY likes.id;
+
+
+--
 -- Name: messages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -219,36 +236,6 @@ CREATE SEQUENCE messages_id_seq
 --
 
 ALTER SEQUENCE messages_id_seq OWNED BY messages.id;
-
-
---
--- Name: notification_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE notification_types (
-    id integer NOT NULL,
-    event character varying(255),
-    text character varying(255)
-);
-
-
---
--- Name: notification_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE notification_types_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: notification_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE notification_types_id_seq OWNED BY notification_types.id;
 
 
 --
@@ -565,14 +552,14 @@ ALTER TABLE ONLY favourites ALTER COLUMN id SET DEFAULT nextval('favourites_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY messages ALTER COLUMN id SET DEFAULT nextval('messages_id_seq'::regclass);
+ALTER TABLE ONLY likes ALTER COLUMN id SET DEFAULT nextval('likes_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY notification_types ALTER COLUMN id SET DEFAULT nextval('notification_types_id_seq'::regclass);
+ALTER TABLE ONLY messages ALTER COLUMN id SET DEFAULT nextval('messages_id_seq'::regclass);
 
 
 --
@@ -657,19 +644,19 @@ ALTER TABLE ONLY favourites
 
 
 --
+-- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY likes
+    ADD CONSTRAINT likes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY messages
     ADD CONSTRAINT messages_pkey PRIMARY KEY (id);
-
-
---
--- Name: notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY notification_types
-    ADD CONSTRAINT notification_types_pkey PRIMARY KEY (id);
 
 
 --
@@ -775,6 +762,20 @@ CREATE INDEX index_favourites_on_favourable_id ON favourites USING btree (favour
 --
 
 CREATE INDEX index_favourites_on_user_id ON favourites USING btree (user_id);
+
+
+--
+-- Name: index_likes_on_likeable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_likes_on_likeable_id ON likes USING btree (likeable_id);
+
+
+--
+-- Name: index_likes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_likes_on_user_id ON likes USING btree (user_id);
 
 
 --
@@ -937,3 +938,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131128172220');
 INSERT INTO schema_migrations (version) VALUES ('20131205215618');
 
 INSERT INTO schema_migrations (version) VALUES ('20131205221003');
+
+INSERT INTO schema_migrations (version) VALUES ('20140119142023');

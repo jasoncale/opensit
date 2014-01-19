@@ -8,6 +8,14 @@
   <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
 <% end %>
 
+<div class="row">
+  <div id="who_likes">
+    <%= render 'likes/like_module' %>
+  </div>
+  
+  <%= render 'shared/like_button' %>
+</div>
+
 <% if !@sit.disable_comments && !@sit.private %>
   <div class="comments">
     <% if !@sit.comments.empty? %>

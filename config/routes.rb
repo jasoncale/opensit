@@ -36,6 +36,8 @@ Opensit::Application.routes.draw do
 
   resources :favourites, only: [:create, :destroy]
 
+  resources :likes, only: [:create, :destroy]
+
   # Crawl live site, but not staging
   get 'robots.txt' => 'pages#robots'
 

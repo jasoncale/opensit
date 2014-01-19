@@ -1,18 +1,7 @@
-# == Schema Information
-#
-# Table name: comments
-#
-#  id         :integer          not null, primary key
-#  body       :text
-#  sit_id     :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer
-#
-
 class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :sit
+  has_many :likes, :as => :likeable
 
   attr_accessible :body, :sit_id, :user_id
 
@@ -24,6 +13,10 @@ class Comment < ActiveRecord::Base
 
   def self.latest(count = 5)
     self.newest_first.limit(count)
+  end
+
+  def likers
+    Like.likers_for(self)
   end
 
   private

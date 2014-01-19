@@ -1,0 +1,3 @@
+<% @sit ||= Sit.find(params[:like][:likeable_id]) %>
+$("#who_likes").html("<%= escape_javascript render('likes/like_module') %>");
+$("#like_button").html("<%= escape_javascript render('shared/like_button') %>");

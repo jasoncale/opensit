@@ -9,6 +9,7 @@ class Sit < ActiveRecord::Base
   has_many :taggings
   has_many :tags, through: :taggings
   has_many :favourites, :as => :favourable
+  has_many :likes, :as => :likeable
 
   validates :body, :presence => true
   validates :s_type, :presence => true
@@ -106,5 +107,11 @@ class Sit < ActiveRecord::Base
     self.tags = names.split(",").map do |n|
       Tag.where(name: n.strip).first_or_create!
     end
+  end
+
+  # Likes
+
+  def likers
+    Like.likers_for(self)
   end
 end                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        # 
