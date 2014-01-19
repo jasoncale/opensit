@@ -41,7 +41,7 @@ describe User do
     it "should not allow spaces in the username" do
       expect { create :user, username: 'dan bartlett', email: 'dan@dan.com' }.to raise_error(
         ActiveRecord::RecordInvalid,
-        "Validation failed: Username cannot contain spaces."
+        "Validation failed: Username cannot contain spaces"
       )
     end
 
@@ -52,33 +52,6 @@ describe User do
       )
     end
   end
-
-  describe "#prevent_empty_spaces" do
-    context "when given a username with spaces" do
-      let(:user_with_spaces) { build(:user, username: "name with spaces")}
-      it "increments the number of errors on a user" do
-        expect { user_with_spaces.prevent_empty_spaces }
-          .to change { user_with_spaces.errors.size }
-          .from(0).to(1)
-      end
-
-      it "returns an array containing: 'cannot contain spaces'" do
-        expect(user_with_spaces.prevent_empty_spaces).to match_array(["cannot contain spaces."])
-      end
-    end
-
-    context "when given a username with no spaces" do
-      it "does not increment the number of errors on a user" do
-        expect { user.prevent_empty_spaces }
-          .not_to change { user.errors.size }
-          .from(0).to(1)
-      end
-
-      it "returns nil" do
-        expect(user.prevent_empty_spaces).to be(nil)
-      end
-    end
-  end #prevent_empty_spaces
 
   describe "#has_city?" do
     context "when a user has a city" do

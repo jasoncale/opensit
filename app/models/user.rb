@@ -26,13 +26,8 @@ class User < ActiveRecord::Base
   # Devise :validatable (above) covers validation of email and password
   validates :username, length: {minimum: 3, maximum: 20}
   validates_uniqueness_of :username
-  validate :prevent_empty_spaces
+  validates :username, no_empty_spaces: true
   validate :route_clash?
-
-  # Don't allow any spaces in usernames
-  def prevent_empty_spaces
-    errors.add(:username, "cannot contain spaces.") if username.match(/\s+/)
-  end
 
   # Don't allow usernames that clash with an existing route
   def route_clash?
