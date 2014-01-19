@@ -210,14 +210,6 @@ class User < ActiveRecord::Base
     write_attribute(:private_stream, value)
   end
 
-  ##
-  # CLASS METHODS
-  ##
-
-  def self.newest_users(count = 5)
-    self.limit(count).newest_first
-  end
-
   # Overwrite Devise function to allow profile update with password requirement
   # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
   def update_with_password(params={})
@@ -227,7 +219,18 @@ class User < ActiveRecord::Base
     end
     update_attributes(params)
   end
+
+
+  ##
+  # CLASS METHODS
+  ##
+
+  def self.newest_users(count = 5)
+    self.limit(count).newest_first
+  end
+
 end
+
 
 # == Schema Information
 #

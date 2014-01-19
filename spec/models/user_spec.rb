@@ -53,6 +53,10 @@ describe User do
     end
   end
 
+  describe "#to_param" do
+    it "returns the username of a user"
+  end
+
   describe "#has_city?" do
     context "when a user has a city" do
       let(:user) { build(:user, :has_city) }
@@ -140,6 +144,104 @@ describe User do
       end
     end
   end #display_name
+
+  describe "#latest_sits" do
+    context "when the user is the same as the current user" do
+      it "returns the last 3 most recent sits for a user"
+    end
+
+    context "when the user is not the same as the current user" do
+      it "returns the last 3 public sits"
+    end
+  end
+
+  describe "#sits_by_year" do
+    it "returns all sits for a user for a given year"
+  end
+
+  describe "#sits_by_month" do
+    it "returns all sits for a user for a given month and year"
+  end
+
+  describe "#stream_range" do
+    it "returns an array of arrays of dates and counts"
+  end
+
+  describe "#following?" do
+    context "when a user follows another user" do
+      it "returns true"
+    end
+
+    context "when a user does not follow another user" do
+      it "returns false"
+    end
+  end
+
+  describe "#follow!" do
+    it "creates a relationship"
+    it "sends a notification"
+  end
+
+  describe "#unfollow!" do
+    it "destroys a relationship"
+  end
+
+  describe "#socialstream" do
+    it "returns an array of sits of other followed users"
+    it "sorts the sits from newest to oldest"
+  end
+
+  describe "#unread_count" do
+    it "returns the count of a user's unread messages"
+  end
+
+  describe "#favourited?" do
+    context "when a user has favorited the specified sit" do
+      it "returns true"
+    end
+
+    context "when a user has not favorited the specified sit" do
+      it "returns false"
+    end
+  end
+
+  describe "#get_favourites" do
+    it "returns a user's favorites"
+  end
+
+  describe "#new_notifications" do
+    it "returns the number of unread notification"
+  end
+
+  describe "#private_stream=" do
+    context "when the parameter is 'true'" do
+      it "updates all of a user's sits to be private"
+      it "sets the user's private stream to true"
+    end
+
+    context "when the parameter is 'false'" do
+      it "updates all of a user's sits to not be private"
+      it "sets the user's private stream to false"
+    end
+  end
+
+  describe "#update_with_password" do
+    context "with no password provided" do
+      it "updates a user's attributes"
+    end
+  end
+
+
+
+  describe "::newest_users" do
+    context "with no provided arguments" do
+      it "returns the five most recent users"
+    end
+
+    context "with a number provided as arguments" do
+      it "returns the correct amount of users"
+    end
+  end
 
 
 end
