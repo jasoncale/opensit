@@ -16,6 +16,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'annotate'
   gem 'meta_request', '0.2.6'
+  gem 'jazz_hands'
+  gem 'pry-coolline'
 
   # Guard shizzle
   gem 'rb-inotify', '~> 0.9', require: false # Only needed on Linux. May need to install libnotify with OS's package manager

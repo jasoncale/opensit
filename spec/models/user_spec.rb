@@ -200,8 +200,6 @@ describe User do
     end
   end # methods that return sits
 
-
-
   describe "#stream_range" do
     it "returns an array of arrays of dates and counts"
   end
