@@ -54,7 +54,10 @@ describe User do
   end
 
   describe "#to_param" do
-    it "returns the username of a user"
+    it "returns the username of a user" do
+      user.username = "john"
+      expect(user.to_param).to eq("john")
+    end
   end
 
   describe "#has_city?" do
@@ -146,13 +149,25 @@ describe User do
   end #display_name
 
   describe "#latest_sits" do
-    context "when the user is the same as the current user" do
-      it "returns the last 3 most recent sits for a user"
+    let(:user) { create(:user) }
+    let(:public_sits) { create_list(:sit, 3, :public) }
+    let(:first_user_sit) { create(:sit, :one_day_ago, user: user) }
+    let(:second_user_sit) do
+      create(:sit, :two_days_ago, user: user)
     end
-
-    context "when the user is not the same as the current user" do
-      it "returns the last 3 public sits"
+    let (:third_user_sit) do
+      create(:sit, :two_days_ago, user: user)
     end
+    let (:fourth_user_sit) do
+      create(:sit, :four_days_ago, user: user)
+    end
+      it "returns the last 3 most recent sits for a user" do
+        expect(user.latest_sits)
+          .to match_array([first_user_sit, second_user_sit, third_user_sit])
+      end
+      it "does not return the public sits that do not belong to a user" do
+        expect(user.latest_sits).to_not match_array([public_sits])
+      end
   end
 
   describe "#sits_by_year" do

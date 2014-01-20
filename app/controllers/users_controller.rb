@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     else
       @feed_items = current_user.socialstream.paginate(:page => params[:page])
       @user = current_user
-      @latest = @user.latest_sits(current_user)
+      @latest = @user.latest_sits
 
       @title = 'Home'
       @page_class = 'me'
@@ -69,7 +69,6 @@ class UsersController < ApplicationController
       return false
     end
     @users = @user.followed_users
-    @latest = @user.latest_sits(current_user)
 
     if @user == current_user
       @title = "People I follow"
@@ -91,7 +90,6 @@ class UsersController < ApplicationController
       return false
     end
     @users = @user.followers
-    @latest = @user.latest_sits(current_user)
 
     if @user == current_user
       @title = "People who follow me"
@@ -105,7 +103,6 @@ class UsersController < ApplicationController
 
   def explore
     @user = current_user
-    @latest = @user.latest_sits(current_user)
     @sits = Sit.public.newest_first.limit(10)
     @newest_users = User.newest_users
     @comments = Comment.latest(5)
@@ -125,7 +122,7 @@ class UsersController < ApplicationController
       rescue ActiveRecord::RecordNotFound
         # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
         render 'public/404', status: 404, layout: false
-        return false        
+        return false
       end
       @title = "SitStream for #{@user.username}"
       @sits = @user.sits.public.newest_first.limit(20)
