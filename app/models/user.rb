@@ -84,9 +84,9 @@ class User < ActiveRecord::Base
     sits.where("EXTRACT(year FROM created_at) = ?", year.to_s)
   end
 
-  def sits_by_month(year, month)
-    Sit.where("EXTRACT(year FROM created_at) = ? AND EXTRACT(month FROM created_at) = ? AND user_id = ?",
-      year.to_s, month.to_s.rjust(2, '0'), self.id)
+  def sits_by_month(month: month, year: year)
+    sits.where("EXTRACT(year FROM created_at) = ?
+      AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0'))
   end
 
   def stream_range

@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @links = @user.stream_range
 
     if params[:y] && params[:m]
-      @sits = @user.sits_by_month(params[:y], params[:m]).newest_first
+      @sits = @user.sits_by_month(month: params[:m], year: params[:y]).newest_first
       @range_title = "#{Date::MONTHNAMES[params[:m].to_i]}, #{params[:y]}"
     elsif params[:y]
       @sits = @user.sits_by_year(params[:y]).newest_first

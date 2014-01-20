@@ -164,6 +164,7 @@ describe User do
       create(:sit, :one_year_ago, user: user)
     end
     let(:this_year) { Time.now.year }
+    let(:this_month) { Date.new.month }
 
     describe "#latest_sits" do
       it "returns the last 3 most recent sits for a user" do
@@ -188,11 +189,16 @@ describe User do
     end
 
     describe "#sits_by_month" do
-      it "returns all sits for a user for a given month and year"
+      it "returns all sits for a user for a given month and year" do
+        expect(user.sits_by_month(month: this_month, year: this_year))
+          .to match_array([first_user_sit, second_user_sit, third_user_sit])
+      end
+      it "does not include sits outside of a given month and year" do
+        expect(user.sits_by_month(month: this_month, year: this_year))
+          .to_not include(fourth_user_sit)
+        end
     end
-
-
-  end
+  end # methods that return sits
 
 
 
