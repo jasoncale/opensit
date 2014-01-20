@@ -81,8 +81,7 @@ class User < ActiveRecord::Base
   end
 
   def sits_by_year(year)
-    Sit.where("EXTRACT(year FROM created_at) = ? AND user_id = ?",
-      year.to_s, self.id)
+    sits.where("EXTRACT(year FROM created_at) = ?", year.to_s)
   end
 
   def sits_by_month(year, month)

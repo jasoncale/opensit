@@ -125,6 +125,8 @@ describe User do
      end
   end #location
 
+
+
   describe "#display_name" do
     context "when a user has no first name" do
       let(:user) { build(:user, :no_first_name, username: "Buddha") }
@@ -148,19 +150,22 @@ describe User do
     end
   end #display_name
 
-  describe "#latest_sits" do
+  describe "methods that return sits" do
     let(:user) { create(:user) }
     let(:public_sits) { create_list(:sit, 3, :public) }
-    let(:first_user_sit) { create(:sit, :one_day_ago, user: user) }
+    let(:first_user_sit) { create(:sit, :one_hour_ago, user: user) }
     let(:second_user_sit) do
-      create(:sit, :two_days_ago, user: user)
+      create(:sit, :two_hours_ago, user: user)
     end
     let (:third_user_sit) do
-      create(:sit, :two_days_ago, user: user)
+      create(:sit, :three_hours_ago, user: user)
     end
     let (:fourth_user_sit) do
-      create(:sit, :four_days_ago, user: user)
+      create(:sit, :one_year_ago, user: user)
     end
+    let(:this_year) { Time.now.year }
+
+    describe "#latest_sits" do
       it "returns the last 3 most recent sits for a user" do
         expect(user.latest_sits)
           .to match_array([first_user_sit, second_user_sit, third_user_sit])
@@ -168,15 +173,28 @@ describe User do
       it "does not return the public sits that do not belong to a user" do
         expect(user.latest_sits).to_not match_array([public_sits])
       end
+    end
+
+    describe "#sits_by_year" do
+      it "returns all sits for a user for a given year" do
+        expect(user.sits_by_year(this_year))
+          .to match_array([first_user_sit, second_user_sit, third_user_sit])
+      end
+
+      it "does not include sits outside of a given year" do
+        expect(user.sits_by_year(this_year))
+          .to_not include(fourth_user_sit)
+      end
+    end
+
+    describe "#sits_by_month" do
+      it "returns all sits for a user for a given month and year"
+    end
+
+
   end
 
-  describe "#sits_by_year" do
-    it "returns all sits for a user for a given year"
-  end
 
-  describe "#sits_by_month" do
-    it "returns all sits for a user for a given month and year"
-  end
 
   describe "#stream_range" do
     it "returns an array of arrays of dates and counts"

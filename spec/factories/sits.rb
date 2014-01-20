@@ -22,21 +22,22 @@ FactoryGirl.define do
       private false
     end
 
-    trait :one_day_ago do
-      created_at { 1.days.ago }
+    trait :one_hour_ago do
+      created_at { 1.hours.ago }
     end
 
-    trait :two_days_ago do
-      created_at { 2.days.ago }
+    trait :two_hours_ago do
+      created_at { 2.hours.ago }
     end
 
-    trait :three_days_ago do
-      created_at { 3.days.ago }
+    trait :three_hours_ago do
+      created_at { 3.hours.ago }
     end
 
-    trait :four_days_ago do
-      created_at { 4.days.ago }
+    trait :one_year_ago do
+      created_at { 1.years.ago }
     end
+
   end
 end
 
