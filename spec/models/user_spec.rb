@@ -30,9 +30,23 @@ describe User do
     it { should have_many(:followers)
           .through(:reverse_relationships)
           .source(:follower) }
-    it { should have_many(:favourites) }
     it { should have_many(:notifications).dependent(:destroy) }
-  end
+    it { should have_many(:favourites) }
+
+    describe "#favourite_sits" do
+      let(:user) { create(:user) }
+      let(:another_user) { create(:user, username: "another_user") }
+      let(:fav_sit) { create(:sit, user: another_user) }
+      let(:unfav_sit) { create(:sit, user: another_user) }
+      let(:user_fav) do
+        Favourite.create(user_id: user.id, favourable_id: fav_sit.id, favourable_type: "Sit")
+      end
+      it "returns a user's favorite sits" do
+        user_fav.reload
+        expect(user.favourite_sits).to match_array([fav_sit])
+      end
+    end
+  end #associations
 
   describe "validations" do
     it { should ensure_length_of(:username).is_at_least(3).is_at_most(20) }
@@ -242,9 +256,7 @@ describe User do
     end
   end
 
-  describe "#get_favourites" do
-    it "returns a user's favorites"
-  end
+
 
   describe "#new_notifications" do
     it "returns the number of unread notification"

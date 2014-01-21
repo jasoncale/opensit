@@ -17,9 +17,11 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
-  has_many :favourites
   has_many :notifications, :dependent => :destroy
-
+  has_many :favourites
+  has_many :favourite_sits, through: :favourites,
+                            source: :favourable,
+                            source_type: "Sit"
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
