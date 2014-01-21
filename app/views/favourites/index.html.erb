@@ -1,12 +1,12 @@
 <%= render :partial => 'shared/me_pills' %>
 
-<% if @favs.empty? %>
+<% if @fav_sits.empty? %>
   <div class="well well-large empty-message">
     <h1>You don't have any favourites yet!</h1>
     <p>Add something to your favourites by clicking the heart icon.</p>
   </div>
 <% end %>
 
-<% @favs.each do |f| %>
-  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => f } %>
+<% @fav_sits.each do |fav_sit| %>
+  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => fav_sit } %>
 <% end %>

@@ -3,7 +3,7 @@ class FavouritesController < ApplicationController
 
 	def index
 		@user = current_user
-		@favs = @user.get_favourites(:delve => true)
+		@fav_sits = @user.favourite_sits
 		@latest = @user.latest_sits
 
 		@title = 'My favourites'

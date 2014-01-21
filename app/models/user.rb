@@ -163,39 +163,6 @@ class User < ActiveRecord::Base
     @sit.favourites.where(:user_id => self.id).exists?
   end
 
-  # Return a users favourites.
-  # Options:
-  #  :type (string) - defaults to Sit
-  #  :id (int) - select by favourable_id
-  #  :delve (bool) - return the favourited objects themselves
-  def get_favourites(opts={})
-
-    type = opts[:type] ? opts[:type] : :sit
-    type = type.to_s.capitalize
-
-    favs = Favourite.where(user_id: self.id).where(favourable_type: type)
-
-    if opts[:id]
-      favs.where(favourable_id: opts[:id].to_s)
-    end
-
-    case opts[:delve]
-    when nil, false, :false
-      return favs
-    when true, :true
-      # Get a list of all favourited object ids
-      # TODO: somehow order these by order in which they were favourited!
-      fav_ids = favs.collect{|f| f.favourable_id}
-
-      if fav_ids.size > 0
-        type_class = type.constantize
-        return type_class.where(id: fav_ids).where(private: false)
-      else
-        return []
-      end
-    end
-  end
-
   def new_notifications
     notifications.unread.count unless notifications.unread.count.zero?
   end
