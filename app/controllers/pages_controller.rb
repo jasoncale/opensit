@@ -16,4 +16,10 @@ class PagesController < ApplicationController
     @title = 'Contact'
     @page_class = 'contact'
   end
+
+  def robots
+    env = Rails.env.production? ? 'production' : 'other'
+    robots = File.read("config/robots/robots.#{env}.txt")
+    render :text => robots, :layout => false, :content_type => 'text/plain'
+  end
 end

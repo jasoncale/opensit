@@ -77,6 +77,6 @@ module Opensit
 
     config.secret_key_base = 'paticcasamuppada'
   
-    config.i18n.enforce_available_locales = false
+    I18n.enforce_available_locales = false
   end
 end
