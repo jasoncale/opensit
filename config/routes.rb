@@ -6,7 +6,7 @@ Opensit::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations" }
   get 'me' => "users#me"
-  get '/u/:username' => "users#show"
+  get '/u/:username' => "users#show", :as => :user
   get '/u/:username/profile' => "users#profile", :as => :profile
   get '/u/:username/following' => "users#following", :as => :following_user
   get '/u/:username/followers' => "users#followers", :as => :followers_user
@@ -23,7 +23,6 @@ Opensit::Application.routes.draw do
   get 'explore' => "users#explore"
   get 'global-feed' => "users#feed", :defaults => { :format => 'atom', :scope => 'global' }
 
-  
   resources :sits do
     resources :comments
   end
@@ -37,7 +36,8 @@ Opensit::Application.routes.draw do
 
   resources :favourites, only: [:create, :destroy]
 
-  ActiveAdmin.routes(self)
+  # Crawl live site, but not staging
+  get 'robots.txt' => 'pages#robots'
 
-  get '/:username' => "users#show", :as => :user
+  ActiveAdmin.routes(self)
 end

@@ -27,23 +27,11 @@ class User < ActiveRecord::Base
   validates :username, length: {minimum: 3, maximum: 20}
   validates_uniqueness_of :username
   validate :check_empty_space
-  validate :route_clash?
   
   # Don't allow any spaces in usernames
   def check_empty_space
     if self.username.match(/\s+/)
       errors.add(:username, "cannot contain spaces.")
-    end
-  end
-
-  # Don't allow usernames that clash with an existing route
-  def route_clash?
-    # Skip if it has a space, the check_empty_space will catch it
-    if !self.username.match(/\s+/)
-      route = Rails.application.routes.recognize_path("/#{self.username}")
-      if route[:controller] != 'user' && route[:action] != 'show'
-        errors.add(:base, "'#{self.username}' is reserved.")
-      end
     end
   end
 
