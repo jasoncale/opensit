@@ -2,11 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  # Uncommenting this leads to ActiveRecord::ConnectionTimeoutError and quick site death 
-  # because old db connections are not being cleared. The middlware that does this is enabled
-  # so I have no idea why it's not working.
-  #
-  # rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
   def custom_user_auth
     unless user_signed_in?

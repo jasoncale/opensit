@@ -36,20 +36,15 @@ describe 'Users' do
         visit "/u/buddha"
         expect(status_code).to eq 200
       end
-      
-      it 'naked' do
-        visit '/buddha'
-        expect(status_code).to eq 200
-      end
 
       it 'case insensitive' do
-        visit '/BuDdHa'
+        visit '/u/BuDdHa'
         expect(status_code).to eq 200
       end
     end
 
     it 'should return 404 for non-existent users' do
-      visit '/jesus'
+      visit '/u/jesus'
       expect(status_code).to eq 404
     end
   end
