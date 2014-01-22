@@ -45,7 +45,7 @@ class Notification < ActiveRecord::Base
         notify = Notification.create(
           message: "#{user.display_name} is now following you!",
           user_id: user_id,
-          link: "/u/#{username}",
+          link: "/u/#{user.username}",
           initiator: follower_id
         )
     end
