@@ -302,12 +302,19 @@ describe User do
   end
 
   describe "#favourited?" do
+    let(:user) { create(:user) }
+
     context "when a user has favorited the specified sit" do
-      it "returns true"
+      before { create(:favourite, user_id: user.id, favourable_id: 1) }
+      it "returns true" do
+        expect(user.favourited?(1)).to be_true
+      end
     end
 
     context "when a user has not favorited the specified sit" do
-      it "returns false"
+      it "returns false" do
+        expect(user.favourited?(2)).to be_false
+      end
     end
   end
 

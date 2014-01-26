@@ -157,10 +157,8 @@ class User < ActiveRecord::Base
     messages_received.unread.count unless messages_received.unread.count.zero?
   end
 
-  # Has this user favourited this sit?
   def favourited?(sit_id)
-    @sit = Sit.find_by_id(sit_id)
-    @sit.favourites.where(:user_id => self.id).exists?
+    favourites.where(favourable_type: "Sit", favourable_id: sit_id).exists?
   end
 
   def new_notifications
