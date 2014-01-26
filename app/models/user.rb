@@ -158,8 +158,8 @@ class User < ActiveRecord::Base
   end
 
   # Has this user favourited this sit?
-  def favourited?(id)
-    @sit = Sit.find_by_id(id)
+  def favourited?(sit_id)
+    @sit = Sit.find_by_id(sit_id)
     @sit.favourites.where(:user_id => self.id).exists?
   end
 

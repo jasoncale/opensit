@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Favourite do
+  it "has a valid factory" do
+    expect(build(:favourite)).to be_valid
+  end
+
   it { should belong_to(:favourable) }
   it { should belong_to(:user) }
 
