@@ -8,6 +8,9 @@ FactoryGirl.define do
       2 + n
     end
 
+    trait :read do
+      read true
+    end
   end
 end
 

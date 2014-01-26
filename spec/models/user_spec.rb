@@ -39,7 +39,9 @@ describe User do
       let(:fav_sit) { create(:sit, user: another_user) }
       let(:unfav_sit) { create(:sit, user: another_user) }
       let(:user_fav) do
-        Favourite.create(user_id: user.id, favourable_id: fav_sit.id, favourable_type: "Sit")
+        Favourite.create(user_id: user.id,
+                         favourable_id: fav_sit.id,
+                         favourable_type: "Sit")
       end
       it "returns a user's favorite sits" do
         user_fav.reload
@@ -53,10 +55,11 @@ describe User do
     it { should validate_uniqueness_of(:username) }
 
     it "should not allow spaces in the username" do
-      expect { create :user, username: 'dan bartlett', email: 'dan@dan.com' }.to raise_error(
-        ActiveRecord::RecordInvalid,
-        "Validation failed: Username cannot contain spaces"
-      )
+      expect { create :user, username: 'dan bartlett', email: 'dan@dan.com' }
+        .to raise_error(
+          ActiveRecord::RecordInvalid,
+          "Validation failed: Username cannot contain spaces"
+        )
     end
 
     it "should not allow usernames that match a route name" do
@@ -271,7 +274,31 @@ describe User do
   end
 
   describe "#unread_count" do
-    it "returns the count of a user's unread messages"
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user, username: "john") }
+
+    context "when a user has unread messages" do
+      before do
+        2.times do
+         create(:message, from_user_id: other_user.id, to_user_id: user.id)
+       end
+      end
+
+      it "returns the count of a user's unread messages" do
+        expect(user.unread_count).to eq(2)
+      end
+    end
+
+    context "when a user has no unread messages" do
+      before do
+        create(:message, :read, from_user_id: other_user.id,
+               to_user_id: user.id)
+      end
+
+      it "returns nil" do
+        expect(user.unread_count).to be(nil)
+      end
+    end
   end
 
   describe "#favourited?" do
