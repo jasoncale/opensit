@@ -136,6 +136,19 @@ class User < ActiveRecord::Base
     return links
   end
 
+  def socialstream
+    Sit.from_users_followed_by(self).newest_first
+  end
+
+  def private_stream=(value)
+    sits.update_all(private: value)
+    write_attribute(:private_stream, value)
+  end
+
+  def favourited?(sit_id)
+    favourites.where(favourable_type: "Sit", favourable_id: sit_id).exists?
+  end
+
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id) ? true : false
   end
@@ -149,25 +162,12 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id).destroy
   end
 
-  def socialstream
-    Sit.from_users_followed_by(self).newest_first
-  end
-
   def unread_count
     messages_received.unread.count unless messages_received.unread.count.zero?
   end
 
-  def favourited?(sit_id)
-    favourites.where(favourable_type: "Sit", favourable_id: sit_id).exists?
-  end
-
   def new_notifications
     notifications.unread.count unless notifications.unread.count.zero?
-  end
-
-  def private_stream=(value)
-    sits.update_all(private: value)
-    write_attribute(:private_stream, value)
   end
 
   # Overwrite Devise function to allow profile update with password requirement

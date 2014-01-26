@@ -175,16 +175,16 @@ describe User do
     end
   end #display_name
 
-  describe "methods that return sits" do
+  describe "methods that interact with sits" do
     let(:public_sits) { create_list(:sit, 3, :public) }
-    let(:first_buddha_sit) { create(:sit, :one_hour_ago, user: buddha) }
-    let(:second_buddha_sit) do
+    let(:first_sit) { create(:sit, :one_hour_ago, user: buddha) }
+    let(:second_sit) do
       create(:sit, :two_hours_ago, user: buddha)
     end
-    let (:third_buddha_sit) do
+    let (:third_sit) do
       create(:sit, :three_hours_ago, user: buddha)
     end
-    let (:fourth_buddha_sit) do
+    let (:fourth_sit) do
       create(:sit, :one_year_ago, user: buddha)
     end
     let(:this_year) { Time.now.year }
@@ -194,7 +194,7 @@ describe User do
       it "returns the last 3 most recent sits for a user" do
         expect(buddha.latest_sits)
           .to match_array(
-            [first_buddha_sit, second_buddha_sit, third_buddha_sit]
+            [first_sit, second_sit, third_sit]
           )
       end
       it "does not return the public sits that do not belong to a user" do
@@ -206,13 +206,13 @@ describe User do
       it "returns all sits for a user for a given year" do
         expect(buddha.sits_by_year(this_year))
           .to match_array(
-            [first_buddha_sit, second_buddha_sit, third_buddha_sit]
+            [first_sit, second_sit, third_sit]
           )
       end
 
       it "does not include sits outside of a given year" do
         expect(buddha.sits_by_year(this_year))
-          .to_not include(fourth_buddha_sit)
+          .to_not include(fourth_sit)
       end
     end
 
@@ -220,19 +220,89 @@ describe User do
       it "returns all sits for a user for a given month and year" do
         expect(buddha.sits_by_month(month: this_month, year: this_year))
           .to match_array(
-            [first_buddha_sit, second_buddha_sit, third_buddha_sit]
+            [first_sit, second_sit, third_sit]
           )
       end
 
       it "does not include sits outside of a given month and year" do
         expect(buddha.sits_by_month(month: this_month, year: this_year))
-          .to_not include(fourth_buddha_sit)
+          .to_not include(fourth_sit)
+      end
+    end
+
+    describe "#stream_range" do
+      it "returns an array of arrays of dates and counts"
+    end
+
+    describe "#socialstream" do
+      before do
+        Relationship.create(followed_id: buddha.id, follower_id: ananda.id)
+        first_sit
+        second_sit
+        third_sit
+        fourth_sit
+      end
+
+      it "returns an array of other followed users' sits" do
+        expect(ananda.socialstream).to eq(
+          [first_sit, second_sit, third_sit, fourth_sit])
+      end
+
+      it "does not return the oldest sits first" do
+        expect(ananda.socialstream).to_not eq(
+          [fourth_sit, third_sit, second_sit, first_sit])
+      end
+    end
+
+  end # methods that interact with sits
+
+
+
+  describe "#private_stream=" do
+    context "when the parameter is 'true'" do
+      it "updates all of a user's sits to be private" do
+        sit = create(:sit, :public, user: user)
+
+        expect { user.private_stream=('true') }
+          .to change { user.sits.where(private: true).count }.from(0).to(1)
+      end
+
+      it "sets the user's private stream to true" do
+        expect { user.private_stream=('true') }
+          .to change { user.private_stream }.from(false).to(true)
+      end
+    end
+
+    context "when the parameter is 'false'" do
+      it "updates all of a user's sits to not be private" do
+        sit = create(:sit, :private, user: user)
+
+        expect { user.private_stream=('false') }
+          .to change { user.sits.where(private: false).count }.from(0).to(1)
+      end
+
+      it "sets the user's private stream to false" do
+        user.private_stream = true
+        expect { user.private_stream=('false') }
+          .to change { user.private_stream }.from(true).to(false)
         end
     end
-  end # methods that return sits
+  end
 
-  describe "#stream_range" do
-    it "returns an array of arrays of dates and counts"
+  describe "#favourited?" do
+    context "when a user has favorited the specified sit" do
+      before { create(:favourite, user_id: buddha.id, favourable_id: 1) }
+
+      it "returns true" do
+        expect(buddha.favourited?(1)).to be_true
+      end
+    end
+
+    context "when a user has not favorited the specified sit" do
+      it "returns false" do
+        expect(buddha.favourited?(2)).to be_false
+      end
+    end
   end
 
   describe "#following?" do
@@ -275,11 +345,6 @@ describe User do
     end
   end
 
-  describe "#socialstream" do
-    it "returns an array of sits of other followed users"
-    it "sorts the sits from newest to oldest"
-  end
-
   describe "#unread_count" do
     context "when a user has unread messages" do
       before do
@@ -305,22 +370,6 @@ describe User do
     end
   end
 
-  describe "#favourited?" do
-    context "when a user has favorited the specified sit" do
-      before { create(:favourite, user_id: buddha.id, favourable_id: 1) }
-
-      it "returns true" do
-        expect(buddha.favourited?(1)).to be_true
-      end
-    end
-
-    context "when a user has not favorited the specified sit" do
-      it "returns false" do
-        expect(buddha.favourited?(2)).to be_false
-      end
-    end
-  end
-
   describe "#new_notifications" do
     context "when a user has notifications that have not been viewed" do
       before { create(:notification, user: buddha, viewed: false) }
@@ -336,37 +385,6 @@ describe User do
       it "returns nil" do
         expect(buddha.new_notifications).to be_nil
       end
-    end
-  end
-
-  describe "#private_stream=" do
-    context "when the parameter is 'true'" do
-      it "updates all of a user's sits to be private" do
-        sit = create(:sit, :public, user: user)
-
-        expect { user.private_stream=('true') }
-          .to change { user.sits.where(private: true).count }.from(0).to(1)
-      end
-
-      it "sets the user's private stream to true" do
-        expect { user.private_stream=('true') }
-          .to change { user.private_stream }.from(false).to(true)
-      end
-    end
-
-    context "when the parameter is 'false'" do
-      it "updates all of a user's sits to not be private" do
-        sit = create(:sit, :private, user: user)
-
-        expect { user.private_stream=('false') }
-          .to change { user.sits.where(private: false).count }.from(0).to(1)
-      end
-
-      it "sets the user's private stream to false" do
-        user.private_stream = true
-        expect { user.private_stream=('false') }
-          .to change { user.private_stream }.from(true).to(false)
-        end
     end
   end
 
@@ -395,7 +413,6 @@ describe User do
       end
     end
   end
-
 
 end
 
