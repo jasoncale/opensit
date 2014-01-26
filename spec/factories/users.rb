@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    username "buddha"
-    email { "#{username.downcase}@example.com" }
-    password {"gunsbitchesbling"}
+    username { Faker::Internet.user_name }
+    email { Faker::Internet.email }
+    password { Faker::Lorem.characters(12) }
 
     trait :has_first_name do
       first_name { Faker::Name.first_name }
