@@ -139,8 +139,6 @@ describe User do
      end
   end #location
 
-
-
   describe "#display_name" do
     context "when a user has no first name" do
       let(:user) { build(:user, :no_first_name, username: "Buddha") }
@@ -219,22 +217,52 @@ describe User do
   end
 
   describe "#following?" do
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user, username: "john") }
+
     context "when a user follows another user" do
-      it "returns true"
+      it "returns true" do
+        Relationship.create(follower_id: user.id, followed_id: other_user.id)
+        expect(user.following?(other_user)).to be_true
+      end
     end
 
     context "when a user does not follow another user" do
-      it "returns false"
+      it "returns false" do
+        expect(user.following?(other_user)).to be_false
+      end
     end
   end
 
   describe "#follow!" do
-    it "creates a relationship"
-    it "sends a notification"
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user, username: "john") }
+
+    it "creates a relationship" do
+      expect { user.follow!(other_user) }
+        .to change {
+          user.followed_users.count
+        }.from(0).to(1)
+    end
+
+    it "sends a notification" do
+      expect(Notification).to receive(:send_notification)
+        .with('NewFollower', other_user.id, { follower: user })
+      user.follow!(other_user)
+    end
   end
 
   describe "#unfollow!" do
-    it "destroys a relationship"
+    it "destroys a relationship" do
+      user = create(:user)
+      other_user = create(:user, username: "john")
+      Relationship.create(follower_id: user.id, followed_id: other_user.id)
+
+      expect { user.unfollow!(other_user) }
+        .to change {
+          user.followed_users.count
+        }.from(1).to(0)
+    end
   end
 
   describe "#socialstream" do
