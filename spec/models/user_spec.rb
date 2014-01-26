@@ -254,56 +254,54 @@ describe User do
       end
     end
 
-  end # methods that interact with sits
+    describe "#private_stream=" do
+      context "when the parameter is 'true'" do
+        it "updates all of a user's sits to be private" do
+          sit = create(:sit, :public, user: user)
 
-
-
-  describe "#private_stream=" do
-    context "when the parameter is 'true'" do
-      it "updates all of a user's sits to be private" do
-        sit = create(:sit, :public, user: user)
-
-        expect { user.private_stream=('true') }
-          .to change { user.sits.where(private: true).count }.from(0).to(1)
-      end
-
-      it "sets the user's private stream to true" do
-        expect { user.private_stream=('true') }
-          .to change { user.private_stream }.from(false).to(true)
-      end
-    end
-
-    context "when the parameter is 'false'" do
-      it "updates all of a user's sits to not be private" do
-        sit = create(:sit, :private, user: user)
-
-        expect { user.private_stream=('false') }
-          .to change { user.sits.where(private: false).count }.from(0).to(1)
-      end
-
-      it "sets the user's private stream to false" do
-        user.private_stream = true
-        expect { user.private_stream=('false') }
-          .to change { user.private_stream }.from(true).to(false)
+          expect { user.private_stream=('true') }
+            .to change { user.sits.where(private: true).count }.from(0).to(1)
         end
-    end
-  end
 
-  describe "#favourited?" do
-    context "when a user has favorited the specified sit" do
-      before { create(:favourite, user_id: buddha.id, favourable_id: 1) }
+        it "sets the user's private stream to true" do
+          expect { user.private_stream=('true') }
+            .to change { user.private_stream }.from(false).to(true)
+        end
+      end
 
-      it "returns true" do
-        expect(buddha.favourited?(1)).to be_true
+      context "when the parameter is 'false'" do
+        it "updates all of a user's sits to not be private" do
+          sit = create(:sit, :private, user: user)
+
+          expect { user.private_stream=('false') }
+            .to change { user.sits.where(private: false).count }.from(0).to(1)
+        end
+
+        it "sets the user's private stream to false" do
+          user.private_stream = true
+          expect { user.private_stream=('false') }
+            .to change { user.private_stream }.from(true).to(false)
+          end
       end
     end
 
-    context "when a user has not favorited the specified sit" do
-      it "returns false" do
-        expect(buddha.favourited?(2)).to be_false
+    describe "#favourited?" do
+      context "when a user has favorited the specified sit" do
+        before { create(:favourite, user_id: buddha.id, favourable_id: 1) }
+
+        it "returns true" do
+          expect(buddha.favourited?(1)).to be_true
+        end
+      end
+
+      context "when a user has not favorited the specified sit" do
+        it "returns false" do
+          expect(buddha.favourited?(2)).to be_false
+        end
       end
     end
-  end
+
+  end # methods that interact with sits
 
   describe "#following?" do
     context "when a user is following another user" do
@@ -389,8 +387,20 @@ describe User do
   end
 
   describe "#update_with_password" do
-    context "with no password provided" do
-      it "updates a user's attributes"
+    context "when there is a password provided" do
+      let(:params) { { password: "password", username: "new_username" } }
+      it "updates a users attributes" do
+        expect { buddha.update_with_password(params) }
+          .to change { buddha.username }.from("buddha").to("new_username")
+      end
+    end
+
+    context "when there is no password provided" do
+      let(:params) { { username: "new_username" } }
+      it "updates a user's attributes" do
+        expect { buddha.update_with_password(params) }
+          .to change { buddha.username }.from("buddha").to("new_username")
+      end
     end
   end
 
