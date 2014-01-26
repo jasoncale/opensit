@@ -6,6 +6,14 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password { Faker::Lorem.characters(12) }
 
+    factory :buddha do
+      username "buddha"
+    end
+
+    factory :ananda do
+      username "ananda"
+    end
+
     trait :has_first_name do
       first_name { Faker::Name.first_name }
     end
@@ -20,22 +28,6 @@ FactoryGirl.define do
 
     trait :no_last_name do
       last_name nil
-    end
-
-    trait :has_city do
-      city { Faker::Address.city }
-    end
-
-    trait :no_city do
-      city nil
-    end
-
-    trait :has_country do
-      country { Faker::Address.country }
-    end
-
-    trait :no_country do
-      country nil
     end
   end
 end

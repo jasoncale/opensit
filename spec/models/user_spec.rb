@@ -5,6 +5,8 @@ describe User do
     expect(build(:user)).to be_valid
   end
   let(:user) { build(:user) }
+  let(:buddha) { create(:buddha) }
+  let(:ananda) { create(:ananda) }
 
   describe "associations" do
     it { should have_many(:sits).dependent(:destroy) }
@@ -34,18 +36,16 @@ describe User do
     it { should have_many(:favourites) }
 
     describe "#favourite_sits" do
-      let(:user) { create(:user) }
-      let(:another_user) { create(:user, username: "another_user") }
-      let(:fav_sit) { create(:sit, user: another_user) }
-      let(:unfav_sit) { create(:sit, user: another_user) }
-      let(:user_fav) do
-        Favourite.create(user_id: user.id,
+      let(:fav_sit) { create(:sit, user: ananda) }
+      let(:unfav_sit) { create(:sit, user: ananda) }
+      let(:buddha_fav) do
+        Favourite.create(user_id: buddha.id,
                          favourable_id: fav_sit.id,
                          favourable_type: "Sit")
       end
       it "returns a user's favorite sits" do
-        user_fav.reload
-        expect(user.favourite_sits).to match_array([fav_sit])
+        buddha_fav.reload
+        expect(buddha.favourite_sits).to match_array([fav_sit])
       end
     end
   end #associations
@@ -72,45 +72,49 @@ describe User do
 
   describe "#to_param" do
     it "returns the username of a user" do
-      user.username = "john"
-      expect(user.to_param).to eq("john")
+      expect(buddha.to_param).to eq("buddha")
     end
   end
 
-  describe "#has_city?" do
+  describe "#city?" do
     context "when a user has a city" do
-      let(:user) { build(:user, :has_city) }
+      before { user.city = Faker::Address.city }
+
       it "returns true" do
-        expect(user.has_city?).to be(true)
+        expect(user.city?).to be(true)
       end
     end
 
     context "when a user doesn't have a city" do
-      let(:user) { build(:user, :no_city) }
+      before { user.city = nil }
+
       it "returns false" do
-        expect(user.has_city?).to be(false)
+        expect(user.city?).to be(false)
       end
     end
   end
 
-  describe "#has_country?" do
+  describe "#country?" do
     context "when a user has a country" do
-      let(:user) { build(:user, :has_country) }
+      before { user.country = Faker::Address.country }
+
       it "returns true" do
-        expect(user.has_country?).to be(true)
+        expect(user.country?).to be(true)
       end
     end
 
     context "when a user doesn't have a country" do
-      let(:user) { build(:user, :no_country) }
+      before { user.country = nil }
+
       it "returns false" do
-        expect(user.has_country?).to be(false)
+        expect(user.country?).to be(false)
       end
     end
   end
 
   describe "#location" do
-    let(:user) {build(:user, city: "New York", country: "United States")}
+    let(:user) { build(:user, city: "New York", country: "United States") }
+
      context "when a user has both a city and country" do
         it "returns both the city and country" do
           expect(user.location).to eq("New York, United States")
@@ -119,6 +123,7 @@ describe User do
 
      context "when a user has a city but no country" do
         before { user.country = nil }
+
         it "returns only the city" do
           expect(user.location).to eq("New York")
         end
@@ -126,6 +131,7 @@ describe User do
 
      context "when a user has a country but no city" do
         before { user.city = nil }
+
         it "returns only the country" do
           expect(user.location).to eq("United States")
         end
@@ -136,6 +142,7 @@ describe User do
           user.city = nil
           user.country = nil
         end
+
         it "returns nil" do
           expect(user.location).to be(nil)
         end
@@ -144,73 +151,82 @@ describe User do
 
   describe "#display_name" do
     context "when a user has no first name" do
-      let(:user) { build(:user, :no_first_name, username: "Buddha") }
+      let(:user) { build(:user, :no_first_name) }
+
       it "returns the users' username" do
-        expect(user.display_name).to eq("Buddha")
+        expect(user.display_name).to eq("#{user.username}")
       end
     end
 
     context "when a user has a first name but no last name" do
-      let(:user) { build(:user, :no_last_name, first_name: "John") }
+      let(:user) { build(:user, :no_last_name, :has_first_name) }
+
       it "returns the users' first name" do
-        expect(user.display_name).to eq("John")
+        expect(user.display_name).to eq("#{user.first_name}")
       end
     end
 
     context "when a user has both a first name and last name" do
-      let(:user) { build(:user, first_name: "John", last_name: "Smith") }
+      let(:user) { build(:user, :has_first_name, :has_last_name) }
+
       it "returns the users' first name and last name" do
-        expect(user.display_name).to eq("John Smith")
+        expect(user.display_name).to eq("#{user.first_name} #{user.last_name}")
       end
     end
   end #display_name
 
   describe "methods that return sits" do
-    let(:user) { create(:user) }
     let(:public_sits) { create_list(:sit, 3, :public) }
-    let(:first_user_sit) { create(:sit, :one_hour_ago, user: user) }
-    let(:second_user_sit) do
-      create(:sit, :two_hours_ago, user: user)
+    let(:first_buddha_sit) { create(:sit, :one_hour_ago, user: buddha) }
+    let(:second_buddha_sit) do
+      create(:sit, :two_hours_ago, user: buddha)
     end
-    let (:third_user_sit) do
-      create(:sit, :three_hours_ago, user: user)
+    let (:third_buddha_sit) do
+      create(:sit, :three_hours_ago, user: buddha)
     end
-    let (:fourth_user_sit) do
-      create(:sit, :one_year_ago, user: user)
+    let (:fourth_buddha_sit) do
+      create(:sit, :one_year_ago, user: buddha)
     end
     let(:this_year) { Time.now.year }
     let(:this_month) { Date.new.month }
 
     describe "#latest_sits" do
       it "returns the last 3 most recent sits for a user" do
-        expect(user.latest_sits)
-          .to match_array([first_user_sit, second_user_sit, third_user_sit])
+        expect(buddha.latest_sits)
+          .to match_array(
+            [first_buddha_sit, second_buddha_sit, third_buddha_sit]
+          )
       end
       it "does not return the public sits that do not belong to a user" do
-        expect(user.latest_sits).to_not match_array([public_sits])
+        expect(buddha.latest_sits).to_not match_array([public_sits])
       end
     end
 
     describe "#sits_by_year" do
       it "returns all sits for a user for a given year" do
-        expect(user.sits_by_year(this_year))
-          .to match_array([first_user_sit, second_user_sit, third_user_sit])
+        expect(buddha.sits_by_year(this_year))
+          .to match_array(
+            [first_buddha_sit, second_buddha_sit, third_buddha_sit]
+          )
       end
 
       it "does not include sits outside of a given year" do
-        expect(user.sits_by_year(this_year))
-          .to_not include(fourth_user_sit)
+        expect(buddha.sits_by_year(this_year))
+          .to_not include(fourth_buddha_sit)
       end
     end
 
     describe "#sits_by_month" do
       it "returns all sits for a user for a given month and year" do
-        expect(user.sits_by_month(month: this_month, year: this_year))
-          .to match_array([first_user_sit, second_user_sit, third_user_sit])
+        expect(buddha.sits_by_month(month: this_month, year: this_year))
+          .to match_array(
+            [first_buddha_sit, second_buddha_sit, third_buddha_sit]
+          )
       end
+
       it "does not include sits outside of a given month and year" do
-        expect(user.sits_by_month(month: this_month, year: this_year))
-          .to_not include(fourth_user_sit)
+        expect(buddha.sits_by_month(month: this_month, year: this_year))
+          .to_not include(fourth_buddha_sit)
         end
     end
   end # methods that return sits
@@ -220,51 +236,42 @@ describe User do
   end
 
   describe "#following?" do
-    let(:user) { create(:user) }
-    let(:other_user) { create(:user, username: "john") }
-
     context "when a user is following another user" do
+      before do
+        Relationship.create(follower_id: ananda.id, followed_id: buddha.id)
+      end
+
       it "returns true" do
-        Relationship.create(follower_id: user.id, followed_id: other_user.id)
-        expect(user.following?(other_user)).to eq(true)
+        expect(ananda.following?(buddha)).to eq(true)
       end
     end
 
     context "when a user is not following another user" do
       it "returns false" do
-        expect(user.following?(other_user)).to eq(false)
+        expect(ananda.following?(buddha)).to eq(false)
       end
     end
   end
 
   describe "#follow!" do
-    let(:user) { create(:user) }
-    let(:other_user) { create(:user, username: "john") }
-
     it "creates a relationship" do
-      expect { user.follow!(other_user) }
-        .to change {
-          user.followed_users.count
-        }.from(0).to(1)
+      expect { ananda.follow!(buddha) }
+        .to change { ananda.followed_users.count }.from(0).to(1)
     end
 
     it "sends a notification" do
       expect(Notification).to receive(:send_notification)
-        .with('NewFollower', other_user.id, { follower: user })
-      user.follow!(other_user)
+        .with('NewFollower', buddha.id, { follower: ananda })
+      ananda.follow!(buddha)
     end
   end
 
   describe "#unfollow!" do
     it "destroys a relationship" do
-      user = create(:user)
-      other_user = create(:user)
-      Relationship.create(follower_id: user.id, followed_id: other_user.id)
+      Relationship.create(follower_id: ananda.id, followed_id: buddha.id)
 
-      expect { user.unfollow!(other_user) }
-        .to change {
-          user.followed_users.count
-        }.from(1).to(0)
+      expect { ananda.unfollow!(buddha) }
+        .to change { ananda.followed_users.count }.from(1).to(0)
     end
   end
 
@@ -274,79 +281,71 @@ describe User do
   end
 
   describe "#unread_count" do
-    let(:user) { create(:user) }
-    let(:other_user) { create(:user, username: "john") }
-
     context "when a user has unread messages" do
       before do
         2.times do
-         create(:message, from_user_id: other_user.id, to_user_id: user.id)
+         create(:message, from_user_id: ananda.id, to_user_id: buddha.id)
        end
       end
 
       it "returns the count of a user's unread messages" do
-        expect(user.unread_count).to eq(2)
+        expect(buddha.unread_count).to eq(2)
       end
     end
 
     context "when a user has no unread messages" do
       before do
-        create(:message, :read, from_user_id: other_user.id,
-               to_user_id: user.id)
+        create(:message, :read, from_user_id: ananda.id,
+               to_user_id: buddha.id)
       end
 
       it "returns nil" do
-        expect(user.unread_count).to be(nil)
+        expect(buddha.unread_count).to be(nil)
       end
     end
   end
 
   describe "#favourited?" do
-    let(:user) { create(:user) }
-
     context "when a user has favorited the specified sit" do
-      before { create(:favourite, user_id: user.id, favourable_id: 1) }
+      before { create(:favourite, user_id: buddha.id, favourable_id: 1) }
+
       it "returns true" do
-        expect(user.favourited?(1)).to be_true
+        expect(buddha.favourited?(1)).to be_true
       end
     end
 
     context "when a user has not favorited the specified sit" do
       it "returns false" do
-        expect(user.favourited?(2)).to be_false
+        expect(buddha.favourited?(2)).to be_false
       end
     end
   end
 
   describe "#new_notifications" do
-    let(:user) { create(:user) }
-
     context "when a user has notifications that have not been viewed" do
-      before { create(:notification, user: user, viewed: false) }
+      before { create(:notification, user: buddha, viewed: false) }
 
       it "returns the number of unviewed notification" do
-        expect(user.new_notifications).to eq(1)
+        expect(buddha.new_notifications).to eq(1)
       end
     end
 
     context "when a user no unviewed notifications" do
-      before { create(:notification, user: user, viewed: true) }
+      before { create(:notification, user: buddha, viewed: true) }
+
       it "returns nil" do
-        expect(user.new_notifications).to be_nil
+        expect(buddha.new_notifications).to be_nil
       end
     end
   end
 
   describe "#private_stream=" do
-    let(:user) { create(:user) }
-
     context "when the parameter is 'true'" do
       it "updates all of a user's sits to be private" do
         sit = create(:sit, :public, user: user)
 
         expect { user.private_stream=('true') }
-          .to change { user.sits.where(private: true).count }
-          .from(0).to(1)
+          .to change { user.sits.where(private: true).count }.from(0).to(1)
       end
 
       it "sets the user's private stream to true" do
@@ -360,8 +359,7 @@ describe User do
         sit = create(:sit, :private, user: user)
 
         expect { user.private_stream=('false') }
-          .to change { user.sits.where(private: false).count }
-          .from(0).to(1)
+          .to change { user.sits.where(private: false).count }.from(0).to(1)
       end
 
       it "sets the user's private stream to false" do

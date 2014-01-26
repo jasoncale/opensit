@@ -1,7 +1,7 @@
 <div class="avatar-container"><%= large_avatar_of(@user) %></div>
 <div class="sidebar-content">
 	<div class="username"><%= username(@user) %></div>
-	<% if @user.has_city? || @user.has_country? %>
+	<% if @user.city? || @user.country? %>
 		<div class="location"><%= @user.location %></div>
 	<% end %>
 
