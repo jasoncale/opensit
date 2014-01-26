@@ -323,14 +323,37 @@ describe User do
   end
 
   describe "#private_stream=" do
+    let(:user) { create(:user) }
+
     context "when the parameter is 'true'" do
-      it "updates all of a user's sits to be private"
-      it "sets the user's private stream to true"
+      it "updates all of a user's sits to be private" do
+        sit = create(:sit, :public, user: user)
+
+        expect { user.private_stream=('true') }
+          .to change { user.sits.where(private: true).count }
+          .from(0).to(1)
+      end
+
+      it "sets the user's private stream to true" do
+        expect { user.private_stream=('true') }
+          .to change { user.private_stream }.from(false).to(true)
+      end
     end
 
     context "when the parameter is 'false'" do
-      it "updates all of a user's sits to not be private"
-      it "sets the user's private stream to false"
+      it "updates all of a user's sits to not be private" do
+        sit = create(:sit, :private, user: user)
+
+        expect { user.private_stream=('false') }
+          .to change { user.sits.where(private: false).count }
+          .from(0).to(1)
+      end
+
+      it "sets the user's private stream to false" do
+        user.private_stream = true
+        expect { user.private_stream=('false') }
+          .to change { user.private_stream }.from(true).to(false)
+        end
     end
   end
 
