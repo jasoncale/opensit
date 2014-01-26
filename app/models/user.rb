@@ -141,6 +141,9 @@ class User < ActiveRecord::Base
   end
 
   def private_stream=(value)
+    unless value.downcase == 'true' || value.downcase == 'false'
+      raise ArgumentError, "Argument must be either 'true' or 'false'"
+    end
     sits.update_all(private: value)
     write_attribute(:private_stream, value)
   end

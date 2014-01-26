@@ -255,7 +255,7 @@ describe User do
     end
 
     describe "#private_stream=" do
-      context "when the parameter is 'true'" do
+      context "when the argument is 'true'" do
         it "updates all of a user's sits to be private" do
           sit = create(:sit, :public, user: user)
 
@@ -264,12 +264,12 @@ describe User do
         end
 
         it "sets the user's private stream to true" do
-          expect { user.private_stream=('true') }
+          expect { user.private_stream=('TRUE') }
             .to change { user.private_stream }.from(false).to(true)
         end
       end
 
-      context "when the parameter is 'false'" do
+      context "when the argument is 'false'" do
         it "updates all of a user's sits to not be private" do
           sit = create(:sit, :private, user: user)
 
@@ -278,10 +278,19 @@ describe User do
         end
 
         it "sets the user's private stream to false" do
-          user.private_stream = true
-          expect { user.private_stream=('false') }
+          user.private_stream = 'true'
+          expect { user.private_stream=('FALSE') }
             .to change { user.private_stream }.from(true).to(false)
-          end
+        end
+      end
+
+      context "when the argument is neither 'true' nor 'false'" do
+        it "raises an ArgumentError" do
+          expect { user.private_stream=('bad_argument') }.to raise_error(
+            ArgumentError,
+            "Argument must be either 'true' or 'false'"
+          )
+        end
       end
     end
 
