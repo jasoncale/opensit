@@ -223,16 +223,16 @@ describe User do
     let(:user) { create(:user) }
     let(:other_user) { create(:user, username: "john") }
 
-    context "when a user follows another user" do
+    context "when a user is following another user" do
       it "returns true" do
         Relationship.create(follower_id: user.id, followed_id: other_user.id)
-        expect(user.following?(other_user)).to be_true
+        expect(user.following?(other_user)).to eq(true)
       end
     end
 
-    context "when a user does not follow another user" do
+    context "when a user is not following another user" do
       it "returns false" do
-        expect(user.following?(other_user)).to be_false
+        expect(user.following?(other_user)).to eq(false)
       end
     end
   end

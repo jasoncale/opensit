@@ -137,7 +137,7 @@ class User < ActiveRecord::Base
   end
 
   def following?(other_user)
-    relationships.find_by_followed_id(other_user.id)
+    relationships.find_by_followed_id(other_user.id) ? true : false
   end
 
   def follow!(other_user)
