@@ -258,7 +258,7 @@ describe User do
   describe "#unfollow!" do
     it "destroys a relationship" do
       user = create(:user)
-      other_user = create(:user, username: "john")
+      other_user = create(:user)
       Relationship.create(follower_id: user.id, followed_id: other_user.id)
 
       expect { user.unfollow!(other_user) }
@@ -319,7 +319,22 @@ describe User do
   end
 
   describe "#new_notifications" do
-    it "returns the number of unread notification"
+    let(:user) { create(:user) }
+
+    context "when a user has notifications that have not been viewed" do
+      before { create(:notification, user: user, viewed: false) }
+
+      it "returns the number of unviewed notification" do
+        expect(user.new_notifications).to eq(1)
+      end
+    end
+
+    context "when a user no unviewed notifications" do
+      before { create(:notification, user: user, viewed: true) }
+      it "returns nil" do
+        expect(user.new_notifications).to be_nil
+      end
+    end
   end
 
   describe "#private_stream=" do
