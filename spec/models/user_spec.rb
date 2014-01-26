@@ -377,12 +377,22 @@ describe User do
   end
 
   describe "::newest_users" do
+    let(:oldest_user) { create(:user, created_at: 1.years.ago) }
+    let(:five_recent_users_array) { create_list(:user, 5) }
+
     context "with no provided arguments" do
-      it "returns the five most recent users"
+      it "returns the five most recent users" do
+        expect(User.newest_users).to match_array(five_recent_users_array)
+      end
     end
 
     context "with a number provided as arguments" do
-      it "returns the correct amount of users"
+      it "returns the correct amount of users" do
+        oldest_user
+        five_recent_users_array
+
+        expect(User.newest_users(6).count).to eq(6)
+      end
     end
   end
 
