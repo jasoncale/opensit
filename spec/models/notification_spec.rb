@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe Notification do
+  it "has a valid factory" do
+    expect(build(:notification)).to be_valid
+  end
 
   describe 'New comments' do
     before :each do
