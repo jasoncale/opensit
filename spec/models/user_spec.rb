@@ -256,8 +256,6 @@ describe User do
     end
   end
 
-
-
   describe "#new_notifications" do
     it "returns the number of unread notification"
   end
@@ -279,8 +277,6 @@ describe User do
       it "updates a user's attributes"
     end
   end
-
-
 
   describe "::newest_users" do
     context "with no provided arguments" do

@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
     links = []
     dates.each do |m|
       year, month = m
-      month_total = self.sits_by_month(year, month).count
+      month_total = self.sits_by_month(month: month, year: year).count
 
       if pointer != year
         year_total = self.sits_by_year(year).count
