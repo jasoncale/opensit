@@ -22,7 +22,6 @@
 /log/*.log
 /tmp
 /public/uploads
-*.sql
 
 /config/initializers/s3_login.rb
 
