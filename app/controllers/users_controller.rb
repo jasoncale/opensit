@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     else
       @feed_items = current_user.socialstream.paginate(:page => params[:page])
       @user = current_user
-      @latest = @user.latest_sits(current_user)
+      @latest = @user.latest_sits
 
       @title = 'Home'
       @page_class = 'me'
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @links = @user.stream_range
 
     if params[:y] && params[:m]
-      @sits = @user.sits_by_month(params[:y], params[:m]).newest_first
+      @sits = @user.sits_by_month(month: params[:m], year: params[:y]).newest_first
       @range_title = "#{Date::MONTHNAMES[params[:m].to_i]}, #{params[:y]}"
     elsif params[:y]
       @sits = @user.sits_by_year(params[:y]).newest_first
@@ -51,7 +51,6 @@ class UsersController < ApplicationController
   def following
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followed_users
-    @latest = @user.latest_sits(current_user)
 
     if @user == current_user
       @title = "People I follow"
@@ -67,7 +66,6 @@ class UsersController < ApplicationController
   def followers
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followers
-    @latest = @user.latest_sits(current_user)
 
     if @user == current_user
       @title = "People who follow me"
@@ -81,7 +79,6 @@ class UsersController < ApplicationController
 
   def explore
     @user = current_user
-    @latest = @user.latest_sits(current_user)
     @sits = Sit.public.newest_first.limit(10)
     @newest_users = User.newest_users
     @comments = Comment.latest(5)

@@ -1,9 +1,9 @@
 require 'textacular/searchable'
 
 class Sit < ActiveRecord::Base
-  attr_accessible :private, :disable_comments, :tag_list, :duration, :s_type, 
+  attr_accessible :private, :disable_comments, :tag_list, :duration, :s_type,
                   :body, :title, :created_at, :user_id, :views
-  
+
   belongs_to :user
   has_many :comments, :dependent => :destroy
   has_many :taggings
@@ -18,9 +18,9 @@ class Sit < ActiveRecord::Base
   validates_numericality_of :duration, greater_than: 0, only_integer: true
 
   # Scopes
-  scope :public, -> { where(private: false) } 
+  scope :public, -> { where(private: false) }
   scope :newest_first, -> { order("created_at DESC") }
-  
+
   # Pagination: sits per page
   self.per_page = 10
 
@@ -77,8 +77,8 @@ class Sit < ActiveRecord::Base
   def self.from_users_followed_by(user)
     followed_user_ids = "SELECT followed_id FROM relationships
                          WHERE follower_id = :user_id"
-    
-    where("(user_id IN (#{followed_user_ids}) AND private = false) OR user_id = :user_id", 
+
+    where("(user_id IN (#{followed_user_ids}) AND private = false) OR user_id = :user_id",
           user_id: user.id)
   end
 
@@ -114,4 +114,22 @@ class Sit < ActiveRecord::Base
   def likers
     Like.likers_for(self)
   end
-end                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        # 
+
+end                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        #
+
+# == Schema Information
+#
+# Table name: sits
+#
+#  body             :text
+#  created_at       :datetime         not null
+#  disable_comments :boolean
+#  duration         :integer
+#  id               :integer          not null, primary key
+#  private          :boolean          default(FALSE)
+#  s_type           :integer
+#  title            :string(255)
+#  updated_at       :datetime         not null
+#  user_id          :integer
+#  views            :integer          default(0)
+#

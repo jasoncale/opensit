@@ -2,7 +2,7 @@
 	<div class="top-row">
 		<div class="my-avatar"><%= small_avatar_of(@user) %></div>
 		<div class="my-basics"><span class="username"><%= username(@user) %></span>
-			<% if !@user.city.blank? || !@user.country.blank? %>
+			<% if @user.city? || @user.country? %>
 				<div class="my-location"><%= @user.location %></div>
 			<% end %>
 		</div>

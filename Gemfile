@@ -3,6 +3,7 @@ ruby "2.0.0"
 
 gem 'rails', '4.0.0'
 gem 'rack'
+gem 'heroku'
 
 group :development do
   gem 'better_errors'
@@ -13,8 +14,10 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'annotate', '2.5.0'
+  gem 'annotate'
   gem 'meta_request', '0.2.6'
+  gem 'jazz_hands'
+  gem 'pry-coolline'
 
   # Guard shizzle
   gem 'rb-inotify', '~> 0.9', require: false # Only needed on Linux. May need to install libnotify with OS's package manager
@@ -24,6 +27,7 @@ group :development, :test do
   gem 'guard-rails'   # Reloads Rails server when cached files like those in /config change
   gem 'guard-livereload' # Sends signal to Livereload extension in browser to reload page
   gem 'guard-migrate' # Automatically runs migrations when needed
+  gem 'terminal-notifier-guard', require: false
 end
 
 # Previously assets group

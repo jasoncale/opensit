@@ -2,8 +2,8 @@ require 'textacular/searchable'
 
 class User < ActiveRecord::Base
   attr_accessible :city, :country, :website, :default_sit_length, :dob,
-                  :password, :email, :first_name, :gender, :last_name, 
-                  :practice, :private_diary, :style, :user_type, :username, 
+                  :password, :email, :first_name, :gender, :last_name,
+                  :practice, :private_diary, :style, :user_type, :username,
                   :who, :why, :password_confirmation, :remember_me, :avatar,
                   :private_stream
 
@@ -17,25 +17,20 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
-  has_many :favourites, dependent: :destroy
   has_many :likes, dependent: :destroy
-
   has_many :notifications, :dependent => :destroy
-
+  has_many :favourites, dependent: :destroy
+  has_many :favourite_sits, through: :favourites,
+                            source: :favourable,
+                            source_type: "Sit"
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Devise :validatable (above) covers validation of email and password
-  validates :username, length: {minimum: 3, maximum: 20}
+  validates :username, length: { minimum: 3, maximum: 20 }
   validates_uniqueness_of :username
-  validate :check_empty_space
-  
-  # Don't allow any spaces in usernames
-  def check_empty_space
-    if self.username.match(/\s+/)
-      errors.add(:username, "cannot contain spaces.")
-    end
-  end
+  validates :username, no_empty_spaces: true
+  # validates :username, unique_page_name: true
 
   # Textacular: search these columns only
   extend Searchable(:username, :first_name, :last_name, :city, :country)
@@ -56,48 +51,45 @@ class User < ActiveRecord::Base
     username
   end
 
+  def city?
+    !city.blank?
+  end
+
+  def country?
+    !country.blank?
+  end
   ##
   # VIRTUAL ATTRIBUTES
   ##
 
   # Location based on whether/if city and country have been entered
   def location
-    if !self.city.blank? && !self.country.blank?
-      "#{self.city}, #{self.country}"
-    elsif !self.city.blank?
-      "#{self.city}"
-    elsif !self.country.blank?
-      "#{self.country}"
-    else
-    end
+    return "#{city}, #{country}" if city? && country?
+    return city if city?
+    return country if country?
   end
 
   def display_name
-    if self.first_name.blank?
-      self.username
-    else
-      "#{self.first_name} #{self.last_name}"
-    end
+    return username if first_name.blank?
+    return first_name if last_name.blank?
+    "#{first_name} #{last_name}"
   end
 
   ##
   # METHODS
   ##
 
-  def latest_sits(current)
-    sits = self.sits.newest_first.limit(3)
-    return sits if current.id == self.id
-    return sits.public
+  def latest_sits
+    sits.newest_first.limit(3)
   end
 
   def sits_by_year(year)
-    Sit.where("EXTRACT(year FROM created_at) = ? AND user_id = ?", 
-      year.to_s, self.id)
+    sits.where("EXTRACT(year FROM created_at) = ?", year.to_s)
   end
 
-  def sits_by_month(year, month)
-    Sit.where("EXTRACT(year FROM created_at) = ? AND EXTRACT(month FROM created_at) = ? AND user_id = ?",
-      year.to_s, month.to_s.rjust(2, '0'), self.id)
+  def sits_by_month(month: month, year: year)
+    sits.where("EXTRACT(year FROM created_at) = ?
+      AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0'))
   end
 
   def stream_range
@@ -106,7 +98,7 @@ class User < ActiveRecord::Base
     first_sit = Sit.where("user_id = ?", self.id).order(:created_at).first.created_at.strftime("%Y %m").split(' ')
     year, month = Time.now.strftime("%Y %m").split(' ')
     dates = []
-    
+
     # Build list of all months from first lsit to current date
     while [year.to_s, month.to_s.rjust(2, '0')] != first_sit
       month = month.to_i
@@ -128,25 +120,41 @@ class User < ActiveRecord::Base
     links = []
     dates.each do |m|
       year, month = m
-      month_total = self.sits_by_month(year, month).count
+      month_total = self.sits_by_month(month: month, year: year).count
 
       if pointer != year
         year_total = self.sits_by_year(year).count
         links <<  [year, year_total]
       end
-      
+
       if month_total != 0
         links << [month, month_total]
       end
-      
+
       pointer = year
     end
-    
+
     return links
   end
 
+  def socialstream
+    Sit.from_users_followed_by(self).newest_first
+  end
+
+  def private_stream=(value)
+    unless value.downcase == 'true' || value.downcase == 'false'
+      raise ArgumentError, "Argument must be either 'true' or 'false'"
+    end
+    sits.update_all(private: value)
+    write_attribute(:private_stream, value)
+  end
+
+  def favourited?(sit_id)
+    favourites.where(favourable_type: "Sit", favourable_id: sit_id).exists?
+  end
+
   def following?(other_user)
-    relationships.find_by_followed_id(other_user.id)
+    relationships.find_by_followed_id(other_user.id) ? true : false
   end
 
   def follow!(other_user)
@@ -158,55 +166,22 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id).destroy
   end
 
-  def socialstream
-    Sit.from_users_followed_by(self).newest_first
-  end
-
   def unread_count
     messages_received.unread.count unless messages_received.unread.count.zero?
   end
 
-  # Has this user favourited this sit?
-  def favourited?(id)
-    @sit = Sit.find_by_id(id)
-    @sit.favourites.where(:user_id => self.id).exists?
-  end
-
-  # Return a users favourites.
-  # Options:
-  #  :type (string) - defaults to Sit
-  #  :id (int) - select by favourable_id
-  #  :delve (bool) - return the favourited objects themselves
-  def get_favourites(opts={})
-  
-    type = opts[:type] ? opts[:type] : :sit
-    type = type.to_s.capitalize
-
-    favs = Favourite.where(user_id: self.id).where(favourable_type: type)
-
-    if opts[:id]
-      favs.where(favourable_id: opts[:id].to_s)
-    end
-    
-    case opts[:delve]
-    when nil, false, :false
-      return favs
-    when true, :true
-      # Get a list of all favourited object ids
-      # TODO: somehow order these by order in which they were favourited!
-      fav_ids = favs.collect{|f| f.favourable_id}
-
-      if fav_ids.size > 0
-        type_class = type.constantize
-        return type_class.where(id: fav_ids).where(private: false)
-      else
-        return []
-      end
-    end       
-  end
-
   def new_notifications
     notifications.unread.count unless notifications.unread.count.zero?
+  end
+
+  # Overwrite Devise function to allow profile update with password requirement
+  # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
+  def update_with_password(params={})
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    update_attributes(params)
   end
 
   # LIKES
@@ -224,15 +199,6 @@ class User < ActiveRecord::Base
     like.destroy
   end
 
-  def private_stream=(value)
-    if value == 'true'
-      self.sits.update_all(private: true)
-    elsif value == 'false'
-      self.sits.update_all(private: false)
-    end
-    write_attribute(:private_stream, value)
-  end
-
   ##
   # CLASS METHODS
   ##
@@ -241,13 +207,52 @@ class User < ActiveRecord::Base
     self.limit(count).newest_first
   end
 
-  # Overwrite Devise function to allow profile update with password requirement
-  # http://stackoverflow.com/questions/4101220/rails-3-devise-how-to-skip-the-current-password-when-editing-a-registratio?rq=1
-  def update_with_password(params={})
-    if params[:password].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation) if params[:password_confirmation].blank?
-    end
-    update_attributes(params)
-  end
 end
+
+# == Schema Information
+#
+# Table name: users
+#
+#  authentication_token   :string(255)
+#  avatar_content_type    :string(255)
+#  avatar_file_name       :string(255)
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
+#  city                   :string(255)
+#  confirmation_sent_at   :datetime
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  country                :string(255)
+#  created_at             :datetime         not null
+#  current_sign_in_at     :datetime
+#  current_sign_in_ip     :string(255)
+#  default_sit_length     :integer          default(30)
+#  dob                    :date
+#  email                  :string(255)
+#  encrypted_password     :string(128)      default(""), not null
+#  failed_attempts        :integer          default(0)
+#  first_name             :string(255)
+#  gender                 :integer
+#  id                     :integer          not null, primary key
+#  last_name              :string(255)
+#  last_sign_in_at        :datetime
+#  last_sign_in_ip        :string(255)
+#  locked_at              :datetime
+#  password_salt          :string(255)
+#  practice               :text
+#  private_diary          :boolean
+#  private_stream         :boolean          default(FALSE)
+#  remember_created_at    :datetime
+#  remember_token         :string(255)
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string(255)
+#  sign_in_count          :integer          default(0)
+#  style                  :string(100)
+#  unlock_token           :string(255)
+#  updated_at             :datetime         not null
+#  user_type              :integer
+#  username               :string(255)
+#  website                :string(100)
+#  who                    :text
+#  why                    :text
+#

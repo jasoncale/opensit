@@ -4,7 +4,7 @@ describe 'Users' do
 
   subject { page }
   before do
-    @buddha = create :user
+    @buddha = create :user, username: "buddha"
   end
 
   it 'should register a new user' do
@@ -21,13 +21,13 @@ describe 'Users' do
 
     it 'should be able to log in' do
       visit user_session_path
-      fill_in "user_email", with: "buddha@example.com"
-      fill_in "user_password", with: "gunsbitchesbling"
+      fill_in "user_email", with: "#{@buddha.email}"
+      fill_in "user_password", with: "#{@buddha.password}"
       click_on "Sign in"
 
       should have_content "Signed in successfully."
     end
-    
+
   end
 
   describe 'username urls' do

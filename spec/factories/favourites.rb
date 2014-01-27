@@ -1,9 +1,14 @@
-class Favourite < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :favourable, polymorphic: true
+FactoryGirl.define do
+  factory :favourite do
+    sequence :user_id do |n|
+      n
+    end
+    sequence :favourable_id do |n|
+      n
+    end
+    favourable_type "Sit"
 
-  validates_presence_of :user_id, :favourable_id, :favourable_type
-  attr_accessible :user_id, :favourable_type, :favourable_id
+  end
 end
 
 # == Schema Information

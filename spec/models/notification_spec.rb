@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe Notification do
+  it "has a valid factory" do
+    expect(build(:notification)).to be_valid
+  end
 
   describe 'New comments' do
     before :each do
-      @buddha = create :user
+      @buddha = create :user, username: 'buddha'
       @ananda = create :user, username: 'ananda'
       @sit = create :sit, user: @buddha
     end
@@ -47,7 +50,7 @@ describe Notification do
         @jesus = create :user, username: 'jesus'
       end
 
-      it 'notifies all others when a new comment is added' do  
+      it 'notifies all others when a new comment is added' do
         # Ananda comments on buddha's sit
         create :comment, sit: @sit, user: @ananda
         expect(@sit.commenters.count).to eq 1
@@ -57,7 +60,7 @@ describe Notification do
         create :comment, sit: @sit.reload, user: @dave
         create :comment, sit: @sit.reload, user: @jesus
 
-        expect(@sit.commenters.count).to eq 3     
+        expect(@sit.commenters.count).to eq 3
         expect(@buddha.notifications.unread.count).to eq 3
         expect(@ananda.notifications.unread.count).to eq 2
         expect(@dave.notifications.unread.count).to eq 1
@@ -80,7 +83,7 @@ describe Notification do
 
         # Buddha responds
         create :comment, sit: @sit.reload, user: @buddha
-      
+
         expect(@ananda.notifications.first.message)
           .to eq("buddha also commented on their own sit.")
       end
@@ -90,7 +93,7 @@ describe Notification do
 
   describe 'New followers' do
     it 'notifies user about new follower' do
-      @buddha = create :user
+      @buddha = create :user, username: 'buddha'
       @ananda = create :user, username: 'ananda'
 
       @buddha.follow!(@ananda)
@@ -118,3 +121,17 @@ describe Notification do
   end
 
 end
+
+# == Schema Information
+#
+# Table name: notifications
+#
+#  created_at :datetime
+#  id         :integer          not null, primary key
+#  initiator  :integer
+#  link       :string(255)
+#  message    :string(255)
+#  updated_at :datetime
+#  user_id    :integer
+#  viewed     :boolean          default(FALSE)
+#
