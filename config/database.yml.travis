@@ -1,0 +1,6 @@
+test:
+  adapter: opensit_test
+  database: myapp_test
+  username: postgres
+  pool: 5
+  timeout: 5000
