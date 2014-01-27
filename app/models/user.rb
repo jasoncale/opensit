@@ -194,7 +194,6 @@ class User < ActiveRecord::Base
 
 end
 
-
 # == Schema Information
 #
 # Table name: users
@@ -209,7 +208,7 @@ end
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  country                :string(255)
-#  created_at             :datetime
+#  created_at             :datetime         not null
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
 #  default_sit_length     :integer          default(30)
@@ -235,7 +234,7 @@ end
 #  sign_in_count          :integer          default(0)
 #  style                  :string(100)
 #  unlock_token           :string(255)
-#  updated_at             :datetime
+#  updated_at             :datetime         not null
 #  user_type              :integer
 #  username               :string(255)
 #  website                :string(100)

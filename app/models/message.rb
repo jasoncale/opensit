@@ -44,7 +44,7 @@ end
 # Table name: messages
 #
 #  body             :text
-#  created_at       :datetime
+#  created_at       :datetime         not null
 #  from_user_id     :integer
 #  id               :integer          not null, primary key
 #  read             :boolean          default(FALSE)
@@ -52,5 +52,5 @@ end
 #  sender_deleted   :boolean          default(FALSE)
 #  subject          :string(255)
 #  to_user_id       :integer
-#  updated_at       :datetime
+#  updated_at       :datetime         not null
 #
