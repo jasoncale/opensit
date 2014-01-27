@@ -62,12 +62,14 @@ describe User do
         )
     end
 
-    it "should not allow usernames that match a route name" do
-      expect { create :user, username: 'front' }.to raise_error(
-        ActiveRecord::RecordInvalid,
-        "Validation failed: Username 'front' is reserved"
-      )
-    end
+    # Used when we had /username routes
+    #
+    # it "should not allow usernames that match a route name" do
+    #   expect { create :user, username: 'front' }.to raise_error(
+    #     ActiveRecord::RecordInvalid,
+    #     "Validation failed: Username 'front' is reserved"
+    #   )
+    # end
   end
 
   describe "#to_param" do

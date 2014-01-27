@@ -17,13 +17,7 @@ class UsersController < ApplicationController
 
   # GET /u/buddha or /buddha
   def show
-    begin
-      @user = User.where("lower(username) = lower(?)", params[:username]).first!
-    rescue ActiveRecord::RecordNotFound
-      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
-      render 'public/404', status: 404, layout: false
-      return false
-    end
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @links = @user.stream_range
 
     if params[:y] && params[:m]
@@ -46,13 +40,7 @@ class UsersController < ApplicationController
 
   # GET /u/buddha/profile
   def profile
-    begin
-      @user = User.where("lower(username) = lower(?)", params[:username]).first!
-    rescue ActiveRecord::RecordNotFound
-      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
-      render 'public/404', status: 404, layout: false
-      return false
-    end
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @links = @user.stream_range
 
     @title = @user.display_name
@@ -61,13 +49,7 @@ class UsersController < ApplicationController
 
   # GET /u/buddha/following
   def following
-    begin
-      @user = User.where("lower(username) = lower(?)", params[:username]).first!
-    rescue ActiveRecord::RecordNotFound
-      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
-      render 'public/404', status: 404, layout: false
-      return false
-    end
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followed_users
 
     if @user == current_user
@@ -82,13 +64,7 @@ class UsersController < ApplicationController
 
   # GET /u/buddha/followers
   def followers
-    begin
-      @user = User.where("lower(username) = lower(?)", params[:username]).first!
-    rescue ActiveRecord::RecordNotFound
-      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
-      render 'public/404', status: 404, layout: false
-      return false
-    end
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followers
 
     if @user == current_user
@@ -117,13 +93,7 @@ class UsersController < ApplicationController
       @sits = Sit.public.newest_first.limit(50)
       @title = "Global SitStream - opensit.com"
     else
-      begin
-        @user = User.where("lower(username) = lower(?)", params[:username]).first!
-      rescue ActiveRecord::RecordNotFound
-        # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
-        render 'public/404', status: 404, layout: false
-        return false
-      end
+      @user = User.where("lower(username) = lower(?)", params[:username]).first!
       @title = "SitStream for #{@user.username}"
       @sits = @user.sits.public.newest_first.limit(20)
     end
@@ -138,13 +108,7 @@ class UsersController < ApplicationController
 
   # GET /u/buddha/export
   def export
-    begin
-      @user = User.where("lower(username) = lower(?)", params[:username]).first!
-    rescue ActiveRecord::RecordNotFound
-      # Ideally the below would just call 'not_found' but this leads to db timeouts (pool gets filled with stale)
-      render 'public/404', status: 404, layout: false
-      return false
-    end
+    @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @sits = Sit.where(:user_id => @user.id)
 
     respond_to do |format|

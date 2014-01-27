@@ -18,6 +18,13 @@ describe Notification do
       expect(@buddha.notifications.unread.count).to eq 1
       expect(@buddha.notifications.first.message)
         .to eq("ananda commented on your sit.")
+      expect(@buddha.notifications.first.initiator).to eq @ananda.id
+    end
+
+    it "links to the sit comment" do
+      # Ananda comments on the buddha's sit
+      @comment = create :comment, sit: @sit, user: @ananda
+      expect(@buddha.notifications.first.link).to eq "#{sit_path(@sit)}\#comment-#{@comment.id}"
     end
 
     it 'should not send a notification when user comments on own sit' do
@@ -92,8 +99,24 @@ describe Notification do
       @buddha.follow!(@ananda)
 
       expect(@ananda.notifications.unread.count).to eq 1
-      expect(@ananda.notifications.first.message)
-        .to eq 'buddha is now following you!'
+      expect(@ananda.notifications.first.message).to eq 'buddha is now following you!'
+      expect(@ananda.notifications.first.link).to eq user_path(@buddha)
+      expect(@ananda.notifications.first.initiator).to eq @buddha.id
+    end
+  end
+
+  describe 'Likes a sit' do
+    it 'notifies user that sit was liked' do
+      @buddha = create :user
+      @ananda = create :user, username: 'ananda'
+      @sit = create :sit, user: @buddha
+
+      @ananda.like!(@sit)
+
+      expect(@buddha.notifications.unread.count).to eq 1
+      expect(@buddha.notifications.first.message).to eq 'ananda likes your entry.'
+      expect(@buddha.notifications.first.link).to eq sit_path(@sit)
+      expect(@buddha.notifications.first.initiator).to eq @ananda.id
     end
   end
 

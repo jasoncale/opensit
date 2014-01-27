@@ -51,6 +51,12 @@ $(document).ready(function(){
     $(this).closest('form').submit();
   });
 
+  // LIKES / a sit
+  $('#like_button').on('click', '.toggle-like', function(e) {
+    e.preventDefault();
+    $(this).closest('form').submit();
+  });
+
   // EDIT PROFILE / private stream warning
   $('.edit-profile .private-stream input').click( function() {
     if ($(this).is(':checked')) {

@@ -1,0 +1,20 @@
+<% 
+if @sit.likers.blank?
+  text = 'Like it?'
+else
+	linked_names = (@sit.likers.map { |u| username(u) } * ', ')
+  text = pluralize(@sit.likes.count, 'person') 
+  if @sit.likes.count == 1
+ 		text << ' likes this'
+ 	else
+ 		text << ' like this'
+ 	end
+  if !@sit.likes.empty? 
+  	text << ": #{linked_names}"
+  end
+end 
+%>
+
+<div id="who_likes">
+	<%= raw text %>
+</div>

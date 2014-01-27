@@ -17,8 +17,9 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :likes, dependent: :destroy
   has_many :notifications, :dependent => :destroy
-  has_many :favourites
+  has_many :favourites, dependent: :destroy
   has_many :favourite_sits, through: :favourites,
                             source: :favourable,
                             source_type: "Sit"
@@ -29,7 +30,7 @@ class User < ActiveRecord::Base
   validates :username, length: { minimum: 3, maximum: 20 }
   validates_uniqueness_of :username
   validates :username, no_empty_spaces: true
-  validates :username, unique_page_name: true
+  # validates :username, unique_page_name: true
 
   # Textacular: search these columns only
   extend Searchable(:username, :first_name, :last_name, :city, :country)
@@ -183,6 +184,20 @@ class User < ActiveRecord::Base
     update_attributes(params)
   end
 
+  # LIKES
+
+  def like!(obj)
+    Like.create!(likeable_id: obj.id, likeable_type: obj.class.name, user_id: self.id)
+  end
+
+  def likes?(obj)
+    Like.where(likeable_id: obj.id, likeable_type: obj.class.name, user_id: self.id).present?
+  end
+
+  def unlike!(obj)
+    like = Like.where(likeable_id: obj.id, likeable_type: obj.class.name, user_id: self.id).first
+    like.destroy
+  end
 
   ##
   # CLASS METHODS
