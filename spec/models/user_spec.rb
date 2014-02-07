@@ -190,7 +190,7 @@ describe User do
       create(:sit, :one_year_ago, user: buddha)
     end
     let(:this_year) { Time.now.year }
-    let(:this_month) { Date.new.month }
+    let(:this_month) { Time.now.month }
 
     describe "#latest_sits" do
       it "returns the last 3 most recent sits for a user" do
