@@ -3,7 +3,7 @@ class FavouritesController < ApplicationController
 
 	def index
 		@user = current_user
-		@fav_sits = @user.favourite_sits
+		@favs = @user.favourite_sits
 		@latest = @user.latest_sits
 
 		@title = 'My favourites'
