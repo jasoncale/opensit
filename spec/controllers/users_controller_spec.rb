@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
   before do
-    @buddha = create :user
+    @buddha = create(:user, username: 'buddha')
   end
 
   describe 'GET /me' do
@@ -18,7 +18,7 @@ describe UsersController do
     context 'logged out' do
       it 'redirects to the front page' do
         get :me
-        expect(response).to redirect_to('/front') 
+        expect(response).to redirect_to('/front')
       end
     end
   end
@@ -91,7 +91,7 @@ describe UsersController do
       expect(response).to be_success
       expect(response.content_type).to eq("application/xml")
     end
-    
+
     it 'returns JSON' do
       sign_in @buddha
       get :export, username: 'buddha', format: 'json'
@@ -104,14 +104,14 @@ describe UsersController do
     before do
       @ananda = create :user, username: 'ananda'
       @sariputta = create :user, username: 'sariputta'
-      
+
       create :sit, user: @ananda, body: 'un'
       create :sit, user: @sariputta, body: 'deux'
-      create :sit, user: @sariputta, body: 'erpderp'     
+      create :sit, user: @sariputta, body: 'erpderp'
       create :sit, user: @buddha, body: 'trois'
       create :sit, user: @buddha, body: 'private!!!', private: true
     end
-    
+
     context 'user feed' do
       it 'should generate an Atom feed' do
         get :feed, username: 'buddha', format: 'atom'
@@ -133,12 +133,12 @@ describe UsersController do
         get :feed, username: 'buddha', format: 'atom'
 
         expect(response.body).to include('trois')
-        expect(response.body).to_not include('private!!!')   
+        expect(response.body).to_not include('private!!!')
       end
     end
 
     context 'global feed' do
-      before do    
+      before do
         get :feed, format: 'atom', scope: 'global'
       end
 
@@ -153,7 +153,7 @@ describe UsersController do
         expect(response.body).to include('deux')
         expect(response.body).to include('trois')
       end
-      
+
       it 'should not include private posts' do
         expect(response.body).to_not include('private!!!')
       end

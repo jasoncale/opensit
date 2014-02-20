@@ -1,13 +1,17 @@
-<footer> 
+<footer>
   <div class="footer-container">
-    <p class="footer-brand muted">OpenSit</p>
-    <p class="footer-text muted">Where Meditators Meet.</p>
-    <ul class="footer-links">
-      <li><%= link_to 'About', about_path %></li>
-      <li class="muted">&middot;</li>
-      <li><%= link_to 'Contact', contact_path %></li>
-      <li class="muted">&middot;</li>
-      <li><%= link_to 'Feedback and Support', 'http://opensit.uservoice.com/' %></li>
-    </ul>
+  <p class="follow">For updates and meditation content follow us on <a href="https://twitter.com/opensit"><i class="fa fa-twitter"></i> Twitter</a>, <a href="https://www.facebook.com/opensit.meditation"><i class="fa fa-facebook"></i> Facebook</a>, and <a href="https://www.google.com/+Opensitmeditation"><i class="fa fa-google-plus"></i> Google+</a></p>
+
+    <% if current_user && ['john', 'tombh', 'danbartlett'].include?(current_user.username) %>
+      <p class="admin"><%= User.count %> contemplatives, <%= Sit.count %> sits, and <%= Comment.count %> comments.</p>
+    <% else %>
+      <ul class="footer-links">
+        <li><%= link_to 'About', about_path %></li>
+        <li class="muted">&middot;</li>
+        <li><%= link_to 'Contact', contact_path %></li>
+        <li class="muted">&middot;</li>
+        <li><%= link_to 'Feedback and Support', 'http://opensit.uservoice.com/' %></li>
+      </ul>
+    <% end %>
   </div>
 </footer>

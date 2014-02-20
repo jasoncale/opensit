@@ -1,0 +1,22 @@
+<%# After AJAX load, form has no access to @sit so reload it %>
+<% unless (current_user and current_user.id == @sit.user_id) or !current_user %>
+
+	<div id="like_button" class="col-centered">
+    <% if current_user and current_user.likes?(@sit) %>
+			<%= form_for(@sit.likes.find_by_user_id(current_user.id), html: { method: :delete }, remote: true) do |f| %>
+				<div><%= f.hidden_field :likeable_id, :value => @sit.id %></div>
+			  <div><%= f.hidden_field :likeable_type, :value => 'Sit' %></div>
+			  <a href="#" title="Unlike it" class="toggle-like"><span class="fa fa-heart"></span></a>
+			<% end %>
+
+    <% else %>
+			<%= form_for(@sit.likes.build, remote: true) do |f| %>
+			  <div><%= f.hidden_field :likeable_id, :value => @sit.id %></div>
+			  <div><%= f.hidden_field :likeable_type, :value => 'Sit' %></div>
+			  <a href="#" title="Like it!" class="toggle-like"><span class="fa fa-heart-o"></span></a>
+			<% end %>
+    <% end %>
+
+  </div>
+
+<% end %>

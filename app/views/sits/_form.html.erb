@@ -9,49 +9,66 @@
     link_to 'Delete', sit_path(@sit), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger delete-entry pull-right'
     end %>
 
-    <% if !current_user.private_stream %>
-      <div class="privacy-options dropdown pull-right">
-        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-        <button type="button" class="btn privacy-button"><i class="fa fa-cog"></i> Privacy</button>
-      </a>
+
+  <% if !current_user.private_stream %>
+    <div class="dropdown privacy-options">
+      <button data-toggle="dropdown" href="#" type="button" class="btn btn-small privacy-button"><i class="fa fa-cog"></i> Privacy</button>
       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-        <li><%= f.input :private, label: 'Make this entry private'.html_safe %></li>
-        <li><%= f.input :disable_comments %></li>
+        <li>
+          <div class="checkbox boolean optional sit_private">
+            <input name="sit[private]" type="hidden" value="0" />
+            <label class="checkbox">
+              <input class="boolean optional" id="sit_private" name="sit[private]" type="checkbox" <%= @sit.private ? 'checked' : '' %> value="1" />
+              Make this entry private
+            </label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox boolean optional sit_disable_comments">
+            <input name="sit[disable_comments]" type="hidden" value="0" />
+            <label class="checkbox" for="sit_disable_comments">
+              <input class="boolean optional" id="sit_disable_comments" name="sit[disable_comments]" type="checkbox" <%= @sit.disable_comments ? 'checked' : '' %> value="1" />
+              Disable comments
+            </label>
+          </div>
+        </li>
       </ul>
-      </div>
-    <% else %>
-      <div class="pull-right">
-        <i class="fa fa-lock"></i> Your stream is private.
-      </div>
-    <% end %>
+    </div>
+  <% else %>
+    <i class="fa fa-lock"></i> Your stream is private.
+  <% end %>
 
-    <div class="sit_type control-group radio_buttons required">
-      <div class="controls">
-        <label class="radio sit_label">
-          <input <%= @sit.s_type == 0 || @sit.s_type.nil? ? 'checked' : '' %> class="radio_buttons required" id="sit_s_type_0" name="sit[s_type]" type="radio" value="0" />I just sat for <input class="string optional" id="sit_duration" name="sit[duration]" size="50" type="text" value="<%= current_page?(new_sit_path(@sit)) ? @user.default_sit_length : @sit.duration %>"> minutes
+  <div class="row">
+    <div class="col-lg-offset-2 col-sm-8 sit_type">
+      <div class="radio">
+        <label>
+          <input <%= @sit.s_type == 0 || @sit.s_type.nil? ? 'checked' : '' %> id="sit_s_type_0" name="sit[s_type]" type="radio" value="0" />
+          I just sat for <input class="optional form-control" id="sit_duration" name="sit[duration]" size="50" type="text" value="<%= current_page?(new_sit_path(@sit)) ? @user.default_sit_length : @sit.duration %>"> minutes
         </label>
-        <br><br>
-        <label class="radio diary_label">
-          <input <%= @sit.s_type == 1 ? 'checked' : '' %> class="radio_buttons required diary_type" id="sit_s_type_1" name="sit[s_type]" type="radio" value="1" />This is a diary entry.
+      </div>
+
+      <div class="radio">
+        <label>
+          <input <%= @sit.s_type == 1 ? 'checked' : '' %> class="diary_type" id="sit_s_type_1" name="sit[s_type]" type="radio" value="1" />This is a diary entry.
         </label>
       </div>
     </div>
-    
-    <br>
-    <div class="new-sit-title">
-      <%= f.input :title %>
-    </div>
-
-  <%= f.input :body, :label => 'What\'s happening?', :input_html => { :rows => 10, :autofocus => true, :class => "basic-form rich-textarea" } %>
-
-  <div class="new-sit-date">
-    <%= f.input :created_at, :as => 'string', :label => 'Date', :input_html => { :placeholder => 'Just now.', :value => current_page?(edit_sit_path(@sit)) ? @sit.created_at.strftime('%Y-%m-%d %H:%M') : '', :label => 'none', :class => 'datepicker' } %>
   </div>
 
-  <%= f.input :tag_list, :as => 'string', :label => 'Tags (separate by commas)' %>
-  
-  <div class="controls">
-    <%= f.submit :class => 'btn btn-large btn-primary pull-left' %>
+  <div class="new-sit-title">
+    <%= form_element(f, :title, 'sit', "Title", 4, { label: false }) %>
+  </div>
+
+  <%= form_element(f, :body, 'sit', "What happened?", 7, { label: false, input_html: { rows: 10, autofocus: true, class: "rich-textarea" }} ) %>
+
+  <%#= form_element(f, :created_at, 'sit', "Date", 2, { as: 'string', label: false, input_html: { placeholder: 'Just now.', value: current_page?(edit_sit_path(@sit)) ? @sit.created_at.strftime('%Y-%m-%d %H:%M') : '', label: 'none', class: 'datepicker' }} ) %>
+
+  <%= form_element(f, :tag_list, 'sit', "Tags", 2, { hint: 'Separate by commas', label: false }) %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit :class => 'btn btn-lg btn-primary' %>
+    </div>
   </div>
 
 <% end %>

@@ -1,9 +1,18 @@
-<div class="avatar-container"><%= large_avatar_of(@user) %></div>
+<%= large_avatar_of(@user) %>
 <div class="sidebar-content">
-	<div class="username"><%= username(@user) %></div>
+	<div class="username"><%= username(@user, false) %></div>
 	<% if !@user.city.blank? || !@user.country.blank? %>
-		<div class="location"><%= @user.location %></div>
+		<div class="location info-block">
+			<div class="icon"><i class="fa fa-map-marker"></i></div>
+			<div class="value"><%= @user.location %></div>
+		</div>
 	<% end %>
+  <% if !@user.website.blank? %>
+    <div class="user-website info-block">
+			<div class="icon"><i class="fa fa-home"></i></div>
+      <div class="value"> <%= website(@user) %></div>
+    </div>
+  <% end %>
 
 	<%= render 'shared/stats' %>
 

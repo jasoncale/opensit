@@ -11,5 +11,9 @@ class RegistrationsController < Devise::RegistrationsController
     super
     flash[:notice] = 'Your profile has been updated.'
   end
-  
+
+  def new
+    @page_class = 'sign-up-page'
+    super
+  end
 end

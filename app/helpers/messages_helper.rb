@@ -6,8 +6,6 @@ module MessagesHelper
 	end
 
 	def inbox_unread_count(user)
-		if user.unread_count
-			"(#{user.unread_count})"
-		end
+		user.unread_count if user.unread_count
 	end
 end

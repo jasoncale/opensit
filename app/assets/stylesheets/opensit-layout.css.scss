@@ -1,20 +1,8 @@
-@import 'grid';
-@import 'opensit-mixins';
-
-/**
- * GLOBAL LAYOUT
- ****************/
-
-/* Semantic.gs setup */
-$column-width: 60px;
-$gutter-width: 20px;
-$columns: 12;
-$total-width: 100%;
-$max-width: 1000px;
+@import 'opensit/base';
 
 html, body {
   height: 100%;
-  width: 100%; 
+  width: 100%;
 }
 
 /* Stop width-jumps by putting scrollbars on all pages */
@@ -23,25 +11,22 @@ html {
 }
 
 /* Sticky footer */
-$footer-height: 145px;
+$footer-height: 100px;
 
-/* Global container */
-.base-container {
-  min-height: 100%;
-  /* All content */
-  .page-content {
-    padding-top: 80px; /* Due to fixed nav bar */
-    overflow:auto;
-    padding-bottom: $footer-height;
-    width: $total-width;
-    max-width: $max-width;
-    margin: 0 auto;
-  }
+.container-full-width {
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-/* Pull navbar in to width of base layout */
-.navbar-inner .container {
-  max-width: $max-width !important;
+.base-container {
+  min-height: 100%;
+}
+
+.page-content {
+  padding-top: 80px; /* Due to fixed nav bar */
+  padding-bottom: 10px;
 }
 
 /* Section container for pages that have more than one column */
@@ -56,55 +41,46 @@ $footer-height: 145px;
 .spacer {
   float: left;
   clear: both;
-  height: 40px;
+  height: 20px;
 }
 
 /* Sidebar modules */
 .nav-module {
-  @include box-model;
+  @include rounded-bottom;
   float: left;
   width: 100%;
   margin-bottom: 20px;
-  border-radius: 5px;
-  border: 1px solid #e3e3e3;
 }
 
 /* Footer */
 footer {
-  background: #f2f2f2;
-  border-top: 1px solid #CCC;
+  background: #fff;
+  border-top: 1px solid #ccc;
   position: relative;
   margin-top: -$footer-height; /* negative value of footer height */
   height: $footer-height - 1;
   clear: both;
   .footer-container {
-    width: $total-width;
-    max-width: $max-width;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
-    .footer-brand {
-      font-family: 'Pacifico';
-      font-size: 2em;
-      margin: 30px 0 15px;
+    .follow {
+      margin: 20px 0 10px;
+      color: $dark-grey;
+      font-size: 1.1em;
     }
-    .footer-text {
-      font-size: 12px;
-      font-weight: bold;
-    }
-    .footer-links { 
+    .footer-links {
       margin: 10px 0;
-      font-size: 12px;
+      padding-left: 0;
       li {
         display: inline;
       }
     }
+    .admin {
+      color: $dark-grey;
+      font-size: 0.8em;
+    }
   }
-}
-
-/* Forms */
-.basic-form {
-  @include column(10);
-  margin: 0 10px 0 0;
 }
 
 .loading-indicator {
@@ -113,33 +89,71 @@ footer {
   clear: both;
   margin-left: 443px;
   margin-top: -47px;
+  color: $light-border;
+  font-size: 1.5em;
 }
 
 /**
  * MAIN PAGES
  ****************/
+.brand-header {
+  background: white;
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin: 4px 0 0 0;
+  border-bottom: 3px solid $green;
+  a {
+    text-decoration: none;
+  }
+  img {
+    width: 150px;
+  }
+  .opensit {
+    font-size: 1.6em;
+    margin-top: -10px;
+    color: $dark-grey;
+  }
+  .already-signed-up {
+    float: right;
+    font-size: 0.8em;
+    margin-top: -47px;
+    margin-right: 20px;
+    a {
+      margin-left: 8px;
+    }
+  }
+}
 
 /* Front page */
 .front-page {
-  .hero-unit {
-    margin: 30px 0;
+  .jumbotron {
+    border-bottom: 3px solid $green;
+    background: transparent url(image_path('women_sitting.jpg')) right center no-repeat;
+    background-size: cover;
+    text-align: center;
+    width: 100%;
     float: left;
-    padding: 60px 50px 30px 50px;
+    height: 400px;
+    padding: 60px 20px;
+    margin-bottom: 0;
+    .sign-up {
+      margin-top: 80px;
+      font-size: 1.3em;
+      border: 0;
+      padding: 15px 30px;
+    }
     .left {
-      float: left;
-      width: 60%;
       h1 {
         margin-bottom: 30px;
       }
     }
     .right {
-      float: right;
-      width: 40%;
       form {
         margin-top: 12px;
         float: right;
         div {
-          margin: 10px 0;
+          margin: 5px 0;
         }
         input[type="email"],
         input[type="text"],
@@ -147,76 +161,68 @@ footer {
           border-radius: 10px;
           line-height: 26px;
           font-size: 20px;
-          height: 40px;
+          height: 52px;
           width: 300px;
+        }
+        .btn-lg {
+          margin: 10px 15px 0 0;
         }
       }
     }
   }
   .three-panes {
-    float: left; 
-    margin: 30px 0 60px 0;
+    float: left;
+    width: 100%;
+    border-bottom: 3px solid $green;
+    color: $dark-grey;
+    padding-top: 20px;
+    background: white;
+    padding-left: 7.5%;
     .pane {
-      @include box-model;
-      float: left;
-      width: 33%;
+      border-radius: 20px;
+      font-size: 0.7em;
       padding: 10px 20px;
       text-align: center;
       i {
-        color: #695c8c;
+        color: lighten($link-color, 5%);
         font-size: 5em;
       }
     }
   }
-  .explore {
-    margin-top: 2em;
+  .padder {
+    float: left;
+    width: 100%;
+    padding: 10px 0 0 10px;
   }
 }
 
 /* Explore module */
-.explore-module {
-  float: left;
+.new-arrivals,
+.recent-comments {
   width: 100%;
-  h2 {
-    font-size: 20px;
-    line-height: 25px;
-    margin: 0 0 10px;
-  }
-  .global-sitstream {
-    @include column(6);
-    .sit-teaser {
-      width: 95%;
-    }
-  }
-  .right-column {
-    @include column(6);
-    .new-arrivals,
-    .recent-comments {
-      width: 100%;
-      margin-top: 30px;
-      float: left;
-    }
-    .new-arrivals {
-      .user {
-        float: left;
-        width: 100%;
-        margin: 5px 0;
-        img {
-          margin-right: 10px;
-        }
-      }
-    }
-    .recent-comments {
-      blockquote {
-        margin-top: 10px;
-        font-size: 0.9em;
-      }
-      .comment-info {
-        opacity: 0.7;
-      }
+  margin-top: 30px;
+  float: left;
+}
+.new-arrivals {
+  .user {
+    float: left;
+    width: 100%;
+    margin: 5px 0;
+    img {
+      margin-right: 10px;
     }
   }
 }
+.recent-comments {
+  blockquote {
+    margin-top: 10px;
+    font-size: 0.9em;
+  }
+  .comment-info {
+    opacity: 0.7;
+  }
+}
+
 
 /* Tag cloud */
 #tag_cloud {
@@ -224,4 +230,99 @@ footer {
   .s { font-size: 1em; }
   .m { font-size: 1.4em; }
   .l { font-size: 2em; }
+}
+
+// RESPONSIVE
+@media (max-width: 767px) {
+
+  // Sign up nav bar hint
+  .sign-up-nav {
+    .nav-text {
+      text-align: center;
+    }
+    .expanded {
+      display: none;
+    }
+    .btn-primary {
+      margin-left: 20px;
+    }
+  }
+
+  // Front page
+  .front-page {
+    .three-panes {
+      padding-left: 0;
+    }
+  }
+
+  // Brand header
+  .brand-header .already-signed-up {
+    margin: -8px 10px 10px 0;
+  }
+
+  // Contact
+  .contact {
+    img {
+      width: 150px;
+    }
+  }
+
+  // View sit
+  .view-sit {
+    .header-tile {
+      display: none;
+    }
+    .text-section {
+      .back-button {
+        margin-left: 0;
+      }
+      h1.sit-title {
+        font-size: 1.5em !important;
+        margin-bottom: 20px;
+      }
+      .body {
+        margin: 0 !important;
+        font-size: 1em !important;
+      }
+      .interactions {
+        .save-it {
+          text-align: center;
+          .save-it-text {
+            margin-left: 0;
+          }
+          .toggle-favourite {
+            margin: 0;
+          }
+        }
+        .like-it {
+          margin-top: 20px !important;
+        }
+        .share-buttons {
+          margin-top: 45px !important;
+          text-align: center !important;
+          .share-it {
+            margin: 0 !important;
+          }
+        }
+      }
+    }
+  }
+  .sidebar,
+  .col-md-9 {
+    width: 100%;
+    position: static; // Unclickable links fix
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .header-tile {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  // Footer
+  footer .footer-container .follow {
+    margin-right: 25px;
+    margin-left: 25px;
+    font-size: 0.9em;
+  }
 }

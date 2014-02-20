@@ -1,0 +1,17 @@
+<div class="user-teaser">
+  <div class="avatar"><%= small_avatar_of(u) %></div>
+  <div class="details">
+	  <div class="name"><%= link_to(user_path(u)) do %>
+		  <%= u.username %>
+		  <% if !u.first_name.blank? %>
+		  	(<%= u.display_name %>)
+		  <% end %>
+		 <% end %>
+	  </div>
+	  <div class="location"><%= u.location %></div>
+	  <div class="pull-right"><%= render :partial => "shared/follow_button", :locals => { :user => u } %></div>
+	 </div>
+	 <div>
+
+	 </div>
+</div>

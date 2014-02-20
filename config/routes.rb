@@ -1,7 +1,5 @@
 Opensit::Application.routes.draw do
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
   root :to => "users#me"
 
   devise_for :users, :controllers => { :registrations => "registrations" }
@@ -20,7 +18,9 @@ Opensit::Application.routes.draw do
   get 'front' => "pages#front"
   get 'about' => "pages#about"
   get 'contact' => "pages#contact"
-  get 'explore' => "users#explore"
+  get 'explore' => "pages#explore"
+  get 'explore/tags' => "pages#tag_cloud", :as => :explore_tags
+  get 'explore/users/new' => "pages#new_users", :as => :explore_new_users
   get 'global-feed' => "users#feed", :defaults => { :format => 'atom', :scope => 'global' }
 
   resources :sits do
@@ -31,13 +31,14 @@ Opensit::Application.routes.draw do
 
   get '/messages/sent' => "messages#sent", :as => :sent_messages
   resources :messages, except: [:edit, :update]
-  
+
   resources :relationships, only: [:create, :destroy]
 
   resources :favourites, only: [:create, :destroy]
 
+  resources :likes, only: [:create, :destroy]
+
   # Crawl live site, but not staging
   get 'robots.txt' => 'pages#robots'
 
-  ActiveAdmin.routes(self)
 end

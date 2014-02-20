@@ -1,5 +1,6 @@
 <% unless (current_user and current_user.id == @sit.user_id) or !current_user %>
-	<span id="favourite_button">
+	<p class="save-it-text">Save it?</p>
+	<span id="favourite_button" class="enable-tooltip" data-toggle="tooltip" data-placement="top">
     <% if current_user and current_user.favourited?(@sit.id) %>
       <%= render 'favourites/unfavourite' %>
     <% else %>

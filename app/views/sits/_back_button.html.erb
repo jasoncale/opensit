@@ -1,0 +1,9 @@
+<% if request.referrer =~ /search/ %>
+  <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to search results</a>
+<% elsif request.referrer =~ /explore/ %>
+  <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to explore</a>
+<% elsif request.referrer =~ /tags/ %>
+  <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to tag</a>
+<% elsif request.referrer =~ /favs/ %>
+  <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to favourites</a>
+<% end %>

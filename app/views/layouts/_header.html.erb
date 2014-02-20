@@ -1,54 +1,94 @@
-<header id="main-header">
-    <nav class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <%= link_to 'OpenSit', root_path, :class => 'brand' %>
-          <span class="alpha pull-left">alpha</span>
-          
-          <% if user_signed_in? %>
-            <span class="icons">
-              <%= link_to(notifications_path, class: 'pull-left', title: 'Notifications') do %>
-                <%= new_notifications(current_user) %>
-              <% end %>
-              <%= link_to(new_sit_path, class: 'pull-left', title: 'Add sit') do %>
-                <i class="fa fa-plus"></i>
-              <% end %>
-              <%= link_to(messages_path, class: 'pull-left', title: 'Inbox') do %>
-                <i class="fa fa-envelope"> <span class="unread-count"><%= current_user.unread_count %></span></i>
-              <% end %>
-            </span>
+<% if user_signed_in? %>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
 
-          <ul class="nav pull-right">
-            <% if !(request.path =~ /search/) %>
-              <li><form action="/search" class="navbar-search"><input type="text" name="q" placeholder="Search" /><input type="hidden" name="type" value="sits"></form></li>
-            <% end %>
-
-            <div class="btn-group pull-right">
-              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-cogs"></i>
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><%= link_to edit_user_registration_path do %>
-              <i class="fa fa-user"></i> &nbsp;Edit profile <% end %></li>
-                <div class="divider"></div>
-                <li><%= link_to(destroy_user_session_path, :method => :delete) do %> 
-              <i class="fa fa-sign-out"></i> &nbsp;Sign out <% end %></li>
-              </ul>
-            </div>
-          </ul>
-
-          <div class="loading-indicator">
-            <i class="fa fa-spinner fa-spin fa-2x"></i>
-          </div>
-          
-         <% else %>
-          <ul class="nav">
-            <li class="sign-up-link"><%= link_to "Sign up for free", new_user_registration_path %></li>
-            <li><%= link_to "Login", new_user_session_path %></li>
-          </ul>
-         <% end %>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="nav-logo">
+          <a class="navbar-brand" href="/">
+            <%= image_tag 'logomark_trans.png', class: 'nav-logomark' %> <span class="nav-logotype">opensit</span>
+          </a>
         </div>
       </div>
-    </nav>
-  </header>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+
+        <% if user_signed_in? %>
+          <li <%='class=active' if current_page?(notifications_path) %>>
+          <%= link_to(notifications_path, title: 'Notifications', class: 'nav-option') do %>
+            <%= new_notifications(current_user) %>
+          <% end %></li>
+          <li <%='class=active' if current_page?(new_sit_path) %>>
+          <%= link_to(new_sit_path, title: 'Add sit', class: 'nav-option') do %>
+            <i class="fa fa-plus"></i> <span class="nav-button-text">NEW</span>
+          <% end %></li>
+          <li <%='class=active' if current_page?(user_path(current_user)) %>>
+          <%= link_to(user_path(current_user), title: 'Me', class: 'nav-option') do %>
+            <i class="fa fa-user"></i> <span class="nav-button-text">ME</span>
+          <% end %></li>
+          <li <%='class=active' if current_page?(explore_path) %>>
+          <%= link_to(explore_path, title: 'Explore', class: 'nav-option') do %>
+            <i class="fa fa-globe"></i> <span class="nav-button-text">EXPLORE</span>
+          <% end %></li>
+        <% else %>
+          <% if !current_page?(new_user_session_path) %>
+            <p class="navbar-text">
+              <a href="/users/sign_in"><button class="btn btn-primary">Login</button></a>
+            </p>
+          <% end %>
+        <% end %>
+        <i class="loading-indicator fa fa-spinner fa-spin"></i>
+        </ul>
+
+
+        <div class="navbar-header navbar-right">
+          <% if user_signed_in? %>
+          <ul class="nav navbar-nav">
+            <li>
+              <form class="navbar-form navbar-right" role="search" action="/search">
+                <div class="form-group search-box">
+                  <input type="text" class="form-control" name="q" placeholder="Search">
+                  <input type="hidden" name="type" value="sits">
+                </div>
+              </form>
+            </li>
+            <li <%='class=active' if current_page?(messages_path) %>>
+            <%= link_to(messages_path, class: 'pull-left', title: 'Inbox', class: 'nav-option') do %>
+              <i class="fa fa-envelope"></i> <span class="unread-count"><%= current_user.unread_count %></span>
+            <% end %>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=small_avatar_of(current_user, 'nav') %> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to favs_path do %>
+                  <i class="fa fa-bookmark-o"></i> &nbsp;My favourites <% end %></li>
+                <li><%= link_to edit_user_registration_path do %>
+                  <i class="fa fa-user"></i> &nbsp;My profile <% end %></li>
+                <li><%= link_to(destroy_user_session_path, :method => :delete) do %>
+                <i class="fa fa-sign-out"></i> &nbsp;Sign out <% end %></li>
+              </ul>
+            </li>
+          </ul>
+          <% end %>
+        </div>
+      </div>
+
+    </div> <!-- end .container -->
+  </nav>
+<% elsif !controller_name.in? ['registrations', 'sessions'] %>
+  <nav class="navbar navbar-default navbar-fixed-top sign-up-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="nav-text">
+          <a href="/"><%= image_tag 'logomark_trans.png', class: 'nav-logomark' %></a>
+          OpenSit <span class="expanded">is a place to share and develop your meditation practice &mdash;</span> <a href="<%=new_user_registration_path%>" class="btn btn-default btn-primary">Sign up</a> or <a href="<%=new_user_session_path%>" class="login-link">Login</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+<% end %>

@@ -1,10 +1,10 @@
 class FavouritesController < ApplicationController
 	before_filter :authenticate_user!
-	
+
 	def index
 		@user = current_user
-		@favs = @user.get_favourites(:delve => true)
-		@latest = @user.latest_sits(current_user)
+		@favs = @user.favourite_sits
+		@latest = @user.latest_sits
 
 		@title = 'My favourites'
 		@page_class = 'favourites'

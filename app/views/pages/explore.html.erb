@@ -1,0 +1,15 @@
+<div class="sit-container">
+
+  <%= render 'explore_tile' %>
+
+  <% @sits.each do |sit| %>
+
+    <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => sit, :width => '3' } %>
+
+  <% end %>
+
+</div>
+
+<div class="pagination-container">
+  <%= will_paginate @sits, renderer: BootstrapPagination::Rails %>
+</div>

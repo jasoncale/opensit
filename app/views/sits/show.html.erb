@@ -1,33 +1,94 @@
-<header>
-  <h1 class="sit-title"><%= @sit.full_title %></h1>
-</header>
+<div class="sidebar col-md-3">
+  <%= render 'shared/user_summary' %>
+  <%= render 'sits/sit_meta' %>
+</div>
 
-<div class="body"><%= @sit.body.html_safe %></div>
+<div class="clearfix col-md-9">
+  <div class="text-section">
 
-<% if current_user and @sit.mine?(current_user) %>
-  <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-mini' %></div>
-<% end %>
+  <%= render 'back_button' %>
 
-<% if !@sit.disable_comments && !@sit.private %>
-  <div class="comments">
-    <% if !@sit.comments.empty? %>
-      <h3>Comments</h3>
+    <header>
+      <h1 class="sit-title"><%= @sit.full_title %></h1>
+      <div class="sit-stats">
+        <div class="stat">
+          <i class="fa fa-clock-o"></i> <%= time_ago_in_words(@sit.created_at) %> ago
+        </div>
+        <div class="stat">
+          <%= "<i class='fa fa-heart'></i> #{@sit.likes.count}".html_safe if @sit.liked? %>
+        </div>
+        <div class="stat">
+          <% if !@sit.tags.empty? %>
+            <span class="glyphicon glyphicon-tags"></span><%= tag_labels(@sit.tags) %>
+          <% end %>
+        </div>
+      </div>
+      <!-- <%= @sit.views %> views -->
+    </header>
+
+    <% if @sit.user.private_stream %>
+      <div class="private-warning"><i class="fa fa-lock"></i> Your stream is private.</div>
+    <% elsif @sit.private %>
+      <div class="private-warning"><i class="fa fa-lock"></i> This is a private entry. Only you can see it!</div>
     <% end %>
-    <div class="comments-list">
-      <% @sit.comments.each do |comment| 
-        @comment = comment %>
-        <%= render 'comments/comment' %>
-      <% end %>
+
+    <div class="body"><%= @sit.body.html_safe %></div>
+
+    <% if current_user and @sit.mine?(current_user) %>
+      <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-default btn-mini' %></div>
+    <% end %>
+
+    <div class="row">
+      <div class="interactions">
+        <div class="col-md-4 save-it">
+          <%= render :partial => 'shared/favourite_button' %>
+        </div>
+
+        <div class="col-md-4 like-it">
+          <div id="who_likes">
+            <%= render 'likes/like_module' %>
+          </div>
+
+          <%= render 'shared/like_button' %>
+        </div>
+
+        <div class="col-md-4 share-buttons">
+          <p class="share-it">Share it?</p>
+          <%
+            share_text = "#{@sit.full_title} by #{@sit.user.display_name} on @opensit, the free meditation journal: #{request.original_url}"
+          %>
+          <a title="Share on twitter" href="http://twitter.com/home?status=<%=share_text%>">
+            <i class="fa fa-twitter"></i></a>
+          <a title="Share on Facebook" href="http://www.facebook.com/sharer/sharer.php?u=<%=request.original_url%>">  <i class="fa fa-facebook"></i></a>
+          <a title="Share on Google+" href="https://plus.google.com/share?url=<%=request.original_url%>">
+            <i class="fa fa-google-plus"></i></a>
+        </div>
+      </div>
     </div>
 
-    <% if user_signed_in? %>
-    <div class="new-comment">
-      <%= simple_form_for [@sit, @sit.comments.build], :remote => 'true' do |f| %>
-        <%= f.input :body, :label => false, :input_html => { :rows => 3, :class => 'rich-textarea span12', :placeholder => 'Have your say.' } %>
-        <%= f.submit 'Add comment', :class => 'btn btn-primary pull-right' %>
-      <% end %>
-    </div>
-    <% end %>
+  </div>
 
-  <% end %>
+  <% if !@sit.disable_comments && !@sit.private %>
+    <div class="comments">
+      <% if !@sit.comments.empty? %>
+        <h2>Comments</h2>
+      <% end %>
+      <div class="comments-list">
+        <% @sit.comments.each do |comment|
+          @comment = comment %>
+          <%= render 'comments/comment' %>
+        <% end %>
+      </div>
+
+      <% if user_signed_in? %>
+      <div class="new-comment">
+        <%= simple_form_for [@sit, @sit.comments.build], :remote => 'true' do |f| %>
+          <%= f.input :body, :label => false, :input_html => { :rows => 3, :class => 'rich-textarea span12', :placeholder => 'Have your say.' } %>
+          <%= f.submit 'Add comment', :class => 'btn btn-primary btn-lg pull-right' %>
+        <% end %>
+      </div>
+      <% end %>
+
+    <% end %>
+  </div>
 </div>

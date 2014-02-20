@@ -1,69 +1,66 @@
-<h1>The Basics</h1>
+<h1>My Profile</h1>
 <hr>
-
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => :true, :method => :put , :class => 'form-horizontal'}) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="avatar-box">
-    <p>To change your avatar, select a new picture through <em>Choose File</em>, and then click Update below.</p>
-    <%= large_avatar_of(@user) %>
-    <!-- <a href="#" class="change-my-avatar">Change my avatar</a> -->
-    <%= f.file_field :avatar %>
+  <div class='form-group'>
+    <label class='col-lg-2 control-label' for='user_avatar'>Profile picture</label>
+    <div class="col-lg-10">
+      <div class="form-group string optional user_first_name">
+      <div class="col-lg-12"><%= large_avatar_of(@user) %>
+      <%= f.file_field :avatar %>
+      <p class="help-block"> To change your picture, select a new picture through <em>Choose File</em>, and then click Update below.</p></div>
+    </div></div>
   </div>
 
-  <%= f.input :first_name %>
+  <div class="update-details">
+    <%= f.submit "Update", :class => 'btn btn-lg btn-primary' %>
+  </div>
 
-  <%= f.input :last_name %>
+<h1>The Basics</h1>
+<hr>
+  <%= form_element(f, :first_name, 'user', "First Name", 3, { label: false }) %>
 
-  <%= f.input :dob, :as => :date, :label => 'Date of birth', :start_year => Date.today.year - 90,
-                          :end_year => Date.today.year - 12, :order => [:day, :month, :year],
-                          :include_blank => true, :input_html => { :class => 'span1' }
-                           %>
+  <%= form_element(f, :last_name, 'user', "Last Name", 3, { label: false }) %>
 
-  <%= f.input :gender, :collection => [['Male', 0], ['Female', 1], ['Transgender', 2]], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
+  <%= form_element(f, :dob, 'user', "Date of Birth", 3, { as: 'date', label: false, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:day, :month, :year], include_blank: true, input_html: { :class => 'col-lg-1' }} )%>
 
-  <%= f.input :city %>
+  <%= form_element(f, :gender, 'user', "Gender", 3, { collection: [['Male', 0], ['Female', 1], ['Transgender', 2]], as: :radio_buttons, item_wrapper_class: 'inline', label: false }) %>
 
-  <%= f.input :country %>
+  <%= form_element(f, :city, 'user', "City", 3, { label: false }) %>
 
-  <%= f.input :website %>
+  <%= form_element(f, :country, 'user', "Country", 3, { label: false }) %>
 
-  <%#= f.input :private_diary,
-              :hint => 'Don\'t allow others to view my diary entries.' %>
+  <%= form_element(f, :website, 'user', "Website", 3, { label: false }) %>
 
-  <div class="update-details well well-small">
-    <%= f.submit "Update", :class => 'btn btn-large btn-primary' %>
+  <div class="update-details">
+    <%= f.submit "Update", :class => 'btn btn-lg btn-primary' %>
   </div>
 
   <div class="contemplative-profile">
     <h1>Contemplative profile</h1>
     <hr>
 
-    <%= f.input :who, :label => 'Who are you?', :input_html => { :rows => 3, :class => 'basic-form' },
-                :hint => 'Tell us a little about yourself in one paragraph.' %>
+    <%= form_element(f, :who, 'user', "Who are you?", 8, { input_html: { rows: 3 }, hint: 'Tell us a little about yourself in one paragraph.', label: false }) %>
 
-    <%= f.input :style, :label => 'Style',
-                :hint => 'What style does your meditation practice stem from, or most closely resemble?' %>
+    <%= form_element(f, :style, 'user', "Meditation style", 3, { hint: 'Zen, TM, Vipassana etc.', label: false }) %>
 
-    <%= f.input :why, :label => 'Why do you practice?', :input_html => { :rows => 7, :class => 'basic-form rich-textarea' },
-                :hint => 'What inspires you to meditate? What do you hope to achieve?' %>
+    <%= form_element(f, :why, 'user', "Why do you practice?", 8, { input_html: { rows: 7, class: 'rich-textarea' }, hint: 'What inspires you to meditate?', label: false }) %>
 
-    <%= f.input :practice, :label => 'What do you practice?', :input_html => { :rows => 7, :class => 'basic-form rich-textarea' },
-                :hint => 'No two sits are the same, but tell us a little about your core meditation practice.<br />
-                What do you actually do when you sit down on the cushion and shut your eyes?' %>
+    <%= form_element(f, :practice, 'user', "What do you practice?", 8, { input_html: { rows: 7, class: 'rich-textarea' }, hint: 'What\'s your routine in an average sit?', label: false }) %>
 
-    <%= f.input :default_sit_length %>
+    <%= form_element(f, :default_sit_length, 'user', "Default sit length", 1, { label: false }) %>
   </div>
 
-  <div class="update-details well well-small">
-    <%= f.submit "Update", :class => 'btn btn-large btn-primary' %>
+  <div class="update-details">
+    <%= f.submit "Update", :class => 'btn btn-lg btn-primary' %>
   </div>
 
 <% end %>
 
 <div class="row account-misc">
 
-  <div class="span4">
+  <div class="col-md-4">
     <h1>Export</h1>
     <p>Download all my sits in:</p>
     <ul>
@@ -72,7 +69,7 @@
     </ul>
   </div>
 
-  <div class="span4">
+  <div class="col-md-4">
     <h1>Account</h1>
     <p>Warning: danger zone.</p>
     <ul>
@@ -81,35 +78,39 @@
     </ul>
   </div>
 
-  <div class="span4">
+  <div class="col-md-4">
     <h1>Privacy</h1>
 
     <p>Your stream is <%= @user.private_stream ? 'private' : 'public' %>.</p>
 
-    <a href="#privacyModal" role="button" class="btn" data-toggle="modal">Make it <%= @user.private_stream ? 'public' : 'private' %></a>
+    <a href="#privacyModal" role="button" class="btn btn-default" data-toggle="modal">Make it <%= @user.private_stream ? 'public' : 'private' %></a>
   </div>
 
 </div>
 
 <!-- Modal -->
-<div id="privacyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="privacyModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="privacyModalLabel">Warning!</h3>
-  </div>
-  <div class="modal-body">
-    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , :class => 'form-horizontal'}) do |f| %>
-      <% if @user.private_stream %>
-        <p>This will make <em>all</em> of your stream public! If there are any entries you wish to remain private, you will have to manually change their privacy settings afterwards.</p>
-        <%= f.input :private_stream, :as => :hidden, :input_html => { :value => "false" } %>
-      <% else %> 
-        <p>This will make your stream private, meaning only you can see it. You can change this back to public at any time, but when you do <strong>all</strong> of your content will be marked as public. If there's anything you wish to remain private, you will have to manually change the privacy settings on each entry.</p>
-        <%= f.input :private_stream, :as => :hidden, :input_html => { :value => "true" } %>
+<div id="privacyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="privacyModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="privacyModalLabel">Warning!</h3>
+    </div>
+    <div class="modal-body">
+      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , :class => 'form-horizontal'}) do |f| %>
+        <% if @user.private_stream %>
+          <p>This will make <em>all</em> of your stream public! If there are any entries you wish to remain private, you will have to manually change their privacy settings afterwards.</p>
+          <%= f.input :private_stream, :as => :hidden, :input_html => { :value => "false" } %>
+        <% else %>
+          <p>This will make your stream private, meaning only you can see it. You can change this back to public at any time, but when you do <strong>all</strong> of your content will be marked as public. If there's anything you wish to remain private, you will have to manually change the privacy settings on each entry.</p>
+          <%= f.input :private_stream, :as => :hidden, :input_html => { :value => "true" } %>
+        <% end %>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+      <%= f.submit "Update", :class => 'btn btn-primary' %>
       <% end %>
+    </div>
   </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-    <%= f.submit "Update", :class => 'btn btn-primary' %>
-    <% end %>
-  </div>
+</div>
 </div>

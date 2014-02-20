@@ -1,3 +1,5 @@
+@import 'opensit/base';
+
 .search-results {
 	input.big-search {
 		font-size: 30px;
@@ -14,29 +16,8 @@
 			font-size: 1.5em;
 		}
 	}
-	.user {
-		float: left;
-		width: 100%;
-		margin: 5px 0;
-		.avatar {
-			float: left;
-			width: 10%;
-		}
-		.details {
-			float: left;
-			width: 90%;
-			.name {
-				float: left;
-			}
-			.location {
-				float: left;
-				clear: left;
-				font-size: 0.9em;
-				color: #666;
-			}
-			.follow_form input {
-				margin-top: -45px;
-			}
-		}
-	}
+}
+
+.big-search {
+	margin-bottom: 20px;
 }

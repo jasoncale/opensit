@@ -2,8 +2,6 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
-
 require 'capybara/poltergeist'
 Capybara.default_driver = :poltergeist
 Capybara.default_wait_time = 10
@@ -48,7 +46,7 @@ RSpec.configure do |config|
 
   # Render views in controller tests otherwise you get a blank response.body
   config.render_views = true
-  
+
   # Database Cleaner
   # Note that transactions cause the seed data to not be seen by capybara. Thus the use of
   # truncation instead.

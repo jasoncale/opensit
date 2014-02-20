@@ -1,8 +1,10 @@
-<h1>Sits tagged '<%= params[:id] %>'</h1>
-<hr>
+<div class="sit-container">
+  <%= render 'tag_tile' %>
 
-<% @sits.each do |sit| %>
+	<% @sits.each do |sit| %>
 
-  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => sit } %>
+	  <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => sit, :width => 3 } %>
 
-<% end %>
+	<% end %>
+
+</div>

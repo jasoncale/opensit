@@ -1,0 +1,6 @@
+<% @comments.each do |comment| %>
+        <div class="comment">
+          <div class="comment-info"><%= username(comment.user) %> commented on <%= username(comment.sit.user) %>'s <%= link_to comment.sit.full_title, sit_path(comment.sit_id) %> (<%= time_ago_in_words(comment.created_at) %> ago) </div>
+          <blockquote><%= comment.body.html_safe %></blockquote>
+        </div>
+      <% end %>

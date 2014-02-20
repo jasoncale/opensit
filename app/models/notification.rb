@@ -45,8 +45,18 @@ class Notification < ActiveRecord::Base
         notify = Notification.create(
           message: "#{user.display_name} is now following you!",
           user_id: user_id,
-          link: "/u/#{user.username}",
+          link: Rails.application.routes.url_helpers.user_path(meta[:follower]),
           initiator: follower_id
+        )
+
+      when 'NewLikeOnSit'
+        username = meta[:liker].display_name
+        liker_id = meta[:liker].id
+        notify = Notification.create(
+          message: "#{username} likes your entry.",
+          user_id: user_id,
+          link: Rails.application.routes.url_helpers.sit_path(meta[:sit_link]),
+          initiator: liker_id
         )
     end
 
@@ -62,3 +72,17 @@ class Notification < ActiveRecord::Base
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: notifications
+#
+#  created_at :datetime
+#  id         :integer          not null, primary key
+#  initiator  :integer
+#  link       :string(255)
+#  message    :string(255)
+#  updated_at :datetime
+#  user_id    :integer
+#  viewed     :boolean          default(FALSE)
+#

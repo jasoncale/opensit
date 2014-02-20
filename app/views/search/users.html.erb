@@ -1,29 +1,14 @@
-<%= render :partial => "big_search" %>
+<div class="sidebar col-md-3">
+  <%= render 'search_tile' %>
+</div>
 
-<% if !@users.empty? %>
-	<% @users.each do |u| %>
-		<div class="user">
-		  <div class="avatar"><%= small_avatar_of(u) %></div>
-		  <div class="details">
-			  <div class="name"><%= link_to(user_path(u)) do %>
-				  <%= u.username %> 
-				  <% if !u.first_name.blank? %>
-				  	(<%= u.display_name %>)
-				  <% end %>
-				 <% end %>
-			  </div>
-			  <div class="location"><%= u.location %></div>
-			  <div class="pull-right"><%= render :partial => "shared/follow_button", :locals => { :user => u } %></div>
-			 </div>
-			 <div>
-
-			 </div>
-		</div>
+<div class="clearfix col-md-9">
+	<%= render :partial => "big_search" %>
+	<% if !@users.empty? %>
+		<% @users.each do |user| %>
+			<%= render :partial => 'shared/user', :locals => { :u => user } %>
+		<% end %>
+	<% else %>
+		<div class="message-box"><h2>No matches</h2></div>
 	<% end %>
-<% else %>
-	<div class="well"><h3>No matches</h3></div>
-<% end %>
-
-<div class="pagination-container">
-	<%= will_paginate @users, :class => 'pagination pagination-centered' %>
 </div>

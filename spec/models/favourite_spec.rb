@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Favourite do
+  it "has a valid factory" do
+    expect(build(:favourite)).to be_valid
+  end
+
   it { should belong_to(:favourable) }
   it { should belong_to(:user) }
 
@@ -12,3 +16,20 @@ describe Favourite do
   it { should respond_to(:favourable_id) }
   it { should respond_to(:favourable_type) }
 end
+
+# == Schema Information
+#
+# Table name: favourites
+#
+#  created_at      :datetime         not null
+#  favourable_id   :integer
+#  favourable_type :string(255)
+#  id              :integer          not null, primary key
+#  updated_at      :datetime         not null
+#  user_id         :integer
+#
+# Indexes
+#
+#  index_favourites_on_favourable_id  (favourable_id)
+#  index_favourites_on_user_id        (user_id)
+#

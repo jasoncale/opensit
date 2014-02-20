@@ -1,21 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="bUUwYz6cKVuhYbL7PtFunzsGV67I56tGyDldiHJgs7k" />
-    <title><%= full_title(@title) %></title>
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700|Pacifico' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-    <%= airbrake_javascript_notifier %>
-
-    <!-- UserVoice JavaScript SDK (only needed once on a page) -->
-    <script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/k0P7h6HxJQhRGClPw5M4kg.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
-  </head>
+  <%= render 'layouts/head' %>
 
   <body>
     <!-- A tab to launch the UserVoice Classic Widget -->
@@ -23,47 +9,45 @@
       UserVoice = window.UserVoice || [];
       UserVoice.push(['showTab', 'classic_widget', {
         mode: 'full',
-        primary_color: '#695c8c',
-        link_color: '#695c8c',
+        primary_color: '#63a961',
+        link_color: '#63a961',
         default_mode: 'support',
         forum_id: 208850,
         support_tab_name: 'Report issues',
         feedback_tab_name: 'Got an idea?',
         tab_label: 'Feedback & Support',
-        tab_color: '#695c8c',
+        tab_color: '#63a961',
         tab_position: 'bottom-right',
         tab_inverted: false
       }]);
     </script>
 
-  <div class="base-container">
+    <% if (controller_name.in? ['registrations', 'sessions']) && controller.action_name == 'new' %>
+      <%= render 'shared/brand_header' %>
+    <% end %>
 
-    <%= render 'layouts/header' %>
-
-    <div class="page-content <%= @page_class %>">
-      <% if flash[:notice] -%>
-        <div class="alert alert-success"><%= flash[:notice] %></div>
-      <% end %>
-      <% if flash[:error] -%>
-        <div class="alert alert-error"><%= flash[:notice] %></div>
+    <div class="container base-container">
+      <% if !current_page?(front_path) %>
+        <%= render 'layouts/header' %>
       <% end %>
 
-      <% action = "#{controller.controller_name}/#{controller.action_name}" %>
-      <% if action.in? ['sits/new', 'sits/edit', 'users/explore'] or controller.controller_name.in? ['registrations', 'tags', 'pages', 'sessions', 'notifications', 'passwords'] or request.path == '/sits' %>
-        <%= yield %>
-      <% else %>
-      <div class="row-fluid">
-        <div class="sidebar span3">
-          <%= render :partial => "shared/sidebar_#{controller.controller_name}" %>
-        </div>
-        <div class="span9">
+      <div class="page-content container <%= @page_class %>">
+<!--         <% if flash[:notice] -%>
+          <div class="alert alert-success"><%= flash[:notice] %></div>
+        <% end %>
+        <% if flash[:error] -%>
+          <div class="alert alert-error"><%= flash[:notice] %></div>
+        <% end %> -->
+
+        <div class="row">
           <%= yield %>
         </div>
+
       </div>
-      <% end %>
 
       <div class="spacer"></div>
     </div>
+
 
   </div> <!-- end #base-container -->
 

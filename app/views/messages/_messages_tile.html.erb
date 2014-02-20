@@ -1,0 +1,21 @@
+<div class="header-tile tile stamp col-md-3">
+	<div class="content">
+		<h2>Messaging</h2>
+
+	   <ul class="nav nav-pills nav-stacked">
+	      <li <%='class=active' if current_page?(new_message_path) %>>
+	        <a href="<%=new_message_path%>" class="item"><i class="pull-left fa fa-edit"></i> New message</a>
+	      </li>
+		  	<li <%='class=active' if current_page?(messages_path) %>>
+				  <%= link_to(messages_path) do %>
+				  	<i class="fa fa-envelope-o"></i> Inbox <span class="badge"><%= inbox_unread_count(@user) %></span>
+				  <% end %>
+				</li>
+				<li <%='class=active' if current_page?(sent_messages_path) %>>
+		  		<%= link_to(sent_messages_path) do %>
+		  			<i class="fa fa-share"></i> Sent messages
+		  		<% end %>
+		 		</li>
+		 </ul>
+		</div>
+</div>

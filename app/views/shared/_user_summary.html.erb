@@ -1,13 +1,52 @@
-<div class="nav-module user-summary">
-	<div class="top-row">
-		<div class="my-avatar"><%= small_avatar_of(@user) %></div>
-		<div class="my-basics"><span class="username"><%= username(@user) %></span>
-			<% if !@user.city.blank? || !@user.country.blank? %>
-				<div class="my-location"><%= @user.location %></div>
-			<% end %>
-		</div>
-	</div>
+<div class="stamp header-tile col-md-3 tile">
+  <div class="content">
+    <div class="user-summary">
+    	<div class="avatar">
+    		<%= small_avatar_of(@user) %>
+    	</div>
+    	<div class="details">
+    		<div class="username"><%= username(@user) %></div>
+    		<% if !@user.city.blank? || !@user.country.blank? %>
+    			<div class="location"><%= @user.location %></div>
+    		<% end %>
+    	</div>
+      <%= render 'shared/stats' %>
+      <%= render 'shared/follow_button', :user => @user %>
+    </div>
 
-	<%= render 'shared/stats' %>
-	<%= render 'shared/follow_button', :user => @user %>
+    <% if @latest.empty? %>
+      <% if current_user && (current_user.id == @user.id) %>
+          <div class="add-a-sit">
+            <a href="<%=new_sit_path%>" class="btn btn-lg btn-primary"> <i class="fa fa-plus"></i> Add your first sit</a></div>
+      <% end %>
+    <% else %>
+      <div class="recent-activity">
+        <% @latest.each do |sit| %>
+          <div class="activity">
+            <div class="icon">
+              <% if sit.s_type == 0 %>
+                <i class="fa fa-clock-o"></i>
+              <% else %>
+                <i class="fa fa-book"></i>
+              <% end %>
+            </div>
+            <div class="details">
+              <div class="title">
+                <% if sit.s_type == 0 %>
+                  <%= sit.duration %> minutes
+                <% else %>
+                  <%= sit.title %>
+                <% end %>
+                <span class="pull-right date"><%= time_ago_in_words(sit.created_at) %> ago</span>
+              </div>
+              <div class="body">
+                <%= teaser(sit, 50) %>
+              </div>
+            </div>
+            <a href="<%= sit_path(sit) %>" class="sit-link hidden"></a>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
