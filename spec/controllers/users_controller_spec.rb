@@ -23,7 +23,7 @@ describe UsersController do
     end
   end
 
-  describe 'GET /u/:username or /:username' do
+  describe 'GET /u/:username' do
     it 'displays user page' do
       get :show, username: 'buddha'
       expect(assigns(:user)).to eq(@buddha)
@@ -31,12 +31,12 @@ describe UsersController do
     end
   end
 
-  describe 'GET /u/:username/profile' do
+  describe 'Profiles details and edit' do
     context 'someone elses' do
       it 'load profile' do
         @ananda = create :user, username: 'ananda', why: 'to get sat0ri'
         sign_in @buddha
-        get :profile, username: 'ananda'
+        get :show, username: 'ananda'
         expect(assigns(:user)).to eq(@ananda)
         expect(response.body).to include('to get sat0ri')
         expect(response.body).to_not have_css('a.edit-profile-btn', text: 'Edit profile')
@@ -46,7 +46,7 @@ describe UsersController do
       it 'load profile with edit button' do
         @deva = create :user, username: 'deva', why: 'seduce lustful practitioners'
         sign_in @deva
-        get :profile, username: 'deva'
+        get :show, username: 'deva'
         expect(assigns(:user)).to eq(@deva)
         expect(response.body).to include('seduce lustful practitioners')
         expect(response.body).to have_css('a.edit-profile-btn', text: 'Edit profile')
@@ -73,14 +73,6 @@ describe UsersController do
       expect(response).to be_success
       expect(response).to render_template("users/show_follow")
       expect(response.body).to have_selector('h3', text: 'People who follow me')
-    end
-  end
-
-  describe 'GET /explore' do
-    it 'loads' do
-      sign_in @buddha
-      get :explore
-      expect(response).to be_success
     end
   end
 

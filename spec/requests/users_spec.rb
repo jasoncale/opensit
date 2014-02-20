@@ -8,7 +8,7 @@ describe 'Users' do
   end
 
   it 'should register a new user' do
-    visit '/'
+    visit new_user_registration_path
     fill_in "user_username", with: "newbie"
     fill_in "user_email", with: "newbie@samsara.com"
     fill_in "user_password", with: "gunsbitchesbling"
@@ -23,7 +23,9 @@ describe 'Users' do
       visit user_session_path
       fill_in "user_email", with: "#{@buddha.email}"
       fill_in "user_password", with: "#{@buddha.password}"
-      click_on "Sign in"
+      within(".new_user") do
+        click_on "Login"
+      end
 
       should have_content "Signed in successfully."
     end

@@ -32,7 +32,7 @@ class PagesController < ApplicationController
   end
 
   def new_users
-    @newest_users = User.newest_users
+    @newest_users = User.newest_users(10)
     @page_class = 'new-users'
   end
 

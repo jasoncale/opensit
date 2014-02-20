@@ -2,7 +2,7 @@ module UsersHelper
 
   def small_avatar_of(user, location = nil)
     if location == 'nav'
-      image_link = user.avatar.blank? ? 'http://placehold.it/38x38' : user.avatar.url(:small_thumb)
+      image_link = user.avatar.blank? ? image_path('/images/default_50.png') : user.avatar.url(:small_thumb)
       image_tag image_link, size: "38x38", alt: user.username, title: user.username
     else
       image_link = user.avatar.blank? ? image_path('/images/default_50.png') : user.avatar.url(:small_thumb)

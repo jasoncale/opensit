@@ -3,10 +3,10 @@
 </div>
 
 <div class="clearfix col-md-9">
+	<h3><%= @title %></h3>
+	<hr>
 
 	<% if @users.any? %>
-		<h3 class="title"><%= @title %></h3>
-		<hr>
 
 	  <div class="user_avatars">
 	    <% @users.each do |user| %>

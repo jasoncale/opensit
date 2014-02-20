@@ -185,10 +185,6 @@ class User < ActiveRecord::Base
     update_attributes(params)
   end
 
-  def new_notifications
-    notifications.unread.count unless notifications.unread.count.zero?
-  end
-
   # LIKES
 
   def like!(obj)
@@ -202,17 +198,6 @@ class User < ActiveRecord::Base
   def unlike!(obj)
     like = Like.where(likeable_id: obj.id, likeable_type: obj.class.name, user_id: self.id).first
     like.destroy
-  end
-
-  # PRIVATE STREAM
-
-  def private_stream=(value)
-    if value == 'true'
-      self.sits.update_all(private: true)
-    elsif value == 'false'
-      self.sits.update_all(private: false)
-    end
-    write_attribute(:private_stream, value)
   end
 
   # STATS

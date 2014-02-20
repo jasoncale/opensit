@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     # is not working correctly.
     #
     # After hours of trying other workarounds, I believe we're experiencing
-    # a bug within rails itself, or more specifically, between rails 4 and the 
+    # a bug within rails itself, or more specifically, between rails 4 and the
     # postgres adapter: https://github.com/rails/rails/issues/12867
     #
     # raise ActionController::RoutingError.new('Not Found')
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) do |u| 
+      devise_parameter_sanitizer.for(:sign_up) do |u|
         u.permit(:username, :email, :password, :password_confirmation)
       end
 
