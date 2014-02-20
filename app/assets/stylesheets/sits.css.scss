@@ -65,7 +65,6 @@ article.sit-teaser-block {
     font-size: 0.7em;
     float: left;
     width: 100%;
-    // border: 1px solid #ccc;
     border-top: $green 3px solid;
     background: #fff;
     border-radius: 0 0 5px 5px;
@@ -102,7 +101,7 @@ article.sit-teaser-block {
   }
 }
 
-/* Sit full */
+/* View sit */
 .view-sit {
   h1.sit-title {
     text-align: center;
@@ -111,7 +110,6 @@ article.sit-teaser-block {
   .text-section {
     .sit-stats {
       width: 100%;
-      // font-family: 'Georgia';
       text-align: center;
       margin-bottom: 40px;
       opacity: 0.5;
@@ -271,6 +269,7 @@ article.sit-teaser-block {
   }
 }
 
+/* Journal next/prev and date */
 .sidebar .sit-meta {
   border-top: $green 3px solid;
   background: #fff;

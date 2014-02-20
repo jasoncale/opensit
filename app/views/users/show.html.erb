@@ -1,5 +1,13 @@
 <div class="sidebar col-md-3">
-  <%= render :partial => "shared/sidebar_users" %>
+  <%= render 'shared/full_user' %>
+
+  <% if !@user.sits.empty? %>
+    <div class="nav-module my-timeline">
+      <ul>
+      <%= timeline(@links) %>
+      </ul>
+    </div>
+  <% end %>
 </div>
 
 <div class="clearfix col-md-9">

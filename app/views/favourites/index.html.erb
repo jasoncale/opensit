@@ -5,7 +5,7 @@
 			<p><strong>Tip!</strong> Click <i class="fa fa-bookmark-o"></i> on any sit to save it to your favourites.</p>
 		</div>
 	</div>
-	<% @favs.each do |f| %>
+	<% @fav_sits.each do |f| %>
 	  <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => f, :width => 3 } %>
 	<% end %>
 </div>

@@ -142,7 +142,7 @@ $(document).ready(function(){
   }
 });
 
-// Loading indicator and Google Analytics
+// Loading indicator
 $(document).on('page:fetch', function() {
   $(".loading-indicator").show();
 });

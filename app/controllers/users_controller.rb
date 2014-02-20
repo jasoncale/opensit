@@ -38,15 +38,6 @@ class UsersController < ApplicationController
     @page_class = 'view-user'
   end
 
-  # GET /u/buddha/profile
-  def profile
-    @user = User.where("lower(username) = lower(?)", params[:username]).first!
-    @links = @user.stream_range
-
-    @title = @user.display_name
-    @page_class = 'view-profile'
-  end
-
   # GET /u/buddha/following
   def following
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
@@ -77,16 +68,6 @@ class UsersController < ApplicationController
 
     @page_class = 'followers'
     render 'show_follow'
-  end
-
-  def explore
-    @user = current_user
-    @sits = Sit.public.newest_first.limit(10)
-    @newest_users = User.newest_users
-    @comments = Comment.latest(5)
-
-    @title = 'Explore'
-    @page_class = 'explore'
   end
 
   # Generate atom feed for user or all public content (global)

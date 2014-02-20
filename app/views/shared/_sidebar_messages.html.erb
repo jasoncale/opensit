@@ -1,9 +1,0 @@
-<ul class="nav nav-list">
-  <li class="nav-header">Compose</li>
-  <li><%= link_to 'New message', new_message_path %></li>
-  <li class="nav-header">Messages</li>
-  <li><%= link_to(messages_path) do %>
-  	Inbox <%= inbox_unread_count(@user) %>
-  <% end %></li>
-  <li><%= link_to 'Sent items', sent_messages_path %></li>
-</ul>

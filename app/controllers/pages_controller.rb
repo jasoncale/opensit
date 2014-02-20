@@ -5,9 +5,6 @@ class PagesController < ApplicationController
     end
 
     @sits = Sit.public.newest_first.limit(30)
-    @newest_users = User.newest_users
-    @comments = Comment.latest(5)
-
     @page_class = 'front-page'
 
     render 'front', layout: 'minimal'
@@ -26,19 +23,21 @@ class PagesController < ApplicationController
   def explore
     @user = current_user
     @sits = Sit.public.newest_first.limit(20).paginate(:page => params[:page])
-    @comments = Comment.latest(5)
 
     @title = 'Explore'
     @page_class = 'explore'
   end
 
   def tag_cloud
-
   end
 
   def new_users
     @newest_users = User.newest_users
     @page_class = 'new-users'
+  end
+
+  def new_comments
+    @comments = Comment.latest(5)
   end
 
   def active_users

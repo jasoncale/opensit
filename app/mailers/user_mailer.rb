@@ -1,3 +1,3 @@
 class UserMailer < ActionMailer::Base
-  default from: "zenbot@opensit.com"
+  default from: "hello@opensit.com"
 end

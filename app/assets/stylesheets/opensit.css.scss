@@ -1,0 +1,503 @@
+@import 'opensit/base';
+
+/*
+ *    LAYOUT
+ ************************/
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+/* Stop width-jumps by putting scrollbars on all pages */
+html {
+  overflow-y: scroll;
+}
+
+body {
+  background-color: $background;
+  font-size: 18px;
+}
+
+/* Sticky footer */
+$footer-height: 100px;
+
+.container-full-width {
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.base-container {
+  min-height: 100%;
+}
+
+.page-content {
+  padding-top: 80px; /* Due to fixed nav bar */
+  padding-bottom: 10px;
+}
+
+/* Section container for pages that have more than one column */
+.pagination-container {
+  margin: 20px 0 0 0;
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+
+/* Give content some padding between footer without breaking sticky footer */
+.spacer {
+  float: left;
+  clear: both;
+  height: 20px;
+}
+
+h3.title {
+  line-height: 5px;
+}
+
+/* Footer */
+footer {
+  background: #fff;
+  border-top: 1px solid #ccc;
+  position: relative;
+  margin-top: -$footer-height; /* negative value of footer height */
+  height: $footer-height - 1;
+  clear: both;
+  .footer-container {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    .follow {
+      margin: 20px 0 10px;
+      color: $dark-grey;
+      font-size: 1.1em;
+    }
+    .footer-links {
+      margin: 10px 0;
+      padding-left: 0;
+      li {
+        display: inline;
+      }
+    }
+    .admin {
+      color: $dark-grey;
+      font-size: 0.8em;
+    }
+  }
+}
+
+/*
+ *    NAVIGATION
+ *******************************/
+
+// NAVBAR
+$bgDefault      : $navbar;
+$bgHighlight    : #222;
+$colDefault     : $green;
+$colHighlight   : whitesmoke;
+
+.navbar-default {
+  background-color: $bgDefault;
+  // border-color: $bgHighlight;
+  .nav-logo {
+    margin-right: 20px;
+    float: left;
+    .navbar-brand {
+      padding: 0;
+      font-size: 1.6em;
+    }
+    .nav-logomark {
+      float: left;
+      width: 82px;
+      margin-top: 4px;
+      margin-right: 4px;
+    }
+    .nav-logotype {
+      color: #fcf9f6;
+      float: left;
+      margin-top: 21px;
+      &:hover {
+        color: white;
+      }
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .navbar-brand {
+    color: $colDefault;
+    &:hover, &:focus {
+      color: $colHighlight;
+    }
+  }
+  .navbar-nav {
+    > li {
+      > a.nav-option {
+        font-size: 1.1em;
+        padding-top: 23px;
+        padding-bottom: 23px;
+        color: $colDefault;
+        &:hover, &:focus {
+          background-color: $bgHighlight;
+          color: whitesmoke;   }
+        }
+        i {
+          font-size: 1em;
+        }
+        .nav-button-text {
+          font-size: 0.6em;
+          font-weight: bold;
+        }
+      }
+      .active {
+        > a, > a:hover, > a:focus {
+          color: $colHighlight;
+          background-color: $bgHighlight;
+        }
+        .nav-option {
+          color: $colHighlight;
+        }
+      }
+      .open {
+        > a, > a:hover, > a:focus {
+          color: $colHighlight;
+          background-color: $bgHighlight;
+          .caret {
+            border-top-color: $colHighlight;
+            border-bottom-color: $colHighlight;
+          }
+        }
+      }
+      > .dropdown {
+        > a {
+          .caret {
+            border-top-color: $colDefault;
+            border-bottom-color: $colDefault;
+          }
+          &:hover, &:focus {
+            .caret {
+              border-top-color: $colHighlight;
+              border-bottom-color: $colHighlight;}}}}}
+          .dropdown-menu {
+              a {
+                font-size: 13px;
+                margin: 5px 0;
+                &:hover {
+                  background: $green;
+                }
+              }
+              .divider {
+                  background-color: $colDefault;
+              }
+        }
+        .search-box {
+          margin-top: 10px;
+        }
+  .navbar-toggle {
+      border-color: $bgHighlight;
+      margin-top: 15px;
+      &:hover, &:focus {
+          background-color: $bgHighlight; }
+      .icon-bar {
+          background-color: $colDefault; }}}
+  .navbar-collapse,
+  .navbar-form {
+      border-color: $colDefault; }
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: $colDefault;
+        &:hover, &:focus {
+            color: $colHighlight;
+            background-color: $bgHighlight; }}
+}
+
+// Guest nav bar - sign up or login
+.sign-up-nav {
+  background: $navbar;
+  height: 66px;
+  .nav-text {
+    img {
+      width: 80px;
+      margin-top: -10px;
+    }
+    .login-link {
+      text-decoration: underline;
+      color: white;
+    }
+    color: white;
+    float: none;
+    margin-top: 10px;
+  }
+}
+
+/*
+ *    CORE ELEMENTS
+ *******************************/
+
+/* Sidebar */
+.sidebar {
+  float: left;
+  img.polaroid {
+    padding: 3px;
+    border: 1px solid #CCC;
+    -moz-box-shadow: 5px 5px 3px #888;
+    -webkit-box-shadow: 5px 5px 3px #888;
+    box-shadow: 5px 5px 3px #888;
+  }
+}
+
+/* Header tiles */
+.header-tile {
+  padding: 0 10px 10px 0;
+  .content {
+    @include rounded-bottom;
+    border-top: $green 3px solid;
+    float: left;
+    width: 100%;
+    background: white;
+    padding: 0 10px 10px 20px;
+    .nav-stacked {
+      i {
+        margin: 3px 10px 0 0;
+      }
+      .badge {
+        float: right;
+        background: #999;
+        color: white;
+        margin-top: 3px;
+      }
+      .active a {
+        background: $green;
+        color: white;
+      }
+    }
+    p {
+      opacity: 0.7;
+      font-size: 0.8em;
+    }
+  }
+}
+.sidebar .header-tile {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+/* Large white text section. e.g. viewing a sit */
+.text-section {
+  background: white;
+  padding: 20px;
+  border-top: 3px solid $green;
+  float: left;
+  width: 100%;
+  @include rounded-bottom;
+  h1 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+}
+
+/* Message boxes */
+.message-box {
+  @include rounded-bottom;
+  border-top: $green 3px solid;
+  background: white;
+  float: left;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+  h2 {
+    margin: 7px 0 15px;
+  }
+}
+
+/* Sidebar modules */
+.nav-module {
+  @include rounded-bottom;
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loading-indicator {
+  display: none;
+  float: left;
+  clear: both;
+  margin-left: 443px;
+  margin-top: -47px;
+  color: $light-border;
+  font-size: 1.5em;
+}
+
+/* Brand header: front page, sign up, sign in */
+.brand-header {
+  background: white;
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin: 4px 0 0 0;
+  border-bottom: 3px solid $green;
+  a {
+    text-decoration: none;
+  }
+  img {
+    width: 150px;
+  }
+  .opensit {
+    font-size: 1.6em;
+    margin-top: -10px;
+    color: $dark-grey;
+  }
+  .already-signed-up {
+    float: right;
+    font-size: 0.8em;
+    margin-top: -47px;
+    margin-right: 20px;
+    a {
+      margin-left: 8px;
+    }
+  }
+}
+
+/* Tag cloud */
+#tag_cloud {
+  line-height: 1.6em;
+  .s { font-size: 1em; }
+  .m { font-size: 1.4em; }
+  .l { font-size: 2em; }
+}
+
+/* Follow button */
+.follow_form {
+  margin-top: 10px;
+  float: left;
+  text-align: right;
+  clear: both;
+  width: 100%;
+  form {
+    margin-bottom: 5px;
+  }
+}
+
+/* Bootstrap alignment fixes */
+.radio input[type="radio"] {
+  float: none !important;
+  margin: 0 5px 4px -18px;
+}
+.checkbox input[type="checkbox"] {
+  float: none !important;
+  margin: 9px 5px 4px -18px;
+}
+
+/* will_paginate Bootstrap pagination */
+.pagination > .active > a,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus {
+  background: whitesmoke;
+  border-color: #ddd;
+  color: #999;
+}
+
+/*
+ *    RESPONSIVE
+ *******************************/
+
+@media (max-width: 767px) {
+
+  // Sign up nav bar hint
+  .sign-up-nav {
+    .nav-text {
+      text-align: center;
+    }
+    .expanded {
+      display: none;
+    }
+    .btn-primary {
+      margin-left: 20px;
+    }
+  }
+
+  // Front page
+  .front-page {
+    .three-panes {
+      padding-left: 0;
+    }
+  }
+
+  // Brand header
+  .brand-header .already-signed-up {
+    margin: -8px 10px 10px 0;
+  }
+
+  // Contact
+  .contact {
+    img {
+      width: 150px;
+    }
+  }
+
+  // View sit
+  .view-sit {
+    .header-tile {
+      display: none;
+    }
+    .text-section {
+      .back-button {
+        margin-left: 0;
+      }
+      h1.sit-title {
+        font-size: 1.5em !important;
+        margin-bottom: 20px;
+      }
+      .body {
+        margin: 0 !important;
+        font-size: 1em !important;
+      }
+      .interactions {
+        .save-it {
+          text-align: center;
+          .save-it-text {
+            margin-left: 0;
+          }
+          .toggle-favourite {
+            margin: 0;
+          }
+        }
+        .like-it {
+          margin-top: 20px !important;
+        }
+        .share-buttons {
+          margin-top: 45px !important;
+          text-align: center !important;
+          .share-it {
+            margin: 0 !important;
+          }
+        }
+      }
+    }
+  }
+  .sidebar,
+  .col-md-9 {
+    width: 100%;
+    position: static; // Unclickable links fix
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .header-tile {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  // Footer
+  footer .footer-container .follow {
+    margin-right: 25px;
+    margin-left: 25px;
+    font-size: 0.9em;
+  }
+}
