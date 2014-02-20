@@ -46,17 +46,16 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     @user = current_user
-    @message = Message.new(params[:message])
 
-    params[:message][:to_user_id].shift # remove random blank that always appears
-    @message.to_user_id = params[:message][:to_user_id].map { |s| s }.join
+    @message = Message.new(params[:message])
+    @message.to_user_id = params[:message][:to_user_id]
     @message.from_user_id = @user.id
 
     if !@message.valid?
       render action: "new"
     else
-      @message.send_message(params[:message][:to_user_id])
-      redirect_to @message, notice: 'Your message has been sent.' 
+      @message.save!
+      redirect_to @message, notice: 'Your message has been sent.'
     end
   end
 

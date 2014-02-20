@@ -1,47 +1,33 @@
-  <% if !user_signed_in? %>
-    <section id="branding">
-      
-      <div class="hero-unit">
-        
-        <div class="left"><h1>Where meditators meet.</h1>
-          <p>OpenSit is a place where people who meditate can record their experiences and connect with each other.</p>
-        </div>
-        
-        <div class="right">
-          <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-            <%= devise_error_messages! %>
+<%= render 'shared/brand_header' %>
 
-            <div><%= f.text_field :username, placeholder: 'Pick a username' %></div>
+<div class="jumbotron">
+  <h1>Where meditators meet.</h1>
+  <p>OpenSit is a place to share and develop your meditation practice.</p>
+  <a href="<%=new_user_registration_path%>"><button class="sign-up btn btn-lg btn-primary">Sign up for free</button></a>
+</div>
 
-            <div><%= f.email_field :email, placeholder: 'Enter your email' %></div>
+<div class="three-panes">
+  <div class="pane col-lg-offset-1 col-lg-3">
+    <i class="fa fa-book"></i>
+    <h3>Start your journal today</h3>
+    <p>What do you practice and how has it changed you? Share your practice.</p>
+  </div>
+  <div class="pane col-lg-3">
+    <i class="fa fa-globe"></i>
+    <h3>Social Meditation</h3>
+    <p>You don't have to do it alone! Follow your friends and explore other peoples journals.</p>
+  </div>
+  <div class="pane col-lg-3">
+    <i class="fa fa-bolt"></i>
+    <h3>Improve your practice</h3>
+    <p>Get feedback, support and inspiration from others, and give your practice a boost.</p></div>
+  </div>
+</div>
 
-            <div><%= f.password_field :password, placeholder: 'Choose a password' %></div>
-
-            <!-- <div><%= f.password_field :password_confirmation, placeholder: 'Confirm password' %></div> -->
-
-            <div><%= f.submit "Sign up", :class => 'pull-right btn btn-primary btn-large' %></div>
-          <% end %>
-        </div>
-      </div>
-      
-      <div class="three-panes">
-        <div class="pane">
-          <i class="fa fa-book"></i>
-          <h3>Start streaming today</h3>
-          What do you practice and how has it changed you? Share your practice or start a private stream.</div>
-        <div class="pane">
-          <i class="fa fa-globe"></i>
-          <h3>Connect with others</h3>
-          Follow friends and discover new practitioners from different countries, cultures and traditions.</div>
-        <div class="pane">
-          <i class="fa fa-bolt"></i>
-          <h3>Improve your practice</h3>
-          Keeping a practice log encourages us. Support each other, be inspired by each other, and give your practice a boost.</div>
-      </div>
-      
-    </section> <!-- end section#branding -->
-
-    <%= render 'shared/explore' %>
-  <% end %>
-  
-  <%#= render 'shared/explore' %>
+<div class="padder">
+  <div class="sit-container">
+    <% @sits.each do |sit| %>
+      <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => sit, :width => '2' } %>
+    <% end %>
+  </div>
+</div>

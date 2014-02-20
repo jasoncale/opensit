@@ -1,14 +1,13 @@
-@import 'opensit-mixins';
+@import 'opensit/base';
 
 /* Sit teaser */
 article.sit-teaser {
   @include box-model;
+  background: white;
   float: left;
   width: 100%;
-  margin-bottom: 10px;
-  border: 1px solid #e2e2e2;
-  border-radius: 5px;
-  padding: 7px;
+  border-bottom: 1px solid $light-border;
+  padding: 10px 10px;
   &:hover {
     cursor: pointer;
     background: #eee;
@@ -20,7 +19,6 @@ article.sit-teaser {
   }
   .sit-content {
     margin-left: 70px;
-    font-size: 0.85em;
     padding-bottom: 5px;
     .top {
       font-size: 0.9em;
@@ -32,6 +30,70 @@ article.sit-teaser {
     .body {
       padding: 5px 0;
       width: 97%;
+      font-size: 0.8em;
+    }
+  }
+  /* Lock icon for private events */
+  .private-event {
+    margin-top: -15px;
+  }
+}
+
+/* Sit teaser block */
+article.sit-teaser-block {
+  float: left;
+  padding: 0 10px 10px 0;
+  .block-content {
+    @include rounded-bottom;
+    border-radius: 5px;
+    float: left;
+    border: 1px solid $light-border;
+    background: #fff;
+    margin: 0 0 10px 0;
+    &:hover {
+      cursor: pointer;
+      background: #eee;
+    }
+  }
+  .body {
+    margin: 10px;
+    padding: 5px;
+    width: 92%;
+    font-size: 0.8em;
+  }
+  .bottom-row {
+    font-size: 0.7em;
+    float: left;
+    width: 100%;
+    // border: 1px solid #ccc;
+    border-top: $green 3px solid;
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    .avatar {
+      float: left;
+      width: 50px;
+      margin: 10px;
+    }
+    .details {
+      float: left;
+      margin-top: 7px;
+      width: calc(100% - 70px);
+      padding-right: 1em;
+      .author-title {
+        height: 34px;
+      }
+      .meta {
+        font-size: 0.9em;
+        text-align: right;
+        width: 100%;
+        margin: 3px 5px 0 0;
+        color: $dark-grey;
+        opacity: 0.5;
+        .fa-heart,
+        .fa-comment {
+          padding-left: 5px;
+        }
+      }
     }
   }
   /* Lock icon for private events */
@@ -42,72 +104,103 @@ article.sit-teaser {
 
 /* Sit full */
 .view-sit {
-  padding-top: 10px; /* no h1 at top so */
   h1.sit-title {
-    font-weight: normal;
-    padding-bottom: 20px;
-    margin-left: 30px;
     text-align: center;
+    font-size: 2.5em;
   }
-  .icon-tag {
-    font-size: 19px;
-  }
-  .full-sit-date {
-    float: right;
-    margin: 12px;
-    color: #666;
-  }
-  .my-actions {
-    float: left;
-    width: 100%;
-    text-align: center;
-    margin: 25px 0;
-  }
-  .body {
-    font-family: "Open Sans";
-    font-size: 1.3em;
-    line-height: 1.5; 
-    margin-left: 30px;
-    li {
-      margin: 10px 0;
+  .text-section {
+    .sit-stats {
+      width: 100%;
+      // font-family: 'Georgia';
+      text-align: center;
+      margin-bottom: 40px;
+      opacity: 0.5;
+      font-size: 0.9em;
+      .stat {
+        display: inline-block;
+        margin-right: 10px;
+        .glyphicon-tags {
+          margin-right: 5px;
+        }
+        .tag-label {
+          margin: 0 2px;
+          background-color: $dark-grey;
+          &:hover {
+            background: #777;
+          }
+        }
+      }
+    }
+    .full-sit-date {
+      float: right;
+      margin: 12px;
+      color: $dark-grey;
+    }
+    .body {
+      font-size: 1.1em;
       line-height: 1.5;
+      margin: 0 30px;
+      li {
+        margin: 10px 0;
+        line-height: 1.5;
+      }
     }
-  }
-  #who_likes {
-    margin: 20px 0 10px 0;
-    width: 100%;
-    float: left;
-    text-align: center;
-  }
-  .col-centered{
-    float: none;
-    text-align: center;
-  }
-  .tags {
-    margin: 5px 0;
-    text-align: center;
-    .tag-label {
-      padding: 5px;
-      margin: 5px;
-      font-size: 14px;
-      font-weight: normal;
+    .interactions {
+      float: left;
+      width: 100%;
+      border-top: 1px $light-border solid;
+      margin-top: 3em;
+      padding: 1em 0 0em;
+      color: $dark-grey;
+      font-size: 0.9em;
+      .save-it-text {
+        margin-left: 30px;
+      }
+      .toggle-favourite {
+        font-size: 2em;
+        margin: -5px 0 0 44px;
+      }
+      #who_likes {
+        margin: 0px 0 5px 0;
+        width: 100%;
+        float: left;
+        text-align: center;
+      }
+      .toggle-like {
+        font-size: 2em;
+      }
+      .share-buttons {
+        text-align: right;
+        a {
+          margin-right: 20px;
+          font-size: 2em;
+        }
+        .share-it {
+          margin-right: 48px;
+        }
+      }
     }
-  }
-  .private-warning {
-    float: left;
-    text-align: center;
-    font-size: 0.9em;
-    padding: 10px;
-    background: #f5f5f5;
+    .col-centered {
+      float: none;
+      text-align: center;
+      margin-bottom: -30px;
+    }
+    .private-warning {
+      float: left;
+      text-align: center;
+      font-size: 0.9em;
+      padding: 10px;
+      background: #f5f5f5;
+    }
   }
   .comments {
     @include box-model;
-    padding: 60px 0 30px 30px;
+    padding: 60px 0 30px 0;
     float: left;
     width: 100%;
     h3 {
       margin-bottom: 20px;
-      color: #666;
+      color: $dark-grey;
     }
     .comment {
       @include box-model;
@@ -115,10 +208,15 @@ article.sit-teaser {
       width: 100%;
       padding: 10px;
       border-top: 1px solid #CCC;
+      .comment-body {
+        margin: 20px 0;
+        font-size: 0.9em;
+      }
       .user {
         float: right;
         font-size: 0.85em;
-        opacity: 0.7;
+        // opacity: 0.7;
+        font-style: italic;
         margin: 10px 0 5px;
       }
     }
@@ -130,26 +228,41 @@ article.sit-teaser {
       }
     }
   }
+  .back-button {
+    margin-left: 20px;
+    margin-bottom: 15px;
+  }
 }
 
 /* New sit */
 .new-sit,
 .edit-sit {
-  .radio_buttons label {
-    font-size: 18px;
+  .sit_type {
+    margin-bottom: 2em;
+    label {
+      font-size: 18px;
+    }
   }
   .new-sit-title {
     display: none;
+    clear: left;
   }
   #sit_duration {
-    width: 50px;
-    height: 34px;
+    display: inline;
+    width: 63px;
     font-size: 30px;
+    height: 47px;
   }
   .privacy-options {
-    .control-group {
-      margin: 0 7px;
+    float: right;
+    .dropdown-menu {
+      padding: 5px 18px 18px 0;
+      margin-left: -145px;
+      width: 235px;
     }
+  }
+  .sit_body {
+    clear: left;
   }
   .delete-entry {
     margin-left: 10px;
@@ -157,16 +270,18 @@ article.sit-teaser {
 }
 
 .sidebar .sit-meta {
+  border-top: $green 3px solid;
+  background: #fff;
   .date {
     text-align: center;
     font-size: 21px;
     margin: 15px;
   }
-  .pager { 
+  .pager {
     li a {
       display: inline-block;
-      width: 88px;
-      height: 29px;
+      width: 50%;
+      height: 50px;
       padding: 12px 14px 5px 14px;
       background-color: #fff;
       border-bottom: 1px solid #ddd;
@@ -183,20 +298,33 @@ article.sit-teaser {
     .disabled {
       color: #999;
       background-color: #eee;
-      height: 34px;
+      height: 50px;
       padding-top: 14px;
     }
     .previous .disabled {
-      width: 88px;
-      height: 29px;
-      padding: 14px 14px 5px 14px; 
+      height: 50px;
+      padding: 14px 26px 5px 14px;
       float: left;
     }
   }
   .sit-tags {
     margin-bottom: 15px;
-  }
-  #favourite_button {
     text-align: center;
+    .glyphicon {
+      margin-right: 10px;
+    }
+    .label {
+      display: inline-block;
+      font-size: 95%;
+      font-weight: normal;
+      margin: 3px;
+    }
+  }
+  .journal-stats {
+    text-align: center;
+    font-size: 0.8em;
+    opacity: 0.8;
+    padding: 0 15px;
+    margin-bottom: 15px;
   }
 }

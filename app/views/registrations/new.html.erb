@@ -1,29 +1,40 @@
 <div class="section sign-up">
-  <div class="well">
+  <div class="well col-sm-10">
+  <h1>OpenSit is a place to share and develop your meditation practice.</h1>
+  <p class="its-free">It's completely free!</p>
+    <div class="left col-md-6">
 
-    <h1>Registration!</h1>
+      <h2>All we need is...</h2>
 
-    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 
-      <% if resource.errors.any? %>
-        <div class="alert alert-danger">
-          <% messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join %>
-          <%= messages.html_safe %>
-        </div>
+        <% if resource.errors.any? %>
+          <div class="alert alert-danger">
+            <% messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join %>
+            <%= messages.html_safe %>
+          </div>
+        <% end %>
+
+        <%= f.input :username, placeholder: 'A username', label: false %>
+
+        <%= f.input :email, placeholder: 'Your email', label: false %>
+
+        <%= f.input :password, placeholder: 'And a password', label: false %>
+
+        <!-- <%= f.input :password_confirmation, placeholder: 'Confirm password', label: false %> -->
+
+        <div class="row"><%= f.submit "Sign up", :class => 'btn btn-primary btn-lg pull-left' %></div>
+
+        <div class="row"><%= render "devise/shared/links" %></div>
       <% end %>
 
-      <%= f.text_field :username, placeholder: 'Choose a username' %>
-
-      <%= f.email_field :email, placeholder: 'Enter your email' %>
-
-      <%= f.password_field :password, placeholder: 'And a password' %>
-
-      <%= f.password_field :password_confirmation, placeholder: 'Confirm password' %>
-
-      <div><%= f.submit "Sign up", :class => 'btn btn-primary btn-large pull-right' %></div>
-    <% end %>
-
-    <%= render "devise/shared/links" %>
-
+    </div>
+    <div class="right col-md-6">
+      <h2>Why sign up?</h2>
+        <div class="point"><div class="icon"><i class="fa fa-book"></i></div><div class="text"> Your own free meditation log</div></div>
+        <div class="point"><div class="icon"><i class="fa fa-comments"></i></div><div class="text"> Feedback on your practice</div></div>
+        <div class="point"><div class="icon"><i class="fa fa-group"></i></div><div class="text"> Follow your favourite practitioners</div></div>
+        <div class="point"><div class="icon"><i class="fa fa-thumbs-up"></i></div><div class="text"> Built by meditators, for meditators</div></div>
+    </div>
   </div>
 </div>

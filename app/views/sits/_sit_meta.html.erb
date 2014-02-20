@@ -1,25 +1,12 @@
-
 <div class="nav-module sit-meta">
 	<div class="date"><%= @sit.date %></div>
+
   <ul class="pager">
 	  <%= previous_sit(@sit) %>
 	  <%= next_sit(@sit) %>
 	</ul>
-  
 
-  <% if !@sit.tags.empty? %>
-		<div class="sit-tags">
-		  <div class="tags">
-		    <i class="icon-tag"></i><%= tag_labels(@sit.tags) %>
-		  </div>
-		</div>
-	<% end %>
- 
-  <%= render :partial => 'shared/favourite_button' %>
+	<div class="journal-stats">
+		<%= @user.display_name %> has logged <%= @user.total_entries %> entries. Last updated <%= time_ago_in_words(@user.last_update) %> ago.
+	</div>
 </div>
-
-<% if @sit.user.private_stream %>
-  <div class="private-warning nav-module"><i class="fa fa-lock"></i> Your stream is private.</div>
-<% elsif @sit.private %>
-  <div class="private-warning nav-module"><i class="fa fa-lock"></i> This is a private entry. Only you can see it!</div>
-<% end %>

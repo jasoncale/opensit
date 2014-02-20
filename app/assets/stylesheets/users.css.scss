@@ -1,3 +1,5 @@
+@import 'opensit/base';
+
 .follow_form {
 	margin-top: 10px;
 	float: left;
@@ -6,16 +8,12 @@
 	width: 100%;
 	form {
 		margin-bottom: 5px;
-		input.btn {
-			font-size: 12px;
-		}
 	}
 }
 
 .sidebar {
 	.sidebar-content {
     padding-left: 10px;
-    font-size: 14px;
     .username {
       margin: 25px 0 0;
       font-size: 1.7em;
@@ -58,86 +56,105 @@
 }
 
 // Me page
-.sidebar .user-summary {
-	font-size: 12px;
-	padding: 8px;
+.user-summary {
+	padding-top: 10px;
 	float: left;
-	background: #f5f5f5;
-	min-height: 85px;
-	.top-row {
+	width: 100%;
+	.avatar {
 		float: left;
-		width: 100%;
-		text-align: right;
-		.my-avatar {
-			float: left;
-			height: 50px;
-			width: 50px;
+		height: 50px;
+		width: 50px;
+	}
+	.details {
+		float: left;
+		width: calc(100% - 50px);
+		.username {
+			width: 100%;
+			text-align: right;
+			font-size: 1em;
+			font-weight: bold;
 		}
-		.my-basics {
-			float: right;
-			width: 135px;
-			.username {
-				float: right;
-				font-size: 16px;
-				font-weight: bold;
-			}
-			.my-location {
-				float: right;
-				clear: both;
-			}
+		.location {
+			width: 100%;
+			text-align: right;
+			font-size: 0.8em;
+			opacity: 0.7;
 		}
 	}
 	.stats {
+		font-size: 0.8em;
 		float: right;
-	}	
+	}
 }
 
+.add-a-sit {
+	width: 100%;
+	font-size: 1.5em;
+	text-align: center;
+	margin-top: 20px;
+	float: left;
+	padding: 10px 0 20px;
+}
 .recent-activity {
-	font-size: 12px;
 	clear: left;
 	background: #fff;
-	h4 {
-		margin: 10px 10px;
-		float: right;
-	}
-	.add-a-sit {
-		width: 100%;
-		font-size: 1.5em;
-		text-align: center;
-		margin-top: 7px;
-		padding: 10px 0 20px;
-	}
-	.sit-teaser {
-		padding: 5px 15px;
+	float: left;
+	margin-top: 20px;
+	// Add your first sit
+	.activity {
+		padding: 5px;
 		float: left;
 		width: 100%;
 		border: 0;
 		border-radius: 0;
-		.title {
-			font-size: 14px;
+		font-size: 0.8em;
+		margin-bottom: 5px;
+		&:hover {
+			.icon {
+				color: darken($link-color, 20%);
+			}
+	    cursor: pointer;
+  	}
+		.icon {
+			float: left;
+			width: 10%;
+			color: $link-color;
+			font-size: 1.4em;
+			margin-left: -9px;
+			margin-right: 5px;
 		}
-		.body {
-			margin: 5px;
-		}
-		.date {
-			float: right;
-			font-size: 0.9em;
-			font-style: italic;
+  	.details {
+  		float: left;
+  		width: 90%;
+			margin-top: 2px;
+			.title {
+				font-size: 14px;
+				.date {
+					float: right;
+					font-size: 0.8em;
+					font-style: italic;
+				}
+			}
+			.body {
+				opacity: 0.7;
+			}
 		}
 	}
 	.sit-teaser:hover {
 		cursor: pointer;
-		background: #eee;	
+		background: #eee;
 	}
 }
 
 .my-timeline {
 	padding: 8px;
+	background: white;
+	border-top: $green 3px solid;
 	ul {
 		list-style-type: circle;
 	}
 	.year {
-		font-size: 1.8em;
+		font-weight: bold;
 		margin: 20px 0 10px 0;
 	}
 	.count {
@@ -151,32 +168,84 @@
 	clear: left;
   font-size: 20px;
   margin-top: 10px;
+  margin-right: 20px;
 }
 
-// View profile
-.view-profile {
-	.edit-profile-btn {
-		float: right;
-		margin: 0 0 10px 0;
-	}
-	.lead {
-		clear: both;
-		margin: 0 20px 30px 20px;
-	}
-	.profile-field {
-		margin: 20px;
-		.title {
-			font-weight: bold;
-			margin-bottom: 15px;
+// View user
+.view-user {
+	.sidebar-content {
+		.info-block {
+			.icon {
+				width: 10%;
+				float: left;
+			}
+			.value {
+				width: 90%;
+				float: left;
+			}
 		}
 	}
-	.user-website {
-		margin-left: 20px; 
+	.back-button {
+    margin-bottom: 15px;
+  }
+	.empty-profile {
+		padding: 20px 20px 0 20px;
 	}
+	.profile {
+		float: left;
+		width: 100%;
+		background: white;
+		border: 1px solid $light-border;
+		border-top: 3px solid $green;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		@include rounded-bottom;
+		.lead {
+			clear: both;
+			margin: 20px 20px 30px 20px;
+		}
+		.profile-field {
+			margin: 20px;
+			float: left;
+			font-size: 0.9em;
+			.title {
+				font-weight: bold;
+				color: $link-color;
+				margin-bottom: 10px;
+			}
+		}
+		.edit-profile-btn {
+			margin-bottom: 10px;
+		}
+	}
+	h1.range-title {
+    font-weight: normal;
+    font-size: 1.5em;
+    float: right;
+    line-height: 15px;
+    margin-right: 11px;
+    padding-bottom: 10px;
+    border-bottom: 3px $green solid;
+  }
+  .sit-container {
+  	clear: left;
+  	width: 100%;
+  	float: left;
+  }
+}
+
+.my-actions {
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin: 25px 0 0 0;
 }
 
 // Edit profile
 .edit-profile {
+	#user_avatar {
+		margin-top: 10px;
+	}
 	.avatar-box {
 		width: 42%;
 		text-align: center;
@@ -188,10 +257,6 @@
 			margin: 20px 0 0 90px;
 			@extend .btn;
 		}
-	}
-	.control-group {
-		float: left;
-		clear: left;
 	}
 	.update-details {
 		float: left;
@@ -229,11 +294,28 @@
 	}
 }
 
-.view-user {
-	h1.range-title {
-    font-weight: normal;
-    font-size: 1.5em;
-    float: right;
-    line-height: 15px;
-  }
+.user-teaser {
+	float: left;
+	width: 100%;
+	margin: 5px 0;
+	.avatar {
+		float: left;
+		width: 60px;
+	}
+	.details {
+		float: left;
+		width: calc(100% - 60px);
+		.name {
+			float: left;
+		}
+		.location {
+			float: left;
+			clear: left;
+			font-size: 0.9em;
+			color: $dark-grey;
+		}
+		.follow_form input {
+			margin-top: -45px;
+		}
+	}
 }

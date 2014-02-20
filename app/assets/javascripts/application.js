@@ -15,8 +15,10 @@
 //= require jquery_ujs
 //= require chosen-jquery
 //= require bootstrap-wysihtml5
-//= require bootstrap-dropdown
-//= require bootstrap-tooltip
-//= require bootstrap-modal
+//= require bootstrap/dropdown
+//= require bootstrap/tooltip
+//= require bootstrap/popover
+//= require bootstrap/modal
+//= require bootstrap/collapse
 //= require turbolinks
 //= require_tree .

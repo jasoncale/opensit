@@ -1,14 +1,22 @@
-<h3 class="title"><%= @title %></h3>
-<hr>
+<div class="sidebar col-md-3">
+  <%= render :partial => "shared/user_summary" %>
+</div>
 
-<% if @users.any? %>
-  <div class="user_avatars">
-    <% @users.each do |user| %>
-      <%= small_avatar_of(user) %>
-    <% end %>
-  </div>
-<% else %>
-  <div class="well">
-    <p>No connections yet!</p>
-  </div>
-<% end %>
+<div class="clearfix col-md-9">
+
+	<% if @users.any? %>
+		<h3 class="title"><%= @title %></h3>
+		<hr>
+
+	  <div class="user_avatars">
+	    <% @users.each do |user| %>
+	      <%= small_avatar_of(user) %>
+	    <% end %>
+	  </div>
+	<% else %>
+	  <div class="message-box">
+	    <h2>No connections yet!</h2>
+	  </div>
+	<% end %>
+
+</div>

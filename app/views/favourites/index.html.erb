@@ -1,12 +1,11 @@
-<%= render :partial => 'shared/me_pills' %>
-
-<% if @fav_sits.empty? %>
-  <div class="well well-large empty-message">
-    <h1>You don't have any favourites yet!</h1>
-    <p>Add something to your favourites by clicking the heart icon.</p>
-  </div>
-<% end %>
-
-<% @fav_sits.each do |fav_sit| %>
-  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => fav_sit } %>
-<% end %>
+<div class="sit-container">
+	<div class="tile stamp col-md-3 header-tile">
+		<div class="content">
+			<h2>My Favourites</h2>
+			<p><strong>Tip!</strong> Click <i class="fa fa-bookmark-o"></i> on any sit to save it to your favourites.</p>
+		</div>
+	</div>
+	<% @favs.each do |f| %>
+	  <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => f, :width => 3 } %>
+	<% end %>
+</div>

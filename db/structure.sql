@@ -22,6 +22,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -497,7 +511,8 @@ CREATE TABLE users (
     avatar_file_size integer,
     avatar_updated_at timestamp without time zone,
     private_stream boolean DEFAULT false,
-    reset_password_sent_at timestamp without time zone
+    reset_password_sent_at timestamp without time zone,
+    sits_count integer
 );
 
 
@@ -940,3 +955,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131205215618');
 INSERT INTO schema_migrations (version) VALUES ('20131205221003');
 
 INSERT INTO schema_migrations (version) VALUES ('20140119142023');
+
+INSERT INTO schema_migrations (version) VALUES ('20140218235031');

@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-    }
-    h1 { font-size: 100%; color: #695c8c; line-height: 1.5em; }
-  </style>
-</head>
+  <%= render 'layouts/head' %>
 
-<body>
+<body class="not-found">
   <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>Oops... Page not found</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-    <p><a href="/">Home</a></p>
+
+  <%= render 'shared/brand_header' %>
+
+  <div class="container">
+    <div class="centered">
+      <h1>Oops... Page not found</h1>
+      <p>You may have mistyped the address or the page may have moved.</p>
+      <p><a href="/">Try again.</a></p>
+    </div>
   </div>
 </body>
 </html>

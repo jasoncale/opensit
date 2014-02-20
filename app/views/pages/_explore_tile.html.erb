@@ -1,0 +1,11 @@
+<div class="tile stamp col-md-3 header-tile">
+  <div class="content">
+    <h2>Explore!</h2>
+
+    <ul class="nav nav-pills nav-stacked">
+      <li <%='class=active' if current_page?(explore_path) %>><a href="/explore" class="item"><i class="fa fa-globe"></i> Global SitStream</a></li>
+      <li <%='class=active' if current_page?(explore_tags_path) %>><a href="/explore/tags" class="item"><i class="fa fa-tags"></i> Popular tags</a></li>
+      <li <%='class=active' if current_page?(explore_new_users_path) %>><a href="/explore/users/new" class="item"><i class="fa fa-user"></i> New users</a></li>
+    </ul>
+  </div>
+</div>

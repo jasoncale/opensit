@@ -41,10 +41,11 @@ class User < ActiveRecord::Base
   # Paperclip
   has_attached_file :avatar, styles: {
     small_thumb: '50x50#',
-    thumb: '200x200#',
+    thumb: '250x250#',
   }
 
   scope :newest_first, -> { order("created_at DESC") }
+  scope :public, -> { where(private: false) }
 
   # Used by url_helper to determine user path, eg; /buddha and /user/buddha
   def to_param
@@ -184,6 +185,43 @@ class User < ActiveRecord::Base
     update_attributes(params)
   end
 
+  # Return a users favourites.
+  # Options:
+  #  :type (string) - defaults to Sit
+  #  :id (int) - select by favourable_id
+  #  :delve (bool) - return the favourited objects themselves
+  def get_favourites(opts={})
+
+    type = opts[:type] ? opts[:type] : :sit
+    type = type.to_s.capitalize
+
+    favs = Favourite.where(user_id: self.id).where(favourable_type: type)
+
+    if opts[:id]
+      favs.where(favourable_id: opts[:id].to_s)
+    end
+
+    case opts[:delve]
+    when nil, false, :false
+      return favs
+    when true, :true
+      # Get a list of all favourited object ids
+      # TODO: somehow order these by order in which they were favourited!
+      fav_ids = favs.collect{|f| f.favourable_id}
+
+      if fav_ids.size > 0
+        type_class = type.constantize
+        return type_class.where(id: fav_ids).where(private: false)
+      else
+        return []
+      end
+    end
+  end
+
+  def new_notifications
+    notifications.unread.count unless notifications.unread.count.zero?
+  end
+
   # LIKES
 
   def like!(obj)
@@ -197,6 +235,27 @@ class User < ActiveRecord::Base
   def unlike!(obj)
     like = Like.where(likeable_id: obj.id, likeable_type: obj.class.name, user_id: self.id).first
     like.destroy
+  end
+
+  # PRIVATE STREAM
+
+  def private_stream=(value)
+    if value == 'true'
+      self.sits.update_all(private: true)
+    elsif value == 'false'
+      self.sits.update_all(private: false)
+    end
+    write_attribute(:private_stream, value)
+  end
+
+  # STATS
+
+  def total_entries
+    self.sits.count
+  end
+
+  def last_update
+    self.sits.public.newest_first.first.created_at
   end
 
   ##

@@ -1,13 +1,17 @@
-<%= render :partial => "big_search" %>
-
-<% if !@tagged.empty? %>
-	<% @tagged.each do |sit| %>
-	  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => sit } %>
-	<% end %>
-<% else %>
-	<div class="well"><h3>Nothing tagged '<%= params[:q] %>'</h3></div>
-<% end %>
-
-<div class="pagination-container">
-	<%= will_paginate @tagged, :class => 'pagination pagination-centered' %>
+<div class="sidebar col-md-3">
+  <%= render 'search_tile' %>
 </div>
+
+<div class="clearfix col-md-9">
+	<%= render :partial => "big_search" %>
+	<% if @tagged && !@tagged.empty? %>
+		<% @tagged.each do |sit| %>
+		  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => sit } %>
+		<% end %>
+		<div class="pagination-container">
+				<%= will_paginate @tagged, renderer: BootstrapPagination::Rails %>
+			</div>
+		</div>
+	<% else %>
+		<div class="message-box"><h2>Nothing tagged '<%= params[:q] %>'</h2></div>
+	<% end %>

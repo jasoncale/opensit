@@ -1,0 +1,9 @@
+<div class="tile stamp col-md-3 header-tile">
+  <div class="content">
+    <h2>Tag: <span class="tag_name"><%= params[:id] %></span></h2>
+
+     <div class="options-group">
+      <a href="/explore/tags" class="item <%='active' if current_page?(explore_tags_path) %>">View popular tags</a>
+     </div>
+  </div>
+</div>

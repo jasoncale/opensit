@@ -1,16 +1,3 @@
-$linkColor: #695c8c;
-// $navbarBackground: $linkColor;
-// $navbarBackgroundHighlight: darken($linkColor, 5%);
-$btnPrimaryBackgroundHighlight: darken($linkColor, 15%);
-$sansFontFamily: "Open Sans", "HelveticaNeue", "Helvetica", "sans-serif";
-$headingsFontWeight: normal;
-input:focus,
-textarea:focus {
-  border-color: lighten($linkColor, 50%) !important;
-  -webkit-box-shadow: inset 0 0 1px lighten($linkColor, 30%), 0 0 8px lighten($linkColor, 10%) !important;
-	-moz-box-shadow: inset 0 0 1px lighten($linkColor, 30%), 0 0 8px lighten($linkColor, 10%) !important;
-	box-shadow: inset 0 0 1px lighten($linkColor, 30%), 0 0 8px lighten($linkColor, 10%) !important;
-}
-
+@import 'opensit/base';
 @import "bootstrap";
 @import "font-awesome";

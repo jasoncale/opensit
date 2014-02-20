@@ -4,7 +4,7 @@ class Sit < ActiveRecord::Base
   attr_accessible :private, :disable_comments, :tag_list, :duration, :s_type,
                   :body, :title, :created_at, :user_id, :views
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :comments, :dependent => :destroy
   has_many :taggings
   has_many :tags, through: :taggings
@@ -22,7 +22,7 @@ class Sit < ActiveRecord::Base
   scope :newest_first, -> { order("created_at DESC") }
 
   # Pagination: sits per page
-  self.per_page = 10
+  self.per_page = 20
 
   # Textacular: search these columns only
   extend Searchable(:title, :body)
@@ -115,6 +115,9 @@ class Sit < ActiveRecord::Base
     Like.likers_for(self)
   end
 
+  def liked?
+    !self.likes.empty?
+  end
 end                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        #
 
 # == Schema Information

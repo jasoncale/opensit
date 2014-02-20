@@ -1,25 +1,31 @@
-<% if @messages.empty? %>
-  <div class="well well-large empty-message">
-    <h1>Your inbox is empty.</h1>
-    <p>I'm sure someone is thinking of you...</p>
-  </div>
-<% else %>
+<div class="sidebar col-md-3">
+  <%= render 'messages_tile' %>
+</div>
 
-  <table class="table msg-overview">
-  	<% @messages.each do |msg| %>
-      <tr>
-        <td class="unread"><%= unread_marker(msg) %></td>
-        <td class="msg-avatar"><%= small_avatar_of(msg.from_user) %></td>
-        <td class="msg-content">
-          <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message?', :class => 'msg-delete' %>
-          <a href="<%= message_path(msg) %>" class="clickable-row">
-          <div class="msg-username"><%= msg.from_user.username %> says:</div>
-          <div class="msg-content"><%= msg.subject.blank? ? truncate(msg.body, :length => 20, :omission => " ...").html_safe : msg.subject %></div>
-          <div class="msg-received">Received <%= time_ago_in_words(msg.created_at) %> ago</div>
-          </a>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+<div class="clearfix col-md-9">
+  <% if @messages.empty? %>
+    <div class="message-box">
+      <h2>Your inbox is empty.</h2>
+      <p>I'm sure someone is thinking of you...</p>
+    </div>
+  <% else %>
 
-<% end %>
+    <table class="table msg-overview">
+      <% @messages.each do |msg| %>
+        <tr>
+          <td class="unread"><%= unread_marker(msg) %></td>
+          <td class="msg-avatar"><%= small_avatar_of(msg.from_user) %></td>
+          <td class="msg-content">
+            <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message?', :class => 'msg-delete' %>
+            <a href="<%= message_path(msg) %>" class="clickable-row">
+            <div class="msg-username"><%= msg.from_user.username %> says:</div>
+            <div class="msg-content"><%= msg.subject.blank? ? truncate(msg.body, :length => 20, :omission => " ...").html_safe : msg.subject %></div>
+            <div class="msg-received">Received <%= time_ago_in_words(msg.created_at) %> ago</div>
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+  <% end %>
+</div>

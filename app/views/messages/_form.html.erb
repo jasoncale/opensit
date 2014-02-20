@@ -5,12 +5,12 @@
     </div>
   <% end %>
 
-  <%= f.input :to_user_id, :collection => User.all, :label => 'To', :label_method => 'username', :input_html => { :multiple => true, :data => {:placeholder => 'Choose a user'}, :class => 'chzn-select' } %>
-  
-  <%= f.input :subject %>
+	<%= form_element(f, :to_user_id, 'message', "To", 4, { label: false, collection: User.all, label_method: 'username', input_html: { multiple: false, data: { placeholder: 'Choose a user'}, class: 'chzn-select' } }) %>
 
-  <%= f.input :body, :input_html => { :rows => 10, :class => "basic-form" } %>
+	<%= form_element(f, :subject, 'message', "Subject", 4, { label: false }) %>
 
-  <%= f.submit 'Send message', :class => 'btn' %>
-  
+	<%= form_element(f, :body, 'message', "Body", 9, { label: false, input_html: { rows: 10 } }) %>
+
+  <%= f.submit 'Send message', :class => 'btn btn-lg btn-primary' %>
+
 <% end %>

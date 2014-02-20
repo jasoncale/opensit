@@ -4,7 +4,6 @@ ruby "2.0.0"
 gem 'rails', '4.0.0'
 gem 'rack'
 gem 'heroku'
-gem 'puma'
 
 group :development do
   gem 'better_errors'
@@ -72,9 +71,9 @@ gem "jquery-rails", "2.3.0"
 
 # Pagination
 gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 # Admin/tracking
-gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'newrelic_rpm'
 gem 'airbrake'
 

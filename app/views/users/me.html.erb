@@ -1,18 +1,23 @@
-<%= render :partial => 'shared/me_pills' %>
-
 <% if @feed_items.empty? %>
-<div class="well well-large empty-message">
-    <h1>You're not following anyone yet!</h1>
-    <p>Go <strong><a href="/explore">explore</a></strong> and see what's going on!</p>
-  </div>
+	<%= render 'shared/user_summary' %>
+
+	<div class="col-lg-9">
+		<div class="message-box">
+		  <h2>You're not following anyone yet!</h2>
+		  <p>Go <strong><a href="/explore">explore</a></strong> and see what's going on!</p>
+		</div>
+	</div>
+<% else %>
+	<div class="sit-container">
+
+		<%= render 'shared/user_summary' %>
+
+		<% @feed_items.each do |sit| %>
+		  <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => sit, :width => '3' } %>
+		<% end %>
+	</div>
+
+	<div class="pagination-container">
+	  <%= will_paginate @feed_items, renderer: BootstrapPagination::Rails %>
+	</div>
 <% end %>
-
-<% @feed_items.each do |sit| %>
-
-  <%= render :partial => 'shared/sit_teaser', :locals => { :sit => sit } %>
-
-<% end %>
-
-<div class="pagination-container">
-  <%= will_paginate @feed_items, :class => 'pagination pagination-centered' %>
-</div>

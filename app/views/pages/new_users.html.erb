@@ -1,0 +1,13 @@
+<div class="sidebar col-md-3">
+  <%= render 'explore_tile' %>
+</div>
+
+<div class="clearfix col-md-9">
+	<% if !@newest_users.empty? %>
+		<% @newest_users.each do |user| %>
+			<%= render :partial => 'shared/user', :locals => { :u => user } %>
+		<% end %>
+	<% else %>
+		<div class="message-box"><h2>No matches</h2></div>
+	<% end %>
+</div>

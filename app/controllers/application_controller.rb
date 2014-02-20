@@ -4,12 +4,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
-  def custom_user_auth
-    unless user_signed_in?
-      redirect_to('/users/sign_in')
-    end
-  end
-
   def not_found
     render 'public/404', status: 404, layout: false
     return false

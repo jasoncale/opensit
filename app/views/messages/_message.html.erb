@@ -1,3 +1,5 @@
+<a href="<%=messages_path%>" class="btn btn-default">&larr; Back to inbox</a>
+
 <div class="title"><strong><%=@message.subject %></strong>
 <div class="body"><%= @message.body.html_safe %></div>
 <div class="from"><%= small_avatar_of(@message.from_user) %></div>

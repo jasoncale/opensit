@@ -1,0 +1,39 @@
+<article class="sit-teaser-block tile <%= "col-md-#{width}" %>">
+
+<div class="block-content">
+
+    <div class="body">
+      <% if request.path =~ /search/ %>
+        <%= teaser(sit, 300, params[:q]) %>
+      <% else %>
+        <%= teaser(sit) %>
+      <% end %>
+    </div>
+    <%= display_lock_if_private(sit) %>
+
+  <div class="bottom-row">
+    <div class="avatar">
+      <%= small_avatar_of(sit.user) %>
+    </div>
+    <div class="details">
+      <div class="author-title"><%= username(sit.user) %> <%= teaser_title(sit) %></div>
+      <div class="meta">
+        <span class="date">
+          <% if params[:y] %>
+            <%= sit.date %>
+          <% else %>
+            <%= time_ago_in_words(sit.created_at) %> ago
+          <% end %>
+        </span>
+        <% if sit.liked? %>
+          <i class="fa fa-heart"></i> <%= sit.likes.count %>
+        <% end %>
+        <% if sit.comments.count > 0 %>
+          <i class="fa fa-comment"></i> <%= sit.comments.count %>
+        <% end %>
+      </div>
+    </div>
+    <a href="<%= sit_path(sit) %>" class="sit-link hidden"></a>
+  </div>
+</div>
+</article>

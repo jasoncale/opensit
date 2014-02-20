@@ -1,18 +1,18 @@
-<% 
-if @sit.likers.blank?
+<%
+if @sit.likers.blank? && current_user && current_user != @sit.user
   text = 'Like it?'
 else
 	linked_names = (@sit.likers.map { |u| username(u) } * ', ')
-  text = pluralize(@sit.likes.count, 'person') 
-  if @sit.likes.count == 1
- 		text << ' likes this'
- 	else
- 		text << ' like this'
- 	end
-  if !@sit.likes.empty? 
-  	text << ": #{linked_names}"
-  end
-end 
+	like_text = pluralize(@sit.likes.count, 'person')
+	if @sit.likes.count == 1
+			like_text << ' likes this'
+		else
+			like_text << ' like this'
+		end
+	if !@sit.likes.empty?
+		text = "<a href='#' id='likers-list' data-container='body' selector='likers-list' data-toggle='popover' data-placement='top' data-content='#{linked_names}'> #{like_text} </a>"
+	end
+end
 %>
 
 <div id="who_likes">

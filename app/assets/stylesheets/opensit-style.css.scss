@@ -1,76 +1,146 @@
-/* Bootstrap alignment fixes */
-label {
-  display: inline !important;
+@import 'opensit/base';
+
+body {
+  background-color: $background;
+  font-size: 18px;
 }
 
-.hidden {
-  display: none;
-}
+// NAVBAR
+$bgDefault      : $navbar;
+$bgHighlight    : #222;
+$colDefault     : $green;
+$colHighlight   : whitesmoke;
 
-/* Navbar */
-#main-header {
-  .navbar-inner {
-    height: 65px;
-    font-size: 12px;
-    .container {
-      padding-top: 10px;
-      .icons { 
-        a {
-          width: 45px;
-          height: 55px;
-          &:hover {
-            text-decoration: none;
-          }
-        }
-        a:last-child {
-          width: 70px;
-        }
-        .unread-count {
-          font-size: 0.8em;
-        }
-        i {
-          font-size: 2.2em;
-          padding: 8px;
-        }
+.navbar-default {
+  background-color: $bgDefault;
+  // border-color: $bgHighlight;
+  .nav-logo {
+    margin-right: 20px;
+    float: left;
+    .navbar-brand {
+      padding: 0;
+      font-size: 1.6em;
+    }
+    .nav-logomark {
+      float: left;
+      width: 87px;
+    }
+    .nav-logotype {
+      color: #fcf9f6;
+      float: left;
+      margin-top: 21px;
+      &:hover {
+        color: white;
       }
     }
-    .dropdown-menu a {
-      font-size: 12px;
+    &:hover {
+      text-decoration: none;
     }
   }
-  .btn {
-    margin-right: 10px;
-    font-size: 12px;
+  .navbar-brand {
+    color: $colDefault;
+    &:hover, &:focus {
+      color: $colHighlight;
+    }
   }
-  .logout {
-    font-size: 1.2em;
-  }
-  .nav.pull-right {
-    margin-right: -30px;
-  }
-  .dropdown-toggle {
-    margin: -1px 10px 0 20px;
-    // Black caret
-    // .caret {
-    //   border-top-color: #333;
-    //   border-bottom-color: #333;
-    // }
-  }
+  .navbar-nav {
+    > li {
+      > a.nav-option {
+        font-size: 1.1em;
+        padding-top: 23px;
+        padding-bottom: 23px;
+        color: $colDefault;
+        &:hover, &:focus {
+          background-color: $bgHighlight;
+          color: whitesmoke;   }
+        }
+        i {
+          font-size: 1em;
+        }
+        .nav-button-text {
+          font-size: 0.6em;
+          font-weight: bold;
+        }
+      }
+      .active {
+        > a, > a:hover, > a:focus {
+          color: $colHighlight;
+          background-color: $bgHighlight;
+        }
+        .nav-option {
+          color: $colHighlight;
+        }
+      }
+      .open {
+        > a, > a:hover, > a:focus {
+          color: $colHighlight;
+          background-color: $bgHighlight;
+          .caret {
+            border-top-color: $colHighlight;
+            border-bottom-color: $colHighlight;
+          }
+        }
+      }
+      > .dropdown {
+        > a {
+          .caret {
+            border-top-color: $colDefault;
+            border-bottom-color: $colDefault;
+          }
+          &:hover, &:focus {
+            .caret {
+              border-top-color: $colHighlight;
+              border-bottom-color: $colHighlight;}}}}}
+          .dropdown-menu {
+              a {
+                font-size: 13px;
+                margin: 5px 0;
+                &:hover {
+                  background: $green;
+                }
+              }
+              .divider {
+                  background-color: $colDefault;
+              }
+        }
+        .search-box {
+          margin-top: 10px;
+        }
+  .navbar-toggle {
+      border-color: $bgHighlight;
+      margin-top: 15px;
+      &:hover, &:focus {
+          background-color: $bgHighlight; }
+      .icon-bar {
+          background-color: $colDefault; }}}
+  .navbar-collapse,
+  .navbar-form {
+      border-color: $colDefault; }
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: $colDefault;
+        &:hover, &:focus {
+            color: $colHighlight;
+            background-color: $bgHighlight; }}
 }
 
-/* Logo */
-.brand {
-  font-family: 'Pacifico';
-  padding: 7px 37px 10px 0px !important;
-  font-size: 32px !important;
-  text-shadow: 0 2px 0 #CCC !important;
-}
-.alpha {
-  margin: -5px 20px 0 -30px;
-  color: #695c8c;
-}
-.sign-up-link {
-  font-weight: bold;
+.sign-up-nav {
+  background: $navbar;
+  height: 66px;
+  .nav-text {
+    img {
+      width: 80px;
+      margin-top: -10px;
+    }
+    .login-link {
+      text-decoration: underline;
+      color: white;
+    }
+    color: white;
+    float: none;
+    margin-top: 10px;
+  }
 }
 
 h3.title {
@@ -79,7 +149,8 @@ h3.title {
 
 /* Sidebar */
 .sidebar {
-  img {
+  float: left;
+  img.polaroid {
     padding: 3px;
     border: 1px solid #CCC;
     -moz-box-shadow: 5px 5px 3px #888;
@@ -89,11 +160,16 @@ h3.title {
 }
 
 /* Message wells */
-.well {
-  h1 {
-    font-weight: normal;
-    font-size: 1.5em;
-    margin: 0 0 15px;
+.message-box {
+  @include rounded-bottom;
+  border-top: $green 3px solid;
+  background: white;
+  float: left;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+  h2 {
+    margin: 7px 0 15px;
   }
 }
 
@@ -101,9 +177,10 @@ h3.title {
 .sign-in,
 .sign-up {
   .well {
+    background: white;
     float: none;
-    margin: 50px auto 0 auto;
-    width: 35%;
+    clear: both;
+    margin: 15px auto 0 auto;
     overflow: hidden;
   }
   input[type="email"],
@@ -113,29 +190,114 @@ h3.title {
     border-radius: 10px;
     line-height: 26px;
     font-size: 20px;
-    height: 40px;
-    width: 95%;
+    height: 52px;
   }
   label {
     margin-bottom: 10px;
   }
-  .remember {
-    margin: 10px 0 20px;
-  }
-  #user_remember_me {
-    margin-top: -1px;
+  .devise-options {
+    float: left;
+    margin-top: 10px;
+    opacity: 0.9;
   }
 }
 
-.sign-up {
-  .btn-large {
-    margin-top: 20px;
+.sign-up-page {
+  padding-top: 0;
+  h1 {
+    text-align: center;
+    line-height: 1.5em;
+    margin: 10px 0 0 0;
+    font-size: 1.5em;
+  }
+  .its-free {
+    text-align: center;
+    color: $pink;
+    font-weight: bold;
+  }
+  .sign-up {
+    h2 {
+      font-size: 1.2em;
+    }
+    .btn-lg {
+      margin-top: 20px;
+    }
+    .left {
+      input {
+        margin-top: 5px;
+      }
+      .row {
+        margin-left: 0;
+      }
+    }
+    .right {
+      .point {
+        font-size: 1.4em;
+        margin: 17px 0;
+        float: left;
+        width: 100%;
+        .icon {
+          float: left;
+          width: 44px;
+          i {
+            font-size: 1.2em;
+            color: lighten($link-color, 5%);
+          }
+        }
+        .text {
+          float: left;
+          width: 80%;
+          font-size: 0.8em;
+          color: $dark-grey;
+        }
+      }
+    }
+  }
+}
+
+.sign-in {
+  margin-top: -30px;
+  .well {
+    padding: 20px 40px 40px 40px;
+    .user_email {
+      margin-bottom: 5px;
+    }
+    .remember {
+      input {
+        margin: 10px 0 0 15px;
+        float: left;
+      }
+      label {
+        float: left;
+        text-align: left;
+        margin-left: -7px;
+      }
+    }
+    .devise-options {
+      margin-left: 15px;
+    }
+  }
+}
+
+.text-section {
+  background: white;
+  padding: 20px;
+  border-top: 3px solid $green;
+  float: left;
+  width: 100%;
+  @include rounded-bottom;
+  h1 {
+    margin-top: 0;
+    margin-bottom: 5px;
   }
 }
 
 /* About and Contact */
 .about,
 .contact {
+  h1 {
+    margin-bottom: 20px;
+  }
   .lead {
     font-size: 140%;
   }
@@ -145,7 +307,21 @@ h3.title {
   }
 }
 
-/* Fix strange bug with bootstrap radio buttons */
+.contact {
+  img {
+    float: right;
+  }
+  .email {
+    text-align: center;
+    color: $link-color;
+    font-size: 1.8em;
+    margin: 20px 0;
+  }
+}
+
+
+/* Bootstrap alignment fixes */
+
 .radio input[type="radio"] {
   float: none !important;
   margin: 0 5px 4px -18px;
@@ -153,4 +329,70 @@ h3.title {
 .checkbox input[type="checkbox"] {
   float: none !important;
   margin: 9px 5px 4px -18px;
+}
+
+/* will_paginate Bootstrap pagination */
+.pagination > .active > a,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus {
+  background: whitesmoke;
+  border-color: #ddd;
+  color: #999;
+}
+
+.header-tile {
+  padding: 0 10px 10px 0;
+  .content {
+    @include rounded-bottom;
+    border-top: $green 3px solid;
+    float: left;
+    width: 100%;
+    background: white;
+    padding: 0 10px 10px 20px;
+    .nav-stacked {
+      i {
+        margin: 3px 10px 0 0;
+      }
+      .badge {
+        float: right;
+        background: #999;
+        color: white;
+        margin-top: 3px;
+      }
+      .active a {
+        background: $green;
+        color: white;
+      }
+    }
+    p {
+      opacity: 0.7;
+      font-size: 0.8em;
+    }
+  }
+}
+.sidebar .header-tile {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.not-found {
+  .container {
+    .centered {
+      text-align: center;
+      h1 {
+        margin-top: 0;
+        padding-top: 20px;
+      }
+      p {
+        margin: 1em 0;
+      }
+      a {
+        font-weight: bold;
+      }
+    }
+  }
 }
