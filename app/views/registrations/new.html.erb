@@ -1,4 +1,4 @@
-<div class="section sign-up">
+<div class="section sign-up-box">
   <div class="well col-sm-10">
   <h1>OpenSit is a place to share and develop your meditation practice.</h1>
   <p class="its-free">It's completely free!</p>
@@ -15,13 +15,11 @@
           </div>
         <% end %>
 
-        <%= f.input :username, placeholder: 'A username', label: false %>
+        <%= f.input :username, placeholder: 'A username', label: false, input_html: { autocomplete: 'off' } %>
 
-        <%= f.input :email, placeholder: 'Your email', label: false %>
+        <%= f.input :email, placeholder: 'Your email', label: false, input_html: { autocomplete: 'off' } %>
 
-        <%= f.input :password, placeholder: 'And a password', label: false %>
-
-        <!-- <%= f.input :password_confirmation, placeholder: 'Confirm password', label: false %> -->
+        <%= f.input :password, placeholder: 'And a password', label: false, input_html: { autocomplete: 'off' } %>
 
         <div class="row"><%= f.submit "Sign up", :class => 'btn btn-primary btn-lg pull-left' %></div>
 

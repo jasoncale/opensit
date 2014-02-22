@@ -47,7 +47,7 @@
 
 /* Sign in/up */
 .sign-in,
-.sign-up {
+.sign-up-box {
   .well {
     background: white;
     float: none;
@@ -75,8 +75,7 @@
 }
 
 /* Sign up */
-.sign-up-page {
-  padding-top: 0;
+.sign-up-box {
   h1 {
     text-align: center;
     line-height: 1.5em;
@@ -88,49 +87,51 @@
     color: $pink;
     font-weight: bold;
   }
-  .sign-up {
-    h2 {
-      font-size: 1.2em;
+  h2 {
+    font-size: 1.2em;
+  }
+  .btn-lg {
+    margin-top: 20px;
+  }
+  .left {
+    input {
+      margin-top: 5px;
     }
-    .btn-lg {
-      margin-top: 20px;
+    .row {
+      margin-left: 0;
     }
-    .left {
-      input {
-        margin-top: 5px;
-      }
-      .row {
-        margin-left: 0;
-      }
-    }
-    .right {
-      .point {
-        font-size: 1.4em;
-        margin: 17px 0;
+  }
+  .right {
+    .point {
+      font-size: 1.4em;
+      margin: 17px 0;
+      float: left;
+      width: 100%;
+      .icon {
         float: left;
-        width: 100%;
-        .icon {
-          float: left;
-          width: 44px;
-          i {
-            font-size: 1.2em;
-            color: lighten($link-color, 5%);
-          }
+        width: 44px;
+        i {
+          font-size: 1.2em;
+          color: lighten($link-color, 5%);
         }
-        .text {
-          float: left;
-          width: 80%;
-          font-size: 0.8em;
-          color: $dark-grey;
-        }
+      }
+      .text {
+        float: left;
+        width: 80%;
+        font-size: 0.8em;
+        color: $dark-grey;
       }
     }
   }
 }
 
+/* Remove page-content padding for sign up / in pages */
+.sign-up-or-in {
+  padding-top: 0;
+}
+
 /* Sign in */
 .sign-in {
-  margin-top: -30px;
   .well {
     padding: 20px 40px 40px 40px;
     .user_email {

@@ -22,7 +22,8 @@
       }]);
     </script>
 
-    <% if (controller_name.in? ['registrations', 'sessions']) && controller.action_name == 'new' %>
+    <% if (controller_name.in? ['registrations', 'sessions']) && controller.action_name != 'edit' %>
+      <% @page_class = 'sign-up-or-in' %>
       <%= render 'shared/brand_header' %>
     <% end %>
 
@@ -34,11 +35,13 @@
       <div class="page-content container <%= @page_class %>">
 
         <div class="row">
-          <% if flash[:notice] -%>
-            <div class="alert alert-success"><%= flash[:notice] %></div>
-          <% end %>
-          <% if flash[:error] -%>
-            <div class="alert alert-error"><%= flash[:notice] %></div>
+          <% if !(controller_name.in? ['registrations', 'sessions']) %>
+            <% if flash[:notice] -%>
+              <div class="alert alert-success"><%= flash[:notice] %></div>
+            <% end %>
+            <% if flash[:error] -%>
+              <div class="alert alert-error"><%= flash[:notice] %></div>
+            <% end %>
           <% end %>
 
           <%= yield %>
