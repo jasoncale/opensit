@@ -202,10 +202,6 @@ class User < ActiveRecord::Base
 
   # STATS
 
-  def total_entries
-    self.sits.count
-  end
-
   def last_update
     self.sits.public.newest_first.first.created_at
   end

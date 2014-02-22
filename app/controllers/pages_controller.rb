@@ -32,8 +32,9 @@ class PagesController < ApplicationController
   end
 
   def new_users
-    @newest_users = User.newest_users(10)
+    @users = User.newest_users(10)
     @page_class = 'new-users'
+    render 'users/user_results'
   end
 
   def new_comments
@@ -41,6 +42,8 @@ class PagesController < ApplicationController
   end
 
   def active_users
+    @users = User.all.order('sits_count DESC')
+    render 'users/user_results'
   end
 
   def robots

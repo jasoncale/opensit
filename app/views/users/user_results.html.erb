@@ -3,8 +3,8 @@
 </div>
 
 <div class="clearfix col-md-9">
-	<% if !@newest_users.empty? %>
-		<% @newest_users.each do |user| %>
+	<% if !@users.empty? %>
+		<% @users.each do |user| %>
 			<%= render :partial => 'shared/user', :locals => { :u => user } %>
 		<% end %>
 	<% else %>

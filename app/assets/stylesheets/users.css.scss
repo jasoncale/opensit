@@ -292,6 +292,7 @@
 	float: left;
 	width: 100%;
 	margin: 5px 0;
+	height: 70px;
 	.avatar {
 		float: left;
 		width: 60px;
@@ -301,6 +302,12 @@
 		width: calc(100% - 60px);
 		.name {
 			float: left;
+		}
+		.sit-count {
+			float: left;
+			color: $dark-grey;
+			margin: 3px 0 0 5px;
+			font-size: 0.8em;
 		}
 		.location {
 			float: left;

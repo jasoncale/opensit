@@ -5,6 +5,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li <%='class=active' if current_page?(explore_path) %>><a href="/explore" class="item"><i class="fa fa-globe"></i> Global SitStream</a></li>
       <li <%='class=active' if current_page?(explore_tags_path) %>><a href="/explore/tags" class="item"><i class="fa fa-tags"></i> Popular tags</a></li>
+      <li <%='class=active' if current_page?(explore_active_users_path) %>><a href="/explore/users/active" class="item"><i class="fa fa-user"></i> Active users</a></li>
       <li <%='class=active' if current_page?(explore_new_users_path) %>><a href="/explore/users/new" class="item"><i class="fa fa-user"></i> New users</a></li>
     </ul>
   </div>
