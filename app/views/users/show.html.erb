@@ -1,12 +1,14 @@
 <div class="sidebar col-md-3">
   <%= render 'shared/full_user' %>
 
-  <% if !@user.sits.empty? %>
-    <div class="nav-module my-timeline">
-      <ul>
-      <%= timeline(@links) %>
-      </ul>
-    </div>
+  <% if !@user.private_stream %>
+    <% if !@user.sits.empty? %>
+      <div class="nav-module my-timeline">
+        <ul>
+        <%= timeline(@links) %>
+        </ul>
+      </div>
+    <% end %>
   <% end %>
 </div>
 
@@ -16,62 +18,69 @@
     <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to new users</a>
   <% end %>
 
-  <% if @range_title %>
-    <h1 class="range-title"><%= @range_title %></h1>
+  <% if @user.private_stream %>
+    <div class="message-box">
+      <h2>Private.</h2>
+      <p>This is a private journal.</p>
+    </div>
   <% else %>
-
-    <% if @user.who.blank? && @user.why.blank? && @user.practice.blank? %>
-      <div class="message-box">
-        <% if current_user == @user %>
-          <h2>You've not filled in your profile yet!</h2>
-          <p>Tell us a bit more about yourself.</p>
-          <div class="my-actions">
-            <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-default' %>
-          </div>
-        <% else %>
-          <h2>This person hasn't filled out their profile yet.</h2>
-        <% end %>
-      </div>
+    <% if @range_title %>
+      <h1 class="range-title"><%= @range_title %></h1>
     <% else %>
-      <div class="profile">
 
-
-        <% if !@user.who.blank? %>
-          <p class="lead"><%= @user.who.html_safe %></p>
-        <% end %>
-
-        <% if !@user.why.blank? %>
-          <div class="profile-field">
-            <div class="title">Why do you practice?</div>
-            <%= @user.why.html_safe %>
-          </div>
-        <% end %>
-
-        <% if !@user.practice.blank? %>
-          <div class="profile-field">
-            <div class="title">What do you practice?</div>
-            <%= @user.practice.html_safe %>
-          </div>
-        <% end %>
-
-        <% if current_user == @user %>
-          <div class="my-actions">
-            <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-default' %>
-          </div>
-        <% else %>
-          <%= link_to(feed_path(@user), :title => 'Subscribe to this users updates', :class => 'user-sit-feed') do %>
-            <i class="fa fa-rss"></i>
+      <% if @user.who.blank? && @user.why.blank? && @user.practice.blank? %>
+        <div class="message-box">
+          <% if current_user == @user %>
+            <h2>You've not filled in your profile yet!</h2>
+            <p>Tell us a bit more about yourself.</p>
+            <div class="my-actions">
+              <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-default' %>
+            </div>
+          <% else %>
+            <h2>This person hasn't filled out their profile yet.</h2>
           <% end %>
-        <% end %>
-      </div>
-    <% end %>
-  <% end %>
+        </div>
+      <% else %>
+        <div class="profile">
 
-  <div class="sit-container">
-    <% @sits.each do |sit| %>
-      <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => sit, :width => 4 } %>
+
+          <% if !@user.who.blank? %>
+            <p class="lead"><%= @user.who.html_safe %></p>
+          <% end %>
+
+          <% if !@user.why.blank? %>
+            <div class="profile-field">
+              <div class="title">Why do you practice?</div>
+              <%= @user.why.html_safe %>
+            </div>
+          <% end %>
+
+          <% if !@user.practice.blank? %>
+            <div class="profile-field">
+              <div class="title">What do you practice?</div>
+              <%= @user.practice.html_safe %>
+            </div>
+          <% end %>
+
+          <% if current_user == @user %>
+            <div class="my-actions">
+              <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-default' %>
+            </div>
+          <% else %>
+            <%= link_to(feed_path(@user), :title => 'Subscribe to this users updates', :class => 'user-sit-feed') do %>
+              <i class="fa fa-rss"></i>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
-  </div>
+
+    <div class="sit-container">
+      <% @sits.each do |sit| %>
+        <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => sit, :width => 4 } %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 

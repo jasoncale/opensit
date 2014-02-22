@@ -20,17 +20,19 @@ class UsersController < ApplicationController
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @links = @user.stream_range
 
-    if params[:y] && params[:m]
-      @sits = @user.sits_by_month(month: params[:m], year: params[:y]).newest_first
-      @range_title = "#{Date::MONTHNAMES[params[:m].to_i]}, #{params[:y]}"
-    elsif params[:y]
-      @sits = @user.sits_by_year(params[:y]).newest_first
-      @range_title = "All sits in #{params[:y]}"
-    else
-      if current_user && @user.id == current_user.id
-        @sits = @user.sits.newest_first.paginate(:page => params[:page])
+    if !@user.private_stream
+      if params[:y] && params[:m]
+        @sits = @user.sits_by_month(month: params[:m], year: params[:y]).newest_first
+        @range_title = "#{Date::MONTHNAMES[params[:m].to_i]}, #{params[:y]}"
+      elsif params[:y]
+        @sits = @user.sits_by_year(params[:y]).newest_first
+        @range_title = "All sits in #{params[:y]}"
       else
-        @sits = @user.sits.public.newest_first.paginate(:page => params[:page])
+        if current_user && @user.id == current_user.id
+          @sits = @user.sits.newest_first.paginate(:page => params[:page])
+        else
+          @sits = @user.sits.public.newest_first.paginate(:page => params[:page])
+        end
       end
     end
 
