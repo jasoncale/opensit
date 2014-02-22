@@ -32,7 +32,7 @@ class PagesController < ApplicationController
   end
 
   def new_users
-    @users = User.newest_users(10)
+    @users = User.newest_users(10).paginate(:page => params[:page])
     @page_class = 'new-users'
     render 'users/user_results'
   end
@@ -42,7 +42,7 @@ class PagesController < ApplicationController
   end
 
   def active_users
-    @users = User.all.order('sits_count DESC')
+    @users = User.all.order('sits_count DESC').limit(10).paginate(:page => params[:page])
     render 'users/user_results'
   end
 

@@ -10,4 +10,8 @@
 	<% else %>
 		<div class="message-box"><h2>No matches</h2></div>
 	<% end %>
+
+	 <div class="pagination-container">
+   	<%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+   </div>
 </div>
