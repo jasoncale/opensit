@@ -26,10 +26,18 @@ class UsersController < ApplicationController
 
     if !@user.private_stream
       if params[:y] && params[:m]
-        @sits = @user.sits_by_month(month: params[:m], year: params[:y]).newest_first
+        if current_user == @user
+          @sits = @user.sits_by_month(month: params[:m], year: params[:y]).newest_first
+        else
+          @sits = @user.sits_by_month(month: params[:m], year: params[:y]).public.newest_first
+        end
         @range_title = "#{Date::MONTHNAMES[params[:m].to_i]}, #{params[:y]}"
       elsif params[:y]
-        @sits = @user.sits_by_year(params[:y]).newest_first
+        if current_user == @user
+          @sits = @user.sits_by_year(params[:y]).newest_first
+        else
+          @sits = @user.sits_by_year(params[:y]).public.newest_first
+        end
         @range_title = "All sits in #{params[:y]}"
       else
         if current_user && @user.id == current_user.id
