@@ -87,7 +87,7 @@ $(document).ready(function(){
   });
 
   // MASONRY
-  if ($('.page-content.me').length) {
+  if ($('.page-content.me .sit-container').length) {
     var container = document.querySelector('.sit-container');
     var msnry = new Masonry( container, {
       columnWidth: '.col-md-3',

@@ -214,6 +214,10 @@ class User < ActiveRecord::Base
     self.limit(count).newest_first
   end
 
+  def self.active_users
+    User.all.where(private_stream: false).order('sits_count DESC')
+  end
+
 end
 
 # == Schema Information

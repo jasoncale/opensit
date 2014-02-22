@@ -1,4 +1,11 @@
-<%= form_for(current_user.relationships.build(followed_id: @user ? @user.id : user.id), remote: true) do |f| %>
+<%
+if (defined? user)
+	user_id = user.id
+else
+	user_id = @user.id
+end
+%>
+<%= form_for(current_user.relationships.build(followed_id: user_id), remote: true) do |f| %>
   <div><%= f.hidden_field :followed_id %></div>
   <%= f.submit "Follow", class: "btn btn-primary" %>
 <% end %>

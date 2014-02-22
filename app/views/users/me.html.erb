@@ -2,9 +2,14 @@
 	<%= render 'shared/user_summary' %>
 
 	<div class="col-lg-9">
-		<div class="message-box">
-		  <h2>You're not following anyone yet!</h2>
-		  <p>Go <strong><a href="/explore">explore</a></strong> and see what's going on!</p>
+		<div class="message-box welcome-box">
+		  <h2>Try following someone!</h2>
+		  <% @users_to_follow.each do |user| %>
+		  	<%= render :partial => 'shared/user', :locals => { :u => user } %>
+		  <% end %>
+		  <div class="my-actions">
+		  	<a href="/" class="btn btn-lg btn-primary">Ok, done!</a>
+		  </div>
 		</div>
 	</div>
 <% else %>
