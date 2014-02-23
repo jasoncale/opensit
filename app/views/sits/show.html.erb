@@ -27,9 +27,13 @@
     </header>
 
     <% if @sit.user.private_stream %>
-      <div class="private-warning"><i class="fa fa-lock"></i> Your stream is private.</div>
+      <div class="private-warning">
+        <span class="label label-primary"><i class="fa fa-lock"></i> Your stream is private.</span>
+      </div>
     <% elsif @sit.private %>
-      <div class="private-warning"><i class="fa fa-lock"></i> This is a private entry. Only you can see it!</div>
+      <div class="private-warning">
+      <span class="label label-primary"><i class="fa fa-lock"></i> This is a private entry.</span>
+      </div>
     <% end %>
 
     <div class="body"><%= @sit.body.html_safe %></div>

@@ -203,7 +203,7 @@ class User < ActiveRecord::Base
   # STATS
 
   def last_update
-    self.sits.public.newest_first.first.created_at
+    self.sits.newest_first.first.created_at
   end
 
   ##
