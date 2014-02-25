@@ -2,11 +2,11 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   config.secret_key = '48ad51ed608db341f42891de6ebd116a431f336d64d787d29ad503f115833528ee29434940fad7c155e7003bf794a1836fdaf3b32e30838534641db21f066e32'
-  
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "zenbot@opensit.com"
+  config.mailer_sender = "hello@opensit.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -127,7 +127,7 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   # config.timeout_in = 30.minutes
-  
+
   # If true, expires auth token on session timeout.
   # config.expire_auth_token_on_timeout = false
 
