@@ -1,9 +1,5 @@
 class PagesController < ApplicationController
   def front
-    if current_user
-      redirect_to me_path
-    end
-
     @sits = Sit.public.newest_first.limit(30)
     @page_class = 'front-page'
 
