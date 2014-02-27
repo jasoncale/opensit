@@ -61,11 +61,7 @@
           <%
             share_text = "#{@sit.full_title} by #{@sit.user.display_name} on @opensit, the free meditation journal: #{request.original_url}"
           %>
-          <a title="Share on twitter" href="http://twitter.com/home?status=<%=share_text%>">
-            <i class="fa fa-twitter"></i></a>
-          <a title="Share on Facebook" href="http://www.facebook.com/sharer/sharer.php?u=<%=request.original_url%>">  <i class="fa fa-facebook"></i></a>
-          <a title="Share on Google+" href="https://plus.google.com/share?url=<%=request.original_url%>">
-            <i class="fa fa-google-plus"></i></a>
+          <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='5216674'></div>
         </div>
       </div>
     </div>
