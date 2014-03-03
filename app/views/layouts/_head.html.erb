@@ -3,6 +3,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="bUUwYz6cKVuhYbL7PtFunzsGV67I56tGyDldiHJgs7k" />
   <title><%= full_title(@title) %></title>
+  <% if !(request.fullpath =~ /sits/) %>
+    <meta name="description" content="<%= meta_desc(@desc) %>" />
+  <% end %>
 
   <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -11,21 +14,5 @@
   <%= csrf_meta_tags %>
   <%= airbrake_javascript_notifier %>
   <script type="text/javascript">
-  //<![CDATA[
-    (function() {
-      var shr = document.createElement('script');
-      shr.setAttribute('data-cfasync', 'false');
-      shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
-      shr.type = 'text/javascript'; shr.async = 'true';
-      shr.onload = shr.onreadystatechange = function() {
-        var rs = this.readyState;
-        if (rs && rs != 'complete' && rs != 'loaded') return;
-        var site_id = '3a20bcc88a931fb230f2bf39a6410dc6';
-        try { Shareaholic.init(site_id); } catch (e) {}
-      };
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(shr, s);
-    })();
-  //]]>
   </script>
 </head>

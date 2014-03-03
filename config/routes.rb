@@ -2,7 +2,7 @@ Opensit::Application.routes.draw do
 
   root :to => "users#me"
 
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" }
   get 'me' => "users#me"
   get '/u/:username' => "users#show", :as => :user
   get '/u/:username/following' => "users#following", :as => :following_user

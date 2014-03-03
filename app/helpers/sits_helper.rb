@@ -4,15 +4,15 @@ module SitsHelper
 		if search
 			excerpt = excerpt(stripped, search, radius: 200)
 			if !excerpt.blank?
-				return highlight(excerpt, search) 		
+				return highlight(excerpt, search)
 			else
 				return truncate(stripped, :length => length, :omission => " ...")
 			end
 		end
 		return truncate(stripped, :length => length, :omission => " ...")
-	end 
+	end
 
-	def teaser_title(sit, type = false) 
+	def teaser_title(sit, type = false)
 		if sit.s_type == 0
       title = " sat for #{sit.duration} minutes".html_safe
 		elsif sit.s_type == 1

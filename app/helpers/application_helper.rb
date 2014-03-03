@@ -1,12 +1,17 @@
 module ApplicationHelper
   # Returns the full title on a per-page basis
   def full_title(page_title)
-    base_title = "OpenSit"
     if page_title.nil?
-      "#{base_title} | Where Meditators Meet. Free Online Practice Journal"
+      "OpenSit | Free Online Meditation Community"
     else
-      "#{page_title} | #{base_title}"
+      "#{page_title} | OpenSit"
     end
+  end
+
+  def meta_desc(desc)
+    base_desc = "OpenSit is a place to share and deepen your meditation practice. Join other mindfulness, Vipassana, or Zen Buddhist practitioners and follow your favourites!"
+    return base_desc if desc.nil?
+    return desc
   end
 
 	def tag_cloud(tags, classes)

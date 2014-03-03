@@ -39,7 +39,7 @@ class Sit < ActiveRecord::Base
   # For use on show sit pages
   def full_title
     if s_type == 0
-      "#{self.duration} minute sit"
+      "#{self.duration} minute meditation sit"
     elsif s_type == 1
       self.title # Diary
     else
@@ -50,6 +50,10 @@ class Sit < ActiveRecord::Base
   ##
   # METHODS
   ##
+
+  def is_sit?
+    s_type == 0
+  end
 
   # Remove <br>'s and &nbsp's
   def custom_strip

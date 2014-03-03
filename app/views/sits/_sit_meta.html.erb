@@ -7,6 +7,7 @@
 	</ul>
 
 	<div class="journal-stats">
-		<%= @user.display_name %> has logged <%= @user.sits_count %> entries. Last updated <%= time_ago_in_words(@user.last_update) %> ago.
+		<p><%= @user.display_name %> has <%= @user.sits_count %> entries in their meditation journal. Last updated <%= time_ago_in_words(@user.last_update) %> ago.</p>
+		<p><a href="<%=user_path(@user)%>">View full meditation journal</a></p>
 	</div>
 </div>

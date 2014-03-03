@@ -13,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def new
+    @title = 'Sign up'
     @page_class = 'sign-up-page'
     super
   end

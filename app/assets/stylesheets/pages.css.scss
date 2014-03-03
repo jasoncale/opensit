@@ -32,10 +32,26 @@
       font-size: 0.7em;
       padding: 10px 20px;
       text-align: center;
+      h2 {
+        font-size: 24px;
+      }
       i {
         color: lighten($link-color, 5%);
         font-size: 5em;
       }
+    }
+  }
+  .copy {
+    color: $dark-grey;
+    float: left;
+    padding: 15px 3em 20px;
+    text-align: center;
+    border-bottom: 3px solid $green;
+    h1 {
+      margin: 10px 0 20px;
+    }
+    p {
+      font-size: 1.2em;
     }
   }
   .padder {

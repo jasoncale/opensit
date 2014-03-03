@@ -17,7 +17,13 @@ class SitsController < ApplicationController
     end
 
     @user = @sit.user
-    @title = "#{@sit.full_title} by #{@user.display_name}"
+
+    if @sit.is_sit?
+      @title = "#{@sit.duration} minute meditation log by #{@user.display_name}"
+    else
+      @title = "#{@sit.title}, a meditation journal by #{@user.display_name}"
+    end
+
     @page_class = 'view-sit'
   end
 

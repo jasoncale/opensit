@@ -44,6 +44,7 @@
 
     <div class="row">
       <div class="interactions">
+      <% if current_user %>
         <div class="col-md-4 save-it">
           <%= render :partial => 'shared/favourite_button' %>
         </div>
@@ -58,11 +59,12 @@
 
         <div class="col-md-4 share-buttons">
           <p class="share-it">Share it?</p>
-          <%
-            share_text = "#{@sit.full_title} by #{@sit.user.display_name} on @opensit, the free meditation journal: #{request.original_url}"
-          %>
           <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='5216674'></div>
         </div>
+      <% else %>
+        <p class="guest-summary">This is meditation journal entry by <%=@user.display_name%>, added on <%=@sit.date%>. They joined <%=time_ago_in_words(@user.created_at)%> ago, and have added <%=@user.sits_count%> entries to date. <strong>Don't miss the next one!</strong> <a href="<%=new_user_registration_path%>">Join today for free</a> to follow them.</p>
+        <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='5216674'></div>
+      <% end %>
       </div>
     </div>
 

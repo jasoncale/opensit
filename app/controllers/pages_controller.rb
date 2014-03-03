@@ -25,20 +25,26 @@ class PagesController < ApplicationController
   end
 
   def tag_cloud
+    @title = 'Popular Tags'
   end
 
   def new_users
     @users = User.newest_users(10).paginate(:page => params[:page])
     @page_class = 'new-users'
+    @title = 'Newest Users'
+
     render 'users/user_results'
   end
 
   def new_comments
     @comments = Comment.latest(5)
+
+    @title = 'New comments'
   end
 
   def active_users
     @users = User.active_users.limit(10).paginate(:page => params[:page])
+    @title = 'Active Users'
     render 'users/user_results'
   end
 
