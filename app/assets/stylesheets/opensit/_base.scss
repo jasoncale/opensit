@@ -14,6 +14,7 @@ $link-color: darken($green, 20%);
 $btn-primary-bg: $link-color;
 $font-family-sans-serif: "Lato", "HelveticaNeue", "Helvetica", "sans-serif";
 $headingsFontWeight: normal;
+$input-border-focus: $link-color;
 
 // MIXINS
 @mixin box-model {

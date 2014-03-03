@@ -404,6 +404,10 @@ $colHighlight   : whitesmoke;
   background: $link-color;
 }
 
+.datepicker table tr td.active:active, .datepicker table tr td.active:hover:active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.active, .datepicker table tr td.active:hover.active, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled:hover.active {
+  background: $link-color !important;
+}
+
 /*
  *    RESPONSIVE
  *******************************/

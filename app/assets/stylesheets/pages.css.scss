@@ -42,16 +42,21 @@
     }
   }
   .copy {
-    color: $dark-grey;
+    color: whitesmoke;
     float: left;
     padding: 15px 3em 20px;
     text-align: center;
+    background: $link-color;
     border-bottom: 3px solid $green;
     h1 {
       margin: 10px 0 20px;
     }
     p {
       font-size: 1.2em;
+    }
+    a {
+      color: white;
+      text-decoration: underline;
     }
   }
   .padder {

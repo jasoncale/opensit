@@ -45,11 +45,13 @@ $(document).ready(function(){
       e.stopPropagation();
   });
 
-  // $( ".datepicker" ).datepicker({
-  //   dateFormat: 'yy-mm-dd',
-  //   changeMonth: true,
-  //   changeYear: true
-  // });
+  // Datepicker
+  $('[data-behaviour~=datepicker]').datepicker({
+    format: 'yyyy-mm-dd',
+    changeMonth: true,
+    changeYear: true,
+    autoclose: true,
+  });
 
   $(".chzn-select").chosen({max_selected_options: 1});
 

@@ -35,7 +35,7 @@ gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'
-
+gem 'bootstrap-datepicker-rails'
 gem 'font-awesome-sass'
 
 group :test do
