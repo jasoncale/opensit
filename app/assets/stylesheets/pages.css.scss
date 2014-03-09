@@ -175,18 +175,57 @@
   }
 }
 
-/* About */
+/* About/Contact */
 .about,
 .contact {
-  h1 {
+  h1, h2 {
+    font-weight: bold;
     margin-bottom: 20px;
   }
   .lead {
     font-size: 140%;
   }
+}
+
+/* About */
+.about {
+  .text-section {
+    padding: 2em;
+  }
   p {
-    line-height: 1.7em;
-    font-size: 120%;
+    font-size: 19px;
+    line-height: 1.4;
+    color: #555;
+  }
+  .lead {
+    margin: 0 2em;
+  }
+  .one-line {
+    text-align: center;
+    color: $link-color;
+    font-size: 110%;
+  }
+  h2 {
+    margin-top: 1em;
+  }
+  .principles {
+    margin: 1em 0;
+    .pane {
+      text-align: center;
+      border-right: 3px solid $green;
+      p {
+        line-height: 1.4;
+        font-size: 100%;
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+  blockquote {
+    font-family: Georgia, serif;
+    line-height: 1.5;
+    opacity: 0.8;
   }
 }
 
