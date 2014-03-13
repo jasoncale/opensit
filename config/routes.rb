@@ -1,6 +1,6 @@
 Opensit::Application.routes.draw do
 
-  root :to => "users#me"
+  root :to => "pages#front"
 
   devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" }
   get 'me' => "users#me"
@@ -14,7 +14,6 @@ Opensit::Application.routes.draw do
 
   get '/search' => "search#main"
 
-  get 'front' => "pages#front"
   get 'about' => "pages#about"
   get 'contact' => "pages#contact"
   get 'explore' => "pages#explore"

@@ -18,7 +18,7 @@ describe UniquePageNameValidator do
 
   context "when given a pre-existing page name" do
     it "is not valid" do
-      validatable.name = "front"
+      validatable.name = "about"
       expect(validatable).to be_invalid
     end
   end

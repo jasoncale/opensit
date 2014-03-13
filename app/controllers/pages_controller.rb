@@ -1,9 +1,13 @@
 class PagesController < ApplicationController
   def front
-    @sits = Sit.public.newest_first.limit(30)
-    @page_class = 'front-page'
+    if user_signed_in?
+      redirect_to controller: :users, action: :me
+    else
+      @sits = Sit.public.newest_first.limit(30)
+      @page_class = 'front-page'
 
-    render 'front', layout: 'minimal'
+      render 'front', layout: 'minimal'
+    end
   end
 
   def about

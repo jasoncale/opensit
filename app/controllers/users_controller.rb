@@ -1,22 +1,18 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :only => [:export, :followers, :following]
+  before_filter :authenticate_user!, :only => [:me, :export, :followers, :following]
 
   # GET /me page if logged in, /front if not
   def me
-    if !user_signed_in?
-      redirect_to front_path
-    else
-      @feed_items = current_user.socialstream.paginate(:page => params[:page])
-      @user = current_user
-      @latest = @user.latest_sits
+    @feed_items = current_user.socialstream.paginate(:page => params[:page])
+    @user = current_user
+    @latest = @user.latest_sits
 
-      if @feed_items.empty?
-        @users_to_follow = User.active_users.limit(5)
-      end
-
-      @title = 'Home'
-      @page_class = 'me'
+    if @feed_items.empty?
+      @users_to_follow = User.active_users.limit(5)
     end
+
+    @title = 'Home'
+    @page_class = 'me'
   end
 
   # GET /u/buddha or /buddha
