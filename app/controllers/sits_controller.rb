@@ -49,7 +49,9 @@ class SitsController < ApplicationController
   def create
     @user = current_user
     @sit = @user.sits.new(params[:sit])
+
     @sit.private = true if @user.private_stream
+    @sit.created_at = DateTime.strptime(params[:custom_date], "%m/%d/%Y %l:%M %p") if params[:custom_date] != ''
 
     if @sit.save
       redirect_to @sit, notice: 'Sit was successfully created.'
@@ -62,6 +64,7 @@ class SitsController < ApplicationController
   # PUT /sits/1
   def update
     @sit = Sit.find(params[:id])
+    @sit.created_at = DateTime.strptime(params[:custom_date], "%m/%d/%Y %l:%M %p") if params[:custom_date]
 
     if @sit.update_attributes(params[:sit])
       redirect_to @sit, notice: 'Sit was successfully updated.'

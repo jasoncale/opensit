@@ -45,11 +45,15 @@ $(document).ready(function(){
       e.stopPropagation();
   });
 
-  // Datepicker
-  $('[data-behaviour~=datepicker]').datepicker({
-    format: 'yyyy-mm-dd',
-    changeMonth: true,
-    changeYear: true,
+  // Old datepicker config - keep in case we revert
+  // $('[data-behaviour~=datepicker]').datepicker({
+  //   format: 'yyyy-mm-dd',
+  //   changeMonth: true,
+  //   changeYear: true,
+  //   autoclose: true,
+  // });
+
+  $('#datetimepicker').datetimepicker({
     autoclose: true,
   });
 

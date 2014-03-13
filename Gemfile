@@ -35,7 +35,8 @@ gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.0.3'
-gem 'bootstrap-datepicker-rails'
+gem 'momentjs-rails', '~> 2.5.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 2.1.30'
 gem 'font-awesome-sass'
 
 group :test do

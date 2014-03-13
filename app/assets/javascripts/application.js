@@ -20,6 +20,7 @@
 //= require bootstrap/popover
 //= require bootstrap/modal
 //= require bootstrap/collapse
-//= require bootstrap-datepicker
+//= require moment
+//= require bootstrap-datetimepicker
 //= require turbolinks
 //= require_tree .
