@@ -271,6 +271,9 @@ article.sit-teaser-block {
   .sit_body {
     clear: left;
   }
+  .custom-date {
+    width: 211px;
+  }
   .delete-entry {
     margin-left: 10px;
   }
@@ -284,6 +287,10 @@ article.sit-teaser-block {
     text-align: center;
     font-size: 21px;
     margin: 15px;
+    .time {
+      font-size: 0.6em;
+      color: $dark-grey;
+    }
   }
   .pager {
     li a {

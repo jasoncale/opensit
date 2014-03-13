@@ -1,5 +1,7 @@
 <div class="nav-module sit-meta">
-	<div class="date"><%= @sit.date %></div>
+	<div class="date"><%= @sit.date %><br>
+		<div class="time"><%= @sit.created_at.strftime("%l:%M %p") %></div>
+	</div>
 
   <ul class="pager">
 	  <%= previous_sit(@sit) %>

@@ -40,6 +40,7 @@
   </div>
   <% end %>
 
+
   <div class="row">
     <div class="col-lg-offset-2 col-sm-8 sit_type">
       <div class="radio">
@@ -63,7 +64,22 @@
 
   <%= form_element(f, :body, 'sit', "What happened?", 7, { label: false, input_html: { rows: 10, autofocus: true, class: "rich-textarea" }} ) %>
 
-  <%= form_element(f, :created_at, 'sit', "Date", 2, { as: 'string', label: false, input_html: { placeholder: 'Just now.', value: current_page?(edit_sit_path(@sit)) ? @sit.created_at.strftime('%Y-%m-%d %H:%M') : '', label: 'none', data: { behaviour: 'datepicker'} }} ) %>
+  <div class='form-group'>
+    <label class='col-lg-2 control-label' for='sit_created_at'>Date</label>
+    <div class="col-lg-2">
+      <div class="form-group string optional sit_created_at">
+        <div class="col-lg-12">
+          <div class="custom-date">
+            <div class='input-group date' id='datetimepicker'>
+                <input type='text' placeholder="Just now" name="custom_date" class="form-control" value="<%=current_page?(edit_sit_path(@sit)) ? @sit.created_at.strftime('%m/%d/%Y %l:%M %p') : '' %>" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <%= form_element(f, :tag_list, 'sit', "Tags", 2, { hint: 'Separate by commas', label: false }) %>
 
