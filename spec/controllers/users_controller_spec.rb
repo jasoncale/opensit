@@ -18,7 +18,7 @@ describe UsersController do
     context 'logged out' do
       it 'redirects to the front page' do
         get :me
-        expect(response).to redirect_to('/front')
+        expect(response).to redirect_to('/users/sign_in')
       end
     end
   end
