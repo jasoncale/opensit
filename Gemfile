@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.0.0"
+ruby '2.1.1'
 
 gem 'rails', '4.0.0'
 gem 'rack'
@@ -16,7 +16,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'annotate'
   gem 'meta_request', '0.2.6'
-  gem 'jazz_hands'
+  gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
+  gem 'pry-byebug'
   gem 'pry-coolline'
 
   # Guard shizzle
