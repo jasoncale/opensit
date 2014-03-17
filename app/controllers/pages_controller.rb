@@ -15,6 +15,11 @@ class PagesController < ApplicationController
     @page_class = 'about'
   end
 
+  def contribute
+    @title = 'Contribute to OpenSit'
+    @page_class = 'contribute'
+  end
+
   def contact
     @title = 'Contact'
     @page_class = 'contact'

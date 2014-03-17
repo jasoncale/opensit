@@ -188,7 +188,8 @@
 }
 
 /* About */
-.about {
+.about,
+.contribute {
   .text-section {
     padding: 2em;
   }
@@ -204,6 +205,7 @@
     text-align: center;
     color: $link-color;
     font-size: 110%;
+    margin: 1em 0;
   }
   h2 {
     margin-top: 1em;

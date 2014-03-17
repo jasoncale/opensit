@@ -4,7 +4,7 @@ OpenSit
 ![OpenSit - Where Meditators Meet](http://opensit.com/images/logomark_readme.png)
 [![Code Climate](https://codeclimate.com/github/danbartlett/opensit.png)](https://codeclimate.com/github/danbartlett/opensit)
 
-OpenSit is an open source meditation community - a place to share your practice and follow friends.
+OpenSit is an open source meditation community - a place to share your meditation practice and follow friends.
 
 The community lives at [OpenSit.com](http://opensit.com)
 
@@ -18,6 +18,9 @@ To install locally for your own hacking pleasure:
 * `bundle exec rake db:create db:migrate`
 * `bundle exec guard`
 * Go to `localhost:3000`
+
+rake db:test:prepare
+rspec spec to run all the tests
 
 #License
 

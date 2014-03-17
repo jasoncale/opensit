@@ -15,6 +15,7 @@ Opensit::Application.routes.draw do
   get '/search' => "search#main"
 
   get 'about' => "pages#about"
+  get 'contribute' => "pages#contribute"
   get 'contact' => "pages#contact"
   get 'explore' => "pages#explore"
   get 'explore/tags' => "pages#tag_cloud", :as => :explore_tags
