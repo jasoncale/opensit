@@ -11,4 +11,15 @@ before_script:
 cache:
   bundler: true
   directories:
-    - tmp/cache/assets/test/sprockets
+  - tmp/cache/assets/test/sprockets
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: Uv7HfnmoNyeXEEqiVDSqhH8hPpaESKON34LJDYAqV7i8151B53QRwFddA4DZuvKLsEBWfbbOfrK9CniTYDaA42JGR4SxIBM246ltstfLDqwn3sZyjy3sPY7B6DKIOJYHUXdTFJHhvzbtEQ1xAq/oHyJu9Ck2WRWtSBHLZtXexX4=
+  app: opensit
+  on:
+    branch: master
+  run:
+    - "rake db:migrate"
+    - restart
