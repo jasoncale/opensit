@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-  <%= if current_page?(edit_sit_path(@sit))
+  <%= if !current_page?(new_sit_path)
     link_to 'Delete', sit_path(@sit), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger delete-entry pull-right'
     end %>
 
@@ -46,7 +46,7 @@
       <div class="radio">
         <label>
           <input <%= @sit.s_type == 0 || @sit.s_type.nil? ? 'checked' : '' %> id="sit_s_type_0" name="sit[s_type]" type="radio" value="0" />
-          I just sat for <input class="optional form-control" id="sit_duration" name="sit[duration]" size="50" type="text" value="<%= current_page?(new_sit_path(@sit)) ? @user.default_sit_length : @sit.duration %>"> minutes
+          I just sat for <input class="optional form-control" id="sit_duration" name="sit[duration]" size="50" type="text" value="<%= current_page?(new_sit_path) ? @user.default_sit_length : @sit.duration %>"> minutes
         </label>
       </div>
 
@@ -71,7 +71,7 @@
         <div class="col-lg-12">
           <div class="custom-date">
             <div class='input-group date' id='datetimepicker'>
-                <input type='text' placeholder="Just now" name="custom_date" class="form-control" value="<%=current_page?(edit_sit_path(@sit)) ? @sit.created_at.strftime('%m/%d/%Y %l:%M %p') : '' %>" />
+                <input type='text' placeholder="Just now" name="custom_date" class="form-control" value="<%=!current_page?(new_sit_path) ? @sit.created_at.strftime('%m/%d/%Y %l:%M %p') : '' %>" />
                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
