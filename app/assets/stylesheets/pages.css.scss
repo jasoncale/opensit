@@ -175,36 +175,20 @@
   }
 }
 
-/* About/Contact */
-.about,
-.contact {
+/* For static pages; About, Contact etc */
+.page {
+  padding: 2em;
+  p, ul li {
+    line-height: 1.6;
+    margin: 0.6em 0;
+    color: #555;
+  }
   h1, h2 {
     font-weight: bold;
     margin-bottom: 20px;
   }
   .lead {
-    font-size: 140%;
-  }
-}
-
-/* About */
-.about,
-.contribute {
-  .text-section {
-    padding: 2em;
-  }
-  p {
-    font-size: 19px;
-    line-height: 1.4;
-    color: #555;
-  }
-  .lead {
-    margin: 0 2em;
-  }
-  .one-line {
-    text-align: center;
-    color: $link-color;
-    font-size: 110%;
+    font-size: 1.3em;
     margin: 1em 0;
   }
   h2 {
@@ -231,6 +215,16 @@
   }
 }
 
+/* Contribute */
+.contribute {
+  .fa-github {
+    float: right;
+    color: $dark-grey;
+    font-size: 20em;
+    margin-left: 85px;
+  }
+}
+
 /* Contact */
 .contact {
   img {
@@ -240,6 +234,17 @@
     text-align: center;
     color: $link-color;
     font-size: 1.8em;
-    margin: 20px 0;
+    margin: 1em 0 2em;
+  }
+}
+
+/* About */
+.about {
+  .fa {
+    float: right;
+    font-size: 15em;
+    color: $dark-grey;
+    margin-left: 55px;
+    margin-bottom: 30px;
   }
 }

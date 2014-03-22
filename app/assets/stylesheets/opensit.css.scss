@@ -20,7 +20,7 @@ body {
 }
 
 /* Sticky footer */
-$footer-height: 100px;
+$footer-height: 150px;
 
 .container-full-width {
   margin: 0 auto;
@@ -55,29 +55,34 @@ $footer-height: 100px;
 
 /* Footer */
 footer {
+  opacity: 0.7;
   background: #fff;
   border-top: 1px solid #ccc;
   position: relative;
   margin-top: -$footer-height; /* negative value of footer height */
   height: $footer-height - 1;
   clear: both;
-  .footer-container {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    .follow {
-      margin: 20px 0 10px;
+  .header {
+    margin: 1em 0 0.5em;
+  }
+  a {
+    color: $dark-grey;
+    font-size: 0.9em;
+    &:hover {
       color: $dark-grey;
-      font-size: 1.1em;
     }
-    .footer-links {
-      margin: 10px 0;
-      padding-left: 0;
-      li {
-        display: inline;
-      }
+  }
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .copyright-holder {
+    text-align: center;
+    .footer-logo {
+      margin: 1em 2em;
+      width: 100px;
     }
-    .admin {
+    .copyright {
       color: $dark-grey;
       font-size: 0.8em;
     }
@@ -455,6 +460,11 @@ $colHighlight   : whitesmoke;
     }
   }
 
+  .about i,
+  .contribute .fa-github {
+    font-size: 5em !important;
+  }
+
   // View sit
   .view-sit {
     .header-tile {
@@ -508,9 +518,9 @@ $colHighlight   : whitesmoke;
   }
 
   // Footer
-  footer .footer-container .follow {
-    margin-right: 25px;
-    margin-left: 25px;
-    font-size: 0.9em;
+  footer {
+    ul, .header {
+      display: none;
+    }
   }
 }

@@ -1,17 +1,34 @@
 <footer>
-  <div class="footer-container">
-  <p class="follow">For updates and meditation content follow us on <a href="https://twitter.com/opensit"><i class="fa fa-twitter"></i> Twitter</a>, <a href="https://www.facebook.com/opensit.meditation"><i class="fa fa-facebook"></i> Facebook</a>, and <a href="https://www.google.com/+Opensitmeditation"><i class="fa fa-google-plus"></i> Google+</a></p>
-
-    <% if current_user && ['john', 'tombh', 'danbartlett'].include?(current_user.username) %>
-      <p class="admin"><%= User.count %> contemplatives, <%= Sit.count %> sits, and <%= Comment.count %> comments.</p>
-    <% else %>
-      <ul class="footer-links">
-        <li><%= link_to 'About', about_path %></li>
-        <li class="muted">&middot;</li>
-        <li><%= link_to 'Contact', contact_path %></li>
-        <li class="muted">&middot;</li>
-        <li><%= link_to 'Feedback and Support', 'http://opensit.uservoice.com/' %></li>
+  <div class="container">
+    <div class="col-md-3">
+      <p class="header">Community</p>
+      <ul>
+        <li><a href="https://twitter.com/opensit">Twitter</a></li>
+        <li><a href="https://www.facebook.com/opensit.meditation">Facebook</a></li>
+        <li><a href="https://www.google.com/+Opensitmeditation">Google+</a></li>
       </ul>
-    <% end %>
+    </div>
+
+    <div class="col-md-3">
+      <p class="header">About</p>
+      <ul>
+        <li><%= link_to 'About OpenSit', about_path %></li>
+        <li><%= link_to 'Contact', contact_path %></li>
+        <li><%= link_to 'Feedback', 'http://opensit.uservoice.com/' %></li>
+      </ul>
+    </div>
+
+    <div class="col-md-3">
+      <p class="header">Contribute</p>
+      <ul>
+        <li><%= link_to 'How to Contribute', '/contribute' %></li>
+        <li><%= link_to 'GitHub', 'http://github.com/danbartlett/opensit' %></li>
+      </ul>
+    </div>
+
+    <div class="copyright-holder col-md-3">
+      <%= image_tag('/images/logomark_trans.png', class: 'footer-logo') %>
+      <p class="copyright">&copy; 2013-<%= Time.now.year %> OpenSit</p>
+    </div>
   </div>
 </footer>
