@@ -177,7 +177,7 @@
 
 /* For static pages; About, Contact etc */
 .page {
-  padding: 2em;
+  padding: 2em 4em !important;
   p, ul li {
     line-height: 1.6;
     margin: 0.6em 0;

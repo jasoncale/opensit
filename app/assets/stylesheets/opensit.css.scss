@@ -453,6 +453,11 @@ $colHighlight   : whitesmoke;
     margin: -8px 10px 10px 0;
   }
 
+  // Pages
+  .page {
+    padding: 1em !important;
+  }
+
   // Contact
   .contact {
     img {
@@ -460,9 +465,11 @@ $colHighlight   : whitesmoke;
     }
   }
 
-  .about i,
-  .contribute .fa-github {
-    font-size: 5em !important;
+  // Hide page images
+  .about .opendude,
+  .contribute .fa-github,
+  .contact img {
+    display: none;
   }
 
   // View sit
@@ -521,6 +528,16 @@ $colHighlight   : whitesmoke;
   footer {
     ul, .header {
       display: none;
+    }
+    .copyright-holder {
+      .footer-logo {
+        width: 75px;
+        margin: 0.5em 2em;
+      }
+    }
+    .mobile-nav {
+      display: block !important;
+      visibility: visible !important;
     }
   }
 }
