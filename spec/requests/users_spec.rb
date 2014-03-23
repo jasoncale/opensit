@@ -12,7 +12,10 @@ describe 'Users' do
     fill_in "user_username", with: "newbie"
     fill_in "user_email", with: "newbie@samsara.com"
     fill_in "user_password", with: "gunsbitchesbling"
-    click_on "Sign up"
+
+    within(".new_user") do
+      find_button("Sign up").trigger('click')
+    end
 
     should have_content "Welcome! You have signed up successfully."
   end
@@ -23,6 +26,7 @@ describe 'Users' do
       visit user_session_path
       fill_in "user_email", with: "#{@buddha.email}"
       fill_in "user_password", with: "#{@buddha.password}"
+
       within(".new_user") do
         click_on "Login"
       end
