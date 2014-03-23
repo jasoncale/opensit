@@ -177,7 +177,7 @@
 
 /* For static pages; About, Contact etc */
 .page {
-  padding: 2em;
+  padding: 2em 4em !important;
   p, ul li {
     line-height: 1.6;
     margin: 0.6em 0;
@@ -221,7 +221,7 @@
     float: right;
     color: $dark-grey;
     font-size: 20em;
-    margin-left: 85px;
+    margin: 0 0 30px 85px;
   }
 }
 
@@ -234,17 +234,25 @@
     text-align: center;
     color: $link-color;
     font-size: 1.8em;
-    margin: 1em 0 2em;
+    margin: 1em 0 1.5em;
   }
 }
 
 /* About */
 .about {
-  .fa {
+  .logomark {
     float: right;
-    font-size: 15em;
-    color: $dark-grey;
-    margin-left: 55px;
-    margin-bottom: 30px;
+    width: 400px;
+    margin: 0 1em 1em 1em;
+  }
+  .opendude {
+    float: right;
+    margin: 0 2em 2em 2em;
+  }
+  .fa-globe {
+    font-size: 10em;
+    float: right;
+    margin: 40px;
+    color: $link-color;
   }
 }

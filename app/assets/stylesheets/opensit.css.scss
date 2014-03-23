@@ -55,7 +55,7 @@ $footer-height: 150px;
 
 /* Footer */
 footer {
-  opacity: 0.7;
+  opacity: 0.8;
   background: #fff;
   border-top: 1px solid #ccc;
   position: relative;
@@ -79,12 +79,12 @@ footer {
   .copyright-holder {
     text-align: center;
     .footer-logo {
-      margin: 1em 2em;
+      margin: 1em 0 0.5em;
       width: 100px;
     }
     .copyright {
       color: $dark-grey;
-      font-size: 0.8em;
+      font-size: 0.7em;
     }
   }
 }
@@ -453,6 +453,11 @@ $colHighlight   : whitesmoke;
     margin: -8px 10px 10px 0;
   }
 
+  // Pages
+  .page {
+    padding: 1em !important;
+  }
+
   // Contact
   .contact {
     img {
@@ -460,9 +465,16 @@ $colHighlight   : whitesmoke;
     }
   }
 
-  .about i,
-  .contribute .fa-github {
-    font-size: 5em !important;
+  // About
+  .about .logomark {
+    width: 100%;
+  }
+
+  // Hide page images
+  .about .opendude,
+  .contribute .fa-github,
+  .contact img {
+    display: none;
   }
 
   // View sit
@@ -521,6 +533,16 @@ $colHighlight   : whitesmoke;
   footer {
     ul, .header {
       display: none;
+    }
+    .copyright-holder {
+      .footer-logo {
+        width: 75px;
+        margin: 0.5em 2em;
+      }
+    }
+    .mobile-nav {
+      display: block !important;
+      visibility: visible !important;
     }
   }
 }
