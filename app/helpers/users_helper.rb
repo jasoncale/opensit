@@ -31,7 +31,11 @@ module UsersHelper
 
   # Return link to website
   def website(user)
-    link_to user.website, user.website
+    if user.website =~ /^(http|https):\/\//
+      link_to user.website, user.website
+    else
+      link_to user.website, "http://#{user.website}"
+    end
   end
 
   def timeline(dates)
