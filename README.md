@@ -17,7 +17,7 @@ To install locally for your own hacking pleasure:
 * `bundle exec rake db:create db:migrate`
 * `bundle exec guard`
 * Go to `localhost:3000`. Voila!
-* To run the the tests: `rake db:test:prepare` and then `rspec spec`
+* To run the tests: `rake db:test:prepare` and then `rspec spec`
 
 #Contributing
 
@@ -31,7 +31,7 @@ To install locally for your own hacking pleasure:
 * Open a [pull request](https://help.github.com/articles/using-pull-requests)
 * Another developer will then review your changes, and give them the thumbs up or offer some comments.
 * If you want push a work in progress, that's fine, but mark it as so e.g. "[WIP] New comments system"
-* Once reviewed and ok'ed, your changes will be merged into master. Celebrate.
+* Once reviewed and ok'ed, your changes will be merged into master. Rejoice.
 * Remember to add tests!
 
 If you find a security issue please don't create a public issue - email hello@opensit.com with details so that we can do our best to minimise any problems.
