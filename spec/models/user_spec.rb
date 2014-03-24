@@ -52,6 +52,7 @@ describe User do
 
   describe "email" do
     it 'sends welcome email' do
+      ActionMailer::Base.deliveries.clear
       ActionMailer::Base.deliveries.should be_empty
 
       email = 'sahaj@samadhi.com'
