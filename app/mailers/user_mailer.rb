@@ -11,4 +11,5 @@ class UserMailer < ActionMailer::Base
 	def welcome_email(user)
 		@email = user.email
 		mail(to: @email, subject: 'Welcome to the community!')
+	end
 end
