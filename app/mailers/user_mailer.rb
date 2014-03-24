@@ -7,4 +7,9 @@ class UserMailer < ActionMailer::Base
 
     mail(to: @email, subject: "Psst.. OpenSit has changed!")
 	end
+
+	def welcome_email(user)
+		@email = user.email
+		mail(to: @email, subject: 'Welcome to the community!')
+	end
 end

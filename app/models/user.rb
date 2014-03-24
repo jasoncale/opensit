@@ -218,6 +218,18 @@ class User < ActiveRecord::Base
     User.all.where(private_stream: false).order('sits_count DESC')
   end
 
+  ##
+  # CALLBACKS
+  ##
+
+  after_create :welcome_email
+
+  private
+
+    def welcome_email
+      UserMailer.welcome_email(self).deliver
+    end
+
 end
 
 # == Schema Information

@@ -50,6 +50,18 @@ describe User do
     end
   end #associations
 
+  describe "email" do
+    it 'sends welcome email' do
+      ActionMailer::Base.deliveries.should be_empty
+
+      email = 'sahaj@samadhi.com'
+      create :user, email: email
+
+      ActionMailer::Base.deliveries.should_not be_empty
+      ActionMailer::Base.deliveries.last.to.should == [email]
+    end
+  end
+
   describe "validations" do
     it { should ensure_length_of(:username).is_at_least(3).is_at_most(20) }
     it { should validate_uniqueness_of(:username) }
