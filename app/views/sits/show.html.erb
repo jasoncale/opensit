@@ -76,7 +76,7 @@
         <h2>Comments</h2>
       <% end %>
       <div class="comments-list">
-        <% @sit.comments.each do |comment|
+        <% @sit.comments.order(:created_at).each do |comment|
           @comment = comment %>
           <%= render 'comments/comment' %>
         <% end %>
