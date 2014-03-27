@@ -8,7 +8,7 @@
   <table class="table">
   	<% @notifications.each do |n| %>
       <tr class="<%= viewed_or_not(n) %>">
-        <td class="avatar"><%= small_avatar_of(User.find(n.initiator)) %></td>
+        <td class="avatar"><%= small_avatar_of(User.find(n.initiator)) if User.exists?(n.initiator) %></td>
         <td>
           <a href="<%= n.link %>" class="clickable-row"><%= n.message %></a>
           <div class="time-ago"><%= time_ago_in_words(n.created_at) %> ago</div></td>
