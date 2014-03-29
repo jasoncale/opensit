@@ -11,6 +11,15 @@ describe Sit do
 	  		todays = create(:sit, user: buddha, created_at: Date.today)
 	  		expect(buddha.reload.streak).to eq 2
 	  	end
+
+	  	it "doesn't increment if already sat today" do
+	  		buddha.streak = 7
+	  		last_sit = create(:sit, user: buddha, created_at: Date.yesterday)
+	  		morning_sit = create(:sit, user: buddha, created_at: Date.today)
+	  		expect(buddha.reload.streak).to eq 8
+	  		evening_sit = create(:sit, user: buddha, created_at: Date.today)
+	  		expect(buddha.reload.streak).to eq 8
+	  	end
 	  end
 
 	  context "missed a day" do
