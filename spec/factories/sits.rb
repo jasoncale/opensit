@@ -3,6 +3,7 @@ FactoryGirl.define do
     body "I done a meditate."
     s_type 0
     duration 30
+    association :user
 
     trait :journal do
       s_type 1

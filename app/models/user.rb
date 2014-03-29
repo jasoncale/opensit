@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
                   :password, :email, :first_name, :gender, :last_name,
                   :practice, :private_diary, :style, :user_type, :username,
                   :who, :why, :password_confirmation, :remember_me, :avatar,
-                  :private_stream
+                  :private_stream, :streak
 
   has_many :sits, :dependent => :destroy
   has_many :messages_received, -> { where receiver_deleted: false }, class_name: 'Message', foreign_key: 'to_user_id'

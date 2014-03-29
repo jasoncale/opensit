@@ -92,7 +92,9 @@ class Sit < ActiveRecord::Base
     return ids
   end
 
-  # Tags
+  ##
+  # TAGS
+  ##
 
   def self.tagged_with(name)
     Tag.find_by_name!(name).sits.public
@@ -113,7 +115,9 @@ class Sit < ActiveRecord::Base
     end
   end
 
-  # Likes
+  ##
+  # LIKES
+  ##
 
   def likers
     Like.likers_for(self)
@@ -122,8 +126,33 @@ class Sit < ActiveRecord::Base
   def liked?
     !self.likes.empty?
   end
-end                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        #
 
+  ##
+  # CALLBACKS
+  ##
+
+  after_create :streak_check
+
+  private
+
+    def streak_check
+      # Check this is sit from today (not a retrospective addition)
+      if self.created_at == Date.today
+        yesterday = self.user.sits.where("DATE(created_at) = ?", Date.yesterday)
+        today = self.user.sits.where("DATE(created_at) = ?", Date.today)
+        # Was there a sit from yesterday?
+        # And is this the first sit today (don't want to increment streak twice in a day)
+        if today.count == 1 && !yesterday.empty?
+          user.streak += 1
+          user.save!
+        elsif yesterday.empty?
+          user.streak = 1
+          user.save!
+        end
+      end
+    end
+
+end
 # == Schema Information
 #
 # Table name: sits
