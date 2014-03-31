@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :only => [:me, :export, :followers, :following]
+  before_filter :authenticate_user!, only: [:me, :export, :followers, :following]
+  before_filter :check_date, only: :show
 
   # GET /me page if logged in, /front if not
   def me
@@ -112,4 +113,16 @@ class UsersController < ApplicationController
     end
   end
 
+  private
+
+    # Validate year and month params on user page
+    def check_date
+      [:y, :m].each do |v|
+        if (params[v] && !params[v].to_i.nonzero?) || params[v].to_i > (v == :y ? 3000 : 12)
+          unit = v == :y ? 'year' : 'month'
+          flash[:error] = "Invalid #{unit}!"
+          redirect_to user_path(params[:username])
+        end
+      end
+    end
 end
