@@ -19,7 +19,7 @@
       <div class="author-title"><%= username(sit.user) %> <%= teaser_title(sit) %></div>
       <div class="meta">
         <span class="date">
-          <% if params[:y] %>
+          <% if params[:year] %>
             <%= sit.date %>
           <% else %>
             <%= time_ago_in_words(sit.created_at) %> ago

@@ -39,7 +39,7 @@ describe UsersController do
           create :sit, user: @buddha, created_at: Date.today - 365
           expect(@buddha.sits.count).to eq 2
 
-          get :show, username: 'buddha', y: Date.today.year
+          get :show, username: 'buddha', year: Date.today.year
           expect(assigns(:sits)).to have(1).items
           expect(assigns(:sits)).to eq(@buddha.sits_by_year(Date.today.year).public.newest_first)
           expect(response).to render_template("users/show")
@@ -47,13 +47,13 @@ describe UsersController do
 
         context 'invalid year' do
           it 'over 3000' do
-            get :show, username: 'buddha', y: '3001'
+            get :show, username: 'buddha', year: '3001'
             expect(response).to redirect_to("/u/buddha")
             expect(flash[:error]).to eq('Invalid year!')
           end
 
           it 'non-numerical' do
-            get :show, username: 'buddha', y: 'non-numerical'
+            get :show, username: 'buddha', year: 'non-numerical'
             expect(response).to redirect_to("/u/buddha")
             expect(flash[:error]).to eq('Invalid year!')
           end
@@ -66,7 +66,7 @@ describe UsersController do
           create :sit, user: @buddha, created_at: Date.today - 35
           expect(@buddha.sits.count).to eq 2
 
-          get :show, username: 'buddha', y: Date.today.year, m: Date.today.month
+          get :show, username: 'buddha', year: Date.today.year, month: Date.today.month
           expect(assigns(:sits)).to have(1).items
           expect(assigns(:sits)).to eq(@buddha.sits_by_month(year: Date.today.year, month: Date.today.month).public.newest_first)
           expect(response).to render_template("users/show")
@@ -74,13 +74,13 @@ describe UsersController do
 
         context 'invalid month' do
           it 'over 12' do
-            get :show, username: 'buddha', m: '13'
+            get :show, username: 'buddha', year: Date.today.year, month: '13'
             expect(response).to redirect_to("/u/buddha")
             expect(flash[:error]).to eq('Invalid month!')
           end
 
           it 'non-numerical' do
-            get :show, username: 'buddha', m: 'non-numerical'
+            get :show, username: 'buddha', year: Date.today.year, month: 'non-numerical'
             expect(response).to redirect_to("/u/buddha")
             expect(flash[:error]).to eq('Invalid month!')
           end

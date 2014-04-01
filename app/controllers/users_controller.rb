@@ -22,20 +22,20 @@ class UsersController < ApplicationController
     @links = @user.stream_range
 
     if !@user.private_stream
-      if params[:y] && params[:m]
+      if params[:year] && params[:month]
         if current_user == @user
-          @sits = @user.sits_by_month(month: params[:m], year: params[:y]).newest_first
+          @sits = @user.sits_by_month(month: params[:month], year: params[:year]).newest_first
         else
-          @sits = @user.sits_by_month(month: params[:m], year: params[:y]).public.newest_first
+          @sits = @user.sits_by_month(month: params[:month], year: params[:year]).public.newest_first
         end
-        @range_title = "#{Date::MONTHNAMES[params[:m].to_i]}, #{params[:y]}"
-      elsif params[:y]
+        @range_title = "#{Date::MONTHNAMES[params[:month].to_i]}, #{params[:year]}"
+      elsif params[:year]
         if current_user == @user
-          @sits = @user.sits_by_year(params[:y]).newest_first
+          @sits = @user.sits_by_year(params[:year]).newest_first
         else
-          @sits = @user.sits_by_year(params[:y]).public.newest_first
+          @sits = @user.sits_by_year(params[:year]).public.newest_first
         end
-        @range_title = "All sits in #{params[:y]}"
+        @range_title = "All sits in #{params[:year]}"
       else
         if current_user && @user.id == current_user.id
           @sits = @user.sits.newest_first.paginate(:page => params[:page])
@@ -117,9 +117,9 @@ class UsersController < ApplicationController
 
     # Validate year and month params on user page
     def check_date
-      [:y, :m].each do |v|
-        if (params[v] && !params[v].to_i.nonzero?) || params[v].to_i > (v == :y ? 3000 : 12)
-          unit = v == :y ? 'year' : 'month'
+      [:year, :month].each do |v|
+        if (params[v] && params[v].to_i.zero?) || params[v].to_i > (v == :year ? 3000 : 12)
+          unit = v == :year ? 'year' : 'month'
           flash[:error] = "Invalid #{unit}!"
           redirect_to user_path(params[:username])
         end
