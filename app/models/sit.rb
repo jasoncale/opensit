@@ -20,6 +20,8 @@ class Sit < ActiveRecord::Base
   # Scopes
   scope :public, -> { where(private: false) }
   scope :newest_first, -> { order("created_at DESC") }
+  scope :today, -> { where("DATE(created_at) = ?", Date.today) }
+  scope :yesterday, -> { where("DATE(created_at) = ?", Date.yesterday) }
 
   # Pagination: sits per page
   self.per_page = 20
@@ -138,15 +140,19 @@ class Sit < ActiveRecord::Base
     def streak_check
       # Check this is sit from today (not a retrospective addition)
       if self.created_at == Date.today
-        yesterday = self.user.sits.where("DATE(created_at) = ?", Date.yesterday)
-        today = self.user.sits.where("DATE(created_at) = ?", Date.today)
+        yesterday = user.sits.yesterday
+        today = user.sits.today
         # Was there a sit from yesterday?
         # And is this the first sit today (don't want to increment streak twice in a day)
-        if today.count == 1 && !yesterday.empty?
-          user.streak += 1
+        if today.count == 1 && yesterday.present?
+          if user.streak == 0
+            user.streak = 2
+          else
+            user.streak += 1
+          end
           user.save!
         elsif yesterday.empty?
-          user.streak = 1
+          user.streak = 0
           user.save!
         end
       end

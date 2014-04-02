@@ -513,7 +513,7 @@ CREATE TABLE users (
     private_stream boolean DEFAULT false,
     reset_password_sent_at timestamp without time zone,
     sits_count integer DEFAULT 0,
-    streak integer DEFAULT 1
+    streak integer DEFAULT 0
 );
 
 
