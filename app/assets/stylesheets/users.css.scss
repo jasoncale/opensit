@@ -321,9 +321,17 @@
 	}
 }
 
-/* Not following anyone yet - welcome box */
-.welcome-box {
-	h2 {
-		margin: 7px 0 25px;
+/* Not following anyone yet */
+.page-content .no-follow {
+	text-align: center;
+	padding-top: 4em;
+	a {
+		font-size: 1.3em;
+		font-weight: bold;
+	}
+	p {
+		margin-top: 4em;
+		font-size: 0.8em;
+		opacity: 0.6;
 	}
 }
