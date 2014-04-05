@@ -2,6 +2,10 @@
 
 class RegistrationsController < Devise::RegistrationsController
 
+  def after_sign_up_path_for(resource)
+    '/welcome'
+  end
+
 	def edit
 		@title = 'Edit profile'
 		@page_class = 'edit-profile'

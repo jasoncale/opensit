@@ -11,6 +11,7 @@ Opensit::Application.routes.draw do
   get '/u/:username/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
   get '/favs' => "favourites#index", :as => :favs
   get '/notifications' => "notifications#index"
+  get '/welcome' => "users#welcome"
 
   get '/search' => "search#main"
 

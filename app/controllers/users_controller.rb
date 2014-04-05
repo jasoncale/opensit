@@ -2,15 +2,17 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:me, :export, :followers, :following]
   before_filter :check_date, only: :show
 
-  # GET /me page if logged in, /front if not
+  # GET /welcome
+  def welcome
+    @user = current_user
+    @users_to_follow = User.active_users.limit(5)
+  end
+
+  # GET /me page
   def me
     @feed_items = current_user.socialstream.paginate(:page => params[:page])
     @user = current_user
     @latest = @user.latest_sits
-
-    if @feed_items.empty?
-      @users_to_follow = User.active_users.limit(5)
-    end
 
     @title = 'Home'
     @page_class = 'me'
@@ -86,7 +88,7 @@ class UsersController < ApplicationController
   def feed
     if params[:scope] == 'global'
       @sits = Sit.public.newest_first.limit(50)
-      @title = "Global SitStream - opensit.com"
+      @title = "Global SitStream | OpenSit"
     else
       @user = User.where("lower(username) = lower(?)", params[:username]).first!
       @title = "SitStream for #{@user.username}"
