@@ -452,6 +452,14 @@ $colHighlight   : whitesmoke;
     }
   }
 
+  // Welcome page
+  .page-content .welcome-box {
+    .points {
+      padding: 0.5em;
+    }
+  }
+
+  // Alerts
   .alert {
     width: 100%;
   }

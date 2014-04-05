@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = current_user
 
     # Prevent /welcome being revisited as GA records each /welcome as a new sign up
-    if @user.sign_in_count > 1 || (Time.now - @user.created_at > 99960)
+    if @user.sign_in_count > 1 || (Time.now - @user.created_at > 60)
       redirect_to me_path
       return false
     end
