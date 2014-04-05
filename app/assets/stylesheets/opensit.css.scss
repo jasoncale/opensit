@@ -422,6 +422,17 @@ $colHighlight   : whitesmoke;
   background: $link-color !important;
 }
 
+/* Alerts */
+.alert {
+  margin: 0 auto;
+  width: 40%;
+  padding: 8px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
 /*
  *    RESPONSIVE
  *******************************/
@@ -439,6 +450,10 @@ $colHighlight   : whitesmoke;
     .btn-primary {
       margin-left: 20px;
     }
+  }
+
+  .alert {
+    width: 100%;
   }
 
   // Front page
