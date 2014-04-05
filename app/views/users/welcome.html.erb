@@ -1,13 +1,15 @@
-<%= render 'shared/user_summary' %>
-
-<div class="col-lg-9">
+<div class="col-lg-12">
 	<div class="message-box welcome-box">
-	  <h2>Try following someone!</h2>
-	  <% @users_to_follow.each do |user| %>
-	  	<%= render :partial => 'shared/user', :locals => { :u => user } %>
-	  <% end %>
+	  <h2>Welcome to our community!</h2>
+	  <p>Here's a few things you should know:</p>
+	  <div class="points">
+	  	<div class="point"><div class="icon"><i class="fa fa-book"></i></div><div class="text"> Your journal is public by default. That means anyone can read it. There is a private journal option under <%= link_to 'My profile', edit_user_registration_path %>.</div></div>
+      <div class="point"><div class="icon"><i class="fa fa-globe"></i></div><div class="text"> We're an open community - <a href="/contribute">you can help us build OpenSit</a>!</div></div>
+      <div class="point"><div class="icon"><i class="fa fa-group"></i></div><div class="text"> Try following someone:</div></div>
+    </div>
+
 	  <div class="my-actions">
-	  	<a href="/" class="btn btn-lg btn-primary">Ok, done!</a>
+	  	<a href="/" class="btn btn-lg btn-primary">Ok, got it!</a>
 	  </div>
 	</div>
 </div>

@@ -324,7 +324,7 @@
 /* Not following anyone yet */
 .page-content .no-follow {
 	text-align: center;
-	padding-top: 4em;
+	padding-top: 3em;
 	a {
 		font-size: 1.3em;
 		font-weight: bold;
@@ -334,4 +334,40 @@
 		font-size: 0.8em;
 		opacity: 0.6;
 	}
+}
+
+/* Welcome page, after sign up */
+.page-content .welcome-box {
+	h2 {
+		text-align: center;
+	}
+	p {
+		text-align: center;
+		font-size: 0.8em;
+		opacity: 0.6;
+	}
+	.points {
+		padding: 1em 4em;
+	}
+  .point {
+    font-size: 1.4em;
+    margin: 17px 0;
+    float: left;
+    width: 100%;
+    .icon {
+      float: left;
+      width: 44px;
+      i {
+        font-size: 1.2em;
+        color: lighten($link-color, 5%);
+      }
+    }
+    .text {
+      float: left;
+      width: 90%;
+      font-size: 0.8em;
+      color: $dark-grey;
+    }
+  }
+
 }

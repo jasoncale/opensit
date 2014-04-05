@@ -1,11 +1,18 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, only: [:me, :export, :followers, :following]
+  before_filter :authenticate_user!, only: [:welcome, :me, :export, :followers, :following]
   before_filter :check_date, only: :show
 
   # GET /welcome
   def welcome
     @user = current_user
-    @users_to_follow = User.active_users.limit(5)
+
+    # Prevent /welcome being revisited as GA records each /welcome as a new sign up
+    if @user.sign_in_count > 1 || (Time.now - @user.created_at > 99960)
+      redirect_to me_path
+      return false
+    end
+
+    @users_to_follow = User.active_users.limit(3)
   end
 
   # GET /me page
