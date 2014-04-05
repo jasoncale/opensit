@@ -17,7 +17,8 @@ describe 'Users' do
       find_button("Sign up").trigger('click')
     end
 
-    should have_content "Welcome! You have signed up successfully."
+    should have_content "Registration complete! Happy sitting."
+    should have_content "Welcome to our community!"
   end
 
   describe 'registered users' do
@@ -31,7 +32,7 @@ describe 'Users' do
         click_on "Login"
       end
 
-      should have_content "Signed in successfully."
+      should have_content "Welcome back!"
     end
 
   end
