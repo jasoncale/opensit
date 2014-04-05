@@ -346,27 +346,4 @@
 		font-size: 0.8em;
 		opacity: 0.6;
 	}
-	.points {
-		padding: 1em 4em;
-	}
-  .point {
-    font-size: 1.4em;
-    margin: 17px 0;
-    float: left;
-    width: 100%;
-    .icon {
-      float: left;
-      width: 50px;
-      i {
-        font-size: 1.2em;
-        color: lighten($link-color, 5%);
-      }
-    }
-    .text {
-      float: left;
-      width: calc(100% - 50px);
-      font-size: 0.8em;
-      color: $dark-grey;
-    }
-  }
 }
