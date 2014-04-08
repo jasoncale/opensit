@@ -422,6 +422,42 @@ $colHighlight   : whitesmoke;
   background: $link-color !important;
 }
 
+/* Alerts */
+.alert {
+  margin: 0 auto;
+  width: 40%;
+  padding: 8px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+/* Bullet points with icons (sign up, welcome) */
+.points {
+  padding: 1em 4em;
+  .point {
+    font-size: 1.4em;
+    margin: 17px 0;
+    float: left;
+    width: 100%;
+    .icon {
+      float: left;
+      width: 50px;
+      i {
+        font-size: 1.2em;
+        color: lighten($link-color, 5%);
+      }
+    }
+    .text {
+      float: left;
+      width: calc(100% - 50px);
+      font-size: 0.8em;
+      color: $dark-grey;
+    }
+  }
+}
+
 /*
  *    RESPONSIVE
  *******************************/
@@ -439,6 +475,18 @@ $colHighlight   : whitesmoke;
     .btn-primary {
       margin-left: 20px;
     }
+  }
+
+  // Welcome page
+  .page-content .welcome-box {
+    .points {
+      padding: 0.5em;
+    }
+  }
+
+  // Alerts
+  .alert {
+    width: 100%;
   }
 
   // Front page

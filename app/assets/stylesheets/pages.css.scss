@@ -123,25 +123,8 @@
     }
   }
   .right {
-    .point {
-      font-size: 1.4em;
-      margin: 17px 0;
-      float: left;
-      width: 100%;
-      .icon {
-        float: left;
-        width: 44px;
-        i {
-          font-size: 1.2em;
-          color: lighten($link-color, 5%);
-        }
-      }
-      .text {
-        float: left;
-        width: 80%;
-        font-size: 0.8em;
-        color: $dark-grey;
-      }
+    .points {
+      padding: 0.5em;
     }
   }
 }

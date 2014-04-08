@@ -321,9 +321,29 @@
 	}
 }
 
-/* Not following anyone yet - welcome box */
-.welcome-box {
+/* Not following anyone yet */
+.page-content .no-follow {
+	text-align: center;
+	padding-top: 3em;
+	a {
+		font-size: 1.3em;
+		font-weight: bold;
+	}
+	p {
+		margin-top: 4em;
+		font-size: 0.8em;
+		opacity: 0.6;
+	}
+}
+
+/* Welcome page, after sign up */
+.page-content .welcome-box {
 	h2 {
-		margin: 7px 0 25px;
+		text-align: center;
+	}
+	p {
+		text-align: center;
+		font-size: 0.8em;
+		opacity: 0.6;
 	}
 }

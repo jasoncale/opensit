@@ -1,22 +1,16 @@
-<% if @feed_items.empty? %>
+<% if @user.followed_users.empty? %>
 	<%= render 'shared/user_summary' %>
-
 	<div class="col-lg-9">
-		<div class="message-box welcome-box">
-		  <h2>Try following someone!</h2>
-		  <% @users_to_follow.each do |user| %>
-		  	<%= render :partial => 'shared/user', :locals => { :u => user } %>
-		  <% end %>
-		  <div class="my-actions">
-		  	<a href="/" class="btn btn-lg btn-primary">Ok, done!</a>
-		  </div>
+		<div class="message-box no-follow">
+		  <h2>You're not following anyone yet.</h2>
+		  <a href="/explore">Go forth and explore!</a>
+		  <p>When you start following people their updates will appear here.</p>
 		</div>
 	</div>
+
 <% else %>
 	<div class="sit-container">
-
 		<%= render 'shared/user_summary' %>
-
 		<% @feed_items.each do |sit| %>
 		  <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => sit, :width => '3' } %>
 		<% end %>
