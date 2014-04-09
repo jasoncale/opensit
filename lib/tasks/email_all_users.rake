@@ -1,8 +1,8 @@
 desc "Email all users"
-task :new_design_email => :environment do
+task :blog_is_live => :environment do
   User.all.each do |u|
     puts "Mailing #{u.email}"
-    UserMailer.new_design(u).deliver
+    UserMailer.blog_is_live(u).deliver
     sleep 1
   end
 end
