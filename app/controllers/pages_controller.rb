@@ -57,6 +57,12 @@ class PagesController < ApplicationController
     render 'users/user_results'
   end
 
+  def new_sitters
+    @users = User.newest_users(10).where('sits_count > 0').paginate(:page => params[:page])
+    @title = 'New Sitters'
+    render 'users/user_results'
+  end
+
   def robots
     env = Rails.env.production? ? 'production' : 'other'
     robots = File.read("config/robots/robots.#{env}.txt")

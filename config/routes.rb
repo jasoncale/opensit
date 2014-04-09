@@ -22,6 +22,7 @@ Opensit::Application.routes.draw do
   get 'explore/tags' => "pages#tag_cloud", :as => :explore_tags
   get 'explore/users/new' => "pages#new_users", :as => :explore_new_users
   get 'explore/users/active' => "pages#active_users", :as => :explore_active_users
+  get 'explore/users/new/sitters' => "pages#new_sitters", :as => :explore_new_sitters
   get 'global-feed' => "users#feed", :defaults => { :format => 'atom', :scope => 'global' }
 
   resources :sits do
