@@ -261,8 +261,19 @@ $colHighlight   : whitesmoke;
     background: white;
     padding: 0 10px 10px 20px;
     .nav-stacked {
+      font-size: 0.9em;
+      li a {
+        padding: 7px 7px;
+      }
+      li.list-title {
+        text-transform: uppercase;
+        margin: 13px 0 0;
+        font-weight: bold;
+        font-size: 0.8em;
+        color: $dark-grey;
+      }
       i {
-        margin: 3px 10px 0 0;
+        margin: 3px 10px 0 2px;
       }
       .badge {
         float: right;
