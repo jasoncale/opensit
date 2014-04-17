@@ -26,7 +26,6 @@ To install locally for your own hacking pleasure:
 * Make sure master is up to date: `git pull --rebase`
 * Create a feature branch: `git checkout -b your-feature-or-fix`
 * Commit early and often (you can clear it up later if you want to)
-* If master has been updated while you've been working then `git rebase master` to keep up to date.
 * When you're done, push your feature branch: `git push origin your-fix-or-feature`
 * Open a [pull request](https://help.github.com/articles/using-pull-requests)
 * Another developer will then review your changes, and give them the thumbs up or offer some comments.
