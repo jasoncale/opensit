@@ -11,7 +11,9 @@
 	  <% if u.sits_count.nonzero? %>
 	  	<div class="sit-count">&mdash; <%= pluralize(u.sits.count, 'sit') %></div>
 	  <% end %>
-	  <div class="location"><%= u.location %></div>
+	  <div class="location">
+	  <%= "#{u.location}." if u.location %>
+	  <span class="joined">Joined <%= joined_date(u) %></span></div>
 	  <div class="pull-right"><%= render :partial => "shared/follow_button", :locals => { :user => u } %></div>
 	 </div>
 	 <div>

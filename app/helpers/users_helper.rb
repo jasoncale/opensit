@@ -50,4 +50,12 @@ module UsersHelper
       end
     end.join(' ').html_safe
   end
+
+  def joined_date(user)
+    if Date.today.month == user.created_at.month
+      user.created_at.strftime("%d %b")
+    else
+      "#{time_ago_in_words(user.created_at)} ago"
+    end
+  end
 end
