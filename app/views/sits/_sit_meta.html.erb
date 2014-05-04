@@ -3,6 +3,10 @@
 		<div class="time"><%= @sit.created_at.strftime("%l:%M %p") %></div>
 	</div>
 
+	  <% if @user.streak > 2 %>
+      <div class="streak"><span class="label label-success"><%=@user.display_name%> is on a <%=@user.streak%> day streak!</span></div>
+    <% end %>
+
   <ul class="pager">
 	  <%= previous_sit(@sit) %>
 	  <%= next_sit(@sit) %>
