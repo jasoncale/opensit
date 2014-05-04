@@ -207,6 +207,15 @@ class User < ActiveRecord::Base
     self.sits.newest_first.first.created_at
   end
 
+  def streak_breaker
+    if self.streak.nonzero?
+      if self.sits.yesterday.empty?
+        self.streak = 0
+        self.save!
+      end
+    end
+  end
+
   ##
   # CLASS METHODS
   ##
