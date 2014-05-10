@@ -232,12 +232,16 @@ class User < ActiveRecord::Base
   # CALLBACKS
   ##
 
-  after_create :welcome_email
+  after_create :welcome_email, :follow_opensit
 
   private
 
     def welcome_email
       UserMailer.welcome_email(self).deliver
+    end
+
+    def follow_opensit
+      relationships.create!(followed_id: 97)
     end
 
 end
