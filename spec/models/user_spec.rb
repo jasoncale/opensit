@@ -50,7 +50,7 @@ describe User do
     end
   end #associations
 
-  describe "email" do
+  context "after signup" do
     it 'sends welcome email' do
       ActionMailer::Base.deliveries.clear
       ActionMailer::Base.deliveries.should be_empty
@@ -60,6 +60,12 @@ describe User do
 
       ActionMailer::Base.deliveries.should_not be_empty
       ActionMailer::Base.deliveries.last.to.should == [email]
+    end
+
+    it 'follows opensit' do
+      opensit = create :user, id: 97
+      nagz = create :user, username: 'nagarjuna'
+      expect(nagz.following?(opensit)).to be(true)
     end
   end
 
