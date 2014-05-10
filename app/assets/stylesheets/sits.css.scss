@@ -292,10 +292,6 @@ article.sit-teaser-block {
       color: $dark-grey;
     }
   }
-  .streak {
-    text-align: center;
-    width: 100%;
-  }
   .pager {
     li a {
       display: inline-block;
@@ -349,6 +345,23 @@ article.sit-teaser-block {
     margin-bottom: 15px;
     a {
       font-weight: bold;
+    }
+  }
+}
+
+// Sit Streak
+.streak {
+  float: left;
+  text-align: center;
+  width: 100%;
+  margin-top: 1em;
+  .label-success {
+    border: 2px solid $green;
+    border-radius: 5px;
+    background: white;
+    color: $link-color;
+    .fa-bolt {
+      color: $green;
     }
   }
 }
