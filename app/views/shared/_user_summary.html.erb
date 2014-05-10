@@ -14,7 +14,9 @@
       <%= render 'shared/follow_button', :user => @user %>
     </div>
 
-    <% if @latest && @latest.empty? %>
+    <%= render 'sits/sit_streak' %>
+
+    <% if @latest.empty? %>
       <% if current_user && (current_user.id == @user.id) %>
           <div class="add-a-sit">
             <a href="<%=new_sit_path%>" class="btn btn-lg btn-primary"> <i class="fa fa-plus"></i> Add your first sit</a></div>

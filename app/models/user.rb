@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
     thumb: '250x250#',
   }
 
+  # Scopes
   scope :newest_first, -> { order("created_at DESC") }
   scope :public, -> { where(private: false) }
 
@@ -204,6 +205,15 @@ class User < ActiveRecord::Base
 
   def last_update
     self.sits.newest_first.first.created_at
+  end
+
+  def streak_breaker
+    if self.streak.nonzero?
+      if self.sits.yesterday.empty?
+        self.streak = 0
+        self.save!
+      end
+    end
   end
 
   ##

@@ -7,15 +7,15 @@ describe Like do
     @sariputta = create :user, username: 'sariputta'
     @sit = create :sit, user: @buddha
 	end
-  
+
   context 'sits' do
 
-  	it 'increments like count' do 
+  	it 'increments like count' do
 			expect(@sit.likes.count).to eq 0
   		@ananda.like! @sit
 			expect(@sit.likes.count).to eq 1
   	end
- 
+
  		it 'returns true for likes?' do
 			expect(@ananda.likes? @sit).to eq false
   		@ananda.like! @sit
@@ -26,15 +26,15 @@ describe Like do
   		expect(@sit.likers.empty?).to eq true
   		@ananda.like! @sit
   		@sariputta.like! @sit
-      
+
       expect(@sit.reload.likers.first).to be_a(User)
       expect(@sit.reload.likers.first.username).to eq('ananda')
-      
+
       expect(@sit.reload.likers.last).to be_a(User)
       expect(@sit.reload.likers.last.username).to eq('sariputta')
   	end
 
-  	it 'decrements like count' do 
+  	it 'decrements like count' do
   		@ananda.like! @sit
 			expect(@sit.likes.count).to eq 1
 
@@ -57,12 +57,12 @@ describe Like do
       @comment = create :comment, sit: @sit, user: @buddha
     end
 
-    it 'increments like count' do 
+    it 'increments like count' do
       expect(@comment.likes.count).to eq 0
       @ananda.like! @comment
       expect(@comment.likes.count).to eq 1
     end
- 
+
     it 'returns true for likes?' do
       expect(@ananda.likes? @comment).to eq false
       @ananda.like! @comment
@@ -76,12 +76,12 @@ describe Like do
 
       expect(@comment.reload.likers.first).to be_a(User)
       expect(@comment.reload.likers.first.username).to eq('sariputta')
-      
+
       expect(@comment.reload.likers.last).to be_a(User)
       expect(@comment.reload.likers.last.username).to eq('ananda')
     end
 
-    it 'decrements like count' do 
+    it 'decrements like count' do
       @ananda.like! @comment
       expect(@comment.likes.count).to eq 1
 
