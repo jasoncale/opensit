@@ -373,6 +373,12 @@ describe User do
     end
   end
 
+  describe "#following_anyone?" do
+    it 'checks if user is following any other users besides OpenSit' do
+
+    end
+  end
+
   describe "#unread_count" do
     context "when a user has unread messages" do
       before do

@@ -1,4 +1,4 @@
-<% if @user.followed_users.empty? %>
+<% if !@user.following_anyone? %>
 	<%= render 'shared/user_summary' %>
 	<div class="col-lg-9">
 		<div class="message-box no-follow">

@@ -168,6 +168,14 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user.id).destroy
   end
 
+  # Is the user following anyone, besides OpenSit?
+  def following_anyone?
+    follows = followed_user_ids
+    follows.delete(97)
+    return false if follows.empty?
+    return true
+  end
+
   def unread_count
     messages_received.unread.count unless messages_received.unread.count.zero?
   end
