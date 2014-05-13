@@ -14,9 +14,9 @@ module SitsHelper
 
 	def teaser_title(sit, type = false)
 		if sit.s_type == 0
-      title = " sat for #{sit.duration} minutes".html_safe
+      title = " sat for <a class='sit-link' title='#{sit.duration} minute meditation report by #{sit.user.display_name}' href='#{sit_path(sit)}'>#{sit.duration} minutes</a>".html_safe
 		elsif sit.s_type == 1
-			title = "added a diary.".html_safe
+			title = "added a <a class='sit-link' title='#{sit.title} by #{sit.user.display_name}' href='#{sit_path(sit)}'>diary</a>.".html_safe
 		end
 		return title
 	end
