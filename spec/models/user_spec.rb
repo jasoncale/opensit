@@ -375,7 +375,14 @@ describe User do
 
   describe "#following_anyone?" do
     it 'checks if user is following any other users besides OpenSit' do
+      opensit = create :user, id: 97
+      buddha = create(:user)
+      ananda = create(:user)
 
+      expect(buddha.following?(opensit)).to be(true)
+      expect(buddha.following_anyone?).to be(false)
+      buddha.follow!(ananda)
+      expect(buddha.following_anyone?).to be(true)
     end
   end
 
