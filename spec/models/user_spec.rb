@@ -50,7 +50,7 @@ describe User do
     end
   end #associations
 
-  describe "email" do
+  context "after signup" do
     it 'sends welcome email' do
       ActionMailer::Base.deliveries.clear
       ActionMailer::Base.deliveries.should be_empty
@@ -60,6 +60,12 @@ describe User do
 
       ActionMailer::Base.deliveries.should_not be_empty
       ActionMailer::Base.deliveries.last.to.should == [email]
+    end
+
+    it 'follows opensit' do
+      opensit = create :user, id: 97
+      nagz = create :user, username: 'nagarjuna'
+      expect(nagz.following?(opensit)).to be(true)
     end
   end
 
@@ -364,6 +370,19 @@ describe User do
 
       expect { ananda.unfollow!(buddha) }
         .to change { ananda.followed_users.count }.from(1).to(0)
+    end
+  end
+
+  describe "#following_anyone?" do
+    it 'checks if user is following any other users besides OpenSit' do
+      opensit = create :user, id: 97
+      buddha = create(:user)
+      ananda = create(:user)
+
+      expect(buddha.following?(opensit)).to be(true)
+      expect(buddha.following_anyone?).to be(false)
+      buddha.follow!(ananda)
+      expect(buddha.following_anyone?).to be(true)
     end
   end
 
