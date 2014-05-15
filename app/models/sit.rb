@@ -139,7 +139,7 @@ class Sit < ActiveRecord::Base
 
     def streak_check
       # Check this is sit from today (not a retrospective addition)
-      if self.created_at == Date.today
+      if self.created_at.to_date == Date.today
         yesterday = user.sits.yesterday
         today = user.sits.today
         # Was there a sit from yesterday?
