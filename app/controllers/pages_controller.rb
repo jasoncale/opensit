@@ -27,7 +27,7 @@ class PagesController < ApplicationController
 
   def explore
     @user = current_user
-    @sits = Sit.public.newest_first.limit(20).paginate(:page => params[:page])
+    @sits = Sit.public.newest_first.with_body.limit(20).paginate(:page => params[:page])
 
     @title = 'Explore'
     @page_class = 'explore'

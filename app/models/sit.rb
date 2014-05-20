@@ -11,7 +11,6 @@ class Sit < ActiveRecord::Base
   has_many :favourites, :as => :favourable
   has_many :likes, :as => :likeable
 
-  validates :body, :presence => true
   validates :s_type, :presence => true
   validates :title, :presence => true, :if => "s_type != 0"
   validates :duration, :presence => true, :if => "s_type == 0"
@@ -22,6 +21,7 @@ class Sit < ActiveRecord::Base
   scope :newest_first, -> { order("created_at DESC") }
   scope :today, -> { where("DATE(created_at) = ?", Date.today) }
   scope :yesterday, -> { where("DATE(created_at) = ?", Date.yesterday) }
+  scope :with_body, -> { where.not(body: '')}
 
   # Pagination: sits per page
   self.per_page = 20

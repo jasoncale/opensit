@@ -2,6 +2,7 @@
 
 <div class="block-content">
 
+  <% if !sit.body.empty? %>
     <div class="body">
       <% if request.path =~ /search/ %>
         <%= teaser(sit, 300, params[:q]) %>
@@ -10,6 +11,7 @@
       <% end %>
     </div>
     <%= display_lock_if_private(sit) %>
+  <% end %>
 
   <div class="bottom-row">
     <div class="avatar">
