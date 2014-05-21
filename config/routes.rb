@@ -40,5 +40,9 @@ Opensit::Application.routes.draw do
   # Crawl live site, but not staging
   get 'robots.txt' => 'pages#robots'
 
-  mount Split::Dashboard, :at => 'split'
+  get "/split" => Split::Dashboard, :anchor => false, :constraints => lambda { |request|
+    request.env['warden'].authenticated?
+    request.env['warden'].authenticate!
+    request.env['warden'].user.email == "danbartlett@gmail.com"
+  }
 end
