@@ -40,4 +40,5 @@ Opensit::Application.routes.draw do
   # Crawl live site, but not staging
   get 'robots.txt' => 'pages#robots'
 
+  mount Split::Dashboard, :at => 'split'
 end
