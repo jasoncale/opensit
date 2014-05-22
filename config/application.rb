@@ -76,7 +76,11 @@ module Opensit
     end
 
     config.secret_key_base = 'paticcasamuppada'
-  
+
     I18n.enforce_available_locales = false
+
+    config.to_prepare do
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "sign_up" }
+    end
   end
 end

@@ -1,10 +1,16 @@
 <div class="section sign-up-box">
   <div class="well col-sm-10">
-  <h1>OpenSit is a place to share and develop your meditation practice.</h1>
-  <p class="its-free">It's completely free!</p>
-    <div class="left col-md-6">
 
-      <h2>All we need is...</h2>
+  <div class="brand-header">
+    <%= image_tag 'logomark_trans.png', class: 'main-logo' %>
+    <p class="opensit">opensit</p>
+  </div>
+
+  <h1>Hey seeker. Get a beautiful meditation journal today.</h1>
+
+  <!-- <p class="its-free">It's completely free!</p> -->
+    <div class="left col-md-4">
+
 
       <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 
@@ -23,18 +29,12 @@
 
         <div class="row"><%= f.submit "Sign up", :class => 'btn btn-primary btn-lg pull-left' %></div>
 
-        <div class="row"><%= render "devise/shared/links" %></div>
+        <div class="row">Already signed up? <a href="<%=new_user_session_path%>">Time to sign in!</a></div>
       <% end %>
 
     </div>
-    <div class="right col-md-6">
-      <h2>Why sign up?</h2>
-        <div class="points">
-          <div class="point"><div class="icon"><i class="fa fa-book"></i></div><div class="text"> Your own free <strong>public or private</strong> meditation journal.</div></div>
-          <div class="point"><div class="icon"><i class="fa fa-comments"></i></div><div class="text"> Feedback on your practice</div></div>
-          <div class="point"><div class="icon"><i class="fa fa-group"></i></div><div class="text"> Follow your favourite practitioners</div></div>
-          <div class="point"><div class="icon"><i class="fa fa-thumbs-up"></i></div><div class="text"> Built by meditators, for meditators</div></div>
-        </div>
+    <div class="right col-md-8">
+      <%=image_tag("journal_slice1.png")%>
     </div>
   </div>
 </div>
