@@ -54,7 +54,11 @@ class SitsController < ApplicationController
     @sit.created_at = DateTime.strptime(params[:custom_date], "%m/%d/%Y %l:%M %p") if params[:custom_date] != ''
 
     if @sit.save
-      redirect_to @sit, notice: 'Your entry was added. Good job!'
+      if !@sit.body.empty?
+        redirect_to @sit, notice: 'Your entry was added. Good job!'
+      else
+        redirect_to '/me', notice: 'Your entry was added. Good job!'
+      end
     else
       @page_class = 'new-sit'
       render action: "new"

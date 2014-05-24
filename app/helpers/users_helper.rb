@@ -44,7 +44,7 @@ module UsersHelper
       type, count = l
       if type.to_s.size == 4
         current_year = type
-        '<div class="year">' + link_to("#{type}", "?year=#{type}") + " <span class=\"count\">(#{count})</span></div>"
+        "<div class='year'> #{type} <span class='count'>(#{count})</span></div>"
       else
         "<li>" + link_to("#{Date::MONTHNAMES[type]}", "#{user_path(params[:username])}/#{params[:id]}?year=#{current_year}&month=#{type}") + " <span class=\"count\">(#{count})</span></li>"
       end

@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @page_class = 'me'
   end
 
-  # GET /u/buddha or /buddha
+  # GET /u/buddha
   def show
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @links = @user.stream_range
@@ -38,18 +38,14 @@ class UsersController < ApplicationController
           @sits = @user.sits_by_month(month: params[:month], year: params[:year]).public.newest_first
         end
         @range_title = "#{Date::MONTHNAMES[params[:month].to_i]}, #{params[:year]}"
-      elsif params[:year]
-        if current_user == @user
-          @sits = @user.sits_by_year(params[:year]).newest_first
-        else
-          @sits = @user.sits_by_year(params[:year]).public.newest_first
-        end
-        @range_title = "All sits in #{params[:year]}"
       else
+        month = Date.today.month
+        year = Date.today.year
+        @range_title = "#{Date::MONTHNAMES[month.to_i]}, #{year}"
         if current_user && @user.id == current_user.id
-          @sits = @user.sits.newest_first.paginate(:page => params[:page])
+          @sits = @user.sits_by_month(month: month, year: year).newest_first
         else
-          @sits = @user.sits.public.newest_first.paginate(:page => params[:page])
+          @sits = @user.sits_by_month(month: month, year: year).public.newest_first
         end
       end
     end

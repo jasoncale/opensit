@@ -6,4 +6,6 @@
   <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to tag</a>
 <% elsif request.referrer =~ /favs/ %>
   <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to favourites</a>
+<% elsif request.referrer =~ /u/ %>
+  <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to timeline</a>
 <% end %>
