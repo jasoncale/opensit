@@ -1,0 +1,16 @@
+<% if @listed.last != sit.created_at.to_date %>
+  <hr>
+  <div class="day-of-the-month"><div class="weekday"><%=sit.created_at.strftime("%a")%></div><div class="date"><%=sit.created_at.strftime("%d")%></div></div>
+<% end %>
+
+<% @listed.push(sit.created_at.to_date) %>
+
+<div class="entry">
+  <% if sit.is_sit? %>
+    <div class="link"><%= link_to "<i class='fa fa-clock-o'></i> #{sit.duration}".html_safe, sit_path(sit) %></div>
+    <div class="teaser"><%= sit.body.empty? ? '&nbsp;'.html_safe : teaser(sit, 150)%></div> <br>
+  <% else %>
+    <div class="link"><%= link_to "<i class='fa fa-book'></i>".html_safe, sit_path(sit) %></div>
+    <div class="teaser"><em><%= sit.title %></em>: <%= teaser(sit, 140)%></div> <br>
+  <% end %>
+</div>

@@ -129,14 +129,14 @@ $(document).ready(function(){
     });
   }
 
-  if ($('.view-user').length) {
-    var container = document.querySelector('.sit-container');
-    var msnry = new Masonry( container, {
-      columnWidth: '.col-md-4',
-      itemSelector: '.tile',
-      stamp: ".stamp",
-    });
-  }
+  // if ($('.view-user').length) {
+  //   var container = document.querySelector('.sit-container');
+  //   var msnry = new Masonry( container, {
+  //     columnWidth: '.col-md-4',
+  //     itemSelector: '.tile',
+  //     stamp: ".stamp",
+  //   });
+  // }
 
   if ($('.view-tag').length) {
     var container = document.querySelector('.sit-container');

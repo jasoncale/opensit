@@ -197,7 +197,7 @@ describe User do
   end #display_name
 
   describe "methods that interact with sits" do
-    let(:public_sits) { create_list(:sit, 3, :public) }
+    let(:public_sits) { create_list(:sit, 3, :public, user: ananda) }
     let(:first_sit) { create(:sit, :one_hour_ago, user: buddha) }
     let(:second_sit) do
       create(:sit, :two_hours_ago, user: buddha)
@@ -272,6 +272,14 @@ describe User do
       it "does not return the oldest sits first" do
         expect(ananda.socialstream).to_not eq(
           [fourth_sit, third_sit, second_sit, first_sit])
+      end
+
+      it "should not shows stubs in socialstream" do
+        stub = create(:sit, user: buddha, body: '')
+        has_body = create(:sit, user: buddha, body: 'In the seeing, only the seen')
+        expect(buddha.sits.count).to eq(6)
+        expect(ananda.socialstream.count).to eq(5)
+        expect(ananda.socialstream).to_not include stub
       end
     end
 

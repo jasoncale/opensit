@@ -24,10 +24,7 @@
       <p>This is a private journal.</p>
     </div>
   <% else %>
-    <% if @range_title %>
-      <h1 class="range-title"><%= @range_title %></h1>
-    <% else %>
-
+    <% if !params[:month] && !params[:year] %>
       <% if @user.who.blank? && @user.why.blank? && @user.practice.blank? %>
         <div class="message-box">
           <% if current_user == @user %>
@@ -75,9 +72,12 @@
       <% end %>
     <% end %>
 
-    <div class="sit-container">
+    <div class="month-view text-section">
+      <h1 class="range-title"><%= @range_title %></h1>
+      <div class="clearfix"></div>
+      <% @listed = [] %>
       <% @sits.each do |sit| %>
-        <%= render :partial => 'shared/sit_teaser_block', :locals => { :sit => sit, :width => 4 } %>
+        <%= render :partial => 'sits/day_journal', :locals => { :sit => sit } %>
       <% end %>
     </div>
   <% end %>

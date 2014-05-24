@@ -3,6 +3,7 @@ require 'rake'
 
 describe Sit do
   let(:buddha) { create(:buddha) }
+  let(:ananda) { create(:ananda) }
 
   describe 'creating a user' do
 	  it 'sets the streak to 0' do
@@ -67,5 +68,12 @@ describe Sit do
 	  		expect(buddha.reload.streak).to eq 12
 	  	end
 	  end
+  end
+
+  context "stubs" do
+  	it "should allow sits without bodies" do
+  		sit = create(:sit, user: buddha, body: '')
+  		expect(sit.valid?).to eq(true)
+  	end
   end
 end

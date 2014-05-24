@@ -140,7 +140,7 @@ class User < ActiveRecord::Base
   end
 
   def socialstream
-    Sit.from_users_followed_by(self).newest_first
+    Sit.from_users_followed_by(self).with_body.newest_first
   end
 
   def private_stream=(value)

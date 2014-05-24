@@ -11,7 +11,6 @@ class Sit < ActiveRecord::Base
   has_many :favourites, :as => :favourable
   has_many :likes, :as => :likeable
 
-  validates :body, :presence => true
   validates :s_type, :presence => true
   validates :title, :presence => true, :if => "s_type != 0"
   validates :duration, :presence => true, :if => "s_type == 0"
@@ -22,6 +21,7 @@ class Sit < ActiveRecord::Base
   scope :newest_first, -> { order("created_at DESC") }
   scope :today, -> { where("DATE(created_at) = ?", Date.today) }
   scope :yesterday, -> { where("DATE(created_at) = ?", Date.yesterday) }
+  scope :with_body, -> { where.not(body: '')}
 
   # Pagination: sits per page
   self.per_page = 20
@@ -68,13 +68,13 @@ class Sit < ActiveRecord::Base
   end
 
   def next(current_user)
-    next_sit = user.sits.where("created_at > ?", self.created_at).order('created_at ASC')
+    next_sit = user.sits.with_body.where("created_at > ?", self.created_at).order('created_at ASC')
     return next_sit.first if current_user && (self.user_id == current_user.id)
     return next_sit.public.first
   end
 
   def prev(current_user)
-    prev_sit = user.sits.where("created_at < ?", self.created_at).order('created_at ASC')
+    prev_sit = user.sits.with_body.where("created_at < ?", self.created_at).order('created_at ASC')
     return prev_sit.last if current_user && (self.user_id == current_user.id)
     return prev_sit.public.last
   end

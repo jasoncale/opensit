@@ -149,6 +149,7 @@
 	.year {
 		font-weight: bold;
 		margin: 20px 0 10px 0;
+		color: $dark-grey;
 	}
 	.count {
 		color: #999;
@@ -217,13 +218,54 @@
     float: right;
     line-height: 15px;
     margin-right: 11px;
+    margin-top: 20px;
     padding-bottom: 10px;
     border-bottom: 3px $green solid;
   }
-  .sit-container {
+  .month-view {
   	clear: left;
   	width: 100%;
   	float: left;
+  	.day-of-the-month {
+  		float: left;
+  		clear: left;
+  		border-right: 2px solid $green;
+  		padding-right: 17px;
+  		.weekday {
+  			text-transform: uppercase;
+  			font-size: 0.6em;
+  			color: $dark-grey;
+  			text-align: center;
+  		}
+  		.date {
+  			clear: left;
+  			font-size: 1.5em;
+  			text-align: center;
+  		}
+  	}
+  	.entry {
+  		margin-left: 59px;
+  		margin-top: 25px;
+  		font-size: 0.9em;
+  		.link {
+  			float: left;
+  			width: 50px;
+  			margin-right: 0.5em;
+  			text-align: center;
+  		}
+  		.teaser {
+  			float: left;
+  			width: 90%;
+  		}
+  	}
+  	hr {
+			margin-top: 30px;
+			margin-bottom: 11px;
+			border: 0;
+			border-top: 1px solid #eeeeee;
+			float: left;
+			width: 100%;
+  	}
   }
 }
 

@@ -62,7 +62,7 @@
     <%= form_element(f, :title, 'sit', "Title", 4, { label: false }) %>
   </div>
 
-  <%= form_element(f, :body, 'sit', "What happened?", 7, { label: false, input_html: { rows: 10, autofocus: true, class: "rich-textarea" }} ) %>
+  <%= form_element(f, :body, 'sit', "What happened?", 7, { label: false, hint: 'You don\'t have to write anything', input_html: { rows: 10, autofocus: true, class: "rich-textarea" }} ) %>
 
   <div class='form-group'>
     <label class='col-lg-2 control-label' for='sit_created_at'>Date</label>
