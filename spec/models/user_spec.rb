@@ -273,6 +273,14 @@ describe User do
         expect(ananda.socialstream).to_not eq(
           [fourth_sit, third_sit, second_sit, first_sit])
       end
+
+      it "should not shows stubs in socialstream" do
+        stub = create(:sit, user: buddha, body: '')
+        has_body = create(:sit, user: buddha, body: 'In the seeing, only the seen')
+        expect(buddha.sits.count).to eq(6)
+        expect(ananda.socialstream.count).to eq(5)
+        expect(ananda.socialstream).to_not include stub
+      end
     end
 
     describe "#private_stream=" do
