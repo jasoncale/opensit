@@ -57,7 +57,7 @@ class SitsController < ApplicationController
       if !@sit.body.empty?
         redirect_to @sit, notice: 'Your entry was added. Good job!'
       else
-        redirect_to '/me', notice: 'Your entry was added. Good job!'
+        redirect_to user_path(@user, year: Date.today.year, month: Date.today.month), notice: 'Your entry was added. Good job!'
       end
     else
       @page_class = 'new-sit'
