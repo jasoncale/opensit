@@ -197,7 +197,7 @@ describe User do
   end #display_name
 
   describe "methods that interact with sits" do
-    let(:public_sits) { create_list(:sit, 3, :public) }
+    let(:public_sits) { create_list(:sit, 3, :public, user: ananda) }
     let(:first_sit) { create(:sit, :one_hour_ago, user: buddha) }
     let(:second_sit) do
       create(:sit, :two_hours_ago, user: buddha)
