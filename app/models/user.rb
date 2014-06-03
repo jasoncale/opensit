@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
     small_thumb: '50x50#',
     thumb: '250x250#',
   }
+  validates_attachment :avatar, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
   # Scopes
   scope :newest_first, -> { order("created_at DESC") }
