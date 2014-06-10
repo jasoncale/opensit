@@ -129,35 +129,6 @@ class Sit < ActiveRecord::Base
     !self.likes.empty?
   end
 
-  ##
-  # CALLBACKS
-  ##
-
-  after_create :streak_check
-
-  private
-
-    def streak_check
-      # Check this is sit from today (not a retrospective addition)
-      if self.created_at.to_date == Date.today
-        yesterday = user.sits.yesterday
-        today = user.sits.today
-        # Was there a sit from yesterday?
-        # And is this the first sit today (don't want to increment streak twice in a day)
-        if today.count == 1 && yesterday.present?
-          if user.streak == 0
-            user.streak = 2
-          else
-            user.streak += 1
-          end
-          user.save!
-        elsif yesterday.empty?
-          user.streak = 0
-          user.save!
-        end
-      end
-    end
-
 end
 # == Schema Information
 #
