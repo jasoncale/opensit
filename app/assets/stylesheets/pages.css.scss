@@ -100,7 +100,7 @@
   h1 {
     text-align: center;
     line-height: 1.5em;
-    margin: 10px 0 0 0;
+    margin: 10px 0 2em 0;
     font-size: 1.5em;
   }
   .its-free {
@@ -115,6 +115,14 @@
     margin-top: 20px;
   }
   .left {
+    .sign-up-form {
+      float: left;
+      width: 100%;
+      text-align: center;
+      input {
+        width: 400px;
+      }
+    }
     input {
       margin-top: 5px;
     }
