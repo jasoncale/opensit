@@ -81,17 +81,6 @@ $(document).ready(function(){
     $(this).closest('form').submit();
   });
 
-  // EDIT PROFILE / private stream warning
-  $('.edit-profile .private-stream input').click( function() {
-    if ($(this).is(':checked')) {
-      $('.private-stream-warning-unticked').hide();
-      $('.private-stream-warning-ticked').show();
-    } else {
-      $('.private-stream-warning-ticked').hide();
-      $('.private-stream-warning-unticked').show();
-    }
-  });
-
   // MASONRY
   if ($('.page-content.me .sit-container').length) {
     var container = document.querySelector('.sit-container');

@@ -320,12 +320,11 @@
 		.wysihtml5-toolbar {
 			display: none;
 		}
-		.private-stream-warning-unticked,
-		.private-stream-warning-ticked {
-			display: none;
-			float: right;
-			width: 77%;
-		}
+	}
+	.privacy-setting .warning {
+		margin-top: 10px;
+		font-size: 0.9em;
+		color: $dark-grey;
 	}
 }
 

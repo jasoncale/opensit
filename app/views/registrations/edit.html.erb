@@ -78,39 +78,22 @@
     </ul>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-4 privacy-setting">
     <h1>Privacy</h1>
 
     <p>Your journal is <%= @user.private_stream ? 'private' : 'public' %>.</p>
 
-    <a href="#privacyModal" role="button" class="btn btn-default" data-toggle="modal">Make it <%= @user.private_stream ? 'public' : 'private' %></a>
-  </div>
-
-</div>
-
-<!-- Modal -->
-<div id="privacyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="privacyModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="privacyModalLabel">Warning!</h3>
-    </div>
-    <div class="modal-body">
       <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , :class => 'form-horizontal'}) do |f| %>
         <% if @user.private_stream %>
-          <p>This will make <em>all</em> of your journal public! If there are any entries you wish to remain private, you will have to manually change their privacy settings afterwards.</p>
+          <%= f.submit "Make it public", :class => 'btn btn-default' %>
+          <p class="warning">This will make <em>all</em> of your journal public! If there are any entries you wish to remain private, you will have to manually change their privacy settings afterwards.</p>
           <%= f.input :private_stream, :as => :hidden, :input_html => { :value => "false" } %>
         <% else %>
-          <p>This will make your journal private, meaning only you can see it. You can change this back to public at any time, but when you do <strong>all</strong> of your content will be marked as public. If there's anything you wish to remain private, you will have to manually change the privacy settings on each entry.</p>
+          <%= f.submit "Make it private", :class => 'btn btn-default' %>
+          <p class="warning">This will make your journal private, meaning only you can see it. You can change this back to public at any time, but when you do <em>all</em> of your content will be marked as public.</p>
           <%= f.input :private_stream, :as => :hidden, :input_html => { :value => "true" } %>
         <% end %>
-    </div>
-    <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-      <%= f.submit "Update", :class => 'btn btn-primary' %>
       <% end %>
-    </div>
   </div>
-</div>
+
 </div>
