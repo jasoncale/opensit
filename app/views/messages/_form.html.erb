@@ -9,7 +9,7 @@
 
 	<%= form_element(f, :subject, 'message', "Subject", 4, { label: false }) %>
 
-	<%= form_element(f, :body, 'message', "Body", 9, { label: false, input_html: { rows: 10 } }) %>
+	<%= form_element(f, :body, 'message', "Body", 9, { label: false, input_html: { class: 'rich-textarea', rows: 10 } }) %>
 
   <%= f.submit 'Send message', :class => 'btn btn-lg btn-primary' %>
 
