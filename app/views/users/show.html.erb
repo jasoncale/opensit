@@ -1,7 +1,7 @@
 <div class="sidebar col-md-3">
   <%= render 'shared/full_user' %>
 
-  <% if !@user.private_stream %>
+  <% if !@user.private_stream || (current_user == @user) %>
     <% if !@user.sits.empty? %>
       <div class="nav-module my-timeline">
         <ul>
@@ -18,7 +18,7 @@
     <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to new users</a>
   <% end %>
 
-  <% if @user.private_stream %>
+  <% if @user.private_stream && (current_user != @user) %>
     <div class="message-box">
       <h2>Private.</h2>
       <p>This is a private journal.</p>
@@ -39,7 +39,6 @@
         </div>
       <% else %>
         <div class="profile">
-
 
           <% if !@user.who.blank? %>
             <p class="lead"><%= @user.who.html_safe %></p>
@@ -72,14 +71,16 @@
       <% end %>
     <% end %>
 
-    <div class="month-view text-section">
-      <h1 class="range-title"><%= @range_title %></h1>
-      <div class="clearfix"></div>
-      <% @listed = [] %>
-      <% @sits.each do |sit| %>
-        <%= render :partial => 'sits/day_journal', :locals => { :sit => sit } %>
-      <% end %>
-    </div>
+    <% if @sits %>
+      <div class="month-view text-section">
+        <h1 class="range-title"><%= @range_title %></h1>
+        <div class="clearfix"></div>
+        <% @listed = [] %>
+        <% @sits.each do |sit| %>
+          <%= render :partial => 'sits/day_journal', :locals => { :sit => sit } %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
 

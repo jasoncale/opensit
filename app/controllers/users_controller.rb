@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @links = @user.stream_range
 
-    if !@user.private_stream
+    if !@user.private_stream || (current_user == @user)
       if params[:year] && params[:month]
         if current_user == @user
           @sits = @user.sits_by_month(month: params[:month], year: params[:year]).newest_first
