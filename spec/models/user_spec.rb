@@ -34,6 +34,7 @@ describe User do
           .source(:follower) }
     it { should have_many(:notifications).dependent(:destroy) }
     it { should have_many(:favourites) }
+    it { should have_many(:goals).dependent(:destroy) }
 
     describe "#favourite_sits" do
       let(:fav_sit) { create(:sit, user: ananda) }
@@ -515,6 +516,8 @@ end
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
 #  sign_in_count          :integer          default(0)
+#  sits_count             :integer          default(0)
+#  streak                 :integer          default(0)
 #  style                  :string(100)
 #  unlock_token           :string(255)
 #  updated_at             :datetime         not null

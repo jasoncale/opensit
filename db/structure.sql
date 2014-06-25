@@ -185,6 +185,42 @@ ALTER SEQUENCE favourites_id_seq OWNED BY favourites.id;
 
 
 --
+-- Name: goals; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE goals (
+    id integer NOT NULL,
+    user_id integer,
+    goal_type integer,
+    duration integer,
+    date_started timestamp without time zone,
+    date_ended timestamp without time zone,
+    completed boolean DEFAULT false,
+    successful_days integer DEFAULT 0,
+    current_day integer
+);
+
+
+--
+-- Name: goals_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE goals_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: goals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE goals_id_seq OWNED BY goals.id;
+
+
+--
 -- Name: likes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -568,6 +604,13 @@ ALTER TABLE ONLY favourites ALTER COLUMN id SET DEFAULT nextval('favourites_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY goals ALTER COLUMN id SET DEFAULT nextval('goals_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY likes ALTER COLUMN id SET DEFAULT nextval('likes_id_seq'::regclass);
 
 
@@ -657,6 +700,14 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY favourites
     ADD CONSTRAINT favourites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: goals_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY goals
+    ADD CONSTRAINT goals_pkey PRIMARY KEY (id);
 
 
 --
@@ -960,3 +1011,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140119142023');
 INSERT INTO schema_migrations (version) VALUES ('20140218235031');
 
 INSERT INTO schema_migrations (version) VALUES ('20140328194519');
+
+INSERT INTO schema_migrations (version) VALUES ('20140625193718');

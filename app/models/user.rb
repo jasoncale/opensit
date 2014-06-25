@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :favourite_sits, through: :favourites,
                             source: :favourable,
                             source_type: "Sit"
+  has_many :goals, :dependent => :destroy
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -323,6 +325,8 @@ end
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
 #  sign_in_count          :integer          default(0)
+#  sits_count             :integer          default(0)
+#  streak                 :integer          default(0)
 #  style                  :string(100)
 #  unlock_token           :string(255)
 #  updated_at             :datetime         not null
