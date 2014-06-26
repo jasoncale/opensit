@@ -252,6 +252,20 @@ describe User do
       end
     end
 
+    describe "#sat_on_date?" do
+      before do
+        create(:sit, created_at: Date.yesterday, user: buddha)
+      end
+
+      it "return true if user sat" do
+        expect(buddha.sat_on_date?(Date.yesterday)).to eq(true)
+      end
+
+      it "return false if user didn't sit" do
+        expect(buddha.sat_on_date?(Date.today - 2)).to eq(false)
+      end
+    end
+
     describe "#stream_range" do
       it "returns an array of arrays of dates and counts"
     end

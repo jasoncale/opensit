@@ -19,18 +19,18 @@ describe Goal do
 	end
 
 	describe 'goal type' do
-	  it 'fixed?' do
+	  it '#fixed?' do
 	    g = buddha.goals.create(goal_type: 1)
 	    expect(g.fixed?).to eq(true)
 	  end
 
-	  it 'ongoing?' do
+	  it '#ongoing?' do
 	  	g = buddha.goals.create(goal_type: 0)
 	    expect(g.ongoing?).to eq(true)
 	  end
 	end
 
-	describe 'successful days' do
+	describe '#days_where_goal_met' do
 		it 'returns how many days the goal has been met'
 	end
 

@@ -97,6 +97,10 @@ class User < ActiveRecord::Base
       AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0'))
   end
 
+  def sat_on_date?(date)
+    sits.where(created_at: date.beginning_of_day..date.end_of_day).present?
+  end
+
   def stream_range
     return false if self.sits.empty?
 
