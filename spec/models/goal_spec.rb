@@ -30,8 +30,27 @@ describe Goal do
 	  end
 	end
 
-	describe '#days_where_goal_met' do
-		it 'returns how many days the goal has been met'
+	describe "goal helpers" do
+		# 10 days into goal of sitting every day for 30 days
+		let(:goal) { buddha.goals.create(goal_type: 1, date_started: Date.today - 9, duration: 30) }
+		before :each do
+			# Only sat twice :(
+			2.times do |i|
+        create(:sit, user: buddha, created_at: Date.today - i)
+      end
+    end
+
+		it '#days_into_goal' do
+      expect(goal.days_into_goal).to eq 10
+		end
+
+		it '#days_where_goal_met' do
+      expect(goal.days_where_goal_met).to eq 2
+		end
+
+		it '#rating' do
+      expect(goal.rating).to eq 20
+		end
 	end
 
 	describe 'rating' do
