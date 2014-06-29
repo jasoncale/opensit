@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Goal do
+	it 'has valid factory' do
+    expect(build(:goal)).to be_valid
+  end
+
   let(:buddha) { create(:buddha) }
   it { should belong_to(:user) }
   it { should validate_presence_of(:user_id) }
@@ -32,7 +36,8 @@ describe Goal do
 
 	describe "goal helpers" do
 		# 10 days into goal of sitting every day for 30 days
-		let(:goal) { buddha.goals.create(goal_type: 1, date_started: Date.today - 9, duration: 30) }
+		let(:goal) { create(:goal, :sit_for_30_days, user: buddha) }
+
 		before :each do
 			# Only sat twice :(
 			2.times do |i|
@@ -58,7 +63,7 @@ describe Goal do
 	end
 
 	describe 'rating' do
-		let(:goal) { buddha.goals.create(goal_type: 1, date_started: Date.today - 9, duration: 30) }
+		let(:goal) { create(:goal, :sit_for_30_days, user: buddha) }
 
 		it 'under 50%' do
 			goal.stub(:rating) { 45 }
