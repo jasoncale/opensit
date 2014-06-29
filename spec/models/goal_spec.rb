@@ -51,12 +51,34 @@ describe Goal do
 		it '#rating' do
       expect(goal.rating).to eq 20
 		end
+
+		it '#rating_colour' do
+			expect(goal.rating_colour).to eq 'red'
+		end
 	end
 
 	describe 'rating' do
-		it 'returns compliance percentage'
-		it 'returns gold if 100%'
-		it 'returns green if over 80%'
+		let(:goal) { buddha.goals.create(goal_type: 1, date_started: Date.today - 9, duration: 30) }
+
+		it 'under 50%' do
+			goal.stub(:rating) { 45 }
+			expect(goal.rating_colour).to eq 'red'
+		end
+
+		it 'under 70%' do
+			goal.stub(:rating) { 64 }
+			expect(goal.rating_colour).to eq 'amber'
+		end
+
+		it 'under 99%' do
+			goal.stub(:rating) { 91 }
+			expect(goal.rating_colour).to eq 'green'
+		end
+
+		it '100%' do
+			goal.stub(:rating) { 100 }
+			expect(goal.rating_colour).to eq 'gold'
+		end
 	end
 end
 

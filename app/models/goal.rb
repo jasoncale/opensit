@@ -8,7 +8,7 @@ class Goal < ActiveRecord::Base
   def to_s
   	text = "#{user.display_name} wants to sit for "
   	text << (self.fixed? ? "#{duration} days in a row" : "#{duration} minutes a day")
-  	text << ". They started on #{date_started.strftime("%d %B %Y")}, and have met the goal on #{days_where_goal_met} out of #{days_into_goal} days, giving them a rating of #{rating}%"
+  	text << ". They started on #{date_started.strftime("%d %B %Y")}, and have met the goal on #{days_where_goal_met} out of #{days_into_goal} days, giving them a rating of #{rating}% (#{rating_colour})"
   end
 
   # Fixed goal e.g. sit for 30 days in a row
@@ -47,6 +47,20 @@ class Goal < ActiveRecord::Base
   		rating = "NA"
   	end
   end
+
+  # Gold for 100%, Green for 80% and above, Amber for 50% and above, Red for anything below
+  def rating_colour
+  	case self.rating
+		when 0..49
+		  "red"
+		when 50..79
+		  "amber"
+		when 80..99
+		  "green"
+		when 100
+		  "gold"
+		end
+	end
 end
 
 # == Schema Information
