@@ -195,9 +195,7 @@ CREATE TABLE goals (
     duration integer,
     date_started timestamp without time zone,
     date_ended timestamp without time zone,
-    completed boolean DEFAULT false,
-    successful_days integer DEFAULT 0,
-    current_day integer
+    completed boolean DEFAULT false
 );
 
 

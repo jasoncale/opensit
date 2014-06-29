@@ -9,3 +9,16 @@ FactoryGirl.define do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: goals
+#
+#  completed    :boolean          default(FALSE)
+#  date_ended   :datetime
+#  date_started :datetime
+#  duration     :integer
+#  goal_type    :integer
+#  id           :integer          not null, primary key
+#  user_id      :integer
+#

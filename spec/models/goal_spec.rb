@@ -91,13 +91,11 @@ end
 #
 # Table name: goals
 #
-#  completed       :boolean          default(FALSE)
-#  current_day     :integer
-#  date_ended      :datetime
-#  date_started    :datetime
-#  duration        :integer
-#  goal_type       :integer
-#  id              :integer          not null, primary key
-#  successful_days :integer          default(0)
-#  user_id         :integer
+#  completed    :boolean          default(FALSE)
+#  date_ended   :datetime
+#  date_started :datetime
+#  duration     :integer
+#  goal_type    :integer
+#  id           :integer          not null, primary key
+#  user_id      :integer
 #
