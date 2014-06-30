@@ -266,6 +266,28 @@ describe User do
       end
     end
 
+    describe "#time_sat_on_date" do
+      it 'returns total minutes sat that day' do
+        2.times do
+          create(:sit, created_at: Date.today, user: buddha, duration: 20)
+        end
+        expect(buddha.time_sat_on_date(Date.today)).to eq(40)
+      end
+    end
+
+    describe "#sat_for_x_on_date?" do
+      before do
+        create(:sit, created_at: Date.yesterday, user: buddha, duration: 30)
+      end
+      it 'returns true if user has sat x minutes that day' do
+        expect(buddha.sat_for_x_on_date?(30, Date.yesterday)).to eq(true)
+      end
+
+      it 'returns false if user sat for less than x minutes that day' do
+        expect(buddha.sat_for_x_on_date?(31, Date.yesterday)).to eq(false)
+      end
+    end
+
     describe "#stream_range" do
       it "returns an array of arrays of dates and counts"
     end

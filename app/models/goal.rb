@@ -1,8 +1,6 @@
 class Goal < ActiveRecord::Base
   belongs_to :user
-
   validates_presence_of :user_id, :goal_type
-
   attr_accessible :user_id, :duration, :goal_type, :date_started
 
   def to_s
@@ -33,10 +31,15 @@ class Goal < ActiveRecord::Base
 	  	(date_started.to_date .. Date.today).each do |day|
 	  		total += 1 if user.sat_on_date?(day)
 	  	end
-  		return total
 	  else
-	  	return 999
+	  	# Rate based on last 2 weeks of results, or since started (if less than two weeks into goal)
+	  	start_from = days_into_goal < 14 ? date_started.to_date : Date.today - 14
+
+	  	(start_from .. Date.today).each do |day|
+	  		total += 1 if user.sat_for_x_on_date?(self.duration, day)
+	  	end
 	  end
+  	total
   end
 
   # How well is the user meeting the goal?
@@ -44,7 +47,11 @@ class Goal < ActiveRecord::Base
   	if self.fixed?
   		rating = ((days_where_goal_met.to_f / days_into_goal.to_f) * 100).round
   	else
-  		rating = "NA"
+  		# Rate based on last 2 weeks of results, or since started (if less than two weeks into goal)
+	  	last_2_weeks = days_into_goal < 14 ? days_into_goal : 14
+
+  		rating = ((days_where_goal_met.to_f / last_2_weeks.to_f) * 100).round
+  		# % of last 5 days where goal (30 mins a day) was met
   	end
   end
 

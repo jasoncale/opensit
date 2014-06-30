@@ -101,6 +101,22 @@ class User < ActiveRecord::Base
     sits.where(created_at: date.beginning_of_day..date.end_of_day).present?
   end
 
+  def time_sat_on_date(date)
+    total_time = 0
+    sits.where(created_at: date.beginning_of_day..date.end_of_day).each do |s|
+      total_time += s.duration
+    end
+    total_time
+  end
+
+  def sat_for_x_on_date?(minutes, date)
+    if sits.where(created_at: date.beginning_of_day..date.end_of_day).present?
+      time_sat_on_date(date) >= minutes
+    else
+      false
+    end
+  end
+
   def stream_range
     return false if self.sits.empty?
 

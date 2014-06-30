@@ -35,30 +35,62 @@ describe Goal do
 	end
 
 	describe "goal helpers" do
-		# 10 days into goal of sitting every day for 30 days
-		let(:goal) { create(:goal, :sit_for_30_days, user: buddha) }
+		context 'fixed goal' do
+			# 10 days into goal of sitting every day for 30 days
+			let(:goal) { create(:goal, :sit_for_30_days, user: buddha) }
 
-		before :each do
-			# Only sat twice :(
-			2.times do |i|
-        create(:sit, user: buddha, created_at: Date.today - i)
-      end
-    end
+			before :each do
+				# Only sat twice :(
+				2.times do |i|
+	        create(:sit, user: buddha, created_at: Date.today - i)
+	      end
+	    end
 
-		it '#days_into_goal' do
-      expect(goal.days_into_goal).to eq 10
+			it '#days_into_goal' do
+	      expect(goal.days_into_goal).to eq 10
+			end
+
+			it '#days_where_goal_met' do
+	      expect(goal.days_where_goal_met).to eq 2
+			end
+
+			it '#rating' do
+	      expect(goal.rating).to eq 20
+			end
+
+			it '#rating_colour' do
+				expect(goal.rating_colour).to eq 'red'
+			end
 		end
 
-		it '#days_where_goal_met' do
-      expect(goal.days_where_goal_met).to eq 2
-		end
+		context 'ongoing goal' do
+			# 10 days into goal of sitting every day for 30 days
+			let(:goal) { create(:goal, :sit_for_30_minutes_a_day, user: buddha) }
 
-		it '#rating' do
-      expect(goal.rating).to eq 20
-		end
+			# Two sits >= 30 mins, one that won't count
+			before :each do
+				2.times do |i|
+					create(:sit, user: buddha, created_at: Date.today - i, duration: 30)
+				end
+				create(:sit, user: buddha, created_at: Date.today - 4, duration: 20)
+	    end
 
-		it '#rating_colour' do
-			expect(goal.rating_colour).to eq 'red'
+			it '#days_into_goal' do
+	      expect(goal.days_into_goal).to eq 10
+			end
+
+			it '#days_where_goal_met' do
+				expect(buddha.sits.count).to eq 3
+	      expect(goal.days_where_goal_met).to eq 2
+			end
+
+			it '#rating' do
+	      expect(goal.rating).to eq 20
+			end
+
+			it '#rating_colour' do
+				expect(goal.rating_colour).to eq 'red'
+			end
 		end
 	end
 
