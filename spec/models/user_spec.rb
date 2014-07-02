@@ -266,6 +266,20 @@ describe User do
       end
     end
 
+    describe '#days_sat_in_date_range' do
+      before do
+        2.times do |i|
+          create(:sit, created_at: Date.yesterday - i, user: buddha)
+        end
+        # The below shouldn't count towards total as buddha already sat that day
+        create(:sit, created_at: Date.yesterday - 1, user: buddha)
+      end
+      it 'works' do
+        expect(buddha.sits.count).to eq 3
+        expect(buddha.days_sat_in_date_range(Date.yesterday - 3, Date.today)).to eq(2)
+      end
+    end
+
     describe "#time_sat_on_date" do
       it 'returns total minutes sat that day' do
         2.times do

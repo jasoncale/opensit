@@ -28,30 +28,22 @@ class Goal < ActiveRecord::Base
   def days_where_goal_met
 	  total = 0
   	if self.fixed?
-	  	(date_started.to_date .. Date.today).each do |day|
-	  		total += 1 if user.sat_on_date?(day)
-	  	end
+  		user.days_sat_in_date_range(date_started.to_date, Date.today)
 	  else
 	  	# Rate based on last 2 weeks of results, or since started (if less than two weeks into goal)
 	  	start_from = days_into_goal < 14 ? date_started.to_date : Date.today - 14
-
-	  	(start_from .. Date.today).each do |day|
-	  		total += 1 if user.sat_for_x_on_date?(self.duration, day)
-	  	end
+	  	user.days_sat_for_min_x_minutes_in_date_range(self.duration, start_from, Date.today)
 	  end
-  	total
   end
 
   # How well is the user meeting the goal?
   def rating
   	if self.fixed?
-  		rating = ((days_where_goal_met.to_f / days_into_goal.to_f) * 100).round
+  		((days_where_goal_met.to_f / days_into_goal.to_f) * 100).round
   	else
   		# Rate based on last 2 weeks of results, or since started (if less than two weeks into goal)
 	  	last_2_weeks = days_into_goal < 14 ? days_into_goal : 14
-
-  		rating = ((days_where_goal_met.to_f / last_2_weeks.to_f) * 100).round
-  		# % of last 5 days where goal (30 mins a day) was met
+  		((days_where_goal_met.to_f / last_2_weeks.to_f) * 100).round
   	end
   end
 

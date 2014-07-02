@@ -97,8 +97,47 @@ class User < ActiveRecord::Base
       AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0'))
   end
 
+  # Do not put me in a loop! Use #days_sat_in_date_range
+  # Returns true if user sat on the date passed
   def sat_on_date?(date)
     sits.where(created_at: date.beginning_of_day..date.end_of_day).present?
+  end
+
+  # Returns the number of days, in a date range, where the user sat
+  def days_sat_in_date_range(start_date, end_date)
+    all_dates = sits.where(created_at: start_date.beginning_of_day..end_date.end_of_day).order('created_at DESC').pluck(:created_at)
+    last_one = total = 0
+    # Dates are ordered so just check the current date aint the same day as the one before
+    # This stops multiple sits in one day incrementing the total by more than 1
+    all_dates.each do |d|
+      total += 1 if d.strftime("%d %B %Y") != last_one
+      last_one = d.strftime("%d %B %Y")
+    end
+    total
+  end
+
+  # Do not put me in a loop! Use #days_sat_for_min_x_minutes_in_date_range
+  def sat_for_x_on_date?(minutes, date)
+    if sits.where(created_at: date.beginning_of_day..date.end_of_day).present?
+      time_sat_on_date(date) >= minutes
+    else
+      false
+    end
+  end
+
+  # Returns the number of days, in a date range, where user sat for a minimum x minutes that day
+  def days_sat_for_min_x_minutes_in_date_range(duration, start_date, end_date)
+    all_sits = sits.where(created_at: start_date.beginning_of_day..end_date.end_of_day).order('created_at DESC')
+    all_dates = all_sits.pluck(:created_at)
+    total_days = 0
+    all_dates.each do |d|
+      total_time = 0
+      all_sits.where(created_at: d.beginning_of_day..d.end_of_day).each do |s|
+        total_time += s.duration
+      end
+      total_days += 1 if total_time >= duration
+    end
+    total_days
   end
 
   def time_sat_on_date(date)
@@ -109,13 +148,6 @@ class User < ActiveRecord::Base
     total_time
   end
 
-  def sat_for_x_on_date?(minutes, date)
-    if sits.where(created_at: date.beginning_of_day..date.end_of_day).present?
-      time_sat_on_date(date) >= minutes
-    else
-      false
-    end
-  end
 
   def stream_range
     return false if self.sits.empty?
