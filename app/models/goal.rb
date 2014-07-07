@@ -72,15 +72,22 @@ class Goal < ActiveRecord::Base
 		  "gold"
 		end
 	end
+
+	def goal_end_date
+		created_at + duration.days
+	end
+
+	def completed?
+		return true if Date.today > goal_end_date && fixed?
+		return false
+	end
 end
 
 # == Schema Information
 #
 # Table name: goals
 #
-#  completed    :boolean          default(FALSE)
 #  created_at   :datetime
-#  date_ended   :datetime
 #  duration     :integer
 #  goal_type    :integer
 #  id           :integer          not null, primary key

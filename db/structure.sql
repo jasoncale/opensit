@@ -194,8 +194,6 @@ CREATE TABLE goals (
     goal_type integer,
     duration integer,
     mins_per_day integer,
-    date_ended timestamp without time zone,
-    completed boolean DEFAULT false,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );

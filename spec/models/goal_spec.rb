@@ -17,8 +17,8 @@ describe Goal do
 	  end
 
 	  it 'creates an uncompleted goal' do
-			g = buddha.goals.create(goal_type: 1)
-	    expect(g.completed).to eq(false)
+			g = buddha.goals.create(goal_type: 1, duration: 10)
+	    expect(g.completed?).to eq(false)
 	  end
 	end
 
@@ -147,15 +147,22 @@ describe Goal do
 			expect(goal.rating_colour).to eq 'gold'
 		end
 	end
+
+	describe 'completed goal' do
+		# Started 4 days ago
+		let(:goal) { create(:goal, :sit_for_3_days, user: buddha) }
+
+		it 'returns true if goal is completed' do
+			expect(goal.completed?).to eq true
+		end
+	end
 end
 
 # == Schema Information
 #
 # Table name: goals
 #
-#  completed    :boolean          default(FALSE)
 #  created_at   :datetime
-#  date_ended   :datetime
 #  duration     :integer
 #  goal_type    :integer
 #  id           :integer          not null, primary key

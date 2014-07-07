@@ -7,6 +7,11 @@ FactoryGirl.define do
       goal_type 1 # fixed
       created_at Date.today - 9
     end
+    trait :sit_for_3_days do
+      duration 3
+      goal_type 1 # fixed
+      created_at Date.today - 4
+    end
     trait :sit_30_mins_a_day_for_30_days do
       duration 30
       mins_per_day 30
@@ -25,9 +30,7 @@ end
 #
 # Table name: goals
 #
-#  completed    :boolean          default(FALSE)
 #  created_at   :datetime
-#  date_ended   :datetime
 #  duration     :integer
 #  goal_type    :integer
 #  id           :integer          not null, primary key
