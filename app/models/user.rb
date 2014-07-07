@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
   def country?
     !country.blank?
   end
+
   ##
   # VIRTUAL ATTRIBUTES
   ##

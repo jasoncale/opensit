@@ -1,12 +1,23 @@
 class Goal < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :user_id, :goal_type
-  attr_accessible :user_id, :duration, :goal_type, :date_started
+  validates_presence_of :duration, :if => "goal_type == 'fixed'"
+  attr_accessible :user_id, :duration, :goal_type
 
   def to_s
   	text = "#{user.display_name} wants to sit for "
-  	text << (self.fixed? ? "#{duration} days in a row" : "#{duration} minutes a day")
-  	text << ". They started on #{date_started.strftime("%d %B %Y")}, and have met the goal on #{days_where_goal_met} out of #{days_into_goal} days, giving them a rating of #{rating}% (#{rating_colour})"
+  	if ongoing?
+  		text << "#{mins_per_day} minutes a day"
+  	else
+	  	if fixed
+	  		if mins_per_day
+	  			text << "#{mins_per_day} minutes a day, for #{duration}"
+	  		else
+	  			text << "#{duration} days in a row"
+	  		end
+	  	end
+	  end
+  	text << ". They started on #{created_at.strftime("%d %B %Y")}, and have met the goal on #{days_where_goal_met} out of #{days_into_goal} days, giving them a rating of #{rating}% (#{rating_colour})"
   end
 
   # Fixed goal e.g. sit for 30 days in a row
@@ -21,24 +32,25 @@ class Goal < ActiveRecord::Base
 
   # Returns how many days into the goal the user is
   def days_into_goal
-  	(date_started.to_date .. Date.today).count
+  	(created_at.to_date .. Date.today).count
   end
 
   # Returns the number of days (since the day the goal began) where the goal was met
   def days_where_goal_met
+  	# Rate based on last 2 weeks of results, or since started (if less than two weeks into goal)
+  	start_from = days_into_goal < 14 ? created_at.to_date : Date.today - 14
 	  total = 0
-  	if self.fixed?
-  		user.days_sat_in_date_range(date_started.to_date, Date.today)
+  	if fixed?
+  		return user.days_sat_for_min_x_minutes_in_date_range(mins_per_day, start_from, Date.today) if mins_per_day
+  		return user.days_sat_in_date_range(created_at.to_date, Date.today)
 	  else
-	  	# Rate based on last 2 weeks of results, or since started (if less than two weeks into goal)
-	  	start_from = days_into_goal < 14 ? date_started.to_date : Date.today - 14
-	  	user.days_sat_for_min_x_minutes_in_date_range(self.duration, start_from, Date.today)
+	  	return user.days_sat_for_min_x_minutes_in_date_range(mins_per_day, start_from, Date.today)
 	  end
   end
 
   # How well is the user meeting the goal?
   def rating
-  	if self.fixed?
+  	if fixed?
   		((days_where_goal_met.to_f / days_into_goal.to_f) * 100).round
   	else
   		# Rate based on last 2 weeks of results, or since started (if less than two weeks into goal)
@@ -49,7 +61,7 @@ class Goal < ActiveRecord::Base
 
   # Gold for 100%, Green for 80% and above, Amber for 50% and above, Red for anything below
   def rating_colour
-  	case self.rating
+  	case rating
 		when 0..49
 		  "red"
 		when 50..79
@@ -67,10 +79,12 @@ end
 # Table name: goals
 #
 #  completed    :boolean          default(FALSE)
+#  created_at   :datetime
 #  date_ended   :datetime
-#  date_started :datetime
 #  duration     :integer
 #  goal_type    :integer
 #  id           :integer          not null, primary key
+#  mins_per_day :integer
+#  updated_at   :datetime
 #  user_id      :integer
 #

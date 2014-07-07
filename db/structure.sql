@@ -193,9 +193,11 @@ CREATE TABLE goals (
     user_id integer,
     goal_type integer,
     duration integer,
-    date_started timestamp without time zone,
+    mins_per_day integer,
     date_ended timestamp without time zone,
-    completed boolean DEFAULT false
+    completed boolean DEFAULT false,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 

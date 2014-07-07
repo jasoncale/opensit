@@ -35,7 +35,7 @@ describe Goal do
 	end
 
 	describe "goal helpers" do
-		context 'fixed goal' do
+		context 'fixed: sit every day for x days' do
 			# 10 days into goal of sitting every day for 30 days
 			let(:goal) { create(:goal, :sit_for_30_days, user: buddha) }
 
@@ -63,11 +63,41 @@ describe Goal do
 			end
 		end
 
-		context 'ongoing goal' do
+		context 'fixed: sit 30 minutes a day for 30 days' do
+			# 5 days into goal of sitting 30 minutes a day for 30 days
+			let(:goal) { create(:goal, :sit_30_mins_a_day_for_30_days, user: buddha) }
+
+			before :each do
+				2.times do |i|
+	        create(:sit, user: buddha, created_at: Date.today - i, duration: 30)
+	      end
+	      # Oops, didn't sit long enough. Go straight to samsara, do not pass go, do not collect £200
+	      create(:sit, user: buddha, created_at: Date.today - 3, duration: 20)
+	    end
+
+			it '#days_into_goal' do
+	      expect(goal.days_into_goal).to eq 5
+			end
+
+			it '#days_where_goal_met' do
+				expect(buddha.sits.count).to eq 3
+	      expect(goal.days_where_goal_met).to eq 2
+			end
+
+			it '#rating' do
+	      expect(goal.rating).to eq 40
+			end
+
+			it '#rating_colour' do
+				expect(goal.rating_colour).to eq 'red'
+			end
+		end
+
+		context 'ongoing, with min minutes per day' do
 			# 10 days into goal of sitting every day for 30 days
 			let(:goal) { create(:goal, :sit_for_30_minutes_a_day, user: buddha) }
 
-			# Two sits >= 30 mins, one that won't count
+			# Two sits >= 30 mins, and one that won't count
 			before :each do
 				2.times do |i|
 					create(:sit, user: buddha, created_at: Date.today - i, duration: 30)
@@ -124,10 +154,12 @@ end
 # Table name: goals
 #
 #  completed    :boolean          default(FALSE)
+#  created_at   :datetime
 #  date_ended   :datetime
-#  date_started :datetime
 #  duration     :integer
 #  goal_type    :integer
 #  id           :integer          not null, primary key
+#  mins_per_day :integer
+#  updated_at   :datetime
 #  user_id      :integer
 #

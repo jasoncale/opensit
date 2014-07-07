@@ -274,7 +274,7 @@ describe User do
         # The below shouldn't count towards total as buddha already sat that day
         create(:sit, created_at: Date.yesterday - 1, user: buddha)
       end
-      it 'works' do
+      it 'returns number of days' do
         expect(buddha.sits.count).to eq 3
         expect(buddha.days_sat_in_date_range(Date.yesterday - 3, Date.today)).to eq(2)
       end
