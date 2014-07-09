@@ -12,7 +12,7 @@ describe Goal do
 
   describe 'new goal' do
 		it 'creates a goal for user' do
-			buddha.goals.create(goal_type: 1)
+			buddha.goals.create(goal_type: 0)
 	    expect(buddha.goals.count).to eq(1)
 	  end
 
