@@ -1,15 +1,15 @@
 class Goal < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :user_id, :goal_type
-  validates_presence_of :duration, :if => "goal_type == 'fixed'"
-  attr_accessible :user_id, :duration, :goal_type
+  validates_presence_of :duration, :if => "goal_type == 1"
+  attr_accessible :user_id, :duration, :goal_type, :mins_per_day
 
   def to_s
   	text = "#{user.display_name} wants to sit for "
   	if ongoing?
   		text << "#{mins_per_day} minutes a day"
   	else
-	  	if fixed
+	  	if fixed?
 	  		if mins_per_day
 	  			text << "#{mins_per_day} minutes a day, for #{duration}"
 	  		else
