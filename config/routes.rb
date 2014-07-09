@@ -12,9 +12,7 @@ Opensit::Application.routes.draw do
   get '/favs' => "favourites#index", :as => :favs
   get '/notifications' => "notifications#index"
   get '/welcome' => "users#welcome"
-
   get '/search' => "search#main"
-
   get 'about' => "pages#about"
   get 'contribute' => "pages#contribute"
   get 'contact' => "pages#contact"
@@ -24,21 +22,19 @@ Opensit::Application.routes.draw do
   get 'explore/users/active' => "pages#active_users", :as => :explore_active_users
   get 'explore/users/new/sitters' => "pages#new_sitters", :as => :explore_new_sitters
   get 'global-feed' => "users#feed", :defaults => { :format => 'atom', :scope => 'global' }
+  get 'goals' => "goals#index"
 
   resources :sits do
     resources :comments
   end
 
   get '/tags/:id' => 'tags#show', :as => :tag
-
   get '/messages/sent' => "messages#sent", :as => :sent_messages
   resources :messages, except: [:edit, :update]
-
   resources :relationships, only: [:create, :destroy]
-
   resources :favourites, only: [:create, :destroy]
-
   resources :likes, only: [:create, :destroy]
+  resources :goals, only: [:create, :destroy]
 
   # Crawl live site, but not staging
   get 'robots.txt' => 'pages#robots'

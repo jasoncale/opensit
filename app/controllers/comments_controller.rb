@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
       end
     end
   end
-  
+
   # PUT /comments/1
   def update
     @comment = Comment.find(params[:id])

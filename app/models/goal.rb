@@ -4,14 +4,14 @@ class Goal < ActiveRecord::Base
   validates_presence_of :duration, :if => "goal_type == 1"
   attr_accessible :user_id, :duration, :goal_type, :mins_per_day
 
-  def to_s
+  def verbalise
   	text = "#{user.display_name} wants to sit for "
   	if ongoing?
   		text << "#{mins_per_day} minutes a day"
   	else
 	  	if fixed?
 	  		if mins_per_day
-	  			text << "#{mins_per_day} minutes a day, for #{duration}"
+	  			text << "#{mins_per_day} minutes a day, for #{duration} days"
 	  		else
 	  			text << "#{duration} days in a row"
 	  		end
