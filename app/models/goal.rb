@@ -78,7 +78,7 @@ class Goal < ActiveRecord::Base
 	end
 
 	def completed?
-		return true if Date.today > goal_end_date && fixed?
+		return true if fixed? && (Date.today > goal_end_date)
 		return false
 	end
 end
