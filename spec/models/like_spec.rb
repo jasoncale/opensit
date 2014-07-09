@@ -99,3 +99,18 @@ describe Like do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: likes
+#
+#  id            :integer          not null, primary key
+#  likeable_id   :integer
+#  likeable_type :string(255)
+#  user_id       :integer
+#
+# Indexes
+#
+#  index_likes_on_likeable_id  (likeable_id)
+#  index_likes_on_user_id      (user_id)
+#

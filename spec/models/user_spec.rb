@@ -34,6 +34,7 @@ describe User do
           .source(:follower) }
     it { should have_many(:notifications).dependent(:destroy) }
     it { should have_many(:favourites) }
+    it { should have_many(:goals).dependent(:destroy) }
 
     describe "#favourite_sits" do
       let(:fav_sit) { create(:sit, user: ananda) }
@@ -248,6 +249,56 @@ describe User do
       it "does not include sits outside of a given month and year" do
         expect(buddha.sits_by_month(month: this_month, year: this_year))
           .to_not include(fourth_sit)
+      end
+    end
+
+    describe "#sat_on_date?" do
+      before do
+        create(:sit, created_at: Date.yesterday, user: buddha)
+      end
+
+      it "return true if user sat" do
+        expect(buddha.sat_on_date?(Date.yesterday)).to eq(true)
+      end
+
+      it "return false if user didn't sit" do
+        expect(buddha.sat_on_date?(Date.today - 2)).to eq(false)
+      end
+    end
+
+    describe '#days_sat_in_date_range' do
+      before do
+        2.times do |i|
+          create(:sit, created_at: Date.yesterday - i, user: buddha)
+        end
+        # The below shouldn't count towards total as buddha already sat that day
+        create(:sit, created_at: Date.yesterday - 1, user: buddha)
+      end
+      it 'returns number of days' do
+        expect(buddha.sits.count).to eq 3
+        expect(buddha.days_sat_in_date_range(Date.yesterday - 3, Date.today)).to eq(2)
+      end
+    end
+
+    describe "#time_sat_on_date" do
+      it 'returns total minutes sat that day' do
+        2.times do
+          create(:sit, created_at: Date.today, user: buddha, duration: 20)
+        end
+        expect(buddha.time_sat_on_date(Date.today)).to eq(40)
+      end
+    end
+
+    describe "#sat_for_x_on_date?" do
+      before do
+        create(:sit, created_at: Date.yesterday, user: buddha, duration: 30)
+      end
+      it 'returns true if user has sat x minutes that day' do
+        expect(buddha.sat_for_x_on_date?(30, Date.yesterday)).to eq(true)
+      end
+
+      it 'returns false if user sat for less than x minutes that day' do
+        expect(buddha.sat_for_x_on_date?(31, Date.yesterday)).to eq(false)
       end
     end
 
@@ -515,6 +566,8 @@ end
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
 #  sign_in_count          :integer          default(0)
+#  sits_count             :integer          default(0)
+#  streak                 :integer          default(0)
 #  style                  :string(100)
 #  unlock_token           :string(255)
 #  updated_at             :datetime         not null
