@@ -1,0 +1,32 @@
+@import 'opensit/base';
+
+.goals {
+	.current_goals {
+		width: 100%;
+	}
+	#new_goal_form {
+		#goal_duration {
+		  display: inline;
+		  width: 63px;
+		  font-size: 30px;
+		  height: 47px;
+		}
+		#mins_or_days {
+			display: inline;
+		  width: 200px;
+		}
+		.toggle-option {
+		  width: 50px;
+		  display: inline;
+		}
+		.days_toggle,
+		.minutes_toggle {
+			color: $dark-grey;
+			font-size: 0.8em;
+			margin-left: 20px;
+		}
+		.minutes_toggle {
+			display: none;
+		}
+	}
+}

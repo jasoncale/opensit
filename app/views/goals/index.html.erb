@@ -1,5 +1,42 @@
-<h1>Your goals</h1>
+<section class="page text-section">
 
-<% @goals.each do |g| %>
-  <%= g.verbalise %>
-<% end %>
+	<table class="current_goals">
+		<thead>
+			<th>Goal</th>
+			<th>Days where goal met</th>
+			<th>Rating</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<% @goals.each do |g| %>
+			<tr>
+				<td><%= g.verbalise %></td>
+			  <td><%= g.days_where_goal_met %></td>
+			  <td><%= g.rating %>%</td>
+			  <td><%= g.rating_colour %></td>
+			 </tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<h2>Start a new goal!</h2>
+	<%= simple_form_for(Goal.new, :html => { :id => 'new_goal_form' }) do |f| %>
+		<p>I will sit for <input class="form-control" id="goal_duration" name="goal[duration]" size="50" type="text" value="30">
+		<select id="mins_or_days" class="form-control" name="goal[type]">
+			<option value="mins">minutes per day</option>
+			<option value="days">days in a row</option>
+		</select>
+
+		<span class="days_toggle">
+			(optional: for <input class="form-control toggle-option" name="goal[days]" size="50" type="text" value=""> days)
+		</span>
+		<span class="minutes_toggle">
+			(optional: minimum <input class="form-control toggle-option" name="goal[mins_per_day]" size="50" type="text" value=""> minutes per day)
+		</span>
+		<br>
+		<button class="btn btn-primary" type="submit">Save</button>
+	<% end %>
+
+	<h2>Completed goals</h2>
+
+</section>

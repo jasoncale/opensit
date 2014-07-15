@@ -45,14 +45,6 @@ $(document).ready(function(){
       e.stopPropagation();
   });
 
-  // Old datepicker config - keep in case we revert
-  // $('[data-behaviour~=datepicker]').datepicker({
-  //   format: 'yyyy-mm-dd',
-  //   changeMonth: true,
-  //   changeYear: true,
-  //   autoclose: true,
-  // });
-
   $('#datetimepicker').datetimepicker({
     autoclose: true,
   });
@@ -135,6 +127,17 @@ $(document).ready(function(){
       stamp: ".stamp",
     });
   }
+
+  // GOALS
+  $('#mins_or_days').click( function() {
+    if ($(this).val() == 'days') {
+      $('.days_toggle').hide();
+      $('.minutes_toggle').fadeIn();
+    } else {
+      $('.minutes_toggle').hide();
+      $('.days_toggle').fadeIn();
+    }
+  });
 
   (function() {
         var shr = document.createElement('script');

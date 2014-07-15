@@ -22,7 +22,6 @@ Opensit::Application.routes.draw do
   get 'explore/users/active' => "pages#active_users", :as => :explore_active_users
   get 'explore/users/new/sitters' => "pages#new_sitters", :as => :explore_new_sitters
   get 'global-feed' => "users#feed", :defaults => { :format => 'atom', :scope => 'global' }
-  get 'goals' => "goals#index"
 
   resources :sits do
     resources :comments
@@ -34,7 +33,7 @@ Opensit::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :favourites, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
-  resources :goals, only: [:create, :destroy]
+  resources :goals
 
   # Crawl live site, but not staging
   get 'robots.txt' => 'pages#robots'
