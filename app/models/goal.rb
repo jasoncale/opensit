@@ -5,7 +5,6 @@ class Goal < ActiveRecord::Base
   attr_accessible :user_id, :duration, :goal_type, :mins_per_day
 
   def verbalise
-  	# text = "#{user.display_name} wants to sit for "
     text = 'Sit for '
   	if ongoing?
   		text << "#{mins_per_day} minutes a day"
@@ -18,7 +17,6 @@ class Goal < ActiveRecord::Base
 	  		end
 	  	end
 	  end
-  	# text << ". They started on #{created_at.strftime("%d %B %Y")}, and have met the goal on #{days_where_goal_met} out of #{days_into_goal} days, giving them a rating of #{rating}% (#{rating_colour})"
   end
 
   # Fixed goal e.g. sit for 30 days in a row

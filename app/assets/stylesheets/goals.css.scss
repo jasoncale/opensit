@@ -11,7 +11,7 @@
 		  font-size: 30px;
 		  height: 47px;
 		}
-		#mins_or_days {
+		#goal_type {
 			display: inline;
 		  width: 200px;
 		}
@@ -19,13 +19,13 @@
 		  width: 50px;
 		  display: inline;
 		}
-		.days_toggle,
-		.minutes_toggle {
+		.ongoing_toggle,
+		.fixed_toggle {
 			color: $dark-grey;
 			font-size: 0.8em;
 			margin-left: 20px;
 		}
-		.minutes_toggle {
+		.fixed_toggle {
 			display: none;
 		}
 	}

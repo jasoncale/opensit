@@ -129,13 +129,13 @@ $(document).ready(function(){
   }
 
   // GOALS
-  $('#mins_or_days').click( function() {
-    if ($(this).val() == 'days') {
-      $('.days_toggle').hide();
-      $('.minutes_toggle').fadeIn();
+  $('#goal_type').click( function() {
+    if ($(this).val() == 'ongoing') {
+      $('.fixed_toggle').hide();
+      $('.ongoing_toggle').fadeIn();
     } else {
-      $('.minutes_toggle').hide();
-      $('.days_toggle').fadeIn();
+      $('.ongoing_toggle').hide();
+      $('.fixed_toggle').fadeIn();
     }
   });
 
