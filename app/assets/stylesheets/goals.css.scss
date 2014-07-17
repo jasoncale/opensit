@@ -4,7 +4,12 @@
 	.current_goals {
 		width: 100%;
 	}
+	.new-goal {
+		text-align: center;
+		margin-top: 2em;
+	}
 	#new_goal_form {
+		text-align: center;
 		#goal_duration {
 		  display: inline;
 		  width: 63px;
@@ -27,6 +32,9 @@
 		}
 		.fixed_toggle {
 			display: none;
+		}
+		.i-will {
+			font-size: 1.4em;
 		}
 	}
 }

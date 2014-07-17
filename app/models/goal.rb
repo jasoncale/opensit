@@ -80,6 +80,7 @@ class Goal < ActiveRecord::Base
 		return true if fixed? && (Date.today > goal_end_date)
 		return false
 	end
+
 end
 
 # == Schema Information
