@@ -15,11 +15,11 @@ class GoalsController < ApplicationController
     goal = params[:goal]
     if goal[:type] == 'ongoing'
       @goal.goal_type = 0
-      @goal.duration = goal[:minutes]
+      @goal.mins_per_day = goal[:minutes]
     else
       @goal.goal_type = 1
       @goal.duration = goal[:duration]
-      @goal.mins_per_day = goal[:mins_per_day]
+      @goal.mins_per_day = goal[:mins_per_day] if goal[:mins_per_day]
     end
 
     if @goal.save
