@@ -13,10 +13,9 @@ class GoalsController < ApplicationController
     @user = current_user
     @goal = @user.goals.new
     goal = params[:goal]
-    if goal[:type] == 'mins'
-      @goal.goal_type = goal[:days].blank? ? 0 : 1
-      @goal.mins_per_day = goal[:duration]
-      @goal.duration = goal[:days]
+    if goal[:type] == 'ongoing'
+      @goal.goal_type = 0
+      @goal.duration = goal[:minutes]
     else
       @goal.goal_type = 1
       @goal.duration = goal[:duration]

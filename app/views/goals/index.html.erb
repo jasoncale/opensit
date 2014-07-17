@@ -12,8 +12,7 @@
 			<tr>
 				<td><%= g.verbalise %></td>
 			  <td><%= g.days_where_goal_met %></td>
-			  <td><%= g.rating %>%</td>
-			  <td><%= g.rating_colour %></td>
+			  <td><%= coloured_rating(g) %></td>
 			 </tr>
 			<% end %>
 		</tbody>
@@ -30,7 +29,7 @@
 			<p class="i-will">I will sit for <input class="form-control" id="goal_duration" name="goal[duration]" size="50" type="text" value="30"> days in a row, minimum <input class="form-control toggle-option" name="goal[mins_per_day]" size="50" type="text" value=""> minutes per day (optional)
 		</div>
 		<div class="ongoing_toggle">
-			<p class="i-will">I will sit for <input class="form-control" id="goal_duration" name="goal[duration]" size="50" type="text" value="30"> minutes per day
+			<p class="i-will">I will sit for <input class="form-control" id="goal_duration" name="goal[minutes]" size="50" type="text" value="30"> minutes per day
 		</div>
 		<br>
 		<button class="btn btn-lg btn-primary" type="submit">Save</button>

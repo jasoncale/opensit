@@ -2,6 +2,7 @@ class Goal < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :user_id, :goal_type
   validates_presence_of :duration, :if => "goal_type == 1"
+  validates_presence_of :mins_per_day, :if => "goal_type == 0"
   attr_accessible :user_id, :duration, :goal_type, :mins_per_day
 
   def verbalise
