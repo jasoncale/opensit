@@ -3,10 +3,26 @@
 .goals {
 	.current_goals {
 		width: 100%;
+		.goal {
+			float: left;
+			width: 100%;
+			margin: 0.5em 0;
+			.rating {
+				float: left;
+				width: 10%;
+			}
+			.content {
+				float: left;
+				width: 90%;
+				.goal-stats {
+					color: $dark-grey;
+					font-size: 0.9em;
+				}
+			}
+		}
 	}
 	.new-goal {
 		text-align: center;
-		margin-top: 2em;
 	}
 	#new_goal_form {
 		text-align: center;
@@ -35,6 +51,9 @@
 		}
 		.i-will {
 			font-size: 1.4em;
+		}
+		.mins-per-day {
+			font-size: 1em;
 		}
 	}
 }
