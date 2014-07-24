@@ -4,7 +4,6 @@
 		<p>Goals are great way to strengthen your meditation practice. Once you set one up here, you'll get feedback on how well you're meeting your goal.</p>
 	</div>
 	<div class="col-md-7">
-		<h3>Current</h3>
 		<div class="current_goals">
 			<% @goals.each do |g| %>
 				<% if !g.completed? %>
@@ -34,7 +33,8 @@
 	<% end %>
 	</div>
 
-	<div class="col-md-12">
+	<a href="#" class="show-completed">Show completed goals</a>
+	<div class="col-md-12 completed-goals">
 		<h2>Completed goals</h2>
 		<% @goals.each do |g| %>
 			<% if g.completed? %>

@@ -139,6 +139,17 @@ $(document).ready(function(){
     }
   });
 
+  // Show completed
+  $('.show-completed').click( function(e) {
+    e.stopPropagation();
+    $('.completed-goals').toggle();
+    if ($('.show-completed').text() == 'Show completed goals') {
+      $('.show-completed').text('Hide completed goals');
+    } else {
+      $('.show-completed').text('Show completed goals');
+    }
+  });
+
   (function() {
         var shr = document.createElement('script');
         shr.setAttribute('data-cfasync', 'false');
