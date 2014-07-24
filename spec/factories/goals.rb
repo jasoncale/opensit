@@ -31,11 +31,13 @@ end
 #
 # Table name: goals
 #
-#  created_at   :datetime
-#  duration     :integer
-#  goal_type    :integer
-#  id           :integer          not null, primary key
-#  mins_per_day :integer
-#  updated_at   :datetime
-#  user_id      :integer
+#  created_at    :datetime
+#  duration      :integer
+#  finished      :boolean          default(FALSE)
+#  finished_date :datetime
+#  goal_type     :integer
+#  id            :integer          not null, primary key
+#  mins_per_day  :integer
+#  updated_at    :datetime
+#  user_id       :integer
 #

@@ -32,7 +32,8 @@ class Goal < ActiveRecord::Base
 
   # Returns how many days into the goal the user is
   def days_into_goal
-  	(created_at.to_date .. Date.today).count
+    end_date = completed? ? finished_date : Date.today
+  	(created_at.to_date .. end_date).count
   end
 
   # Returns the number of days (since the day the goal began) where the goal was met
@@ -78,9 +79,14 @@ class Goal < ActiveRecord::Base
 	end
 
 	def completed?
-		return true if fixed? && (Date.today > goal_end_date)
+    if ongoing?
+      return true if finished == true # finished is used to retire an ongoing goal
+    else
+      return true if fixed? && (Date.today > goal_end_date) # Fixed goal are auto-marked as complete when past their finish date
+    end
+
 		return false
-	end
+  end
 
 end
 
@@ -88,11 +94,13 @@ end
 #
 # Table name: goals
 #
-#  created_at   :datetime
-#  duration     :integer
-#  goal_type    :integer
-#  id           :integer          not null, primary key
-#  mins_per_day :integer
-#  updated_at   :datetime
-#  user_id      :integer
+#  created_at    :datetime
+#  duration      :integer
+#  finished      :boolean          default(FALSE)
+#  finished_date :datetime
+#  goal_type     :integer
+#  id            :integer          not null, primary key
+#  mins_per_day  :integer
+#  updated_at    :datetime
+#  user_id       :integer
 #

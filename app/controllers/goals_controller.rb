@@ -23,18 +23,28 @@ class GoalsController < ApplicationController
     end
 
     if @goal.save
-      redirect_to goals_path, notice: '"A journey of a thousand miles begins with a single step" - Good luck, you can do it!'
+      redirect_to goals_path, notice: '"A journey of a thousand miles begins with a single sit" - You can do it!'
     else
       render action: "index"
     end
   end
 
-  def destroy
-    @user = Relationship.find(params[:id]).followed
-    current_user.unfollow!(@user)
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.js
+  # PUT /goals/1
+  def update
+    @goal = Goal.find(params[:id])
+    @goal.finished = true
+    @goal.finished_date = Date.today
+
+    if @goal.save!
+      redirect_to goals_path, notice: 'Goal marked as finished'
     end
+  end
+
+  # DELETE /goals/1
+  def destroy
+    @goal = Goal.find(params[:goal])
+    @goal.destroy
+
+    redirect_to goals_path
   end
 end
