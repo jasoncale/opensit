@@ -2,11 +2,17 @@
 	<div class="rating"><%= coloured_rating(goal) %></div>
 	<div class="content">
 		<div class="goal-desc"><%= goal.verbalise %></div>
-	  <div class="goal-stats">Started <%=time_ago_in_words(goal.created_at)%> ago, and met goal on <%= goal.days_where_goal_met %> out of <%= goal.days_into_goal%> days</div>
-	  <% if completed %>
-			<%= link_to 'Delete', goal_path(goal), :method => :delete, :confirm => 'Are you sure? This will delete all record of this goal.', :class => 'btn btn-default delete-goal' %>
-		<% else %>
+	  <div class="goal-stats">
+		  <% if !completed %>
+		  	Started <%=days_ago_in_words(goal.created_at)%>, and met goal on <%= goal.days_where_goal_met %> out of <%= goal.days_into_goal%> days
+		  <% else %>
+		  	From <%=goal.created_at.to_date%> to <%= goal.completed_date ? goal.completed_date.to_date : goal.goal_end_date %>. Met goal on <%= goal.days_where_goal_met %> out of <%= goal.days_into_goal%> days
+		  <% end %>
+	  </div>
+	  <% if !completed %>
 			<%= link_to 'Finish', goal_path(goal), :method => :put, :confirm => 'Are you sure?', :class => 'btn btn-default delete-goal' %>
+		<% else %>
+			<%= link_to 'Delete', goal_path(goal), :method => :delete, :confirm => 'Are you sure? This will delete all record of this goal.', :class => 'btn btn-default delete-goal' %>
 		<% end %>
 	</div>
 </div>
