@@ -239,3 +239,41 @@
     color: $link-color;
   }
 }
+
+/* Explore comments */
+.comment-teaser {
+  float: left;
+  width: 100%;
+  margin: 1em 0;
+  .comment-meta {
+    float: left;
+    width: 100%;
+    .avatar {
+      float: left;
+      width: 65px;
+      img {
+        border-radius: 50%;
+      }
+    }
+    .text {
+      float: left;
+      .time-ago {
+        float: left;
+        font-size: 0.8em;
+        color: #ccc;
+      }
+      .summary {
+        float: left;
+        clear: left;
+        font-size: 0.8em;
+      }
+    }
+  }
+  .body {
+    margin-left: 65px;
+    padding: 1em;
+    border-left: 2px solid $green;
+    float: left;
+    background: white;
+  }
+}

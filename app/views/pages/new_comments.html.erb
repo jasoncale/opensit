@@ -1,6 +1,27 @@
-<% @comments.each do |comment| %>
-        <div class="comment">
-          <div class="comment-info"><%= username(comment.user) %> commented on <%= username(comment.sit.user) %>'s <%= link_to comment.sit.full_title, sit_path(comment.sit_id) %> (<%= time_ago_in_words(comment.created_at) %> ago) </div>
-          <blockquote><%= comment.body.html_safe %></blockquote>
-        </div>
-      <% end %>
+<div class="sidebar col-md-3">
+  <%= render 'explore_tile' %>
+</div>
+
+<div class="clearfix col-md-9">
+	<% @comments.each do |comment| %>
+	  <div class="comment-teaser">
+	    <div class="comment-meta">
+	    	<div class="avatar"><%= small_avatar_of(comment.user) %></div>
+	    	<div class="text">
+	    		<div class="time-ago"><%= time_ago_in_words(comment.created_at) %> ago</div>
+		    	<div class="summary">
+		    		<%= username(comment.user, true) %> commented on
+				    <% if comment.sit.is_sit? %>
+				    	<%= username(comment.sit.user, true) %>'s <%= link_to 'sit', sit_path(comment.sit_id) %>
+				    <% else %>
+				    	<%= comment.sit.full_title %> by <%= username(comment.user, true) %>
+				    <% end %>
+				 	</div>
+				</div>
+	    </div>
+	    <div class="body">
+	    	<%= comment.body.html_safe %>
+	    </div>
+	  </div>
+	<% end %>
+</div>

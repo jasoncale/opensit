@@ -45,8 +45,12 @@ class PagesController < ApplicationController
     render 'users/user_results'
   end
 
+  def online_users
+
+  end
+
   def new_comments
-    @comments = Comment.latest(5)
+    @comments = Comment.latest(20)
     @title = 'New comments'
   end
 
