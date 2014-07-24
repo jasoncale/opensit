@@ -169,7 +169,6 @@ end
 #
 #  created_at    :datetime
 #  duration      :integer
-#  finished      :boolean          default(FALSE)
 #  finished_date :datetime
 #  goal_type     :integer
 #  id            :integer          not null, primary key

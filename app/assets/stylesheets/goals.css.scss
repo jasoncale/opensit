@@ -3,21 +3,21 @@
 .goals {
 	.current_goals {
 		width: 100%;
-		.goal {
+	}
+	.goal {
+		float: left;
+		width: 100%;
+		margin: 0.5em 0;
+		.rating {
 			float: left;
-			width: 100%;
-			margin: 0.5em 0;
-			.rating {
-				float: left;
-				width: 10%;
-			}
-			.content {
-				float: left;
-				width: 90%;
-				.goal-stats {
-					color: $dark-grey;
-					font-size: 0.9em;
-				}
+			width: 10%;
+		}
+		.content {
+			float: left;
+			width: 90%;
+			.goal-stats {
+				color: $dark-grey;
+				font-size: 0.9em;
 			}
 		}
 	}

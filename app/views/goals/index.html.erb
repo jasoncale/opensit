@@ -7,13 +7,9 @@
 		<h3>Current</h3>
 		<div class="current_goals">
 			<% @goals.each do |g| %>
-				<div class="goal">
-					<div class="rating"><%= coloured_rating(g) %></div>
-					<div class="content">
-						<div class="goal-desc"><%= g.verbalise %></div>
-					  <div class="goal-stats">Met goal on <%= g.days_where_goal_met %> out of <%= g.days_into_goal%> days</div>
-					</div>
-				</div>
+				<% if !g.completed? %>
+					<%= render :partial => 'goal', locals: { goal: g, completed: false } %>
+				<% end %>
 			<% end %>
 		</div>
 	</div>
@@ -38,11 +34,13 @@
 	<% end %>
 	</div>
 
-	<% @goals.each do |g| %>
-		<% if g.completed? %>
-			<h2>Completed goals</h2>
-			<%= g.verbalise %>
+	<div class="col-md-12">
+		<h2>Completed goals</h2>
+		<% @goals.each do |g| %>
+			<% if g.completed? %>
+				<%= render :partial => 'goal', locals: { goal: g, completed: true } %>
+			<% end %>
 		<% end %>
-	<% end %>
+	</div>
 
 </section>

@@ -32,8 +32,7 @@ class GoalsController < ApplicationController
   # PUT /goals/1
   def update
     @goal = Goal.find(params[:id])
-    @goal.finished = true
-    @goal.finished_date = Date.today
+    @goal.completed_date = Date.today
 
     if @goal.save!
       redirect_to goals_path, notice: 'Goal marked as finished'
@@ -42,9 +41,9 @@ class GoalsController < ApplicationController
 
   # DELETE /goals/1
   def destroy
-    @goal = Goal.find(params[:goal])
+    @goal = Goal.find(params[:id])
     @goal.destroy
 
-    redirect_to goals_path
+    redirect_to goals_path, notice: 'Goal deleted'
   end
 end
