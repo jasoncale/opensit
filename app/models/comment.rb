@@ -9,6 +9,8 @@ class Comment < ActiveRecord::Base
 
   scope :newest_first, -> { order("created_at DESC") }
 
+  self.per_page = 10
+
   after_save :create_notification
 
   def self.latest(count = 5)

@@ -50,7 +50,7 @@ class PagesController < ApplicationController
   end
 
   def new_comments
-    @comments = Comment.latest(20)
+    @comments = Comment.latest(10).paginate(:page => params[:page])
     @title = 'New comments'
   end
 

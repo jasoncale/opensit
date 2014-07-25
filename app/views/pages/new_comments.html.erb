@@ -24,4 +24,8 @@
 	    </div>
 	  </div>
 	<% end %>
+
+	<div class="pagination-container">
+   	<%= will_paginate @comments, renderer: BootstrapPagination::Rails %>
+  </div>
 </div>
