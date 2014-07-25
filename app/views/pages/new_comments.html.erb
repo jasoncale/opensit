@@ -12,9 +12,9 @@
 		    	<div class="summary">
 		    		<%= username(comment.user, true) %> commented on
 				    <% if comment.sit.is_sit? %>
-				    	<%= username(comment.sit.user, true) %>'s <%= link_to 'sit', sit_path(comment.sit_id) %>
+				    	<%= username(comment.sit.user, true) %>'s <%= link_to 'sit', "/sits/#{comment.sit_id}/#comment-#{comment.id}" %>
 				    <% else %>
-				    	<%= comment.sit.full_title %> by <%= username(comment.user, true) %>
+				    	<%= link_to comment.sit.full_title, "/sits/#{comment.sit_id}/#comment-#{comment.id}" %> by <%= username(comment.user, true) %>
 				    <% end %>
 				 	</div>
 				</div>
