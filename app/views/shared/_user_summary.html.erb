@@ -23,6 +23,7 @@
       <% end %>
     <% elsif @latest %>
       <div class="recent-activity">
+        <p class="text-title">Your Recent Activity</p>
         <% @latest.each do |sit| %>
           <div class="activity">
             <div class="icon">
@@ -50,5 +51,16 @@
         <% end %>
       </div>
     <% end %>
+    <div class="current-goals">
+      <p class="text-title">Your Goals</p>
+      <% @goals.each do |g| %>
+        <% if !g.completed? %>
+        <div class="goal-summary">
+          <div class="rating"><%= coloured_rating(g) %></div><div class="text"><%= g.verbalise %></div>
+        </div>
+        <% end %>
+      <% end %>
+      <a href="/goals">Go to goals</a>
+    </div>
   </div>
 </div>
