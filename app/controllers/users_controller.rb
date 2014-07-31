@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def me
     @feed_items = current_user.socialstream.paginate(:page => params[:page])
     @user = current_user
-    @latest = @user.latest_sits
+    @latest = @user.latest_sits(current_user)
 
     @title = 'Home'
     @page_class = 'me'
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   def following
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followed_users
-    @latest = @user.latest_sits
+    @latest = @user.latest_sits(current_user)
 
     if @user == current_user
       @title = "People I follow"
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   def followers
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followers
-    @latest = @user.latest_sits
+    @latest = @user.latest_sits(current_user)
 
     if @user == current_user
       @title = "People who follow me"

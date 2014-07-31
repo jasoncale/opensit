@@ -4,7 +4,7 @@ class SitsController < ApplicationController
   # GET /sits/1
   def show
     @sit = Sit.find(params[:id])
-    @latest = @sit.user.latest_sits
+    @latest = @sit.user.latest_sits(current_user)
 
     if @sit.private == true
       redirect_to me_path if current_user.nil? || (@sit.user_id != current_user.id)

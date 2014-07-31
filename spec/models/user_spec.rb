@@ -214,13 +214,13 @@ describe User do
 
     describe "#latest_sits" do
       it "returns the last 3 most recent sits for a user" do
-        expect(buddha.latest_sits)
+        expect(buddha.latest_sits(buddha))
           .to match_array(
             [first_sit, second_sit, third_sit]
           )
       end
       it "does not return the public sits that do not belong to a user" do
-        expect(buddha.latest_sits).to_not match_array([public_sits])
+        expect(buddha.latest_sits(buddha)).to_not match_array([public_sits])
       end
     end
 
