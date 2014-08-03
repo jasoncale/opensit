@@ -139,6 +139,11 @@ $(document).ready(function(){
     }
   });
 
+  // Finish this goal?
+  $('.goal').hover(function() {
+    $(this).find('.finish-goal').toggle();
+  })
+
   // Show completed
   $('.show-completed').click( function(e) {
     e.stopPropagation();

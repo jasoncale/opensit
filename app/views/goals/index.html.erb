@@ -1,46 +1,40 @@
 <section class="page text-section">
-	<div class="col-md-12">
-		<h1>Goals</h1>
-		<p>Goals are great way to strengthen your meditation practice. Once you set one up here, you'll get feedback on how well you're meeting your goal.</p>
-	</div>
-	<div class="col-md-7">
-		<div class="current_goals">
-			<% @goals.each do |g| %>
-				<% if !g.completed? %>
-					<%= render :partial => 'goal', locals: { goal: g, completed: false } %>
+
+<div class="row">
+	<% if !@has_current %>
+		<div class="col-md-12">
+			<h1>Goals</h1>
+			<p>Goals are great way to strengthen your meditation practice. Once you set one up here, you'll get feedback on how well you're meeting your goal.</p>
+		</div>
+
+		<div class="col-md-12">
+			<%= render 'new' %>
+		</div>
+
+	<% else %>
+		<div class="col-md-12">
+			<div class="current_goals">
+				<p>Here are your current goals:</p>
+				<% @goals.each do |g| %>
+					<% if !g.completed? %>
+						<%= render :partial => 'goal', locals: { goal: g, completed: false } %>
+					<% end %>
 				<% end %>
-			<% end %>
+			</div>
 		</div>
-	</div>
 
-	<div class="col-md-5">
-	<h3 class="new-goal">Start a new goal!</h3>
-	<%= simple_form_for(Goal.new, :html => { :id => 'new_goal_form' }) do |f| %>
-		<select id="goal_type" class="form-control" name="goal[type]">
-			<option value="ongoing">Ongoing</option>
-			<option value="fixed">Time limited</option>
-		</select>
-
-		<div class="fixed_toggle">
-			<p class="i-will">I will sit for <input class="form-control" id="goal_duration" name="goal[duration]" size="50" type="text" value="30"> days in a row
-			<p class="mins-per-day"> minimum <input class="form-control toggle-option" name="goal[mins_per_day]" size="50" type="text" value=""> minutes per day (optional)
-		</div>
-		<div class="ongoing_toggle">
-			<p class="i-will">I will sit for <input class="form-control" id="goal_duration" name="goal[minutes]" size="50" type="text" value="30"> minutes per day
-		</div>
-		<br>
-		<button class="btn btn-lg btn-primary" type="submit">Save</button>
 	<% end %>
-	</div>
-
-	<a href="#" class="show-completed">Show completed goals</a>
-	<div class="col-md-12 completed-goals">
-		<h2>Completed goals</h2>
-		<% @goals.each do |g| %>
-			<% if g.completed? %>
-				<%= render :partial => 'goal', locals: { goal: g, completed: true } %>
-			<% end %>
+		<% if @has_completed %>
+			<a class="show-completed">Show completed goals</a>
+			<div class="col-md-12 completed-goals">
+				<h2>Completed goals</h2>
+				<% @goals.each do |g| %>
+					<% if g.completed? %>
+						<%= render :partial => 'goal', locals: { goal: g, completed: true } %>
+					<% end %>
+				<% end %>
+			</div>
 		<% end %>
-	</div>
+</div>
 
 </section>

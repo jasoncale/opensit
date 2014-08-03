@@ -10,7 +10,7 @@
 		  <% end %>
 	  </div>
 	  <% if !completed %>
-			<%= link_to 'Finish', goal_path(goal), :method => :put, :confirm => 'Are you sure?', :class => 'btn btn-default delete-goal' %>
+			<%= link_to 'I\'m done with this goal', goal_path(goal), method: :put, class: 'finish-goal', data: { confirm: 'Are you sure?' } %>
 		<% else %>
 			<%= link_to 'Delete', goal_path(goal), :method => :delete, :confirm => 'Are you sure? This will delete all record of this goal.', :class => 'btn btn-default delete-goal' %>
 		<% end %>

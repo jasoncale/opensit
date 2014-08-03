@@ -5,6 +5,23 @@ class GoalsController < ApplicationController
     @user = current_user
     @goals = @user.goals
 
+    # This isn't nice but it saves having to set up rake tasks
+    # We can't just do something like goals.completed because completed? is a
+    # dynamically generated Boolean that either reads a db field or manually
+    # figures out when a goal is past its due date
+    #
+    # Maybe just having a global rake task to manually mark the fixed goals as
+    # completed when they reach their day is the better solution. This current solution
+    # does give goals a nice self-oragnising quality that requires no pruning or checking up.
+
+    @goals.each do |g|
+      if g.completed?
+        @has_completed = true
+      else
+        @has_current = true
+      end
+    end
+
     @title = 'My goals'
     @page_class = 'goals'
   end
@@ -35,7 +52,7 @@ class GoalsController < ApplicationController
     @goal.completed_date = Date.today
 
     if @goal.save!
-      redirect_to goals_path, notice: 'Goal marked as finished'
+      redirect_to goals_path, notice: 'Goal marked as completed'
     end
   end
 

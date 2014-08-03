@@ -56,11 +56,11 @@
       <% @goals.each do |g| %>
         <% if !g.completed? %>
         <div class="goal-summary">
-          <div class="rating"><%= coloured_rating(g) %></div><div class="text"><%= g.verbalise %></div>
+          <div class="rating"><%= coloured_rating(g) %></div><div class="text"><%= g.verbalise.gsub!('Sit for ', 'Sit ') %></div>
         </div>
         <% end %>
       <% end %>
-      <a href="/goals">Go to goals</a>
+      <a href="/goals">View goals</a>
     </div>
   </div>
 </div>

@@ -79,12 +79,8 @@ class Goal < ActiveRecord::Base
 	end
 
 	def completed?
-    if ongoing?
-      return true if completed_date # completed_date is used to retire (not delete) an ongoing goal
-    else
-      return true if Date.today > goal_end_date # Fixed goal are auto-marked as complete (not deleted) when past their finish date
-    end
-
+    return true if completed_date # completed_date is used to retire (not delete) a goal
+    return true if fixed? && (Date.today > goal_end_date) # Fixed goal are auto-marked as complete (not deleted) when past their finish date
 		return false
   end
 
@@ -94,12 +90,12 @@ end
 #
 # Table name: goals
 #
-#  created_at    :datetime
-#  duration      :integer
-#  finished_date :datetime
-#  goal_type     :integer
-#  id            :integer          not null, primary key
-#  mins_per_day  :integer
-#  updated_at    :datetime
-#  user_id       :integer
+#  completed_date :datetime
+#  created_at     :datetime
+#  duration       :integer
+#  goal_type      :integer
+#  id             :integer          not null, primary key
+#  mins_per_day   :integer
+#  updated_at     :datetime
+#  user_id        :integer
 #
