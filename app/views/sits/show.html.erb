@@ -85,7 +85,7 @@
       <% if user_signed_in? %>
       <div class="new-comment">
         <%= simple_form_for [@sit, @sit.comments.build], :remote => 'true' do |f| %>
-          <%= f.input :body, :label => false, :input_html => { :rows => 3, :class => 'rich-textarea span12', :placeholder => 'Have your say.' } %>
+          <%= f.input :body, :label => false, :input_html => { :rows => 8, :class => 'rich-textarea span12', :placeholder => 'Have your say.' } %>
           <%= f.submit 'Add comment', :class => 'btn btn-primary btn-lg pull-right' %>
         <% end %>
       </div>
