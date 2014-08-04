@@ -4,7 +4,7 @@
 	<% if !@has_current %>
 		<div class="col-md-12">
 			<h1>Goals</h1>
-			<p>Goals are great way to strengthen your meditation practice. Once you set one up here, you'll get feedback on how well you're meeting your goal.</p>
+			<p>Goals are great way to stay motivated and strengthen your meditation practice. Once you set one up here, you'll get feedback on how well you're meeting your goal.</p>
 		</div>
 
 		<div class="col-md-12">
@@ -14,7 +14,11 @@
 	<% else %>
 		<div class="col-md-12">
 			<div class="current_goals">
-				<p>Here are your current goals:</p>
+				<p>Here are your current goals. <a href="#" class="toggle-goal-form">Add another one?</a></p>
+				<div class="new-goal-form">
+					<%= render 'new' %>
+				</div>
+
 				<% @goals.each do |g| %>
 					<% if !g.completed? %>
 						<%= render :partial => 'goal', locals: { goal: g, completed: false } %>
@@ -25,9 +29,8 @@
 
 	<% end %>
 		<% if @has_completed %>
-			<a class="show-completed">Show completed goals</a>
+			<a href="#" class="show-completed">Show completed goals</a>
 			<div class="col-md-12 completed-goals">
-				<h2>Completed goals</h2>
 				<% @goals.each do |g| %>
 					<% if g.completed? %>
 						<%= render :partial => 'goal', locals: { goal: g, completed: true } %>

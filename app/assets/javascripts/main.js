@@ -144,6 +144,12 @@ $(document).ready(function(){
     $(this).find('.finish-goal').toggle();
   })
 
+  // Add another one
+  $('.toggle-goal-form').click( function (e) {
+    e.stopPropagation();
+    $('.new-goal-form').toggle();
+  })
+
   // Show completed
   $('.show-completed').click( function(e) {
     e.stopPropagation();

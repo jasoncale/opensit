@@ -22,6 +22,14 @@ class UsersController < ApplicationController
     @latest = @user.latest_sits
     @goals = @user.goals
 
+    @goals.each do |g|
+      if g.completed?
+        @has_completed = true
+      else
+        @has_current = true
+      end
+    end
+
     @title = 'Home'
     @page_class = 'me'
   end
