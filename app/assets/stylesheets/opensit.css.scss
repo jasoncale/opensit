@@ -609,4 +609,16 @@ $colHighlight   : whitesmoke;
       visibility: visible !important;
     }
   }
+
+  // Goals
+  .goals {
+    .goal {
+      .goal-desc {
+        font-size: 1em !important;
+      }
+      .content {
+        width: 75%;
+      }
+    }
+  }
 }
