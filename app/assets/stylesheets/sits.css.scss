@@ -360,11 +360,13 @@ article.sit-teaser-block {
   margin-top: 1em;
   .label-success {
     border: 2px solid $green;
+    background: $green;
     border-radius: 5px;
-    background: white;
-    color: $link-color;
+    // background: white;
+    // color: $link-color;
+    color: white;
     .fa-bolt {
-      color: $green;
+      color: white;
     }
   }
 }

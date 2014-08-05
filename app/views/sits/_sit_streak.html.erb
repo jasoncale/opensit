@@ -1,5 +1,5 @@
 <% if @user.streak > 1 %>
   <div class="streak" title="<%= @user == current_user ? 'You have' : "#{@user.display_name} has" %> sat for <%=@user.streak%> days in a row!"><span class="label label-success">
   <span class="fa fa-bolt"></span>
-  <%=@user.streak%> day sit streak!</span></div>
+  <%=@user.streak%> day streak!</span></div>
 <% end %>

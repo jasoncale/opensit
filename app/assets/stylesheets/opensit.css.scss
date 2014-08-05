@@ -136,8 +136,8 @@ $colHighlight   : whitesmoke;
   .navbar-nav {
     > li {
       > a.nav-option {
-        font-size: 1.1em;
-        padding-top: 23px;
+        font-size: 1.4em;
+        padding-top: 20px;
         padding-bottom: 23px;
         color: $colDefault;
         &:hover, &:focus {
@@ -149,7 +149,7 @@ $colHighlight   : whitesmoke;
         }
         .nav-button-text {
           font-size: 0.6em;
-          font-weight: bold;
+          color: whitesmoke;
         }
       }
       .active {
