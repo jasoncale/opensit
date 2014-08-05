@@ -136,8 +136,8 @@ $colHighlight   : whitesmoke;
   .navbar-nav {
     > li {
       > a.nav-option {
-        font-size: 1.1em;
-        padding-top: 23px;
+        font-size: 1.4em;
+        padding-top: 20px;
         padding-bottom: 23px;
         color: $colDefault;
         &:hover, &:focus {
@@ -149,7 +149,7 @@ $colHighlight   : whitesmoke;
         }
         .nav-button-text {
           font-size: 0.6em;
-          font-weight: bold;
+          color: whitesmoke;
         }
       }
       .active {
@@ -260,6 +260,11 @@ $colHighlight   : whitesmoke;
     width: 100%;
     background: white;
     padding: 0 10px 10px 20px;
+    .text-title {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.8em;
+    }
     .nav-stacked {
       font-size: 0.9em;
       li a {
@@ -602,6 +607,18 @@ $colHighlight   : whitesmoke;
     .mobile-nav {
       display: block !important;
       visibility: visible !important;
+    }
+  }
+
+  // Goals
+  .goals {
+    .goal {
+      .goal-desc {
+        font-size: 1em !important;
+      }
+      .content {
+        width: 75%;
+      }
     }
   }
 }

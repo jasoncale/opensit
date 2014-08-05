@@ -9,7 +9,6 @@
     link_to 'Delete', sit_path(@sit), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger delete-entry pull-right'
     end %>
 
-
   <% if !current_user.private_stream %>
     <div class="dropdown privacy-options">
       <button data-toggle="dropdown" href="#" type="button" class="btn btn-small privacy-button"><i class="fa fa-cog"></i> Privacy</button>

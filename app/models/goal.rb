@@ -1,23 +1,23 @@
 class Goal < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :user_id, :goal_type
-  validates_presence_of :duration, :if => "goal_type == 'fixed'"
-  attr_accessible :user_id, :duration, :goal_type
+  validates_presence_of :duration, :if => "goal_type == 1"
+  validates_presence_of :mins_per_day, :if => "goal_type == 0"
+  attr_accessible :user_id, :duration, :goal_type, :mins_per_day
 
-  def to_s
-  	text = "#{user.display_name} wants to sit for "
+  def verbalise
+    text = 'Sit for '
   	if ongoing?
   		text << "#{mins_per_day} minutes a day"
   	else
-	  	if fixed
+	  	if fixed?
 	  		if mins_per_day
-	  			text << "#{mins_per_day} minutes a day, for #{duration}"
+	  			text << "#{mins_per_day} minutes a day, for #{duration} days"
 	  		else
 	  			text << "#{duration} days in a row"
 	  		end
 	  	end
 	  end
-  	text << ". They started on #{created_at.strftime("%d %B %Y")}, and have met the goal on #{days_where_goal_met} out of #{days_into_goal} days, giving them a rating of #{rating}% (#{rating_colour})"
   end
 
   # Fixed goal e.g. sit for 30 days in a row
@@ -32,7 +32,8 @@ class Goal < ActiveRecord::Base
 
   # Returns how many days into the goal the user is
   def days_into_goal
-  	(created_at.to_date .. Date.today).count
+    end_date = completed_date ? completed_date : Date.today
+  	(created_at.to_date .. end_date).count
   end
 
   # Returns the number of days (since the day the goal began) where the goal was met
@@ -78,20 +79,23 @@ class Goal < ActiveRecord::Base
 	end
 
 	def completed?
-		return true if fixed? && (Date.today > goal_end_date)
+    return true if completed_date # completed_date is used to retire (not delete) a goal
+    return true if fixed? && (Date.today > goal_end_date) # Fixed goal are auto-marked as complete (not deleted) when past their finish date
 		return false
-	end
+  end
+
 end
 
 # == Schema Information
 #
 # Table name: goals
 #
-#  created_at   :datetime
-#  duration     :integer
-#  goal_type    :integer
-#  id           :integer          not null, primary key
-#  mins_per_day :integer
-#  updated_at   :datetime
-#  user_id      :integer
+#  completed_date :datetime
+#  created_at     :datetime
+#  duration       :integer
+#  goal_type      :integer
+#  id             :integer          not null, primary key
+#  mins_per_day   :integer
+#  updated_at     :datetime
+#  user_id        :integer
 #

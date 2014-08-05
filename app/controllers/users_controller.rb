@@ -20,6 +20,15 @@ class UsersController < ApplicationController
     @feed_items = current_user.socialstream.paginate(:page => params[:page])
     @user = current_user
     @latest = @user.latest_sits(current_user)
+    @goals = @user.goals
+
+    @goals.each do |g|
+      if g.completed?
+        @has_completed = true
+      else
+        @has_current = true
+      end
+    end
 
     @title = 'Home'
     @page_class = 'me'

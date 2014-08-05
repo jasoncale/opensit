@@ -1,0 +1,50 @@
+<section class="page text-section">
+
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li class="active">Goals</li>
+</ol>
+
+<div class="row">
+	<% if !@has_current %>
+		<div class="col-md-12">
+			<h1>Goals</h1>
+			<p>Goals are great way to stay motivated and strengthen your meditation practice. Once you set one up here, you'll get feedback on how well you're meeting your goal.</p>
+		</div>
+
+		<div class="col-md-12">
+			<%= render 'new' %>
+		</div>
+
+	<% else %>
+		<div class="col-md-12">
+			<div class="current_goals">
+				<p>Here are your current goals. <a href="#" class="toggle-goal-form">Add another one?</a></p>
+				<div class="new-goal-form">
+					<%= render 'new' %>
+				</div>
+
+				<% @goals.each do |g| %>
+					<% if !g.completed? %>
+						<%= render :partial => 'goal', locals: { goal: g, completed: false } %>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>
+	<div class="row">
+		<% if @has_completed %>
+			<a href="#" class="show-completed">Show completed goals</a>
+			<div class="col-md-12 completed-goals">
+				<% @goals.each do |g| %>
+					<% if g.completed? %>
+						<%= render :partial => 'goal', locals: { goal: g, completed: true } %>
+					<% end %>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+</section>

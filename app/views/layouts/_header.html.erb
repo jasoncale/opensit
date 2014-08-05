@@ -25,15 +25,19 @@
           <% end %></li>
           <li <%='class=active' if current_page?(new_sit_path) %>>
           <%= link_to(new_sit_path, title: 'Add sit', class: 'nav-option') do %>
-            <i class="fa fa-plus"></i> <span class="nav-button-text">NEW</span>
+            <i class="fa fa-plus"></i> <span class="nav-button-text">New</span>
           <% end %></li>
           <li <%='class=active' if current_page?(user_path(current_user)) %>>
           <%= link_to(user_path(current_user), title: 'Me', class: 'nav-option') do %>
-            <i class="fa fa-user"></i> <span class="nav-button-text">ME</span>
+            <i class="fa fa-user"></i> <span class="nav-button-text">Me</span>
+          <% end %></li>
+          <li <%='class=active' if current_page?(goals_path) %>>
+          <%= link_to(goals_path, title: 'Goals', class: 'nav-option') do %>
+            <i class="fa fa-bullseye"></i> <span class="nav-button-text">Goals</span>
           <% end %></li>
           <li <%='class=active' if current_page?(explore_path) %>>
           <%= link_to(explore_path, title: 'Explore', class: 'nav-option') do %>
-            <i class="fa fa-globe"></i> <span class="nav-button-text">EXPLORE</span>
+            <i class="fa fa-globe"></i> <span class="nav-button-text">Explore</span>
           <% end %></li>
         <% else %>
           <% if !current_page?(new_user_session_path) %>

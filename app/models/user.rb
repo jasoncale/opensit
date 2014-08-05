@@ -130,11 +130,18 @@ class User < ActiveRecord::Base
   # Returns the number of days, in a date range, where user sat for a minimum x minutes that day
   def days_sat_for_min_x_minutes_in_date_range(duration, start_date, end_date)
     all_sits = sits.where(created_at: start_date.beginning_of_day..end_date.end_of_day).order('created_at DESC')
-    all_dates = all_sits.pluck(:created_at)
+    all_datetimes = all_sits.pluck(:created_at)
+    all_dates = []
+    all_datetimes.each do |d|
+      all_dates.push d.strftime("%d %B %Y")
+    end
+    all_dates.uniq! # Stop multiple sits on the same day incrementing the total
+
     total_days = 0
+
     all_dates.each do |d|
       total_time = 0
-      all_sits.where(created_at: d.beginning_of_day..d.end_of_day).each do |s|
+      all_sits.where(created_at: d.to_date.beginning_of_day..d.to_date.end_of_day).each do |s|
         total_time += s.duration
       end
       total_days += 1 if total_time >= duration

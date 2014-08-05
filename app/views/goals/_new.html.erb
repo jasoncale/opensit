@@ -1,0 +1,16 @@
+<%= simple_form_for(Goal.new, :html => { :id => 'new_goal_form' }) do |f| %>
+	<select id="goal_type" class="form-control" name="goal[type]">
+		<option value="ongoing">Ongoing</option>
+		<option value="fixed">Time limited</option>
+	</select>
+
+	<div class="fixed_toggle">
+		<p class="i-will">I will sit for <input class="form-control" id="goal_duration" name="goal[duration]" size="50" type="text" value="30"> days in a row
+		<p class="mins-per-day"> minimum <input class="form-control toggle-option" name="goal[mins_per_day]" size="50" type="text" value=""> minutes per day (optional)
+	</div>
+	<div class="ongoing_toggle">
+		<p class="i-will">I will sit for <input class="form-control" id="goal_duration" name="goal[minutes]" size="50" type="text" value="30"> minutes per day
+	</div>
+	<br>
+	<button class="btn btn-lg btn-primary" type="submit">Save</button>
+<% end %>

@@ -22,33 +22,11 @@
             <a href="<%=new_sit_path%>" class="btn btn-lg btn-primary"> <i class="fa fa-plus"></i> Add your first sit</a></div>
       <% end %>
     <% elsif @latest %>
-      <div class="recent-activity">
-        <% @latest.each do |sit| %>
-          <div class="activity">
-            <div class="icon">
-              <% if sit.s_type == 0 %>
-                <i class="fa fa-clock-o"></i>
-              <% else %>
-                <i class="fa fa-book"></i>
-              <% end %>
-            </div>
-            <div class="details">
-              <div class="title">
-                <% if sit.s_type == 0 %>
-                  <%= sit.duration %> minutes
-                <% else %>
-                  <%= sit.title %>
-                <% end %>
-                <span class="pull-right date"><%= time_ago_in_words(sit.created_at) %> ago</span>
-              </div>
-              <div class="body">
-                <%= teaser(sit, 50) %>
-              </div>
-            </div>
-            <a href="<%= sit_path(sit) %>" class="sit-link hidden"></a>
-          </div>
-        <% end %>
-      </div>
+      <%= render 'shared/recent_activity' %>
+    <% end %>
+
+    <% if controller.action_name == 'me' %>
+      <%= render 'goals/goal_module' %>
     <% end %>
   </div>
 </div>

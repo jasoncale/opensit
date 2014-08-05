@@ -45,14 +45,6 @@ $(document).ready(function(){
       e.stopPropagation();
   });
 
-  // Old datepicker config - keep in case we revert
-  // $('[data-behaviour~=datepicker]').datepicker({
-  //   format: 'yyyy-mm-dd',
-  //   changeMonth: true,
-  //   changeYear: true,
-  //   autoclose: true,
-  // });
-
   $('#datetimepicker').datetimepicker({
     autoclose: true,
   });
@@ -135,6 +127,39 @@ $(document).ready(function(){
       stamp: ".stamp",
     });
   }
+
+  // GOALS
+  $('#goal_type').click( function() {
+    if ($(this).val() == 'ongoing') {
+      $('.fixed_toggle').hide();
+      $('.ongoing_toggle').fadeIn();
+    } else {
+      $('.ongoing_toggle').hide();
+      $('.fixed_toggle').fadeIn();
+    }
+  });
+
+  // Finish this goal?
+  $('.goal').hover(function() {
+    $(this).find('.finish-goal').toggle();
+  })
+
+  // Add another one
+  $('.toggle-goal-form').click( function (e) {
+    e.stopPropagation();
+    $('.new-goal-form').toggle();
+  })
+
+  // Show completed
+  $('.show-completed').click( function(e) {
+    e.stopPropagation();
+    $('.completed-goals').toggle();
+    if ($('.show-completed').text() == 'Show completed goals') {
+      $('.show-completed').text('Hide completed goals');
+    } else {
+      $('.show-completed').text('Show completed goals');
+    }
+  });
 
   (function() {
         var shr = document.createElement('script');

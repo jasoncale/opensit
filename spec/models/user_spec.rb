@@ -302,6 +302,26 @@ describe User do
       end
     end
 
+    describe "#days_sat_for_min_x_minutes_in_date_range" do
+      it 'should return correct number of days' do
+        2.times do |i|
+          create(:sit, created_at: Date.today - i, user: buddha, duration: 30)
+        end
+        expect(buddha.days_sat_for_min_x_minutes_in_date_range(30, Date.today - 2, Date.today)).to eq 2
+      end
+
+      it 'should only return 1 when user sat twice on that day' do
+        # Hard learned lesson: creating two sits programatically on the same day gives them both identical timestamps, which
+        # when the function in question performs .uniq on a date range can give a very misleading pass when it should fail!
+        # This could cause problems in all kinds of functions that work with dates. Hence + i.seconds to keep them unique.
+        2.times do |i|
+          create(:sit, created_at: Date.today + i.seconds, user: buddha, duration: 30)
+        end
+
+        expect(buddha.days_sat_for_min_x_minutes_in_date_range(30, Date.today, Date.today)).to eq 1
+      end
+    end
+
     describe "#stream_range" do
       it "returns an array of arrays of dates and counts"
     end

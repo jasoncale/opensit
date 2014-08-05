@@ -11,8 +11,13 @@ describe Goal do
   it { should validate_presence_of(:goal_type) }
 
   describe 'new goal' do
-		it 'creates a goal for user' do
-			buddha.goals.create(goal_type: 1)
+		it 'ongoing' do
+			buddha.goals.create(goal_type: 0, mins_per_day: 10)
+	    expect(buddha.goals.count).to eq(1)
+	  end
+
+	  it 'fixed' do
+			buddha.goals.create(goal_type: 1, duration: 10)
 	    expect(buddha.goals.count).to eq(1)
 	  end
 
@@ -162,11 +167,12 @@ end
 #
 # Table name: goals
 #
-#  created_at   :datetime
-#  duration     :integer
-#  goal_type    :integer
-#  id           :integer          not null, primary key
-#  mins_per_day :integer
-#  updated_at   :datetime
-#  user_id      :integer
+#  completed_date :datetime
+#  created_at     :datetime
+#  duration       :integer
+#  goal_type      :integer
+#  id             :integer          not null, primary key
+#  mins_per_day   :integer
+#  updated_at     :datetime
+#  user_id        :integer
 #

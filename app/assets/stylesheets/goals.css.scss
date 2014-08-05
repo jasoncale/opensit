@@ -1,0 +1,166 @@
+@import 'opensit/base';
+
+// Goals page
+.goals {
+	.alert-success {
+		width: 70%;
+	}
+	.current_goals {
+		width: 100%;
+	}
+	.goal {
+		float: left;
+		width: 100%;
+		margin: 1em 0;
+		height: 65px;
+		.content {
+			float: left;
+			width: 90%;
+			padding-left: 10px;
+			.goal-desc {
+				font-size: 1.6em;
+			}
+			.goal-desc.completed {
+				font-size: 1em;
+			}
+			.goal-stats {
+				color: $dark-grey;
+				font-size: 0.9em;
+			}
+		}
+	}
+	.new-goal {
+		text-align: center;
+	}
+	#new_goal_form {
+		text-align: center;
+		margin: 2em 0;
+		#goal_duration {
+		  display: inline;
+		  width: 63px;
+		  font-size: 30px;
+		  height: 47px;
+		}
+		#goal_type {
+			display: inline;
+		  width: 200px;
+		}
+		.toggle-option {
+		  width: 50px;
+		  display: inline;
+		}
+		.ongoing_toggle,
+		.fixed_toggle {
+			color: $dark-grey;
+			font-size: 0.8em;
+			margin-left: 20px;
+		}
+		.fixed_toggle {
+			display: none;
+		}
+		.i-will {
+			font-size: 1.4em;
+		}
+		.mins-per-day {
+			font-size: 1em;
+		}
+	}
+	.new-goal-form {
+		display: none;
+	}
+	.finish-goal {
+		font-size: 0.8em;
+		display: none;
+	}
+	.delete-goal {
+		font-size: 0.8em;
+	}
+	.show-completed {
+		font-size: 0.8em;
+		font-weight: bold;
+		margin-top: 2em;
+		float: left;
+	}
+	.completed-header {
+		font-size: 1.3em;
+		margin-bottom: 0;
+	}
+	.completed-goals {
+		display: none;
+	}
+}
+
+// Rating
+.rating {
+	color: white;
+	border-radius: 5px;
+	float: left;
+	padding: 11px 5px;
+	font-size: 15px;
+	width: 60px;
+	text-align: center;
+	font-weight: bold;
+	margin-right: 10px;
+}
+.rating-red {
+	background: #d9534f;
+}
+.rating-amber {
+	background: #f0ad4e;
+}
+.rating-green {
+	background: #5cb85c;
+}
+.rating-gold {
+	background: #ccac00;
+}
+
+// Me page module
+.current-goals {
+	float: left;
+	width: 100%;
+	.try-goal-container {
+		width: 100%;
+		margin-top: 10px;
+		float: left;
+		text-align: center;
+		border-radius: 5px;
+		padding: 8px 5px 0px 5px;
+		a, p {
+			opacity: 1 !important;
+		}
+		.try-goal {
+			font-weight: bold;
+			// text-transform: uppercase;
+			float: none;
+		}
+	}
+	.goal-summary {
+		float: left;
+		width: 100%;
+		text-align: center;
+		margin: 1em 0;
+		.rating {
+			float: none;
+			width: 50px;
+			margin: 0 auto;
+			span {
+				width: 45px;
+				height: 40px;
+			}
+		}
+		.text {
+			clear: left;
+			font-size: 0.7em;
+			margin-top: 8px;
+		}
+	}
+	.goals-section-link {
+		float: right;
+		margin-top: 0.5em;
+		width: 100%;
+		text-align: right;
+		font-size: 0.8em;
+		font-weight: bold;
+	}
+}

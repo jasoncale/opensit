@@ -5,6 +5,7 @@ class AddGoalsTable < ActiveRecord::Migration
 	    t.integer :goal_type
 			t.integer :duration
 			t.integer :mins_per_day
+			t.datetime :completed_date
 			t.timestamps
 	  end
   end
