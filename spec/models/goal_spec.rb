@@ -161,6 +161,13 @@ describe Goal do
 			expect(goal.completed?).to eq true
 		end
 	end
+
+	describe 'completed fixed goal' do
+		let(:goal) { create(:goal, :sit_20_minutes_for_2_days, user: buddha) }
+		it 'returns true if goal is completed' do
+			expect(goal.completed?).to eq true
+		end
+	end
 end
 
 # == Schema Information

@@ -74,13 +74,13 @@ class Goal < ActiveRecord::Base
 		end
 	end
 
-	def goal_end_date
-		created_at + duration.days
+	def last_day_of_goal
+		created_at.to_date + duration.days - 2
 	end
 
 	def completed?
     return true if completed_date # completed_date is used to retire (not delete) a goal
-    return true if fixed? && (Date.today > goal_end_date) # Fixed goal are auto-marked as complete (not deleted) when past their finish date
+    return true if fixed? && (Date.today > last_day_of_goal) # Fixed goal are auto-marked as complete (not deleted) when past their finish date
 		return false
   end
 
