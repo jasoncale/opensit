@@ -24,11 +24,11 @@ FactoryGirl.define do
       goal_type 0 # ongoing
       created_at Date.today - 9
     end
-    trait :sit_20_minutes_for_2_days do
+    trait :sit_20_minutes_for_3_days do
       mins_per_day 20
       goal_type 1 # fixed
-      duration 2
-      created_at Date.today - 2
+      duration 3
+      created_at Date.today
     end
   end
 end

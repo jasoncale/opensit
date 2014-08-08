@@ -47,6 +47,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'poltergeist', '~> 1.4.0'
   gem 'launchy'
+  gem 'timecop'
 end
 
 gem 'pg'

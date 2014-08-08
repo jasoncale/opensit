@@ -32,8 +32,13 @@ class Goal < ActiveRecord::Base
 
   # Returns how many days into the goal the user is
   def days_into_goal
-    end_date = completed_date ? completed_date : Date.today
-  	(created_at.to_date .. end_date).count
+    end_date = completed_date if completed_date
+    if fixed?
+      end_date = Date.today > last_day_of_goal ? last_day_of_goal : Date.today
+  	else
+      end_date = Date.today
+    end
+    (created_at.to_date .. end_date).count
   end
 
   # Returns the number of days (since the day the goal began) where the goal was met
@@ -75,7 +80,7 @@ class Goal < ActiveRecord::Base
 	end
 
 	def last_day_of_goal
-		created_at.to_date + duration.days - 2
+		created_at.to_date + duration.days - 1 # Minus cos the day the goal was started is the first day
 	end
 
 	def completed?

@@ -51,10 +51,6 @@ describe Goal do
 	      end
 	    end
 
-			it '#days_into_goal' do
-	      expect(goal.days_into_goal).to eq 10
-			end
-
 			it '#days_where_goal_met' do
 	      expect(goal.days_where_goal_met).to eq 2
 			end
@@ -79,10 +75,6 @@ describe Goal do
 	      # Oops, didn't sit long enough. Go straight to samsara, do not pass go, do not collect £200
 	      create(:sit, user: buddha, created_at: Date.today - 3, duration: 20)
 	    end
-
-			it '#days_into_goal' do
-	      expect(goal.days_into_goal).to eq 5
-			end
 
 			it '#days_where_goal_met' do
 				expect(buddha.sits.count).to eq 3
@@ -109,10 +101,6 @@ describe Goal do
 				end
 				create(:sit, user: buddha, created_at: Date.today - 4, duration: 20)
 	    end
-
-			it '#days_into_goal' do
-	      expect(goal.days_into_goal).to eq 10
-			end
 
 			it '#days_where_goal_met' do
 				expect(buddha.sits.count).to eq 3
@@ -153,19 +141,74 @@ describe Goal do
 		end
 	end
 
-	describe 'completed goal' do
-		# Started 4 days ago
-		let(:goal) { create(:goal, :sit_for_3_days, user: buddha) }
-
-		it 'returns true if goal is completed' do
-			expect(goal.completed?).to eq true
+	describe 'last day of goal' do
+		let(:goal) { create(:goal, :sit_for_30_days, user: buddha, created_at: Date.today) }
+		it 'should return correct day' do
+			expect(goal.last_day_of_goal).to eq Date.today + 29 # Only 29 cos today is the first day
 		end
 	end
 
-	describe 'completed fixed goal' do
-		let(:goal) { create(:goal, :sit_20_minutes_for_2_days, user: buddha) }
-		it 'returns true if goal is completed' do
-			expect(goal.completed?).to eq true
+	describe 'completed?' do
+		context 'fixed' do
+			# Started 4 days ago
+			let(:goal) { create(:goal, :sit_for_3_days, user: buddha) }
+
+			it 'returns true if goal is completed' do
+				expect(goal.completed?).to eq true
+			end
+		end
+	end
+
+	describe 'days into goal' do
+		context 'fixed' do
+			before :each do
+				Timecop.return
+			end
+
+			let(:goal) { create(:goal, :sit_20_minutes_for_3_days, user: buddha) }
+
+			it 'first day' do
+				expect(goal.completed?).to eq false
+				expect(goal.days_into_goal).to eq 1
+			end
+
+			it 'second day' do
+				Timecop.freeze(Date.today + 1)
+				expect(goal.completed?).to eq false
+				expect(goal.days_into_goal).to eq 2
+			end
+
+			it 'third day' do
+				Timecop.freeze(Date.today + 2)
+				expect(goal.completed?).to eq false
+				expect(goal.days_into_goal).to eq 3
+			end
+
+			it 'fourth day (goal ended)' do
+				Timecop.freeze(Date.today + 3)
+				expect(goal.completed?).to eq true
+				expect(goal.days_into_goal).to eq 3 # shouldn't increment any further
+			end
+		end
+
+		context 'ongoing' do
+			before :each do
+				Timecop.return
+			end
+
+			let(:goal) { create(:goal, :sit_for_30_minutes_a_day, user: buddha, created_at: Date.today) }
+
+			it 'first day' do
+				expect(goal.completed?).to eq false
+				expect(goal.days_into_goal).to eq 1
+			end
+
+			it 'fourth day' do
+				goal
+				Timecop.freeze(Date.today + 3)
+				expect(goal.completed?).to eq false
+				expect(goal.days_into_goal).to eq 4
+			end
 		end
 	end
 end
