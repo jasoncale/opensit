@@ -39,35 +39,23 @@ describe Goal do
 	  end
 	end
 
-	describe "goal helpers" do
+	describe "#rating" do
 		context 'fixed: sit every day for x days' do
-			# 10 days into goal of sitting every day for 30 days
-			let(:goal) { create(:goal, :sit_for_30_days, user: buddha) }
-
 			before :each do
-				# Only sat twice :(
 				2.times do |i|
 	        create(:sit, user: buddha, created_at: Date.today - i)
 	      end
 	    end
 
-			it '#days_where_goal_met' do
-	      expect(goal.days_where_goal_met).to eq 2
-			end
-
 			it '#rating' do
+				# 10 days into goal of sitting every day for 30 days
+				# Only sat twice :(
+			 	goal = create(:goal, :sit_for_30_days, user: buddha)
 	      expect(goal.rating).to eq 20
-			end
-
-			it '#rating_colour' do
-				expect(goal.rating_colour).to eq 'red'
 			end
 		end
 
 		context 'fixed: sit 30 minutes a day for 30 days' do
-			# 5 days into goal of sitting 30 minutes a day for 30 days
-			let(:goal) { create(:goal, :sit_30_mins_a_day_for_30_days, user: buddha) }
-
 			before :each do
 				2.times do |i|
 	        create(:sit, user: buddha, created_at: Date.today - i, duration: 30)
@@ -76,24 +64,14 @@ describe Goal do
 	      create(:sit, user: buddha, created_at: Date.today - 3, duration: 20)
 	    end
 
-			it '#days_where_goal_met' do
-				expect(buddha.sits.count).to eq 3
-	      expect(goal.days_where_goal_met).to eq 2
-			end
-
 			it '#rating' do
+				# 5 days into goal of sitting 30 minutes a day for 30 days
+				goal = create(:goal, :sit_30_mins_a_day_for_30_days, user: buddha)
 	      expect(goal.rating).to eq 40
-			end
-
-			it '#rating_colour' do
-				expect(goal.rating_colour).to eq 'red'
 			end
 		end
 
 		context 'ongoing, with min minutes per day' do
-			# 10 days into goal of sitting every day for 30 days
-			let(:goal) { create(:goal, :sit_for_30_minutes_a_day, user: buddha) }
-
 			# Two sits >= 30 mins, and one that won't count
 			before :each do
 				2.times do |i|
@@ -102,22 +80,15 @@ describe Goal do
 				create(:sit, user: buddha, created_at: Date.today - 4, duration: 20)
 	    end
 
-			it '#days_where_goal_met' do
-				expect(buddha.sits.count).to eq 3
-	      expect(goal.days_where_goal_met).to eq 2
-			end
-
 			it '#rating' do
+				# 10 days into goal of sitting every day for 30 days
+				goal = create(:goal, :sit_for_30_minutes_a_day, user: buddha)
 	      expect(goal.rating).to eq 20
-			end
-
-			it '#rating_colour' do
-				expect(goal.rating_colour).to eq 'red'
 			end
 		end
 	end
 
-	describe 'rating' do
+	describe '#rating_colour' do
 		let(:goal) { create(:goal, :sit_for_30_days, user: buddha) }
 
 		it 'under 50%' do
@@ -141,17 +112,17 @@ describe Goal do
 		end
 	end
 
-	describe 'last day of goal' do
+	describe '#last_day_of_goal' do
 		let(:goal) { create(:goal, :sit_for_30_days, user: buddha, created_at: Date.today) }
 		it 'should return correct day' do
 			expect(goal.last_day_of_goal).to eq Date.today + 29 # Only 29 cos today is the first day
 		end
 	end
 
-	describe 'completed?' do
+	describe '#completed?' do
 		context 'fixed' do
 			# Started 4 days ago
-			let(:goal) { create(:goal, :sit_for_3_days, user: buddha) }
+			let(:goal) { create(:goal, :sit_for_3_days, created_at: Date.today - 4, user: buddha) }
 
 			it 'returns true if goal is completed' do
 				expect(goal.completed?).to eq true
@@ -159,7 +130,7 @@ describe Goal do
 		end
 	end
 
-	describe 'days into goal' do
+	describe '#days_into_goal' do
 		context 'fixed' do
 			before :each do
 				Timecop.return
@@ -210,6 +181,25 @@ describe Goal do
 				expect(goal.days_into_goal).to eq 4
 			end
 		end
+	end
+
+	describe '#days_where_goal_met' do
+		before :each do
+			Timecop.return
+		end
+
+		let(:goal) { create(:goal, :sit_for_30_minutes_a_day, user: buddha, created_at: Date.today) }
+
+		it 'increments correctly' do
+  		expect(goal.days_where_goal_met).to eq 0
+			create(:sit, user: buddha, created_at: Date.today, duration: 30)
+  		expect(goal.days_where_goal_met).to eq 1
+			Timecop.freeze(Date.today + 1)
+			create(:sit, user: buddha, created_at: Date.today, duration: 30)
+  		expect(goal.days_where_goal_met).to eq 2
+			Timecop.freeze(Date.today + 1)
+  		expect(goal.days_where_goal_met).to eq 2 # no change
+  	end
 	end
 end
 

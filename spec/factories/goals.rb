@@ -11,7 +11,6 @@ FactoryGirl.define do
     trait :sit_for_3_days do
       duration 3
       goal_type 1 # fixed
-      created_at Date.today - 4
     end
     trait :sit_30_mins_a_day_for_30_days do
       duration 30
