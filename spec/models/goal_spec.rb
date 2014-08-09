@@ -41,48 +41,45 @@ describe Goal do
 
 	describe "#rating" do
 		context 'fixed: sit every day for x days' do
-			before :each do
+			it '#rating' do
+				# 10 days into goal of sitting every day for 30 days
+			 	goal = create(:goal, :sit_for_30_days, user: buddha)
+
+				# Only sat twice :(
 				2.times do |i|
 	        create(:sit, user: buddha, created_at: Date.today - i)
 	      end
-	    end
 
-			it '#rating' do
-				# 10 days into goal of sitting every day for 30 days
-				# Only sat twice :(
-			 	goal = create(:goal, :sit_for_30_days, user: buddha)
 	      expect(goal.rating).to eq 20
 			end
 		end
 
 		context 'fixed: sit 30 minutes a day for 30 days' do
-			before :each do
+			it '#rating' do
+				# 5 days into goal of sitting 30 minutes a day for 30 days
+				goal = create(:goal, :sit_30_mins_a_day_for_30_days, user: buddha)
+
 				2.times do |i|
 	        create(:sit, user: buddha, created_at: Date.today - i, duration: 30)
 	      end
 	      # Oops, didn't sit long enough. Go straight to samsara, do not pass go, do not collect £200
 	      create(:sit, user: buddha, created_at: Date.today - 3, duration: 20)
-	    end
 
-			it '#rating' do
-				# 5 days into goal of sitting 30 minutes a day for 30 days
-				goal = create(:goal, :sit_30_mins_a_day_for_30_days, user: buddha)
 	      expect(goal.rating).to eq 40
 			end
 		end
 
 		context 'ongoing, with min minutes per day' do
-			# Two sits >= 30 mins, and one that won't count
-			before :each do
+			it '#rating' do
+				# 10 days into goal of sitting every day for 30 days
+				goal = create(:goal, :sit_for_30_minutes_a_day, user: buddha)
+
+				# Two sits >= 30 mins, and one that won't count
 				2.times do |i|
 					create(:sit, user: buddha, created_at: Date.today - i, duration: 30)
 				end
 				create(:sit, user: buddha, created_at: Date.today - 4, duration: 20)
-	    end
 
-			it '#rating' do
-				# 10 days into goal of sitting every day for 30 days
-				goal = create(:goal, :sit_for_30_minutes_a_day, user: buddha)
 	      expect(goal.rating).to eq 20
 			end
 		end
@@ -132,7 +129,7 @@ describe Goal do
 
 	describe '#days_into_goal' do
 		context 'fixed' do
-			before :each do
+			after :each do
 				Timecop.return
 			end
 
@@ -163,7 +160,7 @@ describe Goal do
 		end
 
 		context 'ongoing' do
-			before :each do
+			after :each do
 				Timecop.return
 			end
 
@@ -184,7 +181,7 @@ describe Goal do
 	end
 
 	describe '#days_where_goal_met' do
-		before :each do
+		after :each do
 			Timecop.return
 		end
 
