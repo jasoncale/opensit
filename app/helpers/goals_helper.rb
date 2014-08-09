@@ -16,6 +16,6 @@ module GoalsHelper
   	days = (Date.today - from.to_date).to_i
   	return 'today' if days == 0
   	return 'yesterday' if days == 1
-  	return "#{days} days ago"
+  	return "#{days + 1} days ago"
   end
 end
