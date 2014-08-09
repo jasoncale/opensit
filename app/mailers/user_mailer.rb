@@ -17,4 +17,9 @@ class UserMailer < ActionMailer::Base
 		@email = user.email
 		mail(to: @email, subject: 'The OpenSit Blog is Live!') if user.email
 	end
+
+  def goals_are_live(user)
+    @email = user.email
+    mail(to: @email, subject: 'Set goals for your meditation') if user.email
+  end
 end
