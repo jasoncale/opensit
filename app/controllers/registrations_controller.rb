@@ -6,6 +6,10 @@ class RegistrationsController < Devise::RegistrationsController
     '/welcome'
   end
 
+  def after_sign_in_path_for(resource)
+    (session[:"user.return_to"].nil?) ? "/" : session[:"user.return_to"].to_s
+  end
+
 	def edit
 		@title = 'Edit profile'
 		@page_class = 'edit-profile'
