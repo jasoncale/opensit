@@ -118,10 +118,18 @@ describe Goal do
 
 	describe '#completed?' do
 		context 'fixed' do
-			# Started 4 days ago
-			let(:goal) { create(:goal, :sit_for_3_days, created_at: Date.today - 4, user: buddha) }
-
 			it 'returns true if goal is completed' do
+				# Started 4 days ago
+				goal = create(:goal, :sit_for_3_days, created_at: Date.today - 4, user: buddha)
+				expect(goal.completed?).to eq true
+			end
+		end
+
+		context 'ongoing' do
+			it 'returns true if goal is retired (completed_date is set)' do
+				# Started 4 days ago
+				goal = create(:goal, :sit_for_30_minutes_a_day, created_at: Date.today - 4, user: buddha)
+				goal.completed_date = Date.today # User retired the goal
 				expect(goal.completed?).to eq true
 			end
 		end
@@ -138,12 +146,6 @@ describe Goal do
 			it 'first day' do
 				expect(goal.completed?).to eq false
 				expect(goal.days_into_goal).to eq 1
-			end
-
-			it 'second day' do
-				Timecop.freeze(Date.today + 1)
-				expect(goal.completed?).to eq false
-				expect(goal.days_into_goal).to eq 2
 			end
 
 			it 'third day' do
@@ -171,11 +173,11 @@ describe Goal do
 				expect(goal.days_into_goal).to eq 1
 			end
 
-			it 'fourth day' do
+			it 'second day' do
 				goal
-				Timecop.freeze(Date.today + 3)
+				Timecop.freeze(Date.today + 1)
 				expect(goal.completed?).to eq false
-				expect(goal.days_into_goal).to eq 4
+				expect(goal.days_into_goal).to eq 2
 			end
 		end
 	end
@@ -185,10 +187,8 @@ describe Goal do
 			Timecop.return
 		end
 
-		let(:goal) { create(:goal, :sit_for_30_minutes_a_day, user: buddha, created_at: Date.today) }
-
 		it 'increments correctly' do
-  		expect(goal.days_where_goal_met).to eq 0
+			goal = create(:goal, :sit_for_30_minutes_a_day, user: buddha, created_at: Date.today)
 			create(:sit, user: buddha, created_at: Date.today, duration: 30)
   		expect(goal.days_where_goal_met).to eq 1
 			Timecop.freeze(Date.today + 1)
@@ -196,6 +196,32 @@ describe Goal do
   		expect(goal.days_where_goal_met).to eq 2
 			Timecop.freeze(Date.today + 1)
   		expect(goal.days_where_goal_met).to eq 2 # no change
+  	end
+
+  	context 'fixed' do
+  		it 'stops incrementing when goal complete' do
+				goal = create(:goal, :sit_20_minutes_for_3_days, user: buddha, created_at: Date.today)
+				create(:sit, user: buddha, created_at: Date.today, duration: 30)
+	  		expect(goal.days_where_goal_met).to eq 1
+				Timecop.freeze(Date.today + 4) # Goal finished
+				expect(goal.completed?).to eq true
+				create(:sit, user: buddha, created_at: Date.today, duration: 30)
+				expect(goal.days_where_goal_met).to eq 1
+			end
+  	end
+
+  	context 'ongoing' do
+  		it 'stops incrementing when goal retired' do
+				goal = create(:goal, :sit_for_30_minutes_a_day, user: buddha, created_at: Date.today)
+				create(:sit, user: buddha, created_at: Date.today, duration: 30)
+	  		expect(goal.days_where_goal_met).to eq 1
+				Timecop.freeze(Date.today + 4)
+				goal.completed_date = Date.today
+				expect(goal.completed?).to eq true
+				Timecop.freeze(Date.today + 5)
+				create(:sit, user: buddha, created_at: Date.today, duration: 30)
+				expect(goal.days_where_goal_met).to eq 1
+			end
   	end
 	end
 end

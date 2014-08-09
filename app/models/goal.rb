@@ -45,12 +45,13 @@ class Goal < ActiveRecord::Base
   def days_where_goal_met
   	# Rate based on last 2 weeks of results, or since started (if less than two weeks into goal)
   	start_from = days_into_goal < 14 ? created_at.to_date : Date.today - 14
+    end_date = completed? ? (fixed? ? last_day_of_goal : completed_date) : Date.today
 	  total = 0
   	if fixed?
-  		return user.days_sat_for_min_x_minutes_in_date_range(mins_per_day, start_from, Date.today) if mins_per_day
-  		return user.days_sat_in_date_range(created_at.to_date, Date.today)
+  		return user.days_sat_for_min_x_minutes_in_date_range(mins_per_day, start_from, end_date) if mins_per_day
+  		return user.days_sat_in_date_range(created_at.to_date, end_date)
 	  else
-	  	return user.days_sat_for_min_x_minutes_in_date_range(mins_per_day, start_from, Date.today)
+	  	return user.days_sat_for_min_x_minutes_in_date_range(mins_per_day, start_from, end_date)
 	  end
   end
 
