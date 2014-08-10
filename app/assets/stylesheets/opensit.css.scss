@@ -440,6 +440,13 @@ $colHighlight   : whitesmoke;
   background: $link-color !important;
 }
 
+/* Bootstrap wysihtml button hiding */
+[data-wysihtml5-command="Indent"],
+[data-wysihtml5-command="Outdent"],
+{
+  display: none;
+}
+
 /* Alerts */
 .alert {
   margin: 0 auto;

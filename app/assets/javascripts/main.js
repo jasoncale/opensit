@@ -1,13 +1,16 @@
 $(document).ready(function(){
   $.each($('.rich-textarea'), function(index, el){
     $(el).wysihtml5({
-      "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
-      "emphasis": true, //Italics, bold, etc. Default true
-      "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
-      "html": false, //Button which allows you to edit the generated HTML. Default false
-      "link": true, //Button to insert a link. Default true
-      "image": false, //Button to insert an image. Default true,
-      "color": false //Button to change color of font
+      toolbar: {
+        "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
+        "emphasis": true, //Italics, bold, etc. Default true
+        "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+        "html": true, //Button which allows you to edit the generated HTML. Default false
+        "link": true, //Button to insert a link. Default true
+        "image": false, //Button to insert an image. Default true,
+        "color": false, //Button to change color of font,
+        "fa": true
+      }
     });
   });
 
@@ -185,3 +188,8 @@ $(document).on('page:fetch', function() {
 $(document).on('page:change', function() {
   $(".loading-indicator").hide();
 });
+
+// https://github.com/Nerian/bootstrap-wysihtml5-rails
+$(document).on('page:load', function(){
+  window['rangy'].initialized = false
+})
