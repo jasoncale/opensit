@@ -407,6 +407,7 @@ $colHighlight   : whitesmoke;
 
 /* Bootstrap alignment fixes */
 .radio input[type="radio"] {
+  position: relative;
   float: none !important;
   margin: 0 5px 4px -18px;
 }
