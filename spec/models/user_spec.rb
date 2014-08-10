@@ -399,13 +399,13 @@ describe User do
         before { create(:favourite, user_id: buddha.id, favourable_id: 1) }
 
         it "returns true" do
-          expect(buddha.favourited?(1)).to be_true
+          expect(buddha.favourited?(1)).to eq true
         end
       end
 
       context "when a user has not favorited the specified sit" do
         it "returns false" do
-          expect(buddha.favourited?(2)).to be_false
+          expect(buddha.favourited?(2)).to eq false
         end
       end
     end

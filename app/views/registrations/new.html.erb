@@ -1,40 +1,52 @@
 <div class="section sign-up-box">
-  <div class="well col-sm-10">
-  <h1>OpenSit is a place to share and develop your meditation practice.</h1>
-  <p class="its-free">It's completely free!</p>
-    <div class="left col-md-6">
+  <div class="well col-sm-8">
 
-      <h2>All we need is...</h2>
+    <div class="row">
+      <div class="brand-header">
+        <%= image_tag 'logomark_trans.png', class: 'main-logo' %>
+        <p class="opensit">opensit</p>
+      </div>
+    </div>
 
-      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <h1><%= ab_test("signup_greeting", "Hey seeker.", "Namaste!") %> Get your beautiful, free meditation journal today.</h1>
 
-        <% if resource.errors.any? %>
-          <div class="alert alert-danger">
-            <% messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join %>
-            <%= messages.html_safe %>
-          </div>
+    <div class="row">
+      <div class="left col-md-offset-3 col-md-6">
+
+        <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+
+          <% if resource.errors.any? %>
+            <div class="alert alert-danger">
+              <% messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join %>
+              <%= messages.html_safe %>
+            </div>
+          <% end %>
+
+          <%= f.input :username, placeholder: 'Choose a username', label: false, input_html: { autocomplete: 'off' } %>
+
+          <%= f.input :email, placeholder: 'Your email', label: false, input_html: { autocomplete: 'off' } %>
+
+          <%= f.input :password, placeholder: 'Your password', label: false, input_html: { autocomplete: 'off' } %>
+
+          <%= f.submit "Sign up", :class => 'btn btn-primary btn-lg cta pull-left' %>
+
+          <div class="sign_in_link">Already signed up? <a href="<%=new_user_session_path%>">Time to sign in!</a></div>
         <% end %>
 
-        <%= f.input :username, placeholder: 'A username', label: false, input_html: { autocomplete: 'off' } %>
-
-        <%= f.input :email, placeholder: 'Your email', label: false, input_html: { autocomplete: 'off' } %>
-
-        <%= f.input :password, placeholder: 'And a password', label: false, input_html: { autocomplete: 'off' } %>
-
-        <div class="row"><%= f.submit "Sign up", :class => 'btn btn-primary btn-lg pull-left' %></div>
-
-        <div class="row"><%= render "devise/shared/links" %></div>
-      <% end %>
-
+      </div>
     </div>
-    <div class="right col-md-6">
-      <h2>Why sign up?</h2>
-        <div class="points">
-          <div class="point"><div class="icon"><i class="fa fa-book"></i></div><div class="text"> Your own free <strong>public or private</strong> meditation journal.</div></div>
-          <div class="point"><div class="icon"><i class="fa fa-comments"></i></div><div class="text"> Feedback on your practice</div></div>
-          <div class="point"><div class="icon"><i class="fa fa-group"></i></div><div class="text"> Follow your favourite practitioners</div></div>
-          <div class="point"><div class="icon"><i class="fa fa-thumbs-up"></i></div><div class="text"> Built by meditators, for meditators</div></div>
-        </div>
+
+    <div class="row col-md-12">
+      <div class="our-community">
+        <h2>And become part of our awesome global community!</h2>
+        <% @users.each do |u|%>
+          <div class="user-snippet">
+            <%= sign_up_avatar(u) %>
+            <div class="details"><%=u.display_name%><br>
+            <%=u.location%></div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

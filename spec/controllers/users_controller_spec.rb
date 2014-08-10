@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+describe UsersController, :type => :controller do
   before do
     @buddha = create(:user, username: 'buddha')
   end

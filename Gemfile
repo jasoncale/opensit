@@ -13,6 +13,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
   gem 'factory_girl_rails'
   gem 'annotate'
   gem 'meta_request', '0.2.6'
@@ -41,11 +42,11 @@ gem 'bootstrap3-datetimepicker-rails', '~> 2.1.30'
 gem 'font-awesome-sass'
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', ">= 2.2.0"
   gem 'database_cleaner'
   gem 'faker' # Generates names, emails and other placeholders for factories
   gem 'shoulda-matchers'
-  gem 'poltergeist', '~> 1.4.0'
+  gem 'poltergeist'
   gem 'launchy'
   gem 'timecop'
 end
@@ -55,6 +56,7 @@ gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'protected_attributes' # Smoother upgrade to rails 4, provides attr_accessible
 gem 'textacular'
+gem 'split', :require => 'split/dashboard'
 
 # Devise authentication
 gem 'devise'

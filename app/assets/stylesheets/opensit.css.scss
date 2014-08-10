@@ -379,6 +379,12 @@ $colHighlight   : whitesmoke;
   }
 }
 
+.sign-up-page {
+  .brand-header {
+    border-bottom: 0;
+  }
+}
+
 /* Tag cloud */
 #tag_cloud {
   line-height: 1.6em;
@@ -403,10 +409,6 @@ $colHighlight   : whitesmoke;
 .radio input[type="radio"] {
   float: none !important;
   margin: 0 5px 4px -18px;
-}
-.checkbox input[type="checkbox"] {
-  float: none !important;
-  margin: 9px 5px 4px -18px;
 }
 
 /* will_paginate Bootstrap pagination */
@@ -436,6 +438,13 @@ $colHighlight   : whitesmoke;
 .datepicker table tr td.active.disabled:hover.active,
 .bootstrap-datetimepicker-widget td span.active {
   background: $link-color !important;
+}
+
+/* Bootstrap wysihtml button hiding */
+[data-wysihtml5-command="Indent"],
+[data-wysihtml5-command="Outdent"],
+{
+  display: none;
 }
 
 /* Alerts */
@@ -490,6 +499,13 @@ $colHighlight   : whitesmoke;
     }
     .btn-primary {
       margin-left: 20px;
+    }
+  }
+
+  // Sign up page
+  .sign-up-box {
+    .user-snippet {
+      width: 33% !important;
     }
   }
 

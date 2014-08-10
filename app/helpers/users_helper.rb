@@ -22,6 +22,10 @@ module UsersHelper
     end
   end
 
+  def sign_up_avatar(user)
+    image_tag user.avatar.url(:thumb), size: "70x70", alt: user.username, title: user.username, class: 'img-circle'
+  end
+
   # Return a hyperlinked username / name
   # Pass plain for an unlinked name
   def username(user, plain = false)
