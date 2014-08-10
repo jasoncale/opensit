@@ -27,12 +27,12 @@ task :mailshot => :environment do
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
-  # ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.delivery_method = :smtp
 
   count = 0
-  query = User.all.newest_first.limit(limit).offset(skip)
+  query = User.all.order(created_at: :asc).limit(limit).offset(skip)
   query.each do |user|
-    # UserMailer.goals_are_live(user).deliver
+    UserMailer.goals_are_live(user).deliver
     count += 1
     puts "#{count} #{user.display_name} (#{user.email})"
   end
