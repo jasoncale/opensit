@@ -97,6 +97,9 @@
 
 /* Sign up */
 .sign-up-box {
+  .well {
+    margin: 25px auto 25px auto;
+  }
   h1 {
     text-align: center;
     line-height: 1.5em;
@@ -128,7 +131,7 @@
     margin-top: 1.5em;
     h2 {
       text-align: center;
-      margin-bottom: 1em;
+      margin-bottom: 2em;
     }
     .user-snippet {
       float: left;
@@ -141,7 +144,8 @@
       .details {
         clear: both;
         margin-top: 1em;
-        font-size: 0.6em;
+        font-size: 0.7em;
+        color: $dark-grey;
       }
     }
   }
