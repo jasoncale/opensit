@@ -1,15 +1,17 @@
 <div class="section sign-up-box">
   <div class="well col-sm-8">
 
-  <div class="brand-header">
-    <%= image_tag 'logomark_trans.png', class: 'main-logo' %>
-    <p class="opensit">opensit</p>
-  </div>
+    <div class="row">
+      <div class="brand-header">
+        <%= image_tag 'logomark_trans.png', class: 'main-logo' %>
+        <p class="opensit">opensit</p>
+      </div>
+    </div>
 
-  <h1>Hey seeker. Get your beautiful, free meditation journal today.</h1>
+      <h1>Hey seeker. Get your beautiful, free meditation journal today.</h1>
 
-  <!-- <p class="its-free">It's completely free!</p> -->
-    <div class="left col-md-5">
+    <div class="row">
+      <div class="left col-md-offset-3 col-md-6">
 
         <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 
@@ -20,20 +22,31 @@
             </div>
           <% end %>
 
-          <%= f.input :username, placeholder: 'A username', label: false, input_html: { autocomplete: 'off' } %>
+          <%= f.input :username, placeholder: 'Choose a username', label: false, input_html: { autocomplete: 'off' } %>
 
           <%= f.input :email, placeholder: 'Your email', label: false, input_html: { autocomplete: 'off' } %>
 
-          <%= f.input :password, placeholder: 'And a password', label: false, input_html: { autocomplete: 'off' } %>
+          <%= f.input :password, placeholder: 'Your password', label: false, input_html: { autocomplete: 'off' } %>
 
-          <div class="row"><%= f.submit "Sign up", :class => 'btn btn-primary btn-lg pull-left' %></div>
+          <%= f.submit "Sign up", :class => 'btn btn-primary btn-lg cta pull-left' %>
 
-          <div class="row">Already signed up? <a href="<%=new_user_session_path%>">Time to sign in!</a></div>
+          <div class="sign_in_link">Already signed up? <a href="<%=new_user_session_path%>">Time to sign in!</a></div>
         <% end %>
 
+      </div>
     </div>
-    <div class="right col-md-7">
-      <%=image_tag("journal.png")%>
+
+    <div class="row col-md-12">
+      <div class="our-community">
+        <h2>And become part of our awesome global community!</h2>
+        <% @users.each do |u|%>
+          <div class="user-snippet">
+            <%= sign_up_avatar(u) %>
+            <div class="details"><%=u.display_name%><br>
+            <%=u.location%></div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

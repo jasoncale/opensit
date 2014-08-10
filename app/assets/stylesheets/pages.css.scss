@@ -100,7 +100,7 @@
   h1 {
     text-align: center;
     line-height: 1.5em;
-    margin: 10px 0 2em 0;
+    margin: 10px 0 1em 0;
     font-size: 1.5em;
   }
   .its-free {
@@ -111,29 +111,42 @@
   h2 {
     font-size: 1.2em;
   }
-  .btn-lg {
-    margin-top: 20px;
-  }
   .left {
-    .sign-up-form {
-      float: left;
+    .cta {
       width: 100%;
+    }
+    .sign_in_link {
+      margin-top: 0.5em;
+      float: left;
+      color: $dark-grey;
+      font-size: 0.8em;
+    }
+  }
+  .our-community {
+    float: left;
+    width: 100%;
+    margin-top: 1.5em;
+    h2 {
       text-align: center;
-      input {
-        width: 400px;
+      margin-bottom: 1em;
+    }
+    .user-snippet {
+      float: left;
+      text-align: center;
+      width: 16.6%;
+      height: 150px;
+      img {
+        margin: 0 auto;
+      }
+      .details {
+        clear: both;
+        margin-top: 1em;
+        font-size: 0.6em;
       }
     }
-    input {
-      margin-top: 5px;
-    }
-    .row {
-      margin-left: 0;
-    }
   }
-  .right {
-    .points {
-      padding: 0.5em;
-    }
+  .total_hours {
+    text-align: center;
   }
 }
 
@@ -151,7 +164,7 @@
     }
     .remember {
       input {
-        margin: 10px 0 0 15px;
+        margin: 13px 0 0 15px;
         float: left;
       }
       label {

@@ -410,10 +410,6 @@ $colHighlight   : whitesmoke;
   float: none !important;
   margin: 0 5px 4px -18px;
 }
-.checkbox input[type="checkbox"] {
-  float: none !important;
-  margin: 9px 5px 4px -18px;
-}
 
 /* will_paginate Bootstrap pagination */
 .pagination > .active > a,
@@ -496,6 +492,13 @@ $colHighlight   : whitesmoke;
     }
     .btn-primary {
       margin-left: 20px;
+    }
+  }
+
+  // Sign up page
+  .sign-up-box {
+    .user-snippet {
+      width: 33% !important;
     }
   }
 
