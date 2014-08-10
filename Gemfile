@@ -41,11 +41,11 @@ gem 'bootstrap3-datetimepicker-rails', '~> 2.1.30'
 gem 'font-awesome-sass'
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', ">= 2.2.0"
   gem 'database_cleaner'
   gem 'faker' # Generates names, emails and other placeholders for factories
   gem 'shoulda-matchers'
-  gem 'poltergeist', '~> 1.4.0'
+  gem 'poltergeist'
   gem 'launchy'
   gem 'timecop'
 end
