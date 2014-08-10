@@ -299,6 +299,8 @@ GEM
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
       rspec-mocks (~> 3.0.0)
+    rspec-collection_matchers (1.0.0)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.0.3)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.3)
@@ -427,6 +429,7 @@ DEPENDENCIES
   rails_12factor
   rb-fsevent
   rb-inotify (~> 0.9)
+  rspec-collection_matchers
   rspec-rails
   rvm-capistrano
   sass-rails (~> 4.0.2)

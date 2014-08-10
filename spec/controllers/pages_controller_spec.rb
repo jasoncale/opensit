@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PagesController do
+describe PagesController, :type => :controller do
   before do
     @buddha = create(:user, username: 'buddha')
   end
