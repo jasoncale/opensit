@@ -112,8 +112,10 @@ class Sit < ActiveRecord::Base
   end
 
   def tag_list=(names)
-    self.tags = names.split(",").map do |n|
-      Tag.where(name: n.strip).first_or_create!
+    elements = names.split(",")
+    elements.reject! { |c| c.blank? } # Prevent blank tags being added
+    self.tags = elements.map do |t|
+      Tag.where(name: t.strip).first_or_create!
     end
   end
 
