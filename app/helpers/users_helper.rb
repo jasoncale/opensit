@@ -48,9 +48,9 @@ module UsersHelper
       type, count = l
       if type.to_s.size == 4
         current_year = type
-        "<div class='year'> #{type} <span class='count'>(#{count})</span></div>"
+        "<optgroup label='#{type} (#{count})'>"
       else
-        "<li>" + link_to("#{Date::MONTHNAMES[type]}", "#{user_path(params[:username])}/#{params[:id]}?year=#{current_year}&month=#{type}") + " <span class=\"count\">(#{count})</span></li>"
+        "<option " + (current_year == params[:year].to_i && type == params[:month].to_i ? 'selected ' : '') + "value='" + "#{user_path(params[:username])}/#{params[:id]}?year=#{current_year}&month=#{type}" + "'>" + "#{Date::MONTHNAMES[type]}, #{current_year} - #{count} events</option>"
       end
     end.join(' ').html_safe
   end

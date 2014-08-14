@@ -138,22 +138,15 @@
 	}
 }
 
-/* Timeline */
-.my-timeline {
+/* Timeline select */
+.date_range_select {
+  float: right;
 	padding: 8px;
 	background: white;
-	border-top: $green 3px solid;
-	ul {
-		list-style-type: circle;
-	}
-	.year {
-		font-weight: bold;
-		margin: 20px 0 10px 0;
-		color: $dark-grey;
-	}
-	.count {
-		color: #999;
-	}
+	border: $green 3px solid;
+  border-radius: 5px;
+  color: $dark-grey;
+  font-size: 1.3em;
 }
 
 // Feed icon on sits / bio

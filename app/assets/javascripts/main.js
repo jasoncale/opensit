@@ -70,6 +70,11 @@ $(document).ready(function(){
     trigger: 'click',
   });
 
+  // VIEW PROFILE / Date select
+  $('.date_range_select').change( function() {
+    Turbolinks.visit($(this).val());
+  });
+
   // LIKES / a sit
   $('#like_button').on('click', '.toggle-like', function(e) {
     e.preventDefault();

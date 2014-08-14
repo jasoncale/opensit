@@ -3,10 +3,8 @@
 
   <% if !@user.private_stream || (current_user == @user) %>
     <% if !@user.sits.empty? %>
-      <div class="nav-module my-timeline">
-        <ul>
-        <%= timeline(@links) %>
-        </ul>
+      <div class="nav-module">
+
       </div>
     <% end %>
   <% end %>
@@ -43,37 +41,43 @@
           <% if !@user.who.blank? %>
             <p class="lead"><%= @user.who.html_safe %></p>
           <% end %>
+          <p>Has sat x hours in total, and x this week!</p>
 
-          <% if !@user.why.blank? %>
-            <div class="profile-field">
-              <div class="title">Why do you practice?</div>
-              <%= @user.why.html_safe %>
-            </div>
-          <% end %>
-
-          <% if !@user.practice.blank? %>
-            <div class="profile-field">
-              <div class="title">What do you practice?</div>
-              <%= @user.practice.html_safe %>
-            </div>
-          <% end %>
-
-          <% if current_user == @user %>
-            <div class="my-actions">
-              <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-default' %>
-            </div>
-          <% else %>
-            <%= link_to(feed_path(@user), :title => 'Subscribe to this users updates', :class => 'user-sit-feed') do %>
-              <i class="fa fa-rss"></i>
+          <div class="hidden">
+            <% if !@user.why.blank? %>
+              <div class="profile-field">
+                <div class="title">Why do you practice?</div>
+                <%= @user.why.html_safe %>
+              </div>
             <% end %>
-          <% end %>
+
+            <% if !@user.practice.blank? %>
+              <div class="profile-field">
+                <div class="title">What do you practice?</div>
+                <%= @user.practice.html_safe %>
+              </div>
+            <% end %>
+
+            <% if current_user == @user %>
+              <div class="my-actions">
+                <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-default' %>
+              </div>
+            <% else %>
+              <%= link_to(feed_path(@user), :title => 'Subscribe to this users updates', :class => 'user-sit-feed') do %>
+                <i class="fa fa-rss"></i>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     <% end %>
 
     <% if @sits %>
       <div class="month-view text-section">
-        <h1 class="range-title"><%= @range_title %></h1>
+        <select class="date_range_select">
+          <%= timeline(@links) %>
+        </select>
+        <!-- <h1 class="range-title"><%= @range_title %></h1> -->
         <div class="clearfix"></div>
         <% @listed = [] %>
         <% @sits.each do |sit| %>
