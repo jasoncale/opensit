@@ -13,6 +13,9 @@
       <div class="value"> <%= website(@user) %></div>
     </div>
   <% end %>
+  <% if !@user.who.blank? %>
+    <p class="lead"><%= @user.who.html_safe %></p>
+  <% end %>
 
 	<%= render 'shared/stats' %>
 

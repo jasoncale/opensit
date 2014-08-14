@@ -37,6 +37,7 @@ class UsersController < ApplicationController
   # GET /u/buddha
   def show
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
+    @total_hours = @user.sits.sum(:duration) / 60
     @links = @user.stream_range
 
     if !@user.private_stream || (current_user == @user)

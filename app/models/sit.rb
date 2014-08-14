@@ -57,6 +57,10 @@ class Sit < ActiveRecord::Base
     s_type == 0
   end
 
+  def stub?
+    body.empty?
+  end
+
   # Remove <br>'s and &nbsp's
   def custom_strip
     no_brs = self.body.gsub(/<br>/, ' ')

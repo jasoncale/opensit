@@ -36,6 +36,7 @@
           <% end %>
         </div>
       <% else %>
+          <div class="hidden">
         <div class="profile">
 
           <% if !@user.who.blank? %>
@@ -43,7 +44,6 @@
           <% end %>
           <p>Has sat x hours in total, and x this week!</p>
 
-          <div class="hidden">
             <% if !@user.why.blank? %>
               <div class="profile-field">
                 <div class="title">Why do you practice?</div>
