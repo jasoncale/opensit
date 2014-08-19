@@ -12,18 +12,20 @@
 
     <table class="table msg-overview">
       <% @messages.each do |msg| %>
-        <tr>
-          <td class="unread"><%= unread_marker(msg) %></td>
-          <td class="msg-avatar"><%= small_avatar_of(msg.from_user) %></td>
-          <td class="msg-content">
-            <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message?', :class => 'msg-delete' %>
-            <a href="<%= message_path(msg) %>" class="clickable-row">
-            <div class="msg-username"><%= msg.from_user.username %> says:</div>
-            <div class="msg-content"><%= msg.subject.blank? ? truncate(msg.body, :length => 20, :omission => " ...").html_safe : msg.subject %></div>
-            <div class="msg-received">Received <%= time_ago_in_words(msg.created_at) %> ago</div>
-            </a>
-          </td>
-        </tr>
+        <% if User.where(id: msg.from_user_id).present? %>
+          <tr>
+            <td class="unread"><%= unread_marker(msg) %></td>
+            <td class="msg-avatar"><%= small_avatar_of(msg.from_user) %></td>
+            <td class="msg-content">
+              <%= link_to 'X', message_path(msg), :method => :delete, :confirm => 'Delete this message?', :class => 'msg-delete' %>
+              <a href="<%= message_path(msg) %>" class="clickable-row">
+              <div class="msg-username"><%= msg.from_user.username %> says:</div>
+              <div class="msg-content"><%= msg.subject.blank? ? truncate(msg.body, :length => 20, :omission => " ...").html_safe : msg.subject %></div>
+              <div class="msg-received">Received <%= time_ago_in_words(msg.created_at) %> ago</div>
+              </a>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
 
