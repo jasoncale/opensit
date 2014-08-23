@@ -61,14 +61,7 @@ $(document).ready(function(){
   });
 
   // VIEW SIT / Likers list
-  $('#likers-list').click( function(event){
-    return false;
-  });
-  $('#likers-list').popover({
-    animation: true,
-    html: true,
-    trigger: 'click',
-  });
+  $("#likers-list").tooltip();
 
   // LIKES / a sit
   $('#like_button').on('click', '.toggle-like', function(e) {

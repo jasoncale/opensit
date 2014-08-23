@@ -1,3 +1,4 @@
 <% @sit ||= Sit.find(params[:like][:likeable_id]) %>
 $("#who_likes").html("<%= escape_javascript render('likes/like_module') %>");
 $("#like_button").html("<%= escape_javascript render('shared/like_button') %>");
+$("#likers-list").tooltip(); // This is here so that the tooltip is re-initialised each time, otherwise it doesn't work after you like something
