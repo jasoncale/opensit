@@ -99,6 +99,11 @@ class User < ActiveRecord::Base
       AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0'))
   end
 
+  def hours_sat_this_month(month: month, year: year)
+    sits.where("EXTRACT(year FROM created_at) = ?
+      AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0')).sum(:duration) / 60
+  end
+
   # Do not put me in a loop! Use #days_sat_in_date_range
   # Returns true if user sat on the date passed
   def sat_on_date?(date)

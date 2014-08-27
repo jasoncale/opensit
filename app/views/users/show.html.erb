@@ -1,4 +1,4 @@
-<div class="sidebar col-md-3">
+  <div class="sidebar col-md-3">
   <%= render 'shared/full_user' %>
 
   <% if !@user.private_stream || (current_user == @user) %>
@@ -42,7 +42,6 @@
           <% if !@user.who.blank? %>
             <p class="lead"><%= @user.who.html_safe %></p>
           <% end %>
-          <p>Has sat x hours in total, and x this week!</p>
 
             <% if !@user.why.blank? %>
               <div class="profile-field">
@@ -74,10 +73,13 @@
 
     <% if @sits %>
       <div class="month-view text-section">
+
         <select class="date_range_select">
           <%= timeline(@links) %>
         </select>
         <!-- <h1 class="range-title"><%= @range_title %></h1> -->
+          <p>Sat on <%=@user.days_sat_in_date_range(Date.new(params[:year].to_i, params[:month].to_i, 01), Date.new(params[:year].to_i, params[:month].to_i, 30))%> days this month. <%=@user.sits_by_month(month: params[:month], year: params[:year]).count%> entries this month. No of hours <%=@user.hours_sat_this_month(month: params[:month], year: params[:year])%></p>
+
         <div class="clearfix"></div>
         <% @listed = [] %>
         <% @sits.each do |sit| %>
