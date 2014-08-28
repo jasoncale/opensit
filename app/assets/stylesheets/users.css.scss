@@ -5,14 +5,9 @@
 	.sidebar-content {
     padding-left: 10px;
     .username {
-      margin: 25px 0 0;
+      margin: 25px 0 20px 10%;
       font-size: 1.7em;
       font-weight: normal;
-    }
-    .location {
-      float: left;
-      width: 100%;
-      margin: 5px 0;
     }
 		.stats {
 			float: left;
@@ -143,7 +138,6 @@
   float: right;
 	padding: 8px;
 	background: white;
-	border: $green 3px solid;
   border-radius: 5px;
   color: $dark-grey;
   font-size: 1.3em;
@@ -162,6 +156,11 @@
 .view-user {
 	.sidebar-content {
 		.info-block {
+      float: left;
+      width: 100%;
+      color: $dark-grey;
+      font-size: 0.8em;
+      margin: 5px 0;
 			.icon {
 				width: 10%;
 				float: left;
@@ -219,6 +218,16 @@
   	clear: left;
   	width: 100%;
   	float: left;
+    .month_stats_container {
+      float: left;
+      width: 100%;
+      text-align: center;
+      margin-top: 1em;
+      .month_stats {
+        font-size: 0.9em;
+        color: $dark-grey;
+      }
+    }
   	.day-of-the-month {
   		float: left;
   		clear: left;

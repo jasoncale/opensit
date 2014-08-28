@@ -162,6 +162,9 @@ class User < ActiveRecord::Base
     total_time
   end
 
+  def total_hours_sat
+    sits.sum(:duration) / 60
+  end
 
   def stream_range
     return false if self.sits.empty?

@@ -1,13 +1,5 @@
-  <div class="sidebar col-md-3">
+<div class="sidebar col-md-3">
   <%= render 'shared/full_user' %>
-
-  <% if !@user.private_stream || (current_user == @user) %>
-    <% if !@user.sits.empty? %>
-      <div class="nav-module">
-
-      </div>
-    <% end %>
-  <% end %>
 </div>
 
 <div class="clearfix col-md-9">
@@ -31,18 +23,16 @@
             <div class="my-actions">
               <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-default' %>
             </div>
-          <% else %>
-            <h2>This person hasn't filled out their profile yet.</h2>
           <% end %>
         </div>
       <% else %>
-          <div class="hidden">
         <div class="profile">
 
           <% if !@user.who.blank? %>
             <p class="lead"><%= @user.who.html_safe %></p>
           <% end %>
 
+          <div class="hidden">
             <% if !@user.why.blank? %>
               <div class="profile-field">
                 <div class="title">Why do you practice?</div>
@@ -78,7 +68,9 @@
           <%= timeline(@links) %>
         </select>
         <!-- <h1 class="range-title"><%= @range_title %></h1> -->
-          <p>Sat on <%=@user.days_sat_in_date_range(Date.new(params[:year].to_i, params[:month].to_i, 01), Date.new(params[:year].to_i, params[:month].to_i, 30))%> days this month. <%=@user.sits_by_month(month: params[:month], year: params[:year]).count%> entries this month. No of hours <%=@user.hours_sat_this_month(month: params[:month], year: params[:year])%></p>
+        <div class="month_stats_container">
+          <p class="month_stats">Sat on <%=@days_sat_this_month%> days this month, totalling <%=@hours_sat_this_month%> hours practice. (<%=@entries_this_month%> entries this month)</p>
+        </div>
 
         <div class="clearfix"></div>
         <% @listed = [] %>

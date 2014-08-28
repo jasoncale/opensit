@@ -37,13 +37,16 @@ class UsersController < ApplicationController
   # GET /u/buddha
   def show
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
-    @total_hours = @user.sits.sum(:duration) / 60
+    @total_hours = @user.total_hours_sat
     @links = @user.stream_range
 
     if !@user.private_stream || (current_user == @user)
       if params[:year] && params[:month]
         if current_user == @user
           @sits = @user.sits_by_month(month: params[:month], year: params[:year]).newest_first
+          @days_sat_this_month = @user.days_sat_in_date_range(Date.new(params[:year].to_i, params[:month].to_i, 01), Date.new(params[:year].to_i, params[:month].to_i, -1))
+          @hours_sat_this_month = @user.hours_sat_this_month(month: params[:month], year: params[:year])
+          @entries_this_month = @user.sits_by_month(month: params[:month], year: params[:year]).count
         else
           @sits = @user.sits_by_month(month: params[:month], year: params[:year]).public.newest_first
         end
