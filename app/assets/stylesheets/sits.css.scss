@@ -282,76 +282,6 @@ article.sit-teaser-block {
   }
 }
 
-/* Journal next/prev and date */
-.sidebar .sit-meta {
-  border-top: $green 3px solid;
-  background: #fff;
-  .date {
-    text-align: center;
-    font-size: 21px;
-    margin: 15px;
-    .time {
-      font-size: 0.6em;
-      color: $dark-grey;
-    }
-  }
-  .pager {
-    li a {
-      display: inline-block;
-      width: 50%;
-      height: 50px;
-      padding: 12px 14px 5px 14px;
-      background-color: #fff;
-      border-bottom: 1px solid #ddd;
-      border-top: 1px solid #ddd;
-      border-left: 0;
-      border-right: 0;
-      -webkit-border-radius: 0;
-      -moz-border-radius: 0;
-      border-radius: 0;
-      &:hover {
-        background: #eee;
-      }
-    }
-    .disabled {
-      color: #999;
-      background-color: #eee;
-      height: 50px;
-      width: 50%;
-      padding-top: 14px;
-      float: right;
-    }
-    .previous .disabled {
-      height: 50px;
-      padding: 14px 26px 5px 14px;
-      float: left;
-    }
-  }
-  .sit-tags {
-    margin-bottom: 15px;
-    text-align: center;
-    .glyphicon {
-      margin-right: 10px;
-    }
-    .label {
-      display: inline-block;
-      font-size: 95%;
-      font-weight: normal;
-      margin: 3px;
-    }
-  }
-  .journal-stats {
-    text-align: center;
-    color: $dark-grey;
-    font-size: 0.8em;
-    padding: 0 15px;
-    margin-bottom: 15px;
-    a {
-      font-weight: bold;
-    }
-  }
-}
-
 // Sit Streak
 .streak {
   float: left;
@@ -368,5 +298,27 @@ article.sit-teaser-block {
     .fa-bolt {
       color: white;
     }
+  }
+}
+
+// Previous/next sit preview
+.sit_preview {
+  .arrow {
+    width: 40px;
+    float: left;
+    font-size: 2em;
+    text-align: left;
+  }
+  .content {
+    width: calc(100% - 40px);
+    float: left;
+  }
+}
+.sit_preview.next {
+  .content {
+    text-align: right;
+  }
+  .arrow {
+    text-align: right;
   }
 }

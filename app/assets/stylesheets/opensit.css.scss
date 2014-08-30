@@ -255,10 +255,9 @@ $colHighlight   : whitesmoke;
   padding: 0 10px 10px 0;
   .content {
     @include rounded-bottom;
-    border-top: $green 3px solid;
+    // border-top: $green 3px solid;
     float: left;
     width: 100%;
-    background: white;
     padding: 0 10px 10px 20px;
     .text-title {
       text-transform: uppercase;

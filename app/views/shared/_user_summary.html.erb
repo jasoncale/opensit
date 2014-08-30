@@ -15,6 +15,9 @@
 
     <%= render 'sits/sit_streak' %>
 
+    Last updated <%= time_ago_in_words(@user.last_update) %> ago
+    <a href="<%=user_path(@user)%>">View full meditation journal</a>
+
     <% if @latest.empty? %>
       <% if current_user && (current_user.id == @user.id) %>
           <div class="add-a-sit">

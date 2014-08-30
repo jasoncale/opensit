@@ -24,6 +24,9 @@ class SitsController < ApplicationController
       @title = "#{@sit.title}, a meditation journal by #{@user.display_name}"
     end
 
+    @previous = @sit.prev(current_user)
+    @next = @sit.next(current_user)
+
     @page_class = 'view-sit'
   end
 
