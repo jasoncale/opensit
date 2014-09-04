@@ -77,6 +77,11 @@
         <% @sits.each do |sit| %>
           <%= render :partial => 'sits/day_journal', :locals => { :sit => sit } %>
         <% end %>
+
+        <div class="month_navigation col-md-12">
+          <a href="?year=<%=@prev.year%>&month=<%=sprintf '%02d', @prev.month%>">Previous month</a>
+          <a href="?year=<%=@next.year%>&month=<%=sprintf '%02d', @next.month%>">Next month</a>
+        </div>
       </div>
     <% end %>
   <% end %>

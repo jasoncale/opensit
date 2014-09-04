@@ -42,6 +42,8 @@ class UsersController < ApplicationController
 
     if !@user.private_stream || (current_user == @user)
       if params[:year] && params[:month]
+        @prev = Date.new(params[:year].to_i, params[:month].to_i, 01) - 1.day
+        @next = Date.new(params[:year].to_i, params[:month].to_i, -1) + 1.day
         if current_user == @user
           @sits = @user.sits_by_month(month: params[:month], year: params[:year]).newest_first
           @days_sat_this_month = @user.days_sat_in_date_range(Date.new(params[:year].to_i, params[:month].to_i, 01), Date.new(params[:year].to_i, params[:month].to_i, -1))
@@ -52,13 +54,13 @@ class UsersController < ApplicationController
         end
         @range_title = "#{Date::MONTHNAMES[params[:month].to_i]}, #{params[:year]}"
       else
-        month = Date.today.month
-        year = Date.today.year
-        @range_title = "#{Date::MONTHNAMES[month.to_i]}, #{year}"
+        @prev = Date.today.beginning_of_month - 1.day
+        @next = Date.today.end_of_month + 1.day
+        # @range_title = "#{Date::MONTHNAMES[month.to_i]}, #{year}"
         if current_user && @user.id == current_user.id
-          @sits = @user.sits_by_month(month: month, year: year).newest_first
+          @sits = @user.sits_by_month(month: Date.today.month, year: Date.today.year).newest_first
         else
-          @sits = @user.sits_by_month(month: month, year: year).public.newest_first
+          @sits = @user.sits_by_month(month: Date.today.month, year: Date.today.year).public.newest_first
         end
       end
     end

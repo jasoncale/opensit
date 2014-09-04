@@ -210,16 +210,6 @@
 			margin-bottom: 10px;
 		}
 	}
-	h1.range-title {
-    font-weight: normal;
-    font-size: 1.5em;
-    float: right;
-    line-height: 15px;
-    margin-right: 11px;
-    margin-top: 20px;
-    padding-bottom: 10px;
-    border-bottom: 3px $green solid;
-  }
   .month-view {
   	clear: left;
   	width: 100%;
@@ -274,6 +264,9 @@
 			float: left;
 			width: 100%;
   	}
+    .month_navigation {
+      float: left;
+    }
   }
 }
 
