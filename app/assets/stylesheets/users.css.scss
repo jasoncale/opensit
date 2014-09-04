@@ -4,10 +4,16 @@
 .sidebar {
 	.sidebar-content {
     padding-left: 10px;
-    .username {
+    .display_name {
       margin: 25px 0 20px 10%;
       font-size: 1.7em;
       font-weight: normal;
+    }
+    .username {
+      margin: -20px 0 20px 11%;
+      font-size: 0.9em;
+      font-weight: bold;
+      color: $dark-grey;
     }
 		.stats {
 			float: left;

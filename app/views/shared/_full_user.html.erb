@@ -1,6 +1,7 @@
 <%= large_avatar_of(@user) %>
 <div class="sidebar-content">
-	<div class="username"><%= username(@user, false) %></div>
+	<div class="display_name"><%= username(@user, false) %></div>
+  <div class="username"><%= @user.username %></div>
 	<% if !@user.city.blank? || !@user.country.blank? %>
 		<div class="location info-block">
 			<div class="icon"><i class="fa fa-map-marker"></i></div>
@@ -12,6 +13,13 @@
     <div class="user-website info-block">
 			<div class="icon"><i class="fa fa-home"></i></div>
       <div class="value"> <%= website(@user) %></div>
+    </div>
+  <% end %>
+
+  <% if !@user.style.blank? %>
+    <div class="user-style info-block">
+      <div class="icon"><i class="fa fa-bolt"></i></div>
+      <div class="value"> <%= @user.style %></div>
     </div>
   <% end %>
 
