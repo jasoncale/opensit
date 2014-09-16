@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "\"Dan from OpenSit\" <hello@opensit.com>"
+  default from: "\"Diary for Alan\" <hello@diaryforalan.com>"
 
   def new_design(user)
     @email = user.email
