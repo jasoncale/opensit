@@ -14,7 +14,7 @@ atom_feed do |feed|
 
       entry.author do |author|
         author.name(sit.user.display_name)
-        author.uri("http://opensit.com#{user_path(sit.user)}")
+        author.uri("http://diaryforalan.com#{user_path(sit.user)}")
       end
       entry.content sit.body, :type => 'html'
       entry.updated(sit.updated_at.strftime("%Y-%m-%dT%H:%M:%SZ"))

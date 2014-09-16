@@ -1,35 +1,7 @@
 <footer>
   <div class="container">
-    <div class="col-md-3">
-      <p class="header">Community</p>
-      <ul>
-        <li><a href="https://twitter.com/opensit">Twitter</a></li>
-        <li><a href="https://www.facebook.com/opensit.meditation">Facebook</a></li>
-        <li><a href="https://www.google.com/+Opensitmeditation">Google+</a></li>
-      </ul>
-    </div>
-
-    <div class="col-md-3">
-      <p class="header">About</p>
-      <ul>
-        <li><%= link_to 'Blog', 'http://blog.opensit.com?utm_source=opensit&utm_content=footer_link' %></li>
-        <li><%= link_to 'About OpenSit', about_path %></li>
-        <li><%= link_to 'Contact', contact_path %></li>
-      </ul>
-    </div>
-
-    <div class="col-md-3">
-      <p class="header">Contribute</p>
-      <ul>
-        <li><%= link_to 'How to Contribute', '/contribute' %></li>
-        <li><%= link_to 'GitHub', 'http://github.com/danbartlett/opensit' %></li>
-      </ul>
-    </div>
-
-    <div class="copyright-holder col-md-3">
-      <%= image_tag('/images/default_250.png', class: 'footer-logo') %>
-      <p class="mobile-nav hidden"><a href="/about">About</a> - <a href="/contribute">Contribute</a> - <a href="/contact">Contact</a></p>
-      <p class="copyright">&copy; 2013-<%= Time.now.year %> OpenSit</p>
+    <div class="copyright-holder col-md-12">
+      <p class="copyright">Powered by &copy; 2013-<%= Time.now.year %> <a href="http://opensit.com">OpenSit</a></p>
     </div>
   </div>
 </footer>
