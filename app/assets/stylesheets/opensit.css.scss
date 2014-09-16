@@ -1,5 +1,19 @@
 @import 'opensit/base';
 
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
 /*
  *    LAYOUT
  ************************/
@@ -78,11 +92,8 @@ footer {
   }
   .copyright-holder {
     text-align: center;
-    .footer-logo {
-      margin: 1em 0 0.5em;
-      width: 100px;
-    }
     .copyright {
+      padding: 1em 0;
       color: $dark-grey;
       font-size: 0.7em;
     }
@@ -352,27 +363,19 @@ $colHighlight   : whitesmoke;
 /* Brand header: front page, sign up, sign in */
 .brand-header {
   background: white;
-  float: left;
   width: 100%;
   text-align: center;
-  margin: 4px 0 0 0;
-  border-bottom: 3px solid $green;
-  a {
-    text-decoration: none;
+  padding: 1em 1em;
+
+  h1 {
+    float: left;
+    padding: 0;
+    margin: 0;
   }
-  img {
-    width: 150px;
-  }
-  .opensit {
-    font-size: 1.6em;
-    margin-top: -10px;
-    color: $dark-grey;
-  }
+
   .already-signed-up {
     float: right;
     font-size: 0.8em;
-    margin-top: -47px;
-    margin-right: 20px;
     a {
       margin-left: 8px;
     }
@@ -612,13 +615,14 @@ $colHighlight   : whitesmoke;
 
   // Footer
   footer {
+
     ul, .header {
       display: none;
     }
     .copyright-holder {
-      .footer-logo {
-        width: 75px;
-        margin: 0.5em 2em;
+
+      p.copyright {
+        padding: 2em 0;
       }
     }
     .mobile-nav {

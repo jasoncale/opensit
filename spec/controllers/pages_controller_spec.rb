@@ -12,7 +12,8 @@ describe PagesController, :type => :controller do
       expect(response).to be_success
     end
 
-    it 'loads new sitters' do
+    it 'loads new sitters when signed in' do
+      sign_in @buddha
       dudette = create :user, username: 'ladyperson'
       create :sit, user: dudette, created_at: Date.today
 
