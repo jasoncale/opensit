@@ -1,5 +1,5 @@
 class SitsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!
 
   # GET /sits/1
   def show

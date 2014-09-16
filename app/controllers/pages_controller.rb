@@ -1,12 +1,11 @@
 class PagesController < ApplicationController
+  before_filter :authenticate_user!, except: [:front]
+
   def front
     if user_signed_in?
       redirect_to controller: :users, action: :me
     else
-      @sits = Sit.communal.with_body.newest_first.limit(30)
-      @page_class = 'front-page'
-
-      render 'front', layout: 'minimal'
+      redirect_to new_user_session_path
     end
   end
 

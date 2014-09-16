@@ -12,7 +12,7 @@ describe PagesController, :type => :controller do
   end
 
   describe "GET 'new_sitters" do
-    it 'loads new sitters' do
+    it 'loads new sitters when signed in' do
       sign_in buddha
       dudette = create :user, username: 'ladyperson'
       create :sit, user: dudette, created_at: Date.today
