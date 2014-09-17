@@ -88,3 +88,6 @@ gem 'rvm-capistrano'
 
 # Heroku assets and logging
 gem 'rails_12factor', group: :production
+
+# Importing w/ JSON.
+gem 'json'

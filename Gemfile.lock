@@ -411,6 +411,7 @@ DEPENDENCIES
   jazz_hands!
   jquery-rails (= 2.3.0)
   jquery-turbolinks
+  json
   launchy
   meta_request (= 0.2.6)
   mini_magick
