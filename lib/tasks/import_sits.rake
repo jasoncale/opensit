@@ -1,16 +1,21 @@
+require 'rubygems'
 require 'json'
+require 'net/http'
+
+def fetch(url)
+   resp = Net::HTTP.get_response(URI.parse(url))
+   data = resp.body
+   JSON.parse(data)
+end
 
 desc "Import JSON export into local database .."
-task :import_sits, [:json_file, :username] => [:environment] do |t, args|
+task :import_sits, [:json_url, :username] => [:environment] do |t, args|
 
   user = User.where("lower(username) = lower(?)", args[:username]).first!
 
   if user
-    json_file = args[:json_file]
-
-    if json_file && File.exists?(json_file)
-      file = File.read(json_file)
-      data_hash = JSON.parse(file)
+    if args[:json_url]
+      data_hash = fetch(args[:json_url])
       data_hash.each do |entry|
         old_id = entry.delete('id')
         updated_at = entry.delete('updated_at')
@@ -22,7 +27,7 @@ task :import_sits, [:json_file, :username] => [:environment] do |t, args|
         end
       end
     else
-      puts "pass path=export_json_file.json to the task"
+      puts "pass json_url to the task"
     end
   else
     puts "user not found"
