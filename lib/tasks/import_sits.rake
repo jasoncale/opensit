@@ -9,13 +9,14 @@ def fetch(url)
 end
 
 desc "Import JSON export into local database .."
-task :import_sits, [:json_url, :username] => [:environment] do |t, args|
+task :import_sits, [:json_name, :username] => [:environment] do |t, args|
 
   user = User.where("lower(username) = lower(?)", args[:username]).first!
 
   if user
-    if args[:json_url]
-      data_hash = fetch(args[:json_url])
+    if args[:json_name]
+      url = "https://s3-eu-west-1.amazonaws.com/diaryforalan/data/#{args[:json_name]}"
+      data_hash = fetch(url)
       data_hash.each do |entry|
         old_id = entry.delete('id')
         updated_at = entry.delete('updated_at')
