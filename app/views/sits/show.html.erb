@@ -45,46 +45,44 @@
     <% end %>
 
     <div class="row">
-      <div class="interactions">
+      <div class="like-row">
       <% if current_user %>
-        <div class="col-md-5">
-          <% if @previous %>
-            <%= link_to sit_path(@previous) do %>
-              <div class="sit_preview previous">
-                <div class="arrow">
-                  <i class="fa fa-chevron-left"></i>
-                </div>
-                <%= render partial: 'sit_preview', locals: { sit: @previous } %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-
-        <div class="col-md-2 like-it">
+        <div class="col-md-12 like-it">
           <div id="who_likes">
             <%= render 'likes/like_module' %>
           </div>
-
           <%= render 'shared/like_button' %>
         </div>
+      </div>
+    </div>
 
-        <div class="col-md-5">
-          <% if @next %>
-            <div class="sit_preview next">
-              <%= link_to sit_path(@next) do %>
-                <%= render partial: 'sit_preview', locals: { sit: @next } %>
-                <div class="arrow">
-                  <i class="fa fa-chevron-right"></i>
-                </div>
-              <% end %>
+    <div class="prev-next-row">
+      <% if @previous %>
+        <div class="sit_preview previous">
+          <%= link_to sit_path(@previous) do %>
+            <div class="arrow">
+              <i class="fa fa-chevron-left"></i>
+            </div>
+            <%= render partial: 'sit_preview', locals: { sit: @previous } %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if @next %>
+        <div class="sit_preview next">
+          <%= link_to sit_path(@next) do %>
+            <%= render partial: 'sit_preview', locals: { sit: @next } %>
+            <div class="arrow">
+              <i class="fa fa-chevron-right"></i>
             </div>
           <% end %>
         </div>
+      <% end %>
+
       <% else %>
         <p class="guest-summary">This is meditation journal entry by <%=@user.display_name%>, added on <%=@sit.date%>. They joined <%=time_ago_in_words(@user.created_at)%> ago, and have added <%=@user.sits_count%> entries to date. <strong>Don't miss the next one!</strong> <a href="<%=new_user_registration_path%>">Join today for free</a> to follow them.</p>
         <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='5216674'></div>
       <% end %>
-      </div>
     </div>
 
   </div>
