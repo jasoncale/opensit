@@ -5,27 +5,28 @@
 <div class="clearfix col-md-9">
   <div class="text-section">
 
-  <%= render 'back_button' %>
+    <%= render 'back_button' %>
 
     <header>
       <h1 class="sit-title"><%= @sit.full_title %></h1>
+
       <div class="sit-stats">
         <div class="stat">
-          <i class="fa fa-clock-o"></i> <%= time_ago_in_words(@sit.created_at) %> ago
-            <div class="date"><%= @sit.date %><br>
-    <div class="time"><%= @sit.created_at.strftime("%l:%M %p") %></div>
-  </div>
+          <i class="fa fa-clock-o"></i> <span title="<%= time_ago_in_words(@sit.created_at) %> ago"><%= @sit.date %> <%= @sit.created_at.strftime("%l:%M %p") %></span>
         </div>
         <div class="stat">
           <%= "<i class='fa fa-heart'></i> #{@sit.likes.count}".html_safe if @sit.liked? %>
         </div>
         <div class="stat">
-          <% if !@sit.tags.empty? %>
-            <span class="glyphicon glyphicon-tags"></span><%= tag_labels(@sit.tags) %>
-          <% end %>
+          <%= "<i class='fa fa-comment'></i> #{@sit.comments.count}".html_safe if @sit.comments.present? %>
         </div>
       </div>
-      <!-- <%= @sit.views %> views -->
+
+      <div class="tags-container">
+        <% if !@sit.tags.empty? %>
+          <span class="fa fa-tags"></span><%= tag_labels(@sit.tags) %>
+        <% end %>
+      </div>
     </header>
 
     <% if @sit.user.private_stream %>
@@ -34,7 +35,7 @@
       </div>
     <% elsif @sit.private %>
       <div class="private-warning">
-      <span class="label label-primary"><i class="fa fa-lock"></i> This is a private entry.</span>
+        <span class="label label-primary"><i class="fa fa-lock"></i> This is a private entry.</span>
       </div>
     <% end %>
 
