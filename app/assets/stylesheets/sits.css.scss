@@ -192,14 +192,15 @@ article.sit-teaser-block {
       .sit_preview {
         a {
           font-size: 0.8em;
+          transition: color 0.5s ease;
           padding: 20px;
           display: block;
           width: 50%;
           float: left;
           height: 100px;
-          color: #333;
+          color: $dark-grey;
           &:hover {
-            background: #eee;
+            color: $link-color;
           }
         }
         .arrow {
