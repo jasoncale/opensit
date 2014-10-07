@@ -2,47 +2,8 @@
 <div class="sidebar-content">
 	<div class="display_name"><%= username(@user, false) %></div>
   <div class="username"><%= @user.username %></div>
-	<% if !@user.city.blank? || !@user.country.blank? %>
-		<div class="location info-block">
-			<div class="icon"><i class="fa fa-map-marker"></i></div>
-			<div class="value"><%= @user.location %></div>
-		</div>
-  <% end %>
 
-  <% if !@user.website.blank? %>
-    <div class="user-website info-block">
-      <div class="icon"><i class="fa fa-home"></i></div>
-      <div class="value"> <%= website(@user) %></div>
-    </div>
-  <% end %>
-
-  <div class="info-block">
-    <div class="icon"><i class="fa fa-group"></i></div>
-    <div class="value"><a href="<%= following_user_path(@user) %>"><%= @user.followed_users.count %> following</a> - <a href="<%= followers_user_path(@user) %>"><%= @user.followers.count %> followers</a></div>
-  </div>
-
-  <% if !@user.style.blank? %>
-    <div class="user-style info-block">
-      <div class="icon"><i class="fa fa-bolt"></i></div>
-      <div class="value"> <%= @user.style %></div>
-    </div>
-  <% end %>
-
-  <div class="info-block">
-    <div class="icon"><i class="fa fa-calendar"></i></div>
-    <div class="value">Joined <%=time_ago_in_words(@user.created_at)%> ago</div>
-  </div>
-
-  <div class="info-block">
-    <div class="icon"><i class="fa fa-book"></i></div>
-    <div class="value">Recorded <%= @user.sits_count %> journal entries</div>
-  </div>
-
-  <div class="info-block">
-    <div class="icon"><i class="fa fa-dashboard"></i></div>
-    <div class="value">Logged <%= @user.total_hours_sat %> hours practice</div>
-  </div>
-
+  <%= render 'users/details' %>
 
 	<%= render 'shared/follow_button', :user => @user %>
 </div>

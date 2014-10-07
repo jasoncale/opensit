@@ -12,7 +12,7 @@
 
       <div class="sit-stats">
         <div class="stat">
-          <i class="fa fa-clock-o"></i> <span title="<%= time_ago_in_words(@sit.created_at) %> ago"><%= @sit.date %> <%= @sit.created_at.strftime("%l:%M %p") %></span>
+          <i class="fa fa-clock-o"></i> <span title=""><%= @sit.date %> <%= @sit.created_at.strftime("%l:%M %p") %></span>
         </div>
         <div class="stat">
           <%= "<i class='fa fa-heart'></i> #{@sit.likes.count}".html_safe if @sit.liked? %>

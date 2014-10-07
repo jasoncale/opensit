@@ -72,9 +72,41 @@
 			opacity: 0.7;
 		}
 	}
-	.stats {
-		font-size: 0.8em;
+	.user-details {
+		margin-top: 20px;
+	}
+	.latest {
+		float: left;
+		width: 100%;
+		margin-top: 10px;
+		font-size: 0.7em;
+	}
+	.full-journal-link {
+		clear: left;
 		float: right;
+		width: 100%;
+		text-align: center;
+		font-size: 0.7em;
+	}
+}
+
+// Bullet points: city, followers, style, stats etc.
+.user-details {
+	float: left;
+	.info-block {
+    float: left;
+    width: 100%;
+    color: $dark-grey;
+    font-size: 0.8em;
+    margin: 5px 0;
+		.icon {
+			width: 10%;
+			float: left;
+		}
+		.value {
+			width: 90%;
+			float: left;
+		}
 	}
 }
 
@@ -91,9 +123,7 @@
 /* Recent activity */
 .recent-activity {
 	clear: left;
-	background: #fff;
 	float: left;
-	margin-top: 20px;
 	.activity {
 		padding: 5px;
 		float: left;
@@ -160,23 +190,6 @@
 
 // View user
 .view-user {
-	.sidebar-content {
-		.info-block {
-      float: left;
-      width: 100%;
-      color: $dark-grey;
-      font-size: 0.8em;
-      margin: 5px 0;
-			.icon {
-				width: 10%;
-				float: left;
-			}
-			.value {
-				width: 90%;
-				float: left;
-			}
-		}
-	}
 	.back-button {
     margin-bottom: 15px;
   }
@@ -265,7 +278,13 @@
 			width: 100%;
   	}
     .month_navigation {
-      float: left;
+    	margin-top: 20px;
+    	.previous {
+      	float: left;
+      }
+      .next {
+      	float: right;
+      }
     }
   }
 }

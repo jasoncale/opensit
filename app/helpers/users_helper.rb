@@ -7,7 +7,7 @@ module UsersHelper
     else
       image_link = user.avatar.blank? ? image_path('/images/default_50.png') : user.avatar.url(:small_thumb)
       link_to user_path(user) do
-        image_tag image_link, size: "50x50", alt: user.username, title: user.username
+        image_tag image_link, size: "50x50", alt: user.username, title: user.username, class: 'img-circle'
       end
     end
   end
