@@ -322,7 +322,7 @@ describe User do
       end
     end
 
-    describe "#stream_range" do
+    describe "#journal_range" do
       it "returns an array of arrays of dates and counts"
     end
 

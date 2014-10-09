@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
   # METHODS
   ##
 
-  def latest_sits(current_user)
+  def latest_sit(current_user)
     return sits.newest_first.limit(1) if self == current_user
     return sits.public.newest_first.limit(1)
   end
@@ -100,14 +100,24 @@ class User < ActiveRecord::Base
   end
 
   def hours_sat_this_month(month: month, year: year)
-    sits.where("EXTRACT(year FROM created_at) = ?
-      AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0')).sum(:duration) / 60
+    minutes = sits.where("EXTRACT(year FROM created_at) = ?
+      AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0')).sum(:duration)
+    total = (minutes / 60.0).round(1).to_s.gsub('.0', '')
   end
 
   # Do not put me in a loop! Use #days_sat_in_date_range
   # Returns true if user sat on the date passed
   def sat_on_date?(date)
     sits.where(created_at: date.beginning_of_day..date.end_of_day).present?
+  end
+
+  # Convenience method for generating monthly stats for /u/
+  def get_monthly_stats(month, year)
+    @stats = {}
+    @stats[:days_sat_this_month] = days_sat_in_date_range(Date.new(year.to_i, month.to_i, 01), Date.new(year.to_i, month.to_i, -1))
+    @stats[:hours_sat_this_month] = hours_sat_this_month(month: month, year: year)
+    @stats[:entries_this_month] = sits_by_month(month: month, year: year).count
+    @stats
   end
 
   # Returns the number of days, in a date range, where the user sat
@@ -166,14 +176,15 @@ class User < ActiveRecord::Base
     sits.sum(:duration) / 60
   end
 
-  def stream_range
+  # Returns list of months a user has sat, and sitting totals for each month
+  def journal_range
     return false if self.sits.empty?
 
     first_sit = Sit.where("user_id = ?", self.id).order(:created_at).first.created_at.strftime("%Y %m").split(' ')
     year, month = Time.now.strftime("%Y %m").split(' ')
     dates = []
 
-    # Build list of all months from first lsit to current date
+    # Build list of all months from first sit to current date
     while [year.to_s, month.to_s.rjust(2, '0')] != first_sit
       month = month.to_i
       year = year.to_i
@@ -186,29 +197,38 @@ class User < ActiveRecord::Base
       end
     end
 
-    # Add first sit month
+    # Add first sitting month
     dates << [first_sit[0].to_i, first_sit[1].to_i]
+
+    # Object to return, containing two arrays
+    @obj = {}
+
+    # Used to list number of sits per month
+    @obj[:sitting_totals] = []
+
+    # Used to provide a simple list of available months for navigation
+    @obj[:list_of_months] = []
 
     # Filter out any months with no activity
     pointer = 1900
-    links = []
     dates.each do |m|
       year, month = m
       month_total = self.sits_by_month(month: month, year: year).count
 
       if pointer != year
         year_total = self.sits_by_year(year).count
-        links <<  [year, year_total]
+        @obj[:sitting_totals] << [year, year_total] if !year_total.zero?
       end
 
       if month_total != 0
-        links << [month, month_total]
+        @obj[:sitting_totals] << [month, month_total]
+        @obj[:list_of_months] << "#{year} #{month.to_s.rjust(2, '0')}"
       end
 
       pointer = year
     end
 
-    return links
+    return @obj
   end
 
   def socialstream

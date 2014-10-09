@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def me
     @feed_items = current_user.socialstream.paginate(:page => params[:page])
     @user = current_user
-    @latest = @user.latest_sits(current_user)
+    @latest = @user.latest_sit(current_user)
     @goals = @user.goals
 
     @goals.each do |g|
@@ -38,29 +38,50 @@ class UsersController < ApplicationController
   def show
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @total_hours = @user.total_hours_sat
-    @links = @user.stream_range
+    @by_month = @user.journal_range
 
-    if !@user.private_stream || (current_user == @user)
-      if params[:year] && params[:month]
-        @prev = Date.new(params[:year].to_i, params[:month].to_i, 01) - 1.day
-        @next = Date.new(params[:year].to_i, params[:month].to_i, -1) + 1.day
-        if current_user == @user
-          @sits = @user.sits_by_month(month: params[:month], year: params[:year]).newest_first
-          @days_sat_this_month = @user.days_sat_in_date_range(Date.new(params[:year].to_i, params[:month].to_i, 01), Date.new(params[:year].to_i, params[:month].to_i, -1))
-          @hours_sat_this_month = @user.hours_sat_this_month(month: params[:month], year: params[:year])
-          @entries_this_month = @user.sits_by_month(month: params[:month], year: params[:year]).count
-        else
-          @sits = @user.sits_by_month(month: params[:month], year: params[:year]).public.newest_first
-        end
-        @range_title = "#{Date::MONTHNAMES[params[:month].to_i]}, #{params[:year]}"
+    # Viewing by month?
+    if params[:year] && params[:month]
+      @month_view = true
+      index = @by_month[:list_of_months].index "#{params[:year]} #{params[:month]}"
+
+      if @by_month[:list_of_months][index + 1]
+        @prev = @by_month[:list_of_months][index + 1].split(' ')
+      end
+
+      if @by_month[:list_of_months][index - 1]
+        @next = @by_month[:list_of_months][index - 1].split(' ')
+      end
+    else
+      @prev = Date.today.beginning_of_month - 1.day
+      @next = Date.today.end_of_month + 1.day
+    end
+
+    # Viewing your own profile
+    if current_user == @user
+      # Month view
+      if @month_view
+        @sits = @user.sits_by_month(month: params[:month], year: params[:year]).newest_first
+        @stats = @user.get_monthly_stats(params[:month], params[:year])
+
+      # My profile
       else
-        @prev = Date.today.beginning_of_month - 1.day
-        @next = Date.today.end_of_month + 1.day
-        # @range_title = "#{Date::MONTHNAMES[month.to_i]}, #{year}"
-        if current_user && @user.id == current_user.id
-          @sits = @user.sits_by_month(month: Date.today.month, year: Date.today.year).newest_first
+        @sits = @user.sits_by_month(month: Date.today.month, year: Date.today.year).newest_first
+        @stats = @user.get_monthly_stats(Date.today.month, Date.today.year)
+      end
+
+    # Viewing someone elses profile
+    else
+      if !@user.private_stream
+        # Month view
+        if @month_view
+          @sits = @user.sits_by_month(month: params[:month], year: params[:year]).public.newest_first
+          @stats = @user.get_monthly_stats(params[:month], params[:year])
+
+        # Profile
         else
           @sits = @user.sits_by_month(month: Date.today.month, year: Date.today.year).public.newest_first
+          @stats = @user.get_monthly_stats(Date.today.month, Date.today.year)
         end
       end
     end
@@ -74,7 +95,7 @@ class UsersController < ApplicationController
   def following
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followed_users
-    @latest = @user.latest_sits(current_user)
+    @latest = @user.latest_sit(current_user)
 
     if @user == current_user
       @title = "People I follow"
@@ -90,7 +111,7 @@ class UsersController < ApplicationController
   def followers
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followers
-    @latest = @user.latest_sits(current_user)
+    @latest = @user.latest_sit(current_user)
 
     if @user == current_user
       @title = "People who follow me"

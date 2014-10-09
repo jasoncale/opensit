@@ -50,7 +50,7 @@ module UsersHelper
         current_year = type
         "<optgroup label='#{type} (#{count})'>"
       else
-        "<option " + (current_year == params[:year].to_i && type == params[:month].to_i ? 'selected ' : '') + "value='" + "#{user_path(params[:username])}/#{params[:id]}?year=#{current_year}&month=#{type}" + "'>" + "#{Date::MONTHNAMES[type]}, #{current_year}</option>"
+        "<option " + (current_year == params[:year].to_i && type == params[:month].to_i ? 'selected ' : '') + "value='" + "#{user_path(params[:username])}/#{params[:id]}?year=#{current_year}&month=#{type.to_s.rjust(2, '0')}" + "'>" + "#{Date::MONTHNAMES[type]}, #{current_year}</option>"
       end
     end.join(' ').html_safe
   end
