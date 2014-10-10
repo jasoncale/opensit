@@ -40,49 +40,28 @@ class UsersController < ApplicationController
     @total_hours = @user.total_hours_sat
     @by_month = @user.journal_range
 
-    # Viewing by month?
-    if params[:year] && params[:month]
-      @month_view = true
-      index = @by_month[:list_of_months].index "#{params[:year]} #{params[:month]}"
+    month = params[:month] ? params[:month] : Date.today.month
+    year = params[:year] ? params[:year] : Date.today.year
+    index = @by_month[:list_of_months].index "#{year} #{month}"
 
-      if @by_month[:list_of_months][index + 1]
-        @prev = @by_month[:list_of_months][index + 1].split(' ')
-      end
+    if @by_month[:list_of_months][index + 1]
+      @prev = @by_month[:list_of_months][index + 1].split(' ')
+    end
 
-      if @by_month[:list_of_months][index - 1]
-        @next = @by_month[:list_of_months][index - 1].split(' ')
-      end
-    else
-      @prev = Date.today.beginning_of_month - 1.day
-      @next = Date.today.end_of_month + 1.day
+    if !index.zero?
+      @next = @by_month[:list_of_months][index - 1].split(' ')
     end
 
     # Viewing your own profile
     if current_user == @user
-      # Month view
-      if @month_view
-        @sits = @user.sits_by_month(month: params[:month], year: params[:year]).newest_first
-        @stats = @user.get_monthly_stats(params[:month], params[:year])
-
-      # My profile
-      else
-        @sits = @user.sits_by_month(month: Date.today.month, year: Date.today.year).newest_first
-        @stats = @user.get_monthly_stats(Date.today.month, Date.today.year)
-      end
+      @sits = @user.sits_by_month(month: month, year: year).newest_first
+      @stats = @user.get_monthly_stats(month, year)
 
     # Viewing someone elses profile
     else
       if !@user.private_stream
-        # Month view
-        if @month_view
-          @sits = @user.sits_by_month(month: params[:month], year: params[:year]).public.newest_first
-          @stats = @user.get_monthly_stats(params[:month], params[:year])
-
-        # Profile
-        else
-          @sits = @user.sits_by_month(month: Date.today.month, year: Date.today.year).public.newest_first
-          @stats = @user.get_monthly_stats(Date.today.month, Date.today.year)
-        end
+        @sits = @user.sits_by_month(month: month, year: year).public.newest_first
+        @stats = @user.get_monthly_stats(month, year)
       end
     end
 

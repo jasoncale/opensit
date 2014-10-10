@@ -90,7 +90,7 @@
             <a class="previous" href="?year=<%=@prev[0]%>&month=<%=@prev[1]%>"><i class="fa fa-chevron-left"></i> Previous</a>
           <% end %>
 
-          <% unless @next[0] == Date.today.year && @next[1] > Date.today.month %>
+          <% if @next %>
             <a class="next" href="?year=<%=@next[0]%>&month=<%=@next[1]%>">Next <i class="fa fa-chevron-right"></i></a>
           <% end %>
         </div>

@@ -57,28 +57,28 @@
       </div>
     </div>
 
-    <div class="prev-next-row">
-      <% if @previous %>
-        <div class="sit_preview previous">
-          <%= link_to sit_path(@previous) do %>
-            <div class="arrow">
-              <i class="fa fa-chevron-left"></i>
-            </div>
-            <%= render partial: 'sit_preview', locals: { sit: @previous } %>
-          </div>
-        <% end %>
-      <% end %>
-
-      <% if @next %>
-        <div class="sit_preview next">
-          <%= link_to sit_path(@next) do %>
-            <%= render partial: 'sit_preview', locals: { sit: @next } %>
-            <div class="arrow">
-              <i class="fa fa-chevron-right"></i>
+      <div class="prev-next-row">
+        <% if @previous %>
+          <div class="sit_preview previous">
+            <%= link_to sit_path(@previous) do %>
+              <div class="arrow">
+                <i class="fa fa-chevron-left"></i>
+              </div>
+              <%= render partial: 'sit_preview', locals: { sit: @previous } %>
             </div>
           <% end %>
-        </div>
-      <% end %>
+        <% end %>
+
+        <% if @next %>
+          <div class="sit_preview next">
+            <%= link_to sit_path(@next) do %>
+              <%= render partial: 'sit_preview', locals: { sit: @next } %>
+              <div class="arrow">
+                <i class="fa fa-chevron-right"></i>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
 
       <% else %>
         <p class="guest-summary">This is meditation journal entry by <%=@user.display_name%>, added on <%=@sit.date%>. They joined <%=time_ago_in_words(@user.created_at)%> ago, and have added <%=@user.sits_count%> entries to date. <strong>Don't miss the next one!</strong> <a href="<%=new_user_registration_path%>">Join today for free</a> to follow them.</p>
