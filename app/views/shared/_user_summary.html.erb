@@ -14,19 +14,20 @@
 
       <%= render 'users/details' %>
 
-      <div class="latest">LATEST</div>
       <% if @latest.empty? %>
         <% if current_user && (current_user.id == @user.id) %>
             <div class="add-a-sit">
               <a href="<%=new_sit_path%>" class="btn btn-lg btn-primary"> <i class="fa fa-plus"></i> Add your first sit</a></div>
         <% end %>
       <% elsif @latest %>
+        <div class="latest">LATEST</div>
         <%= render 'shared/recent_activity' %>
       <% end %>
-      <a class="full-journal-link" href="<%=user_path(@user)%>">View full meditation journal</a>
 
       <% if controller.action_name == 'me' %>
         <%= render 'goals/goal_module' %>
+      <% else %>
+        <a class="full-journal-link" href="<%=user_path(@user)%>">View full meditation journal</a>
       <% end %>
     </div>
   </div>
