@@ -42,14 +42,25 @@ class UsersController < ApplicationController
 
     month = params[:month] ? params[:month] : Date.today.month
     year = params[:year] ? params[:year] : Date.today.year
-    index = @by_month[:list_of_months].index "#{year} #{month}"
 
-    if @by_month[:list_of_months][index + 1]
-      @prev = @by_month[:list_of_months][index + 1].split(' ')
-    end
+    index = @by_month[:list_of_months].index "#{year} #{month}" if @user.sits.present?
 
-    if !index.zero?
-      @next = @by_month[:list_of_months][index - 1].split(' ')
+    # Generate prev/next links
+    # .. for someone who's sat this month
+    if index
+      if @by_month[:list_of_months][index + 1]
+        @prev = @by_month[:list_of_months][index + 1].split(' ')
+      end
+
+      if !index.zero?
+        @next = @by_month[:list_of_months][index - 1].split(' ')
+      end
+    else
+      if @by_month
+        # Haven't sat this month - when was the last time they sat?
+        @first_month =  @by_month[:list_of_months].first.split(' ')
+      end
+      # Haven't sat at all
     end
 
     # Viewing your own profile

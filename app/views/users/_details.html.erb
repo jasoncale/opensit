@@ -38,10 +38,12 @@
     <div class="value">Joined <%=time_ago_in_words(@user.created_at)%> ago</div>
   </div>
 
-  <div class="info-block">
-    <div class="icon"><i class="fa fa-book"></i></div>
-    <div class="value">Recorded <%= @user.sits_count %> journal entries</div>
-  </div>
+  <% if @user.sits.count > 0 %>
+    <div class="info-block">
+      <div class="icon"><i class="fa fa-book"></i></div>
+      <div class="value">Recorded <%= @user.sits_count %> journal entries</div>
+    </div>
+  <% end %>
 
   <% if @user.total_hours_sat > 0 %>
     <div class="info-block">

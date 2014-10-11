@@ -44,6 +44,7 @@ module UsersHelper
 
   def timeline(dates)
     current_year = Time.now.year
+
     dates.map do |l|
       type, count = l
       if type.to_s.size == 4

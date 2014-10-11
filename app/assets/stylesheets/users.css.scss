@@ -193,8 +193,8 @@
 	.back-button {
     margin-bottom: 15px;
   }
-	.empty-profile {
-		padding: 20px 20px 0 20px;
+	.fill-out-your-profile {
+		text-align: center;
 	}
 	.profile {
 		float: left;
@@ -263,6 +263,7 @@
   			width: 50px;
   			margin-right: 0.5em;
   			text-align: center;
+  			color: #999;
   		}
   		.teaser {
   			float: left;
@@ -279,6 +280,9 @@
   	}
     .month_navigation {
     	margin-top: 20px;
+    	a {
+    		padding: 10px;
+    	}
     	.previous {
       	float: left;
       }

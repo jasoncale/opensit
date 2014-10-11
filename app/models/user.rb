@@ -214,6 +214,8 @@ class User < ActiveRecord::Base
 
     # Filter out any months with no activity
     pointer = 2000
+
+    # dates is an array of months: ["2014 10", "2014 9"]
     dates.each do |m|
       year, month = m
       month_total = self.sits_by_month(month: month, year: year).count
@@ -229,12 +231,6 @@ class User < ActiveRecord::Base
       end
 
       pointer = year
-    end
-
-    # Add current month (in case user hasn't sat this month)
-    if !@obj[:list_of_months].index "#{Date.today.year} #{Date.today.month}"
-      @obj[:list_of_months].push "#{Date.today.year} #{Date.today.month}"
-      @obj[:sitting_totals].unshift [Date.today.month, 0]
     end
 
     return @obj
