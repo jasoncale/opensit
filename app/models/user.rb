@@ -99,10 +99,13 @@ class User < ActiveRecord::Base
       AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0'))
   end
 
-  def hours_sat_this_month(month: month, year: year)
+  def time_sat_this_month(month: month, year: year)
     minutes = sits.where("EXTRACT(year FROM created_at) = ?
       AND EXTRACT(month FROM created_at) = ?", year.to_s, month.to_s.rjust(2, '0')).sum(:duration)
-    total = (minutes / 60.0).round(1).to_s.gsub('.0', '')
+    total_time = minutes.divmod(60)
+    text = "#{total_time[0]} hours"
+    text << " #{total_time[1]} minutes" if !total_time[1].zero?
+    text
   end
 
   # Do not put me in a loop! Use #days_sat_in_date_range
@@ -115,7 +118,7 @@ class User < ActiveRecord::Base
   def get_monthly_stats(month, year)
     @stats = {}
     @stats[:days_sat_this_month] = days_sat_in_date_range(Date.new(year.to_i, month.to_i, 01), Date.new(year.to_i, month.to_i, -1))
-    @stats[:hours_sat_this_month] = hours_sat_this_month(month: month, year: year)
+    @stats[:time_sat_this_month] = time_sat_this_month(month: month, year: year)
     @stats[:entries_this_month] = sits_by_month(month: month, year: year).count
     @stats
   end
@@ -206,11 +209,11 @@ class User < ActiveRecord::Base
     # Used to list number of sits per month
     @obj[:sitting_totals] = []
 
-    # Used to provide a simple list of available months for navigation
+    # Used to provide a simple list of available months for dropdown select navigation
     @obj[:list_of_months] = []
 
     # Filter out any months with no activity
-    pointer = 1900
+    pointer = 2000
     dates.each do |m|
       year, month = m
       month_total = self.sits_by_month(month: month, year: year).count
@@ -226,6 +229,12 @@ class User < ActiveRecord::Base
       end
 
       pointer = year
+    end
+
+    # Add current month (in case user hasn't sat this month)
+    if !@obj[:list_of_months].index "#{Date.today.year} #{Date.today.month}"
+      @obj[:list_of_months].push "#{Date.today.year} #{Date.today.month}"
+      @obj[:sitting_totals].unshift [Date.today.month, 0]
     end
 
     return @obj
