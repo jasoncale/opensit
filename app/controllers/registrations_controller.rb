@@ -26,4 +26,9 @@ class RegistrationsController < Devise::RegistrationsController
     @users = User.all.where("avatar_file_name <> ''").where("sits_count > 1").sample(6)
     super
   end
+
+  def create
+    @users = User.all.where("avatar_file_name <> ''").where("sits_count > 1").sample(6)
+    super
+  end
 end
