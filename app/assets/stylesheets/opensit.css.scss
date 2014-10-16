@@ -310,6 +310,7 @@ $colHighlight   : whitesmoke;
   border-top: 3px solid $green;
   float: left;
   width: 100%;
+  word-wrap: break-word;
   @include rounded-bottom;
   h1 {
     margin-top: 0;
