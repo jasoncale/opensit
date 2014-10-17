@@ -50,6 +50,7 @@ article.sit-teaser-block {
     border: 1px solid $light-border;
     background: #fff;
     margin: 0 0 10px 0;
+    width: 100%;
     &:hover {
       cursor: pointer;
       background: #eee;
@@ -60,6 +61,7 @@ article.sit-teaser-block {
     padding: 5px;
     width: 92%;
     font-size: 0.8em;
+    word-wrap: break-word;
   }
   .bottom-row {
     font-size: 0.7em;
