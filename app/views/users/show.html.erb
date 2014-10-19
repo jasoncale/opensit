@@ -29,9 +29,14 @@
 
         <% if !@user.who.blank? %>
           <div class="profile">
-            <p class="lead"><%= @user.who.html_safe %></p>
+            <p class="lead"><%= @user.who.html_safe %>
 
-            <div class="hidden">
+            <% if @user.practice || @user.why %>
+              <a href="#" class="expand-profile">More</a>
+            <% end %>
+            </p>
+
+            <div class="full-profile">
               <% if !@user.why.blank? %>
                 <div class="profile-field">
                   <div class="title">Why do you practice?</div>
@@ -52,7 +57,7 @@
     <% end %>
 
     <% if @sits %>
-      <div class="month-view text-section">
+      <div class="month-view">
 
       <% if !@stats[:days_sat_this_month].zero? %>
         <select class="date_range_select">
@@ -82,11 +87,11 @@
         <% if !@stats[:days_sat_this_month].zero? %>
           <div class="month_navigation col-md-12">
             <% if @prev %>
-              <a class="previous" href="?year=<%=@prev[0]%>&month=<%=@prev[1]%>"><i class="fa fa-chevron-left"></i> Previous</a>
+              <a class="previous" href="?year=<%=@prev[0]%>&month=<%=@prev[1]%>">&larr; Previous</a>
             <% end %>
 
             <% if @next %>
-              <a class="next" href="?year=<%=@next[0]%>&month=<%=@next[1]%>">Next <i class="fa fa-chevron-right"></i></a>
+              <a class="next" href="?year=<%=@next[0]%>&month=<%=@next[1]%>">Next &rarr;</a>
             <% end %>
           </div>
         <% end %>

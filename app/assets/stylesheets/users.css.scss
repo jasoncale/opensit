@@ -78,15 +78,16 @@
 	.latest {
 		float: left;
 		width: 100%;
-		margin-top: 10px;
+		margin-top: 20px;
+		font-weight: bold;
 		font-size: 0.7em;
 	}
 	.full-journal-link {
 		clear: left;
-		float: right;
+		float: left;
 		width: 100%;
-		text-align: center;
 		font-size: 0.7em;
+		margin-left: 25px;
 	}
 }
 
@@ -153,6 +154,7 @@
 			margin-top: 2px;
 			.title {
 				font-size: 14px;
+				margin-top: 2px;
 				.date {
 					float: right;
 					font-size: 0.8em;
@@ -201,17 +203,15 @@
 		float: left;
 		width: 100%;
 		background: white;
-		border: 1px solid $light-border;
 		border-top: 3px solid $green;
 		margin-bottom: 20px;
-		padding-bottom: 20px;
+		padding: 20px 40px 0 40px;
 		@include rounded-bottom;
 		.lead {
 			clear: both;
-			margin: 20px 20px 30px 20px;
 		}
 		.profile-field {
-			margin: 20px;
+			margin-bottom: 20px;
 			float: left;
 			font-size: 0.9em;
 			.title {
@@ -223,11 +223,26 @@
 		.edit-profile-btn {
 			margin-bottom: 10px;
 		}
+		// More ->
+		.expand-profile {
+			font-size: 0.8em;
+			font-weight: bold;
+			float: right;
+			margin: 20px;
+		}
+		.full-profile {
+			display: none;
+		}
 	}
   .month-view {
   	clear: left;
-  	width: 100%;
-  	float: left;
+  	background: white;
+		padding: 20px;
+		float: left;
+		width: 100%;
+		// box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.18);
+		border: 1px solid #e2e2e2;
+		border-radius: 5px 5px 5px 5px;
     .month_stats_container {
       float: left;
       width: 100%;

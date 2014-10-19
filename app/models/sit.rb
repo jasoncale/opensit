@@ -41,7 +41,7 @@ class Sit < ActiveRecord::Base
   # For use on show sit pages
   def full_title
     if s_type == 0
-      "#{self.duration} minute meditation sit"
+      "#{self.duration} minute meditation journal"
     elsif s_type == 1
       self.title # Diary
     else

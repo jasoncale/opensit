@@ -36,9 +36,9 @@ module UsersHelper
   # Return link to website
   def website(user)
     if user.website =~ /^(http|https):\/\//
-      link_to user.website, user.website
+      link_to user.website, user.website, rel: 'nofollow'
     else
-      link_to user.website, "http://#{user.website}"
+      link_to user.website, "http://#{user.website}", rel: 'nofollow'
     end
   end
 

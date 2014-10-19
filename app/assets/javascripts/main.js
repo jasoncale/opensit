@@ -75,6 +75,12 @@ $(document).ready(function(){
     Turbolinks.visit($(this).val());
   });
 
+  // VIEW PROFILE / Full profile
+  $('.expand-profile').click( function(e) {
+    e.preventDefault();
+    $('.full-profile').slideToggle();
+  })
+
   // LIKES / a sit
   $('#like_button').on('click', '.toggle-like', function(e) {
     e.preventDefault();
