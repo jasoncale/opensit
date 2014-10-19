@@ -564,36 +564,30 @@ $colHighlight   : whitesmoke;
     }
     .text-section {
       .back-button {
-        margin-left: 0;
+        margin-left: 10px;
+      }
+      header {
+        padding: 0 10px;
+        .mobile-user-summary {
+          display: block;
+          text-align: center;
+          margin-bottom: 10px;
+        }
       }
       h1.sit-title {
-        font-size: 1.5em !important;
+        font-size: 1.2em !important;
         margin-bottom: 20px;
       }
       .body {
-        margin: 0 !important;
+        margin: 0 10px !important;
         font-size: 1em !important;
       }
-      .interactions {
-        .save-it {
-          text-align: center;
-          .save-it-text {
-            margin-left: 0;
-          }
-          .toggle-favourite {
-            margin: 0;
-          }
-        }
-        .like-it {
-          margin-top: 20px !important;
-        }
-        .share-buttons {
-          margin-top: 45px !important;
-          text-align: center !important;
-          .share-it {
-            margin: 0 !important;
-          }
-        }
+      // Prev/next navigation
+      .sit_preview .content {
+        display: none;
+      }
+      .sit_preview.next .arrow {
+        float: right;
       }
     }
   }
