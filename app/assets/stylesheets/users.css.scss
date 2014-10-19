@@ -372,8 +372,7 @@
 .user-teaser {
 	float: left;
 	width: 100%;
-	margin: 5px 0;
-	height: 70px;
+	margin: 5px 0 20px;
 	.avatar {
 		float: left;
 		width: 60px;
@@ -398,9 +397,6 @@
 		}
 		.joined {
 			color: #CCC;
-		}
-		.follow_form input {
-			margin-top: -45px;
 		}
 	}
 }

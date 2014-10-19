@@ -395,12 +395,13 @@ $colHighlight   : whitesmoke;
 /* Follow button */
 .follow_form {
   margin-top: 10px;
-  float: left;
   text-align: right;
-  clear: both;
   width: 100%;
   form {
     margin-bottom: 5px;
+    input {
+      // margin-top: -90px;
+    }
   }
 }
 
@@ -548,6 +549,25 @@ $colHighlight   : whitesmoke;
   // About
   .about .logomark {
     width: 100%;
+  }
+
+  // Explore comments
+  .comment-teaser {
+    .body {
+      margin-left: 0;
+    }
+    .comment-meta .text .summary {
+      margin-bottom: 10px;
+    }
+  }
+
+  // Explore users
+  .user-teaser .details .follow_form {
+    text-align: left;
+    float: left;
+    input {
+      margin-top: 0;
+    }
   }
 
   // Hide page images
