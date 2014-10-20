@@ -4,7 +4,7 @@
     	<div class="avatar">
     		<%= small_avatar_of(@user) %>
     	</div>
-    	<div class="details">
+    	<div class="name-location">
     		<div class="username"><%= username(@user) %></div>
     		<% if !@user.city.blank? || !@user.country.blank? %>
     			<div class="location"><%= @user.location %></div>

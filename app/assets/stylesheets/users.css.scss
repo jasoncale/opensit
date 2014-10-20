@@ -56,7 +56,7 @@
 		height: 50px;
 		width: 50px;
 	}
-	.details {
+	.name-location {
 		float: left;
 		width: calc(100% - 50px);
 		height: 50px;
@@ -110,6 +110,9 @@
 			width: 90%;
 			float: left;
 		}
+	}
+	.user-website a {
+		word-break: break-word;
 	}
 }
 
