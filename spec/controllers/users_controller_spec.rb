@@ -93,22 +93,20 @@ describe UsersController, :type => :controller do
   describe 'Profiles details and edit' do
     context 'someone elses' do
       it 'load profile' do
-        @ananda = create :user, username: 'ananda', why: 'to get sat0ri'
+        @ananda = create :user, username: 'ananda', who: 'to get sat0ri'
         sign_in @buddha
         get :show, username: 'ananda'
         expect(assigns(:user)).to eq(@ananda)
         expect(response.body).to include('to get sat0ri')
-        expect(response.body).to_not have_css('a.edit-profile-btn', text: 'Edit profile')
       end
     end
     context 'own profile' do
       it 'load profile with edit button' do
-        @deva = create :user, username: 'deva', why: 'seduce lustful practitioners'
+        @deva = create :user, username: 'deva', who: 'seduce lustful practitioners'
         sign_in @deva
         get :show, username: 'deva'
         expect(assigns(:user)).to eq(@deva)
         expect(response.body).to include('seduce lustful practitioners')
-        expect(response.body).to have_css('a.edit-profile-btn', text: 'Edit profile')
       end
     end
   end
