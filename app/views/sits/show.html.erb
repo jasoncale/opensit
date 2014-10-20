@@ -17,6 +17,11 @@
 
       <div class="sit-stats">
         <div class="stat">
+          <% if current_user and @sit.mine?(current_user) %>
+            <%= link_to 'Edit', edit_sit_path(@sit) %>
+          <% end %>
+        </div>
+        <div class="stat">
           <i class="fa fa-clock-o"></i> <span title=""><%= @sit.date %> <%= @sit.created_at.strftime("%l:%M %p") %></span>
         </div>
         <div class="stat">
@@ -46,21 +51,18 @@
 
     <div class="body"><%= @sit.body.html_safe %></div>
 
-    <% if current_user and @sit.mine?(current_user) %>
-      <div class="my-actions"><%= link_to 'Edit', edit_sit_path(@sit), :class => 'btn btn-default btn-mini' %></div>
-    <% end %>
-
-    <div class="row">
-      <div class="like-row">
-      <% if current_user %>
-        <div class="col-md-12 like-it">
-          <div id="who_likes">
-            <%= render 'likes/like_module' %>
+    <% if current_user %>
+      <div class="row">
+        <div class="like-row<%= ' my-sit' if current_user == @user %>">
+          <div class="col-md-12 like-it">
+            <div id="who_likes">
+              <%= render 'likes/like_module' %>
+            </div>
+            <%= render 'shared/like_button' %>
           </div>
-          <%= render 'shared/like_button' %>
         </div>
       </div>
-    </div>
+    <% end %>
 
       <div class="prev-next-row">
         <% if @previous %>
@@ -84,14 +86,8 @@
             <% end %>
           </div>
         <% end %>
-
-      <% else %>
-        <p class="guest-summary">This is meditation journal entry by <%=@user.display_name%>, added on <%=@sit.date%>. They joined <%=time_ago_in_words(@user.created_at)%> ago, and have added <%=@user.sits_count%> entries to date. <strong>Don't miss the next one!</strong> <a href="<%=new_user_registration_path%>">Join today for free</a> to follow them.</p>
-        <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='5216674'></div>
-      <% end %>
+      </div>
     </div>
-
-  </div>
 
   <% if !@sit.disable_comments && !@sit.private %>
     <div class="comments">

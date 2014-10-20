@@ -151,7 +151,7 @@ article.sit-teaser-block {
     .body {
       font-size: 1.1em;
       line-height: 1.5;
-      margin: 0 60px;
+      margin: 0 60px 3em 60px;
       li {
         margin: 10px 0;
         line-height: 1.5;
@@ -162,7 +162,7 @@ article.sit-teaser-block {
     .like-row {
       float: left;
       width: 100%;
-      margin-top: 3em;
+      margin-bottom: 2em;
       padding: 1em 0 0em;
       color: $dark-grey;
       font-size: 0.9em;
@@ -187,9 +187,13 @@ article.sit-teaser-block {
         }
       }
     }
+    .like-row.my-sit {
+      height: auto;
+    }
 
     // Prev/next clickable areas
     .prev-next-row {
+      margin-top: 1em;
       border-top: 1px $light-border solid;
       .sit_preview {
         a {
