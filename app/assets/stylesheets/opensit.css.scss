@@ -505,6 +505,9 @@ $colHighlight   : whitesmoke;
 
   // Sign up page
   .sign-up-box {
+    h1 {
+      font-size: 1em;
+    }
     .user-snippet {
       width: 33% !important;
     }
@@ -517,6 +520,16 @@ $colHighlight   : whitesmoke;
     }
   }
 
+  // Sign in
+  .sign-in {
+    h1 {
+      font-size: 25px;
+    }
+    .remember label {
+      margin-top: 7px;
+    }
+  }
+
   // Alerts
   .alert {
     width: 100%;
@@ -526,6 +539,15 @@ $colHighlight   : whitesmoke;
   .front-page {
     .three-panes {
       padding-left: 0 !important;
+    }
+    button.sign-up {
+      margin-top: 30px !important;
+    }
+    .copy {
+      font-size: 14px;
+      h1 {
+        font-size: 25px;
+      }
     }
   }
 
@@ -599,8 +621,12 @@ $colHighlight   : whitesmoke;
         margin-bottom: 20px;
       }
       .body {
-        margin: 0 10px !important;
-        font-size: 1em !important;
+        margin: 0 20px !important;
+        font-size: 0.9em !important;
+      }
+      .like-row {
+        margin-top: 1em;
+        margin-bottom: 0;
       }
       // Prev/next navigation
       .sit_preview .content {
@@ -617,10 +643,18 @@ $colHighlight   : whitesmoke;
     position: static; // Unclickable links fix
     padding-left: 0;
     padding-right: 0;
+    margin-bottom: 25px;
   }
   .header-tile {
     width: 100%;
     margin-bottom: 20px;
+  }
+
+  // Month view / profile
+  .month-view {
+    .entry .link {
+      width: auto !important;
+    }
   }
 
   // Footer
