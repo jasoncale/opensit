@@ -1,0 +1,50 @@
+<div class="user-details">
+  <% if @user.streak > 1 %>
+    <div class="location info-block">
+      <div class="icon"><i class="fa fa-bolt"></i></div>
+      <div class="value" title="<%= @user == current_user ? 'You have' : "#{@user.display_name} has" %> sat for <%=@user.streak%> days in a row!">
+      <strong><%=@user.streak%> day streak!</strong></div>
+    </div>
+  <% end %>
+
+  <div class="info-block">
+    <div class="icon"><i class="fa fa-group"></i></div>
+    <div class="value"><a href="<%= following_user_path(@user) %>"><%= @user.followed_users.count %> following</a> - <a href="<%= followers_user_path(@user) %>"><%= @user.followers.count %> followers</a></div>
+  </div>
+
+  <% if @user.sits.count > 0 %>
+    <div class="info-block">
+      <div class="icon"><i class="fa fa-book"></i></div>
+      <div class="value">Recorded <%= @user.sits_count %> journal entries</div>
+    </div>
+  <% end %>
+
+  <% if @user.total_hours_sat > 0 %>
+    <div class="info-block">
+      <div class="icon"><i class="fa fa-dashboard"></i></div>
+      <div class="value">Logged <%= @user.total_hours_sat %> hours practice</div>
+    </div>
+  <% end %>
+
+  <% if request.path != '/me' %>
+    <% if !@user.style.blank? %>
+      <div class="user-style info-block">
+        <div class="icon"><i class="fa fa-sliders"></i></div>
+        <div class="value"> <%= @user.style %></div>
+      </div>
+    <% end %>
+
+    <div class="info-block">
+      <div class="icon"><i class="fa fa-calendar"></i></div>
+      <div class="value">Joined <%=time_ago_in_words(@user.created_at)%> ago</div>
+    </div>
+
+    <% if !@user.website.blank? %>
+      <div class="user-website info-block">
+        <div class="icon"><i class="fa fa-home"></i></div>
+        <div class="value"> <%= website(@user) %></div>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>

@@ -255,10 +255,9 @@ $colHighlight   : whitesmoke;
   padding: 0 10px 10px 0;
   .content {
     @include rounded-bottom;
-    border-top: $green 3px solid;
+    box-shadow: none;
     float: left;
     width: 100%;
-    background: white;
     padding: 0 10px 10px 20px;
     .text-title {
       text-transform: uppercase;
@@ -397,12 +396,13 @@ $colHighlight   : whitesmoke;
 /* Follow button */
 .follow_form {
   margin-top: 10px;
-  float: left;
   text-align: right;
-  clear: both;
   width: 100%;
   form {
     margin-bottom: 5px;
+    input {
+      // margin-top: -90px;
+    }
   }
 }
 
@@ -506,6 +506,9 @@ $colHighlight   : whitesmoke;
 
   // Sign up page
   .sign-up-box {
+    h1 {
+      font-size: 1em;
+    }
     .user-snippet {
       width: 33% !important;
     }
@@ -515,6 +518,19 @@ $colHighlight   : whitesmoke;
   .page-content .welcome-box {
     .points {
       padding: 0.5em;
+    }
+    .text {
+      font-size: 14px;
+    }
+  }
+
+  // Sign in
+  .sign-in {
+    h1 {
+      font-size: 25px;
+    }
+    .remember label {
+      margin-top: 7px;
     }
   }
 
@@ -527,6 +543,15 @@ $colHighlight   : whitesmoke;
   .front-page {
     .three-panes {
       padding-left: 0 !important;
+    }
+    button.sign-up {
+      margin-top: 30px !important;
+    }
+    .copy {
+      font-size: 14px;
+      h1 {
+        font-size: 25px;
+      }
     }
   }
 
@@ -552,6 +577,25 @@ $colHighlight   : whitesmoke;
     width: 100%;
   }
 
+  // Explore comments
+  .comment-teaser {
+    .body {
+      margin-left: 0;
+    }
+    .comment-meta .text .summary {
+      margin-bottom: 10px;
+    }
+  }
+
+  // Explore users
+  .user-teaser .details .follow_form {
+    text-align: left;
+    float: left;
+    input {
+      margin-top: 0;
+    }
+  }
+
   // Hide page images
   .about .opendude,
   .contribute .fa-github,
@@ -566,36 +610,34 @@ $colHighlight   : whitesmoke;
     }
     .text-section {
       .back-button {
-        margin-left: 0;
+        margin-left: 10px;
+      }
+      header {
+        padding: 0 10px;
+        .mobile-user-summary {
+          display: block;
+          text-align: center;
+          margin-bottom: 10px;
+        }
       }
       h1.sit-title {
-        font-size: 1.5em !important;
+        font-size: 1.2em !important;
         margin-bottom: 20px;
       }
       .body {
-        margin: 0 !important;
-        font-size: 1em !important;
+        margin: 0 20px !important;
+        font-size: 0.9em !important;
       }
-      .interactions {
-        .save-it {
-          text-align: center;
-          .save-it-text {
-            margin-left: 0;
-          }
-          .toggle-favourite {
-            margin: 0;
-          }
-        }
-        .like-it {
-          margin-top: 20px !important;
-        }
-        .share-buttons {
-          margin-top: 45px !important;
-          text-align: center !important;
-          .share-it {
-            margin: 0 !important;
-          }
-        }
+      .like-row {
+        margin-top: 1em;
+        margin-bottom: 0;
+      }
+      // Prev/next navigation
+      .sit_preview .content {
+        display: none;
+      }
+      .sit_preview.next .arrow {
+        float: right;
       }
     }
   }
@@ -605,10 +647,18 @@ $colHighlight   : whitesmoke;
     position: static; // Unclickable links fix
     padding-left: 0;
     padding-right: 0;
+    margin-bottom: 25px;
   }
   .header-tile {
     width: 100%;
     margin-bottom: 20px;
+  }
+
+  // Month view / profile
+  .month-view {
+    .entry .link {
+      width: auto !important;
+    }
   }
 
   // Footer
@@ -635,7 +685,7 @@ $colHighlight   : whitesmoke;
         font-size: 1em !important;
       }
       .content {
-        width: 75%;
+        width: 70%;
       }
     }
   }

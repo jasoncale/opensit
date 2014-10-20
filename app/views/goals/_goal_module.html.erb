@@ -1,18 +1,10 @@
 <div class="current-goals">
-  <% if !@has_current %>
-  <div class="try-goal-container">
-    <p><strong>Pssst</strong>, <a class="try-goal" href="/goals">try setting a goal!</a></p>
-  </div>
-  <% else %>
-  <!-- <p class="text-title">Your Goals</p> -->
-    <% @goals.each do |g| %>
-      <% if !g.completed? %>
-      <div class="goal-summary">
-        <%= coloured_rating(g) %>
-        <div class="text"><%= g.verbalise %></div>
-      </div>
-      <% end %>
+  <% @goals.each do |g| %>
+    <% if !g.completed? %>
+    <div class="goal-summary">
+      <%= coloured_rating(g) %>
+      <div class="text"><a href="/goals"><%= g.verbalise %></a></div>
+    </div>
     <% end %>
-    <a class="goals-section-link" href="/goals">Go to goals</a>
   <% end %>
 </div>

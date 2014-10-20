@@ -4,12 +4,14 @@ class SitsController < ApplicationController
   # GET /sits/1
   def show
     @sit = Sit.find(params[:id])
-    @latest = @sit.user.latest_sits(current_user)
+    @latest = @sit.user.latest_sit(current_user)
 
+    # For completely private sits
     if @sit.private == true
       redirect_to me_path if current_user.nil? || (@sit.user_id != current_user.id)
     end
 
+    # Views, not very accurate as any guest visit increments by one
     if current_user
       @sit.increment!(:views, by = 1) if current_user.id != @sit.user_id
     else
@@ -19,10 +21,13 @@ class SitsController < ApplicationController
     @user = @sit.user
 
     if @sit.is_sit?
-      @title = "#{@sit.duration} minute meditation log by #{@user.display_name}"
+      @title = "#{@sit.duration} minute meditation journal by #{@user.display_name}"
     else
       @title = "#{@sit.title}, a meditation journal by #{@user.display_name}"
     end
+
+    @previous = @sit.prev(current_user)
+    @next = @sit.next(current_user)
 
     @page_class = 'view-sit'
   end

@@ -7,7 +7,11 @@
 
 <div class="entry">
   <% if sit.is_sit? %>
-    <div class="link"><%= link_to "<i class='fa fa-clock-o'></i> #{sit.duration}".html_safe, sit_path(sit) %></div>
+  	<% if sit.stub? %>
+    	<div class="link"><i class='fa fa-clock-o'></i> <%=sit.duration%></div>
+    <% else %>
+    	<div class="link"><%= link_to "<i class='fa fa-clock-o'></i> #{sit.duration}".html_safe, sit_path(sit) %></div>
+    <% end %>
     <div class="teaser"><%= sit.body.empty? ? '&nbsp;'.html_safe : teaser(sit, 150)%></div> <br>
   <% else %>
     <div class="link"><%= link_to "<i class='fa fa-book'></i>".html_safe, sit_path(sit) %></div>

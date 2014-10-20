@@ -47,7 +47,6 @@ article.sit-teaser-block {
     @include rounded-bottom;
     border-radius: 5px;
     float: left;
-    border: 1px solid $light-border;
     background: #fff;
     margin: 0 0 10px 0;
     width: 100%;
@@ -111,56 +110,65 @@ article.sit-teaser-block {
     margin-bottom: 15px;
   }
   .text-section {
-    .sit-stats {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 40px;
-      opacity: 0.5;
-      font-size: 0.9em;
-      .stat {
-        display: inline-block;
-        margin-right: 10px;
-        .glyphicon-tags {
+    // To allow prev/next areas to sit flush to edges
+    padding: 20px 0 0;
+
+    // Header, title, meta
+    header {
+      padding: 0 60px;
+      .sit-stats {
+        width: 100%;
+        text-align: center;
+        color: #999;
+        font-size: 0.8em;
+        margin-bottom: 10px;
+        .stat {
+          display: inline-block;
+          margin-right: 10px;
+        }
+      }
+      .mobile-user-summary {
+        display: none;
+      }
+      .tags-container {
+        width: 100%;
+        margin-bottom: 40px;
+        text-align: center;
+        font-size: 0.8em;
+        color: #999;
+        .fa-tags {
           margin-right: 5px;
         }
         .tag-label {
           margin: 0 2px;
-          background-color: $dark-grey;
+          background-color: #999;
           &:hover {
             background: #777;
           }
         }
       }
     }
-    .full-sit-date {
-      float: right;
-      margin: 12px;
-      color: $dark-grey;
-    }
+
+    // Content
     .body {
       font-size: 1.1em;
       line-height: 1.5;
-      margin: 0 30px;
+      margin: 0 60px 3em 60px;
       li {
         margin: 10px 0;
         line-height: 1.5;
       }
     }
-    .interactions {
+
+    // Likes
+    .like-row {
       float: left;
       width: 100%;
-      border-top: 1px $light-border solid;
-      margin-top: 3em;
+      margin-bottom: 2em;
       padding: 1em 0 0em;
       color: $dark-grey;
       font-size: 0.9em;
-      .save-it-text {
-        margin-left: 30px;
-      }
-      .toggle-favourite {
-        font-size: 2em;
-        margin: -5px 0 0 44px;
-      }
+      height: 110px;
       #who_likes {
         margin: 0px 0 5px 0;
         width: 100%;
@@ -170,22 +178,61 @@ article.sit-teaser-block {
       .toggle-like {
         font-size: 2em;
       }
-      .share-buttons {
-        text-align: right;
-        a {
-          margin-right: 20px;
-          font-size: 2em;
-        }
-        .share-it {
-          margin-right: 48px;
-        }
-      }
+
+      // "This is an entry by x, sign up today" hint.
       .guest-summary {
         margin: 10px 10px 0;
         text-align: center;
         padding: 10px;
         a {
           font-weight: bold;
+        }
+      }
+    }
+    .like-row.my-sit {
+      height: auto;
+    }
+
+    // Prev/next clickable areas
+    .prev-next-row {
+      margin-top: 1em;
+      border-top: 1px $light-border solid;
+      .sit_preview {
+        a {
+          font-size: 0.8em;
+          transition: background-color 0.5s ease;
+          padding: 20px;
+          display: block;
+          width: 50%;
+          float: left;
+          height: 100px;
+          color: $dark-grey;
+          &:hover {
+            background-color: #eee;
+          }
+        }
+        .arrow {
+          width: 40px;
+          float: left;
+          font-size: 2em;
+          text-align: left;
+        }
+        .content {
+          width: calc(100% - 40px);
+          float: left;
+        }
+      }
+
+      // Next sit preview
+      .sit_preview.next {
+        a {
+          float: right;
+        }
+        .content {
+          text-align: right;
+        }
+        .arrow {
+          text-align: right;
         }
       }
     }
@@ -202,6 +249,8 @@ article.sit-teaser-block {
       padding: 10px;
     }
   }
+
+  // Comments section
   .comments {
     @include box-model;
     padding: 60px 0 30px 0;
@@ -281,76 +330,6 @@ article.sit-teaser-block {
   }
   .help-block {
     font-size: 0.8em;
-  }
-}
-
-/* Journal next/prev and date */
-.sidebar .sit-meta {
-  border-top: $green 3px solid;
-  background: #fff;
-  .date {
-    text-align: center;
-    font-size: 21px;
-    margin: 15px;
-    .time {
-      font-size: 0.6em;
-      color: $dark-grey;
-    }
-  }
-  .pager {
-    li a {
-      display: inline-block;
-      width: 50%;
-      height: 50px;
-      padding: 12px 14px 5px 14px;
-      background-color: #fff;
-      border-bottom: 1px solid #ddd;
-      border-top: 1px solid #ddd;
-      border-left: 0;
-      border-right: 0;
-      -webkit-border-radius: 0;
-      -moz-border-radius: 0;
-      border-radius: 0;
-      &:hover {
-        background: #eee;
-      }
-    }
-    .disabled {
-      color: #999;
-      background-color: #eee;
-      height: 50px;
-      width: 50%;
-      padding-top: 14px;
-      float: right;
-    }
-    .previous .disabled {
-      height: 50px;
-      padding: 14px 26px 5px 14px;
-      float: left;
-    }
-  }
-  .sit-tags {
-    margin-bottom: 15px;
-    text-align: center;
-    .glyphicon {
-      margin-right: 10px;
-    }
-    .label {
-      display: inline-block;
-      font-size: 95%;
-      font-weight: normal;
-      margin: 3px;
-    }
-  }
-  .journal-stats {
-    text-align: center;
-    color: $dark-grey;
-    font-size: 0.8em;
-    padding: 0 15px;
-    margin-bottom: 15px;
-    a {
-      font-weight: bold;
-    }
   }
 }
 

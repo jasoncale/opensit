@@ -63,6 +63,17 @@ $(document).ready(function(){
   // VIEW SIT / Likers list
   $("#likers-list").tooltip();
 
+  // VIEW PROFILE / Date select
+  $('.date_range_select').change( function() {
+    Turbolinks.visit($(this).val());
+  });
+
+  // VIEW PROFILE / Full profile
+  $('.expand-profile').click( function(e) {
+    e.preventDefault();
+    $('.full-profile').slideToggle();
+  })
+
   // LIKES / a sit
   $('#like_button').on('click', '.toggle-like', function(e) {
     e.preventDefault();

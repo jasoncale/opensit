@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def me
     @feed_items = current_user.socialstream.paginate(:page => params[:page])
     @user = current_user
-    @latest = @user.latest_sits(current_user)
+    @latest = @user.latest_sit(current_user)
     @goals = @user.goals
 
     @goals.each do |g|
@@ -37,25 +37,42 @@ class UsersController < ApplicationController
   # GET /u/buddha
   def show
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
-    @links = @user.stream_range
+    @total_hours = @user.total_hours_sat
+    @by_month = @user.journal_range
 
-    if !@user.private_stream || (current_user == @user)
-      if params[:year] && params[:month]
-        if current_user == @user
-          @sits = @user.sits_by_month(month: params[:month], year: params[:year]).newest_first
-        else
-          @sits = @user.sits_by_month(month: params[:month], year: params[:year]).public.newest_first
-        end
-        @range_title = "#{Date::MONTHNAMES[params[:month].to_i]}, #{params[:year]}"
-      else
-        month = Date.today.month
-        year = Date.today.year
-        @range_title = "#{Date::MONTHNAMES[month.to_i]}, #{year}"
-        if current_user && @user.id == current_user.id
-          @sits = @user.sits_by_month(month: month, year: year).newest_first
-        else
-          @sits = @user.sits_by_month(month: month, year: year).public.newest_first
-        end
+    month = params[:month] ? params[:month] : Date.today.month
+    year = params[:year] ? params[:year] : Date.today.year
+
+    index = @by_month[:list_of_months].index "#{year} #{month}" if @user.sits.present?
+
+    # Generate prev/next links
+    # .. for someone who's sat this month
+    if index
+      if @by_month[:list_of_months][index + 1]
+        @prev = @by_month[:list_of_months][index + 1].split(' ')
+      end
+
+      if !index.zero?
+        @next = @by_month[:list_of_months][index - 1].split(' ')
+      end
+    else
+      if @by_month
+        # Haven't sat this month - when was the last time they sat?
+        @first_month =  @by_month[:list_of_months].first.split(' ')
+      end
+      # Haven't sat at all
+    end
+
+    # Viewing your own profile
+    if current_user == @user
+      @sits = @user.sits_by_month(month: month, year: year).newest_first
+      @stats = @user.get_monthly_stats(month, year)
+
+    # Viewing someone elses profile
+    else
+      if !@user.private_stream
+        @sits = @user.sits_by_month(month: month, year: year).public.newest_first
+        @stats = @user.get_monthly_stats(month, year)
       end
     end
 
@@ -68,7 +85,7 @@ class UsersController < ApplicationController
   def following
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followed_users
-    @latest = @user.latest_sits(current_user)
+    @latest = @user.latest_sit(current_user)
 
     if @user == current_user
       @title = "People I follow"
@@ -84,7 +101,7 @@ class UsersController < ApplicationController
   def followers
     @user = User.where("lower(username) = lower(?)", params[:username]).first!
     @users = @user.followers
-    @latest = @user.latest_sits(current_user)
+    @latest = @user.latest_sit(current_user)
 
     if @user == current_user
       @title = "People who follow me"

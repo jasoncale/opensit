@@ -1,15 +1,5 @@
 <div class="sidebar col-md-3">
   <%= render 'shared/full_user' %>
-
-  <% if !@user.private_stream || (current_user == @user) %>
-    <% if !@user.sits.empty? %>
-      <div class="nav-module my-timeline">
-        <ul>
-        <%= timeline(@links) %>
-        </ul>
-      </div>
-    <% end %>
-  <% end %>
 </div>
 
 <div class="clearfix col-md-9">
@@ -18,6 +8,7 @@
     <a href="<%=request.referrer%>" class="back-button btn btn-default">&larr; Back to new users</a>
   <% end %>
 
+  <%# Is this someone elses private journal? %>
   <% if @user.private_stream && (current_user != @user) %>
     <div class="message-box">
       <h2>Private.</h2>
@@ -25,59 +16,84 @@
     </div>
   <% else %>
     <% if !params[:month] && !params[:year] %>
-      <% if @user.who.blank? && @user.why.blank? && @user.practice.blank? %>
-        <div class="message-box">
-          <% if current_user == @user %>
-            <h2>You've not filled in your profile yet!</h2>
-            <p>Tell us a bit more about yourself.</p>
-            <div class="my-actions">
-              <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-default' %>
-            </div>
-          <% else %>
-            <h2>This person hasn't filled out their profile yet.</h2>
-          <% end %>
+      <%# You've not filled out your profile %>
+      <% if current_user == @user && @user.who.blank? && @user.why.blank? && @user.practice.blank? %>
+        <div class="message-box fill-out-your-profile">
+          <h3>Your profile is empty!</h3>
+          <p>Tell us a bit more about yourself.</p>
+          <div class="my-actions">
+            <%= link_to 'Start my profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-primary btn-default' %>
+          </div>
         </div>
       <% else %>
-        <div class="profile">
 
-          <% if !@user.who.blank? %>
-            <p class="lead"><%= @user.who.html_safe %></p>
-          <% end %>
+        <% if !@user.who.blank? %>
+          <div class="profile">
+            <p class="lead"><%= @user.who.html_safe %>
 
-          <% if !@user.why.blank? %>
-            <div class="profile-field">
-              <div class="title">Why do you practice?</div>
-              <%= @user.why.html_safe %>
-            </div>
-          <% end %>
-
-          <% if !@user.practice.blank? %>
-            <div class="profile-field">
-              <div class="title">What do you practice?</div>
-              <%= @user.practice.html_safe %>
-            </div>
-          <% end %>
-
-          <% if current_user == @user %>
-            <div class="my-actions">
-              <%= link_to 'Edit profile', edit_registration_path(@user), :class => 'edit-profile-btn btn btn-default' %>
-            </div>
-          <% else %>
-            <%= link_to(feed_path(@user), :title => 'Subscribe to this users updates', :class => 'user-sit-feed') do %>
-              <i class="fa fa-rss"></i>
+            <% if (!@user.practice.blank? || !@user.why.blank?) %>
+              <a href="#" class="expand-profile">More</a>
             <% end %>
+            </p>
+
+            <div class="full-profile">
+              <% if !@user.why.blank? %>
+                <div class="profile-field">
+                  <div class="title">Why do you practice?</div>
+                  <%= @user.why.html_safe %>
+                </div>
+              <% end %>
+
+              <% if !@user.practice.blank? %>
+                <div class="profile-field">
+                  <div class="title">What do you practice?</div>
+                  <%= @user.practice.html_safe %>
+                </div>
+              <% end %>
+            </div>
+          </div>
           <% end %>
-        </div>
       <% end %>
     <% end %>
 
     <% if @sits %>
-      <div class="month-view text-section">
-        <h1 class="range-title"><%= @range_title %></h1>
+      <div class="month-view">
+
+      <% if !@stats[:days_sat_this_month].zero? %>
+        <select class="date_range_select">
+          <%= timeline(@by_month[:sitting_totals]) %>
+        </select>
+      <% end %>
+
+        <div class="month_stats_container">
+          <p class="month_stats">
+            <% if @user.sits.empty? %>
+              Nothing to see here, yet.
+            <% elsif @stats[:days_sat_this_month].zero? %>
+              Zzzzz... Nothing logged this month. <a class="previous" href="?year=<%=@first_month[0]%>&month=<%=@first_month[1]%>">Check out their latest journal entries.</a>
+            <% else %>
+              Sat on <%=@stats[:days_sat_this_month]%> days this month, totalling <%=@stats[:time_sat_this_month]%> practice. (<%=@stats[:entries_this_month]%> entries total)
+            <% end %>
+          </p>
+        </div>
+
         <div class="clearfix"></div>
+
         <% @listed = [] %>
         <% @sits.each do |sit| %>
           <%= render :partial => 'sits/day_journal', :locals => { :sit => sit } %>
+        <% end %>
+
+        <% if !@stats[:days_sat_this_month].zero? %>
+          <div class="month_navigation col-md-12">
+            <% if @prev %>
+              <a class="previous" href="?year=<%=@prev[0]%>&month=<%=@prev[1]%>">&larr; Previous</a>
+            <% end %>
+
+            <% if @next %>
+              <a class="next" href="?year=<%=@next[0]%>&month=<%=@next[1]%>">Next &rarr;</a>
+            <% end %>
+          </div>
         <% end %>
       </div>
     <% end %>

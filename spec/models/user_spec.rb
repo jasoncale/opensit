@@ -212,16 +212,14 @@ describe User do
     let(:this_year) { Time.now.year }
     let(:this_month) { Time.now.month }
 
-    describe "#latest_sits" do
-      it "returns the last 3 most recent sits for a user" do
-        expect(buddha.latest_sits(buddha))
-          .to match_array(
-            [first_sit, second_sit, third_sit]
-          )
+    describe "#latest_sit" do
+      it "returns the latest sit for a user" do
+        expect(buddha.latest_sit(buddha))
+          .to eq [third_sit]
       end
-      it "does not return the public sits that do not belong to a user" do
-        expect(buddha.latest_sits(buddha)).to_not match_array([public_sits])
-      end
+      # it "does not return the public sits that do not belong to a user" do
+      #   expect(buddha.latest_sit(buddha)).to_not match_array([public_sits])
+      # end
     end
 
     describe "#sits_by_year" do
@@ -322,7 +320,7 @@ describe User do
       end
     end
 
-    describe "#stream_range" do
+    describe "#journal_range" do
       it "returns an array of arrays of dates and counts"
     end
 

@@ -4,15 +4,16 @@
 .sidebar {
 	.sidebar-content {
     padding-left: 10px;
-    .username {
-      margin: 25px 0 0;
+    .display_name {
+      margin: 25px 0 20px 10%;
       font-size: 1.7em;
       font-weight: normal;
     }
-    .location {
-      float: left;
-      width: 100%;
-      margin: 5px 0;
+    .username {
+      margin: -20px 0 20px 11%;
+      font-size: 0.9em;
+      font-weight: bold;
+      color: $dark-grey;
     }
 		.stats {
 			float: left;
@@ -58,6 +59,7 @@
 	.details {
 		float: left;
 		width: calc(100% - 50px);
+		height: 50px;
 		.username {
 			width: 100%;
 			text-align: right;
@@ -71,9 +73,43 @@
 			opacity: 0.7;
 		}
 	}
-	.stats {
-		font-size: 0.8em;
-		float: right;
+	.user-details {
+		margin-top: 20px;
+		width: 100%;
+	}
+	.latest {
+		float: left;
+		width: 100%;
+		margin-top: 20px;
+		font-weight: bold;
+		font-size: 0.7em;
+	}
+	.full-journal-link {
+		clear: left;
+		float: left;
+		width: 100%;
+		font-size: 0.7em;
+		margin-left: 25px;
+	}
+}
+
+// Bullet points: city, followers, style, stats etc.
+.user-details {
+	float: left;
+	.info-block {
+    float: left;
+    width: 100%;
+    color: $dark-grey;
+    font-size: 0.8em;
+    margin: 5px 0;
+		.icon {
+			width: 10%;
+			float: left;
+		}
+		.value {
+			width: 90%;
+			float: left;
+		}
 	}
 }
 
@@ -90,9 +126,8 @@
 /* Recent activity */
 .recent-activity {
 	clear: left;
-	background: #fff;
 	float: left;
-	margin-top: 20px;
+	width: 100%;
 	.activity {
 		padding: 5px;
 		float: left;
@@ -121,6 +156,7 @@
 			margin-top: 2px;
 			.title {
 				font-size: 14px;
+				margin-top: 2px;
 				.date {
 					float: right;
 					font-size: 0.8em;
@@ -138,22 +174,14 @@
 	}
 }
 
-/* Timeline */
-.my-timeline {
+/* Timeline select */
+.date_range_select {
+  float: right;
 	padding: 8px;
 	background: white;
-	border-top: $green 3px solid;
-	ul {
-		list-style-type: circle;
-	}
-	.year {
-		font-weight: bold;
-		margin: 20px 0 10px 0;
-		color: $dark-grey;
-	}
-	.count {
-		color: #999;
-	}
+  border-radius: 5px;
+  color: $dark-grey;
+  font-size: 1.3em;
 }
 
 // Feed icon on sits / bio
@@ -167,39 +195,25 @@
 
 // View user
 .view-user {
-	.sidebar-content {
-		.info-block {
-			.icon {
-				width: 10%;
-				float: left;
-			}
-			.value {
-				width: 90%;
-				float: left;
-			}
-		}
-	}
 	.back-button {
     margin-bottom: 15px;
   }
-	.empty-profile {
-		padding: 20px 20px 0 20px;
+	.fill-out-your-profile {
+		text-align: center;
 	}
 	.profile {
 		float: left;
 		width: 100%;
 		background: white;
-		border: 1px solid $light-border;
 		border-top: 3px solid $green;
 		margin-bottom: 20px;
-		padding-bottom: 20px;
+		padding: 20px 40px 0 40px;
 		@include rounded-bottom;
 		.lead {
 			clear: both;
-			margin: 20px 20px 30px 20px;
 		}
 		.profile-field {
-			margin: 20px;
+			margin-bottom: 20px;
 			float: left;
 			font-size: 0.9em;
 			.title {
@@ -211,21 +225,36 @@
 		.edit-profile-btn {
 			margin-bottom: 10px;
 		}
+		// More ->
+		.expand-profile {
+			font-size: 0.8em;
+			font-weight: bold;
+			float: right;
+			margin: 20px;
+		}
+		.full-profile {
+			display: none;
+		}
 	}
-	h1.range-title {
-    font-weight: normal;
-    font-size: 1.5em;
-    float: right;
-    line-height: 15px;
-    margin-right: 11px;
-    margin-top: 20px;
-    padding-bottom: 10px;
-    border-bottom: 3px $green solid;
-  }
   .month-view {
   	clear: left;
-  	width: 100%;
-  	float: left;
+  	background: white;
+		padding: 20px;
+		float: left;
+		width: 100%;
+		// box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.18);
+		border: 1px solid #e2e2e2;
+		border-radius: 5px 5px 5px 5px;
+    .month_stats_container {
+      float: left;
+      width: 100%;
+      text-align: center;
+      margin-top: 1em;
+      .month_stats {
+        font-size: 0.9em;
+        color: #999;
+      }
+    }
   	.day-of-the-month {
   		float: left;
   		clear: left;
@@ -249,12 +278,15 @@
   		font-size: 0.9em;
   		.link {
   			float: left;
+  			margin-bottom: 10px;
   			width: 50px;
   			margin-right: 0.5em;
   			text-align: center;
+  			color: #999;
   		}
   		.teaser {
   			float: left;
+  			margin-bottom: 10px;
   			width: 90%;
   		}
   	}
@@ -266,6 +298,18 @@
 			float: left;
 			width: 100%;
   	}
+    .month_navigation {
+    	margin-top: 20px;
+    	a {
+    		padding: 10px;
+    	}
+    	.previous {
+      	float: left;
+      }
+      .next {
+      	float: right;
+      }
+    }
   }
 }
 
@@ -332,8 +376,7 @@
 .user-teaser {
 	float: left;
 	width: 100%;
-	margin: 5px 0;
-	height: 70px;
+	margin: 5px 0 20px;
 	.avatar {
 		float: left;
 		width: 60px;
@@ -358,9 +401,6 @@
 		}
 		.joined {
 			color: #CCC;
-		}
-		.follow_form input {
-			margin-top: -45px;
 		}
 	}
 }

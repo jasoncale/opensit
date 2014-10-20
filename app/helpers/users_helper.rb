@@ -7,17 +7,17 @@ module UsersHelper
     else
       image_link = user.avatar.blank? ? image_path('/images/default_50.png') : user.avatar.url(:small_thumb)
       link_to user_path(user) do
-        image_tag image_link, size: "50x50", alt: user.username, title: user.username
+        image_tag image_link, size: "50x50", alt: user.username, title: user.username, class: 'img-circle'
       end
     end
   end
 
   def large_avatar_of(user)
     if user.avatar.blank?
-      image_tag image_path('/images/default_250.png'), size: "250x170", alt: user.username, title: user.username, class: 'polaroid'
+      image_tag image_path('/images/default_250.png'), size: "250x170", alt: user.username, title: user.username, class: 'img-circle'
     else
       link_to user_path(user) do
-        image_tag user.avatar.url(:thumb), size: "250x250", alt: user.username, title: user.username, class: 'polaroid'
+        image_tag user.avatar.url(:thumb), size: "250x250", alt: user.username, title: user.username, class: 'img-circle'
       end
     end
   end
@@ -36,21 +36,22 @@ module UsersHelper
   # Return link to website
   def website(user)
     if user.website =~ /^(http|https):\/\//
-      link_to user.website, user.website
+      link_to user.website, user.website, rel: 'nofollow'
     else
-      link_to user.website, "http://#{user.website}"
+      link_to user.website, "http://#{user.website}", rel: 'nofollow'
     end
   end
 
   def timeline(dates)
     current_year = Time.now.year
+
     dates.map do |l|
       type, count = l
       if type.to_s.size == 4
         current_year = type
-        "<div class='year'> #{type} <span class='count'>(#{count})</span></div>"
+        "<optgroup label='#{type} (#{count})'>"
       else
-        "<li>" + link_to("#{Date::MONTHNAMES[type]}", "#{user_path(params[:username])}/#{params[:id]}?year=#{current_year}&month=#{type}") + " <span class=\"count\">(#{count})</span></li>"
+        "<option " + (current_year == params[:year].to_i && type == params[:month].to_i ? 'selected ' : '') + "value='" + "#{user_path(params[:username])}/#{params[:id]}?year=#{current_year}&month=#{type.to_s.rjust(2, '0')}" + "'>" + "#{Date::MONTHNAMES[type]}, #{current_year}</option>"
       end
     end.join(' ').html_safe
   end
