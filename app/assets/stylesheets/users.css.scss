@@ -59,7 +59,8 @@
 	.name-location {
 		float: left;
 		width: calc(100% - 50px);
-		height: 50px;
+		min-height: 50px;
+		margin-bottom: 10px;
 		.username {
 			width: 100%;
 			text-align: right;
