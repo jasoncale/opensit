@@ -273,6 +273,11 @@ class User < ActiveRecord::Base
     return true
   end
 
+  def users_to_follow
+    User.joins(:reverse_relationships).where(relationships: { follower_id: followed_user_ids })
+      .where.not(relationships: { followed_id: followed_user_ids }).group("users.id").having("COUNT(followed_id) >= ?", 2)
+  end
+
   def unread_count
     messages_received.unread.count unless messages_received.unread.count.zero?
   end
@@ -395,7 +400,7 @@ end
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  country                :string(255)
-#  created_at             :datetime         not null
+#  created_at             :datetime
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
 #  default_sit_length     :integer          default(30)
@@ -423,7 +428,7 @@ end
 #  streak                 :integer          default(0)
 #  style                  :string(100)
 #  unlock_token           :string(255)
-#  updated_at             :datetime         not null
+#  updated_at             :datetime
 #  user_type              :integer
 #  username               :string(255)
 #  website                :string(100)

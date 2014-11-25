@@ -463,6 +463,39 @@ describe User do
     end
   end
 
+  describe "#users_to_follow" do
+    it "suggests users to follow" do
+      user = create(:user)
+      buddha = create(:user)
+      ananda = create(:user)
+      anuruddha = create(:user)
+
+      ananda.follow!(buddha)
+      anuruddha.follow!(buddha)
+
+      user.follow!(ananda)
+      user.follow!(anuruddha)
+
+      expect(user.users_to_follow).to match_array([buddha])
+    end
+
+    it "should not suggest the already followed users" do
+      user = create(:user)
+      buddha = create(:user)
+      ananda = create(:user)
+      anuruddha = create(:user)
+
+      ananda.follow!(buddha)
+      anuruddha.follow!(buddha)
+
+      user.follow!(ananda)
+      user.follow!(anuruddha)
+      user.follow!(buddha)
+
+      expect(user.users_to_follow).to eq([])
+    end
+  end
+
   describe "#unread_count" do
     context "when a user has unread messages" do
       before do
@@ -560,7 +593,7 @@ end
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  country                :string(255)
-#  created_at             :datetime         not null
+#  created_at             :datetime
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
 #  default_sit_length     :integer          default(30)
@@ -588,7 +621,7 @@ end
 #  streak                 :integer          default(0)
 #  style                  :string(100)
 #  unlock_token           :string(255)
-#  updated_at             :datetime         not null
+#  updated_at             :datetime
 #  user_type              :integer
 #  username               :string(255)
 #  website                :string(100)

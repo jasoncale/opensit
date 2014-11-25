@@ -11,8 +11,8 @@ end
 #
 # Table name: tags
 #
-#  created_at :datetime         not null
+#  created_at :datetime
 #  id         :integer          not null, primary key
 #  name       :string(255)
-#  updated_at :datetime         not null
+#  updated_at :datetime
 #
