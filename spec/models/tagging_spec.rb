@@ -9,11 +9,11 @@ end
 #
 # Table name: taggings
 #
-#  created_at :datetime         not null
+#  created_at :datetime
 #  id         :integer          not null, primary key
 #  sit_id     :integer
 #  tag_id     :integer
-#  updated_at :datetime         not null
+#  updated_at :datetime
 #
 # Indexes
 #
