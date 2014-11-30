@@ -44,10 +44,15 @@ class SitsController < ApplicationController
   # GET /sits/1/edit
   def edit
     @sit = Sit.find(params[:id])
-    @user = current_user
 
-    @title = 'Edit sit'
-    @page_class = 'edit-sit'
+    if current_user == @sit.user
+      @user = current_user
+
+      @title = 'Edit sit'
+      @page_class = 'edit-sit'
+    else
+      redirect_to root_path, notice: "You can't edit this post"
+    end
   end
 
   # POST /sits
@@ -73,20 +78,29 @@ class SitsController < ApplicationController
   # PUT /sits/1
   def update
     @sit = Sit.find(params[:id])
-    @sit.created_at = DateTime.strptime(params[:custom_date], "%m/%d/%Y %l:%M %p") if params[:custom_date]
 
-    if @sit.update_attributes(params[:sit])
-      redirect_to @sit, notice: 'Sit was successfully updated.'
+    if current_user == @sit.user
+      @sit.created_at = DateTime.strptime(params[:custom_date], "%m/%d/%Y %l:%M %p") if params[:custom_date]
+
+      if @sit.update_attributes(params[:sit])
+        redirect_to @sit, notice: 'Sit was successfully updated.'
+      else
+        render action: "edit"
+      end
     else
-      render action: "edit"
+      redirect_to root_path, notice: "You can't edit this post"
     end
   end
 
   # DELETE /sits/1
   def destroy
     @sit = Sit.find(params[:id])
-    @sit.destroy
 
-    redirect_to me_path
+    if current_user == @sit.user
+      @sit.destroy
+      redirect_to me_path
+    else
+      redirect_to root_path, notice: "You can't delete this post"
+    end
   end
 end
