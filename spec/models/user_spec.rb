@@ -584,6 +584,7 @@ end
 # Table name: users
 #
 #  authentication_token   :string(255)
+#  authorised_users       :string(255)      default("")
 #  avatar_content_type    :string(255)
 #  avatar_file_name       :string(255)
 #  avatar_file_size       :integer
@@ -593,7 +594,7 @@ end
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  country                :string(255)
-#  created_at             :datetime
+#  created_at             :datetime         not null
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
 #  default_sit_length     :integer          default(30)
@@ -610,8 +611,7 @@ end
 #  locked_at              :datetime
 #  password_salt          :string(255)
 #  practice               :text
-#  private_diary          :boolean
-#  private_stream         :boolean          default(FALSE)
+#  privacy_setting        :string(255)      default("public")
 #  remember_created_at    :datetime
 #  remember_token         :string(255)
 #  reset_password_sent_at :datetime
@@ -621,7 +621,7 @@ end
 #  streak                 :integer          default(0)
 #  style                  :string(100)
 #  unlock_token           :string(255)
-#  updated_at             :datetime
+#  updated_at             :datetime         not null
 #  user_type              :integer
 #  username               :string(255)
 #  website                :string(100)

@@ -16,11 +16,11 @@ end
 #
 # Table name: relationships
 #
-#  created_at  :datetime
+#  created_at  :datetime         not null
 #  followed_id :integer
 #  follower_id :integer
 #  id          :integer          not null, primary key
-#  updated_at  :datetime
+#  updated_at  :datetime         not null
 #
 # Indexes
 #
