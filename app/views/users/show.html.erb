@@ -36,6 +36,11 @@
             <% end %>
             </p>
 
+            <%# Add edit profile link if it is your own profile %>
+            <% if @user == current_user %>
+              <%= link_to 'Edit profile', edit_user_registration_path, class: 'edit-profile' %>
+            <% end %>
+
             <div class="full-profile">
               <% if !@user.why.blank? %>
                 <div class="profile-field">
