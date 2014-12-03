@@ -299,6 +299,17 @@
   			margin-bottom: 10px;
   			width: 90%;
   		}
+        @media (max-width: 767px) {
+            margin-top: 0px;
+            .link {
+                float: none;
+                text-align: left;
+            }
+            .teaser {
+                float: none;
+                margin-bottom: 0px;
+            }
+        }
   	}
   	hr {
 			margin-top: 30px;
