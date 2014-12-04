@@ -41,7 +41,7 @@ describe UsersController, :type => :controller do
 
       #     get :show, username: 'buddha', year: Date.today.year
       #     expect(assigns(:sits)).to have(1).items
-      #     expect(assigns(:sits)).to eq(@buddha.sits_by_year(Date.today.year).public.newest_first)
+      #     expect(assigns(:sits)).to eq(@buddha.sits_by_year(Date.today.year).communal.newest_first)
       #     expect(response).to render_template("users/show")
       #   end
 
@@ -68,7 +68,7 @@ describe UsersController, :type => :controller do
 
           get :show, username: 'buddha', year: Date.today.year, month: Date.today.month
           expect(assigns(:sits)).to have(1).items
-          expect(assigns(:sits)).to eq(@buddha.sits_by_month(year: Date.today.year, month: Date.today.month).public.newest_first)
+          expect(assigns(:sits)).to eq(@buddha.sits_by_month(year: Date.today.year, month: Date.today.month).communal.newest_first)
           expect(response).to render_template("users/show")
         end
 

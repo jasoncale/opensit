@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     # Viewing someone elses profile
     else
       if !@user.private_stream
-        @sits = @user.sits_by_month(month: month, year: year).public.newest_first
+        @sits = @user.sits_by_month(month: month, year: year).communal.newest_first
         @stats = @user.get_monthly_stats(month, year)
       end
     end
@@ -116,12 +116,12 @@ class UsersController < ApplicationController
   # Generate atom feed for user or all public content (global)
   def feed
     if params[:scope] == 'global'
-      @sits = Sit.public.newest_first.limit(50)
+      @sits = Sit.communal.newest_first.limit(50)
       @title = "Global SitStream | OpenSit"
     else
       @user = User.where("lower(username) = lower(?)", params[:username]).first!
       @title = "SitStream for #{@user.username}"
-      @sits = @user.sits.public.newest_first.limit(20)
+      @sits = @user.sits.communal.newest_first.limit(20)
     end
 
     # This is the feed's update timestamp

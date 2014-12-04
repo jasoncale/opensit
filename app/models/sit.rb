@@ -17,7 +17,7 @@ class Sit < ActiveRecord::Base
   validates_numericality_of :duration, greater_than: 0, only_integer: true
 
   # Scopes
-  scope :public, -> { where(private: false) }
+  scope :communal, -> { where(private: false) }
   scope :newest_first, -> { order("created_at DESC") }
   scope :today, -> { where("DATE(created_at) = ?", Date.today) }
   scope :yesterday, -> { where("DATE(created_at) = ?", Date.yesterday) }
@@ -74,13 +74,13 @@ class Sit < ActiveRecord::Base
   def next(current_user)
     next_sit = user.sits.with_body.where("created_at > ?", self.created_at).order('created_at ASC')
     return next_sit.first if current_user && (self.user_id == current_user.id)
-    return next_sit.public.first
+    return next_sit.communal.first
   end
 
   def prev(current_user)
     prev_sit = user.sits.with_body.where("created_at < ?", self.created_at).order('created_at ASC')
     return prev_sit.last if current_user && (self.user_id == current_user.id)
-    return prev_sit.public.last
+    return prev_sit.communal.last
   end
 
   # Returns sits from the users being followed by the given user.
@@ -103,7 +103,7 @@ class Sit < ActiveRecord::Base
   ##
 
   def self.tagged_with(name)
-    Tag.find_by_name!(name).sits.public
+    Tag.find_by_name!(name).sits.communal
   end
 
   def self.tag_counts
