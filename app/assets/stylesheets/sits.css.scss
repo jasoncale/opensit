@@ -267,6 +267,13 @@ article.sit-teaser-block {
       width: 100%;
       padding: 10px;
       border-top: 1px solid #CCC;
+      .avatar {
+        float: left;
+        width: 65px;
+        img {
+          border-radius: 50%;
+        }
+      }
       .comment-body {
         margin: 20px 0;
         font-size: 0.9em;

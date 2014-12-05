@@ -1,5 +1,6 @@
 <a name="comment-<%=@comment.id%>"></a>
 <div class="comment">
+  <div class="avatar"><%= small_avatar_of(@comment.user) %></div>
   <div class="comment-body"><%= @comment.body.html_safe %></div>
   <div class="user"><%= username(@comment.user) %>, <%= time_ago_in_words(@comment.created_at) %> ago</div>
 </div>
