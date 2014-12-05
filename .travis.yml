@@ -8,10 +8,8 @@ script:
 before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database opensit_test' -U postgres
-cache:
-  bundler: true
-  directories:
-  - tmp/cache/assets/test/sprockets
+cache: bundler
+sudo: false
 
 deploy:
   provider: heroku
