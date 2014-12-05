@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
     @user = current_user
     @message = Message.find(params[:id])
     @from_user = User.find(@message.from_user_id)
+    @reply = Message.new(subject: "RE: " + @message.subject)
 
     # Only mark as read if the recipient is reading
     @message.mark_as_read unless @user.id == @from_user.id
@@ -55,7 +56,7 @@ class MessagesController < ApplicationController
       render action: "new"
     else
       @message.save!
-      redirect_to @message, notice: 'Your message has been sent.'
+      redirect_to messages_url, notice: 'Your message has been sent.'
     end
   end
 
