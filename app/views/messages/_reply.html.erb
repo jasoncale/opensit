@@ -1,0 +1,19 @@
+<%= simple_form_for(@reply, :html => { :class => 'form-horizontal'}) do |f| %>
+  <% if @reply.errors.any? %>
+    <div class="alert alert-danger">
+      Please complete the required fields.
+    </div>
+  <% end %>
+
+  <%= f.input :to_user_id, :as => "hidden", :input_html => { :value => @from_user.id } %>
+
+  <%= form_element(f, :subject, 'message', "Subject", 4, { label: false }) %>
+
+  <%= form_element(f, :body, 'message', "Body", 9, { label: false, input_html: { class: 'rich-textarea', rows: 10 } }) %>
+
+  <%= f.submit 'Reply', :class => 'btn btn-lg btn-primary' %>
+
+<% end %>
+
+Render reply partial on message partial and display sender username f…
+…or clarity.
