@@ -36,8 +36,16 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
 
-    redirect_to comments_url
+    respond_to do |format|
+      if @comment.user == current_user
+        @comment.destroy
+        format.html { redirect_to @comment.sit, notice: 'Your comment has been deleted.' }
+        format.js
+      else
+        format.html { redirect_to @comment.sit, notice: 'You do not have permission to delete this.' }
+      end
+    end
+
   end
 end
