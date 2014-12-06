@@ -267,6 +267,13 @@ article.sit-teaser-block {
       width: 100%;
       padding: 10px;
       border-top: 1px solid #CCC;
+      .avatar {
+        float: left;
+        width: 65px;
+        img {
+          border-radius: 50%;
+        }
+      }
       .comment-body {
         margin: 20px 0;
         font-size: 0.9em;
@@ -277,6 +284,21 @@ article.sit-teaser-block {
         // opacity: 0.7;
         font-style: italic;
         margin: 10px 0 5px;
+        .delete-comment-form {
+          display: inline;
+          input[type='submit'] {
+            background: none;
+            padding: 0;
+            border: none;
+            margin: 0;
+            color: $link-color;
+            outline: none;
+            color: #999;
+            &:hover {
+              color: $link-color;
+            }
+          }
+        }
       }
     }
     .new_comment {
