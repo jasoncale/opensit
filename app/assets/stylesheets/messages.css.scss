@@ -42,23 +42,36 @@
 		margin-top: 20px;
 		margin-left: 20px;
 	}
-	.from {
-		float: right;
-		margin-top: 20px;
-	}
-	.date {
-		float: right;
-		clear: right;
-		font-size: 0.8em;
-		font-weight: bold;
-		color: #999;
-	}
-	.delete {
-		float: right;
-		clear: right;
-		font-size: 0.8em;
-		a {
+	.message_details {
+		float: left;
+		width: 100%;
+		margin-bottom: 2em;
+		.from {
+			float: right;
+			margin: 20px 0 10px;
+			.avatar {
+				float: right;
+			}
+			.username {
+				float: right;
+				clear: right;
+				font-weight: bold;
+			}
+		}
+		.date {
+			float: right;
+			clear: right;
+			font-size: 0.8em;
+			font-weight: bold;
 			color: #999;
+		}
+		.delete {
+			float: right;
+			clear: right;
+			font-size: 0.8em;
+			a {
+				color: #999;
+			}
 		}
 	}
 }
