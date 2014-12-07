@@ -4,11 +4,15 @@ Opensit::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" }
   get 'me' => "users#me"
-  get '/u/:username' => "users#show", :as => :user
-  get '/u/:username/following' => "users#following", :as => :following_user
-  get '/u/:username/followers' => "users#followers", :as => :followers_user
-  get '/u/:username/export' => "users#export"
-  get '/u/:username/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
+
+  constraints(:username => /[^\/]+/) do
+    get '/u/:username' => "users#show", :as => :user
+    get '/u/:username/following' => "users#following", :as => :following_user
+    get '/u/:username/followers' => "users#followers", :as => :followers_user
+    get '/u/:username/export' => "users#export"
+    get '/u/:username/feed' => "users#feed", :as => :feed, :defaults => { :format => 'atom' }
+  end
+
   get '/favs' => "favourites#index", :as => :favs
   get '/notifications' => "notifications#index"
   get '/welcome' => "users#welcome"

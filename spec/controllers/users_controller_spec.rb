@@ -32,6 +32,15 @@ describe UsersController, :type => :controller do
       end
     end
 
+    context 'username has period' do
+      it 'displays user page' do
+        @buddha.update!(username: 'buddha.monk')
+        get :show, username: 'buddha.monk'
+        expect(assigns(:user)).to eq(@buddha)
+        expect(response).to render_template("users/show")
+      end
+    end
+
     context 'date specified' do
       # context 'year' do
       #   it 'loads sits from that year' do
