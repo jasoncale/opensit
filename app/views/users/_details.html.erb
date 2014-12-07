@@ -42,7 +42,7 @@
     <% if !@user.website.blank? %>
       <div class="user-website info-block">
         <div class="icon"><i class="fa fa-home"></i></div>
-        <div class="value"> <%= website(@user) %></div>
+        <div class="value" itemprop="name"> <%= website(@user) %></div>
       </div>
     <% end %>
   <% end %>

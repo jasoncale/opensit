@@ -1,7 +1,7 @@
 <%= large_avatar_of(@user) %>
 <div class="sidebar-content">
-	<div class="display_name"><%= username(@user, false) %></div>
-  <div class="username"><%= @user.username %></div>
+	<div class="display_name" itemprop="name"><%= username(@user, false) %></div>
+  <div class="username" itemprop="alternateName"><%= @user.username %></div>
 
   <%= render 'users/details' %>
 
