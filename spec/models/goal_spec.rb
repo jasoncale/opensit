@@ -149,13 +149,13 @@ describe Goal do
 			end
 
 			it 'third day' do
-				Timecop.freeze(Date.today + 2)
+				Timecop.freeze((Date.today + 2).to_time)
 				expect(goal.completed?).to eq false
 				expect(goal.days_into_goal).to eq 3
 			end
 
 			it 'fourth day (goal ended)' do
-				Timecop.freeze(Date.today + 3)
+				Timecop.freeze((Date.today + 3).to_time)
 				expect(goal.completed?).to eq true
 				expect(goal.days_into_goal).to eq 3 # shouldn't increment any further
 			end
@@ -175,7 +175,7 @@ describe Goal do
 
 			it 'second day' do
 				goal
-				Timecop.freeze(Date.today + 1)
+				Timecop.freeze((Date.today + 1).to_time)
 				expect(goal.completed?).to eq false
 				expect(goal.days_into_goal).to eq 2
 			end
@@ -191,10 +191,10 @@ describe Goal do
 			goal = create(:goal, :sit_for_30_minutes_a_day, user: buddha, created_at: Date.today)
 			create(:sit, user: buddha, created_at: Date.today, duration: 30)
   		expect(goal.days_where_goal_met).to eq 1
-			Timecop.freeze(Date.today + 1)
+			Timecop.freeze((Date.today + 1).to_time)
 			create(:sit, user: buddha, created_at: Date.today, duration: 30)
   		expect(goal.days_where_goal_met).to eq 2
-			Timecop.freeze(Date.today + 1)
+			Timecop.freeze((Date.today + 1).to_time)
   		expect(goal.days_where_goal_met).to eq 2 # no change
   	end
 
@@ -203,7 +203,7 @@ describe Goal do
 				goal = create(:goal, :sit_20_minutes_for_3_days, user: buddha, created_at: Date.today)
 				create(:sit, user: buddha, created_at: Date.today, duration: 30)
 	  		expect(goal.days_where_goal_met).to eq 1
-				Timecop.freeze(Date.today + 4) # Goal finished
+				Timecop.freeze((Date.today + 4).to_time) # Goal finished
 				expect(goal.completed?).to eq true
 				create(:sit, user: buddha, created_at: Date.today, duration: 30)
 				expect(goal.days_where_goal_met).to eq 1
@@ -215,10 +215,10 @@ describe Goal do
 				goal = create(:goal, :sit_for_30_minutes_a_day, user: buddha, created_at: Date.today)
 				create(:sit, user: buddha, created_at: Date.today, duration: 30)
 	  		expect(goal.days_where_goal_met).to eq 1
-				Timecop.freeze(Date.today + 4)
+				Timecop.freeze((Date.today + 4).to_time)
 				goal.completed_date = Date.today
 				expect(goal.completed?).to eq true
-				Timecop.freeze(Date.today + 5)
+				Timecop.freeze((Date.today + 5).to_time)
 				create(:sit, user: buddha, created_at: Date.today, duration: 30)
 				expect(goal.days_where_goal_met).to eq 1
 			end
