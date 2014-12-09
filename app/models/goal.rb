@@ -44,7 +44,7 @@ class Goal < ActiveRecord::Base
   # Returns the number of days (since the day the goal began) where the goal was met
   def days_where_goal_met
   	# Rate based on last 2 weeks of results, or since started (if less than two weeks into goal)
-  	start_from = days_into_goal < 14 ? created_at.to_date : Date.today - 14
+  	start_from = days_into_goal < 14 ? created_at.to_date : Date.today - 13
     end_date = completed? ? (fixed? ? last_day_of_goal : completed_date) : Date.today
 	  total = 0
   	if fixed?

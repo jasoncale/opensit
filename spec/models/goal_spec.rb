@@ -222,6 +222,14 @@ describe Goal do
 				create(:sit, user: buddha, created_at: Date.today, duration: 30)
 				expect(goal.days_where_goal_met).to eq 1
 			end
+
+			it 'does not return more than 14 days of results' do
+				# goal started 14 days ago
+				goal = create(:goal, :sit_for_30_minutes_a_day, user: buddha, created_at: Date.today - 13)
+				# generate sits starting today through 15 days ago
+				15.times.each { |i| create(:sit, user: buddha, created_at: Date.today - i, duration: 30) }
+				expect(goal.days_where_goal_met).to eq 14
+			end
   	end
 	end
 end
