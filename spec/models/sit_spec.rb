@@ -16,7 +16,7 @@ describe Sit do
 	  	it "increments streak by 1" do
 	  		expect(buddha.streak).to eq 0
 	  		create(:sit, user: buddha, created_at: Date.yesterday)
-	  		create(:sit, user: buddha, created_at: Date.today)
+	  		create(:sit, user: buddha, created_at: Date.current)
 	  		expect(buddha.reload.streak).to eq 2
 	  	end
 
@@ -25,10 +25,10 @@ describe Sit do
           create(:sit, user: buddha, created_at: Date.yesterday - i)
         end
         # Morning sit
-        create(:sit, user: buddha, created_at: Date.today + 9.hours)
+        create(:sit, user: buddha, created_at: Date.current + 9.hours)
         expect(buddha.reload.streak).to eq 3
         # Evening sit
-	  	  create(:sit, user: buddha, created_at: Date.today + 19.hours)
+	  	  create(:sit, user: buddha, created_at: Date.current + 19.hours)
 	  		expect(buddha.reload.streak).to eq 3
 	  	end
 	  end
@@ -38,7 +38,7 @@ describe Sit do
 	  		2.times do |i|
           create(:sit, user: buddha, created_at: Date.yesterday - (i + 1))
         end
-	  		create(:sit, user: buddha, created_at: Date.today)
+	  		create(:sit, user: buddha, created_at: Date.current)
 	  		expect(buddha.reload.streak).to eq 0
 	  	end
 	  end
