@@ -497,18 +497,14 @@ describe User do
 
     it "should not suggest myself" do
       user = create(:user)
-      buddha = create(:user)
       ananda = create(:user)
       anuruddha = create(:user)
 
-      ananda.follow!(buddha)
-      anuruddha.follow!(buddha)
       ananda.follow!(user)
       anuruddha.follow!(user)
       
       user.follow!(ananda)
       user.follow!(anuruddha)
-      user.follow!(buddha)
 
       expect(user.users_to_follow).to eq([])
     end
