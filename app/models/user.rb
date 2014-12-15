@@ -274,8 +274,12 @@ class User < ActiveRecord::Base
   end
 
   def users_to_follow
-    User.joins(:reverse_relationships).where(relationships: { follower_id: followed_user_ids })
-      .where.not(relationships: { followed_id: followed_user_ids }).group("users.id").having("COUNT(followed_id) >= ?", 2)
+    User.joins(:reverse_relationships)
+      .where(relationships: { follower_id: followed_user_ids })
+      .where.not(relationships: { followed_id: followed_user_ids })
+      .where.not(id: self.id)
+      .group("users.id")
+      .having("COUNT(followed_id) >= ?", 2)
   end
 
   def unread_count
