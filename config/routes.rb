@@ -28,6 +28,7 @@ Opensit::Application.routes.draw do
   get 'explore/users/active' => "pages#active_users", :as => :explore_active_users
   get 'explore/users/new/sitters' => "pages#new_sitters", :as => :explore_new_sitters
   get 'global-feed' => "users#feed", :defaults => { :format => 'atom', :scope => 'global' }
+  get 'calendar' => "pages#calendar", :as => :calendar
 
   resources :sits do
     resources :comments

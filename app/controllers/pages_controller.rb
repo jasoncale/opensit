@@ -33,6 +33,9 @@ class PagesController < ApplicationController
     @page_class = 'explore'
   end
 
+  def calendar
+  end
+
   def tag_cloud
     @title = 'Popular Tags'
   end
@@ -46,7 +49,6 @@ class PagesController < ApplicationController
   end
 
   def online_users
-
   end
 
   def new_comments
