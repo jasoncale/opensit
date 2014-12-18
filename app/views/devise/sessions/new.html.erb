@@ -16,9 +16,7 @@
 
 		  <%= f.input :password, placeholder: 'Password', label: false %>
 
-		  <% if devise_mapping.rememberable? -%>
-		    <div class="row remember"><%= f.check_box :remember_me, value: '1' %> <%= f.label :remember_me, class: 'col-lg-10' %></div>
-		  <% end -%>
+      <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => true if devise_mapping.rememberable? %>
 
 		  <div><%= f.submit "Login", :class => 'pull-right btn btn-primary btn-lg' %></div>
 
