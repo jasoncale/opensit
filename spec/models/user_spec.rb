@@ -35,6 +35,7 @@ describe User do
     it { should have_many(:notifications).dependent(:destroy) }
     it { should have_many(:favourites) }
     it { should have_many(:goals).dependent(:destroy) }
+    it { should have_many(:reports).dependent(:destroy) }
 
     describe "#favourite_sits" do
       let(:fav_sit) { create(:sit, user: ananda) }
@@ -502,7 +503,7 @@ describe User do
 
       ananda.follow!(user)
       anuruddha.follow!(user)
-      
+
       user.follow!(ananda)
       user.follow!(anuruddha)
 

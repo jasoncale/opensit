@@ -10,6 +10,7 @@ class Sit < ActiveRecord::Base
   has_many :tags, through: :taggings
   has_many :favourites, :as => :favourable
   has_many :likes, :as => :likeable
+  has_many :reports, :as => :reportable
 
   validates :s_type, :presence => true
   validates :title, :presence => true, :if => "s_type != 0"
