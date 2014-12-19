@@ -74,6 +74,12 @@ class Notification < ActiveRecord::Base
       n.save
     end
   end
+
+  private
+
+    def self.can_combine_likes?(last_notification, sit_link)
+      last_notification.present? and last_notification.link == sit_link and last_notification.message.include?('like')
+    end
 end
 
 # == Schema Information
