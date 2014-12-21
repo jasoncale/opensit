@@ -1,18 +1,19 @@
 require 'spec_helper'
 
 describe PagesController, :type => :controller do
-  before do
-    @buddha = create(:user, username: 'buddha')
-  end
+  let(:buddha) { create(:user, username: 'buddha') }
 
-  describe 'Explore' do
+  describe "GET 'explore'" do
     it 'loads the global sit stream' do
-      sign_in @buddha
+      sign_in buddha
       get :explore
       expect(response).to be_success
     end
+  end
 
+  describe "GET 'new_sitters" do
     it 'loads new sitters' do
+      sign_in buddha
       dudette = create :user, username: 'ladyperson'
       create :sit, user: dudette, created_at: Date.today
 
