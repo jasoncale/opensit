@@ -1,0 +1,13 @@
+<div class="suggested-user">
+  <div class="avatar"><%= small_avatar_of(suggested_user) %></div>
+  <div class="details">
+    <div class="name"><%= link_to(user_path(suggested_user)) do %>
+      <%= suggested_user.username %>
+    <% end -%></div>
+    <div class="location">
+      <%= "#{suggested_user.location}." if suggested_user.location %>
+    </div>
+    <div class="sit-count"><%= pluralize(suggested_user.sits.count, 'sit') %></div>
+  </div>
+  <%= render :partial => "shared/follow_button", :locals => { :user => suggested_user } %>
+</div>

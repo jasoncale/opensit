@@ -426,6 +426,51 @@
 	}
 }
 
+/* Suggested users */
+.suggested-users {
+    font-size: 0.9em;
+    h2 {
+        text-transform: uppercase;
+        margin: 13px 0;
+        font-weight: bold;
+        font-size: 0.8em;
+        color: $dark-grey;
+    }
+    .suggested-user {
+        float: left;
+        position: relative;
+        width: 100%;
+        .avatar {
+            float: left;
+            width: 60px;
+        }
+        .details {
+            float: left;
+            width: calc(100% - 60px);
+            overflow: hidden;
+
+            .name {
+                float: left;
+                margin-top: 2px;
+            }
+            .location, .sit-count {
+                float: left;
+                clear: left;
+                font-size: 0.7em;
+                color: $dark-grey;
+            }
+        }
+        .follow_form {
+            position: absolute;
+            right: 0px;
+            top: 7px;
+            margin-top: 0px;
+            box-shadow: -10px 0px 10px 10px $background;
+            width: auto;
+        }
+    }
+}
+
 /* Not following anyone yet */
 .page-content .no-follow {
 	text-align: center;
