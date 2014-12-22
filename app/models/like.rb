@@ -14,7 +14,7 @@ class Like < ActiveRecord::Base
   private
     def create_notification
       @obj = self.likeable_type.constantize.find(self.likeable_id)
-      Notification.send_notification('NewLikeOnSit', @obj.user.id, { liker: self.user, sit_id: @obj.id, like_id: self.id })
+      Notification.send_new_sit_like_notification(@obj.user.id, { liker: self.user, sit_id: @obj.id, like_id: self.id })
     end
 end
 
