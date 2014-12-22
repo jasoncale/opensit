@@ -6,10 +6,7 @@
     <%= username(@comment.user) %><br> <%= time_ago_in_words(@comment.created_at) %> ago
 
     <% if current_user == @comment.user %>
-      <%= simple_form_for [@sit, @comment], :method => 'delete', :remote => true,
-        :html => { :class => 'delete-comment-form' } do |f| %>
-        <%= f.submit 'x' %>
-      <% end %>
+      <br><%= link_to 'Delete', sit_comment_path(@sit, @comment), method: :delete, data: { confirm: 'Delete your comment?' }, class: 'delete-goal' %>
     <% end %>
 
   </div>
