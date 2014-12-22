@@ -17,7 +17,7 @@ class Notification < ActiveRecord::Base
       when 'NewComment'
         username = meta[:commenter].display_name
         commenter_id = meta[:commenter].id
-        sit_id = meta[:sit_link]
+        sit_id = meta[:sit_id]
         comment_id = meta[:comment_id]
         sit_owner = meta[:sit_owner]
         if meta[:mine]
@@ -58,12 +58,13 @@ class Notification < ActiveRecord::Base
       when 'NewLikeOnSit'
         username = meta[:liker].display_name
         liker_id = meta[:liker].id
-        like_id = meta[:sit_link]
+        sit_id = meta[:sit_id]
+        like_id = meta[:like_id]
 
         notify = Notification.create(
           message: "#{username} likes your entry.",
           user_id: user_id,
-          link: Rails.application.routes.url_helpers.sit_path(meta[:sit_link]),
+          link: Rails.application.routes.url_helpers.sit_path(meta[:sit_id]),
           initiator: liker_id,
           object_type: 'like',
           object_id: like_id
