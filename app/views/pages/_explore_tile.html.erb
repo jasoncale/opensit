@@ -12,5 +12,7 @@
       <li <%='class=active' if current_page?(explore_new_users_path) %>><a href="/explore/users/new" class="item"><i class="fa fa-user"></i> New users</a></li>
       <li <%='class=active' if current_page?(explore_new_sitters_path) %>><a title="New users who have started adding sits" href="/explore/users/new/sitters" class="item"><i class="fa fa-user"></i> New sitters</a></li>
     </ul>
+
+    <%= render 'shared/suggested_users_block', users: current_user.users_to_follow %>
   </div>
 </div>
