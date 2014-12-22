@@ -1,5 +1,5 @@
 class Notification < ActiveRecord::Base
-  attr_accessible :user_id, :message, :viewed, :link, :initiator
+  attr_accessible :user_id, :message, :viewed, :link, :initiator, :object_type, :object_id
 
   belongs_to :user
 
@@ -24,9 +24,9 @@ class Notification < ActiveRecord::Base
           message = "#{username} commented on your sit."
         else
           if sit_owner == username
-            message = "#{username} also commented on their own sit."  
+            message = "#{username} also commented on their own sit."
           else
-            message = "#{username} also commented on #{sit_owner}'s sit." 
+            message = "#{username} also commented on #{sit_owner}'s sit."
           end
         end
         # No need to notify the user if they've just commented on their own sit
@@ -35,28 +35,38 @@ class Notification < ActiveRecord::Base
             message: message,
             user_id: user_id,
             link: "/sits/#{sit_id}\#comment-#{comment_id}",
-            initiator: commenter_id
+            initiator: commenter_id,
+            object_type: 'comment',
+            object_id: comment_id
           )
         end
 
       when 'NewFollower'
         user = meta[:follower]
         follower_id = meta[:follower].id
+        follow_id = meta[:follow_id]
+
         notify = Notification.create(
           message: "#{user.display_name} is now following you!",
           user_id: user_id,
           link: Rails.application.routes.url_helpers.user_path(meta[:follower]),
-          initiator: follower_id
+          initiator: follower_id,
+          object_type: 'follow',
+          object_id: follow_id
         )
 
       when 'NewLikeOnSit'
         username = meta[:liker].display_name
         liker_id = meta[:liker].id
+        like_id = meta[:sit_link]
+
         notify = Notification.create(
           message: "#{username} likes your entry.",
           user_id: user_id,
           link: Rails.application.routes.url_helpers.sit_path(meta[:sit_link]),
-          initiator: liker_id
+          initiator: liker_id,
+          object_type: 'like',
+          object_id: like_id
         )
     end
 
@@ -85,4 +95,6 @@ end
 #  updated_at :datetime
 #  user_id    :integer
 #  viewed     :boolean          default(FALSE)
+#  object_type :string(255)
+#  object_id  :integer
 #

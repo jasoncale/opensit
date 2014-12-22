@@ -20,4 +20,6 @@ end
 #  updated_at :datetime
 #  user_id    :integer
 #  viewed     :boolean          default(FALSE)
+#  object_type :string(255)
+#  object_id  :integer
 #

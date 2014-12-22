@@ -436,7 +436,7 @@ describe User do
 
     it "sends a notification" do
       expect(Notification).to receive(:send_notification)
-        .with('NewFollower', buddha.id, { follower: ananda })
+        .with('NewFollower', buddha.id, { follower: ananda, follow_id: Relationship.count + 1 })
       ananda.follow!(buddha)
     end
   end
@@ -502,7 +502,7 @@ describe User do
 
       ananda.follow!(user)
       anuruddha.follow!(user)
-      
+
       user.follow!(ananda)
       user.follow!(anuruddha)
 
