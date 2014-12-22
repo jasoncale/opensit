@@ -97,6 +97,7 @@
 
 /* Sign up */
 .sign-up-box {
+  .alert { width: inherit; }
   .well {
     margin: 25px auto 25px auto;
   }
@@ -165,17 +166,6 @@
     padding: 20px 40px 40px 40px;
     .user_email {
       margin-bottom: 5px;
-    }
-    .remember {
-      input {
-        margin: 13px 0 0 15px;
-        float: left;
-      }
-      label {
-        float: left;
-        text-align: left;
-        margin-left: -7px;
-      }
     }
     .devise-options {
       margin-left: 15px;
