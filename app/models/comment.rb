@@ -31,7 +31,7 @@ class Comment < ActiveRecord::Base
       # And any other commenters
       if !commenters.empty?
         commenters.each do |c|
-          Notification.send_notification('NewComment', c, { commenter: self.user, it_id: self.sit.id, comment_id: self.id, sit_owner: self.sit.user.display_name })
+          Notification.send_notification('NewComment', c, { commenter: self.user, sit_id: self.sit.id, comment_id: self.id, sit_owner: self.sit.user.display_name })
         end
       end
     end
