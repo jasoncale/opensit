@@ -280,8 +280,8 @@ article.sit-teaser-block {
       }
       .user {
         float: right;
-        font-size: 0.85em;
-        // opacity: 0.7;
+        min-width: 190px;
+        font-size: 0.7em;
         font-style: italic;
         margin: 10px 0 5px;
         .delete-comment-form {
@@ -366,8 +366,6 @@ article.sit-teaser-block {
     border: 2px solid $green;
     background: $green;
     border-radius: 5px;
-    // background: white;
-    // color: $link-color;
     color: white;
     .fa-bolt {
       color: white;
