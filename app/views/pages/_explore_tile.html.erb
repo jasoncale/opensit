@@ -13,7 +13,7 @@
       <li <%='class=active' if current_page?(explore_new_sitters_path) %>><a title="New users who have started adding sits" href="/explore/users/new/sitters" class="item"><i class="fa fa-user"></i> New sitters</a></li>
     </ul>
 
-    <% if @suggested_users %>
+    <% if @suggested_users && !@suggested_users.empty? %>
       <%= render 'shared/suggested_users_block', users: @suggested_users %>
     <% end %>
   </div>
