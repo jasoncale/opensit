@@ -194,6 +194,27 @@ article.sit-teaser-block {
       height: auto;
     }
 
+    // Reports
+    .report-flag {
+      float: right;
+      margin-right: 20px;
+      &:hover {
+        cursor: pointer;
+        &:before {
+          content: "\f024";
+        }
+      }
+    }
+    .report-modal {
+      label {
+        text-align: left;
+      }
+      .form-group {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
     // Prev/next clickable areas
     .prev-next-row {
       margin-top: 1em;

@@ -40,6 +40,7 @@ Opensit::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :favourites, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
+  resources :reports, only: [:create]
   resources :goals
 
   # Crawl live site, but not staging

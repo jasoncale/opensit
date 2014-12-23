@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
                             source_type: "Sit"
   has_many :goals, :dependent => :destroy
 
+  has_many :reports, :dependent => :destroy
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

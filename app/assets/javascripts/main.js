@@ -80,6 +80,12 @@ $(document).ready(function(){
     $(this).closest('form').submit();
   });
 
+  // REPORTS / a sit
+  $('.report-flag').on('click', function(e) {
+    e.preventDefault();
+    $('.report-modal').modal();
+  });
+
   // MASONRY
   if ($('.page-content.me .sit-container').length) {
     var container = document.querySelector('.sit-container');

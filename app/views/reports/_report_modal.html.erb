@@ -1,0 +1,31 @@
+<div class="report-modal modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <%= simple_form_for reportable.reports.new, :remote => true do |f| %>
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Report</h4>
+        </div>
+
+        <div class="modal-body form-horizontal">
+
+          <%= f.input :reason, collection: report_reason_options() %>
+          <%= f.input :body %>
+          <%= f.input :reportable_id, as: :hidden, input_html: { value: reportable.id } %>
+          <%= f.input :reportable_type, as: :hidden, input_html: { value: reportable.class.to_s } %>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <%= f.submit 'Report', class: 'btn btn-primary', data: { disable_with: 'reporting...' } %>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
