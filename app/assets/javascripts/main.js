@@ -63,6 +63,9 @@ $(document).ready(function(){
   // VIEW SIT / Likers list
   $("#likers-list").tooltip();
 
+  // VIEW SIT / Report
+  $('.report-flag').tooltip();
+
   // VIEW PROFILE / Date select
   $('.date_range_select').change( function() {
     Turbolinks.visit($(this).val());
