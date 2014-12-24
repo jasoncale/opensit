@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
   def not_found
-    render 'public/404', status: 404, layout: false
-    return false
+    # render 'public/404', status: 404, layout: false
+    # return false
     # The above is the only way to safely return a 404 without filling
     # the database pool with stale connections and bringing the site down.
     # DB connections should be managed automatically by middleware, but something
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     # a bug within rails itself, or more specifically, between rails 4 and the
     # postgres adapter: https://github.com/rails/rails/issues/12867
     #
-    # raise ActionController::RoutingError.new('Not Found')
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   protected
