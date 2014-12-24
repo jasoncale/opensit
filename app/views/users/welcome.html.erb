@@ -1,11 +1,26 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=848416401858718&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="col-lg-12 page">
 	<div class="message-box welcome-box">
 	  <h2>Welcome to our community!</h2>
 	  <p>Here's a few things you should know.</p>
 	  <div class="points">
+	  	<div class="point"><div class="icon"><i class="fa fa-dashboard"></i></div><div class="text"> Try <%= link_to 'setting a goal', goals_path %> and get feedback on how well you're doing.</div></div>
 	  	<div class="point"><div class="icon"><i class="fa fa-book"></i></div><div class="text"> Your journal is public by default. That means anyone can read it. There is also a private journal option under <%= link_to 'My profile', edit_user_registration_path %>.</div></div>
-      <div class="point"><div class="icon"><i class="fa fa-globe"></i></div><div class="text"> We're an open community, and open source. That means <a href="/contribute">you can help us build OpenSit</a>!</div></div>
-      <div class="point"><div class="icon"><i class="fa fa-group"></i></div><div class="text"> Tell us a bit about yourself; <%= link_to 'fill out your profile and add a picture', edit_user_registration_path %>.</div></div>
+      <div class="point centered"><div class="icon"><i class="fa fa-share"></i></div><div class="text">Keep up to date with us!
+	  		<div class="fb-like" data-href="http://opensit.com" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+	  		<div class="twitter-follow-container">
+	  			<a href="https://twitter.com/opensit" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @opensit</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div>
+				</div>
+			</div>
     </div>
 
 	  <div class="my-actions">
