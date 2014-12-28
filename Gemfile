@@ -3,6 +3,7 @@ ruby '2.1.5'
 
 gem 'rails', '4.2'
 gem 'rack'
+gem "rack-timeout"
 gem 'puma'
 
 group :development do
