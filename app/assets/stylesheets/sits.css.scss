@@ -324,11 +324,18 @@ article.sit-teaser-block {
         }
       }
     }
-    .new_comment {
-      width: 98%;
-      margin-left: 9px;
-      .wysihtml5-toolbar {
-        display: none;
+    .new-comment {
+      float: left;
+      width: 100%;
+      .post-comment-btn {
+        margin-top: 1em;
+      }
+      .new_comment {
+        width: 98%;
+        margin-left: 9px;
+        .wysihtml5-toolbar {
+          display: none;
+        }
       }
     }
   }
