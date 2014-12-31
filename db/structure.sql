@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE comments (
@@ -63,7 +63,7 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
--- Name: favourites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: favourites; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE favourites (
@@ -96,7 +96,7 @@ ALTER SEQUENCE favourites_id_seq OWNED BY favourites.id;
 
 
 --
--- Name: goals; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: goals; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE goals (
@@ -131,7 +131,7 @@ ALTER SEQUENCE goals_id_seq OWNED BY goals.id;
 
 
 --
--- Name: likes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: likes; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE likes (
@@ -162,7 +162,7 @@ ALTER SEQUENCE likes_id_seq OWNED BY likes.id;
 
 
 --
--- Name: messages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: messages; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE messages (
@@ -199,7 +199,7 @@ ALTER SEQUENCE messages_id_seq OWNED BY messages.id;
 
 
 --
--- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE notifications (
@@ -210,7 +210,9 @@ CREATE TABLE notifications (
     initiator integer,
     viewed boolean DEFAULT false,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    object_type character varying(255),
+    object_id integer
 );
 
 
@@ -234,7 +236,7 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
--- Name: rails_admin_histories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: rails_admin_histories; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE rails_admin_histories (
@@ -270,7 +272,7 @@ ALTER SEQUENCE rails_admin_histories_id_seq OWNED BY rails_admin_histories.id;
 
 
 --
--- Name: relationships; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: relationships; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE relationships (
@@ -302,7 +304,7 @@ ALTER SEQUENCE relationships_id_seq OWNED BY relationships.id;
 
 
 --
--- Name: reports; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: reports; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE reports (
@@ -337,7 +339,7 @@ ALTER SEQUENCE reports_id_seq OWNED BY reports.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE schema_migrations (
@@ -346,7 +348,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: sits; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sits; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE sits (
@@ -384,7 +386,7 @@ ALTER SEQUENCE sits_id_seq OWNED BY sits.id;
 
 
 --
--- Name: taggings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: taggings; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE taggings (
@@ -416,7 +418,7 @@ ALTER SEQUENCE taggings_id_seq OWNED BY taggings.id;
 
 
 --
--- Name: tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: tags; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE tags (
@@ -447,7 +449,7 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE users (
@@ -609,7 +611,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY comments
@@ -617,7 +619,7 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: favourites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: favourites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY favourites
@@ -625,7 +627,7 @@ ALTER TABLE ONLY favourites
 
 
 --
--- Name: goals_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: goals_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY goals
@@ -633,7 +635,7 @@ ALTER TABLE ONLY goals
 
 
 --
--- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY likes
@@ -641,7 +643,7 @@ ALTER TABLE ONLY likes
 
 
 --
--- Name: messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY messages
@@ -649,7 +651,7 @@ ALTER TABLE ONLY messages
 
 
 --
--- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY notifications
@@ -657,7 +659,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: rails_admin_histories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: rails_admin_histories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY rails_admin_histories
@@ -665,7 +667,7 @@ ALTER TABLE ONLY rails_admin_histories
 
 
 --
--- Name: relationships_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: relationships_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY relationships
@@ -673,7 +675,7 @@ ALTER TABLE ONLY relationships
 
 
 --
--- Name: reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY reports
@@ -681,7 +683,7 @@ ALTER TABLE ONLY reports
 
 
 --
--- Name: sits_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: sits_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY sits
@@ -689,7 +691,7 @@ ALTER TABLE ONLY sits
 
 
 --
--- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY taggings
@@ -697,7 +699,7 @@ ALTER TABLE ONLY taggings
 
 
 --
--- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY tags
@@ -705,7 +707,7 @@ ALTER TABLE ONLY tags
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY users
@@ -713,112 +715,112 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: index_favourites_on_favourable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_favourites_on_favourable_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_favourites_on_favourable_id ON favourites USING btree (favourable_id);
 
 
 --
--- Name: index_favourites_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_favourites_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_favourites_on_user_id ON favourites USING btree (user_id);
 
 
 --
--- Name: index_likes_on_likeable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_likes_on_likeable_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_likes_on_likeable_id ON likes USING btree (likeable_id);
 
 
 --
--- Name: index_likes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_likes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_likes_on_user_id ON likes USING btree (user_id);
 
 
 --
--- Name: index_rails_admin_histories; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_rails_admin_histories; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_rails_admin_histories ON rails_admin_histories USING btree (item, "table", month, year);
 
 
 --
--- Name: index_relationships_on_followed_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_relationships_on_followed_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_relationships_on_followed_id ON relationships USING btree (followed_id);
 
 
 --
--- Name: index_relationships_on_follower_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_relationships_on_follower_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_relationships_on_follower_id ON relationships USING btree (follower_id);
 
 
 --
--- Name: index_relationships_on_follower_id_and_followed_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_relationships_on_follower_id_and_followed_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX index_relationships_on_follower_id_and_followed_id ON relationships USING btree (follower_id, followed_id);
 
 
 --
--- Name: index_reports_on_reportable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_reports_on_reportable_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_reports_on_reportable_id ON reports USING btree (reportable_id);
 
 
 --
--- Name: index_reports_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_reports_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_reports_on_user_id ON reports USING btree (user_id);
 
 
 --
--- Name: index_taggings_on_sit_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_taggings_on_sit_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_taggings_on_sit_id ON taggings USING btree (sit_id);
 
 
 --
--- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX index_taggings_on_tag_id ON taggings USING btree (tag_id);
 
 
 --
--- Name: sit_body; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: sit_body; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX sit_body ON sits USING gin (to_tsvector('english'::regconfig, body));
 
 
 --
--- Name: sit_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: sit_title; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX sit_title ON sits USING gin (to_tsvector('english'::regconfig, (title)::text));
 
 
 --
--- Name: tag_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: tag_name; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX tag_name ON tags USING gin (to_tsvector('english'::regconfig, (name)::text));
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
@@ -898,3 +900,4 @@ INSERT INTO schema_migrations (version) VALUES ('20140625193718');
 
 INSERT INTO schema_migrations (version) VALUES ('20141218153117');
 
+INSERT INTO schema_migrations (version) VALUES ('20141222165045');

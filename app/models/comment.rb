@@ -26,12 +26,12 @@ class Comment < ActiveRecord::Base
       commenters = self.sit.commenters
 
       # Notify the owner of the sit
-      Notification.send_notification('NewComment', self.sit.user.id, { commenter: self.user, sit_link: self.sit.id, comment_id: self.id, mine: true })
+      Notification.send_new_comment_notification(self.sit.user.id, self, true)
 
       # And any other commenters
       if !commenters.empty?
         commenters.each do |c|
-          Notification.send_notification('NewComment', c, { commenter: self.user, sit_link: self.sit.id, comment_id: self.id, sit_owner: self.sit.user.display_name })
+          Notification.send_new_comment_notification(c, self, false)
         end
       end
     end

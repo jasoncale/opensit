@@ -19,6 +19,8 @@ describe Notification do
       expect(@buddha.notifications.first.message)
         .to eq("ananda commented on your sit.")
       expect(@buddha.notifications.first.initiator).to eq @ananda.id
+      expect(@buddha.notifications.first.object_type).to eq 'comment'
+      expect(@buddha.notifications.first.object_id).to eq @sit.comments.first.id
     end
 
     it "links to the sit comment" do
@@ -102,6 +104,8 @@ describe Notification do
       expect(@ananda.notifications.first.message).to eq 'buddha is now following you!'
       expect(@ananda.notifications.first.link).to eq user_path(@buddha)
       expect(@ananda.notifications.first.initiator).to eq @buddha.id
+      expect(@ananda.notifications.first.object_type).to eq 'follow'
+      expect(@ananda.notifications.first.object_id).to eq @buddha.relationships.where(follower_id: @buddha.id, followed_id: @ananda.id).first.id
     end
   end
 
@@ -117,6 +121,8 @@ describe Notification do
       expect(@buddha.notifications.first.message).to eq 'ananda likes your entry.'
       expect(@buddha.notifications.first.link).to eq sit_path(@sit)
       expect(@buddha.notifications.first.initiator).to eq @ananda.id
+      expect(@buddha.notifications.first.object_type).to eq 'like'
+      expect(@buddha.notifications.first.object_id).to eq @sit.likes.first.id
     end
   end
 
@@ -134,4 +140,6 @@ end
 #  updated_at :datetime
 #  user_id    :integer
 #  viewed     :boolean          default(FALSE)
+#  object_type :string(255)
+#  object_id  :integer
 #
