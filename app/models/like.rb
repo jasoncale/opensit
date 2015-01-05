@@ -8,7 +8,7 @@ class Like < ActiveRecord::Base
   after_save :create_notification
 
   def self.likers_for(obj)
-    obj.likes.map { |u| User.find(u.user_id) }.reverse
+    obj.likes.order(id: :asc).map { |u| User.find(u.user_id) }
   end
 
   private
