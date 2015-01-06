@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     month = params[:month] ? params[:month] : Date.today.month
     year = params[:year] ? params[:year] : Date.today.year
 
-    index = @by_month[:list_of_months].index "#{year} #{month}" if @user.sits.present?
+    index = @by_month[:list_of_months].index "#{year} #{sprintf '%02d', month}" if @user.sits.present?
 
     # Generate prev/next links
     # .. for someone who's sat this month
