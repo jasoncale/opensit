@@ -383,7 +383,7 @@ class User < ActiveRecord::Base
   private
 
     def welcome_email
-      UserMailer.welcome_email(self).deliver
+      UserMailer.welcome_email(self).deliver_now
     end
 
     def follow_opensit
