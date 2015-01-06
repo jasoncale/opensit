@@ -89,22 +89,22 @@ describe Goal do
 		let(:goal) { create(:goal, :sit_for_30_days, user: buddha) }
 
 		it 'under 50%' do
-			goal.stub(:rating) { 45 }
+                        allow(goal).to receive_messages(:rating => 45)
 			expect(goal.rating_colour).to eq 'red'
 		end
 
 		it 'under 70%' do
-			goal.stub(:rating) { 64 }
+                        allow(goal).to receive_messages(:rating => 64)
 			expect(goal.rating_colour).to eq 'amber'
 		end
 
 		it 'under 99%' do
-			goal.stub(:rating) { 91 }
+                        allow(goal).to receive_messages(:rating => 91)
 			expect(goal.rating_colour).to eq 'green'
 		end
 
 		it '100%' do
-			goal.stub(:rating) { 100 }
+                        allow(goal).to receive_messages(:rating => 100)
 			expect(goal.rating_colour).to eq 'gold'
 		end
 	end

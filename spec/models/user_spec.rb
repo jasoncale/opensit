@@ -55,13 +55,13 @@ describe User do
   context "after signup" do
     it 'sends welcome email' do
       ActionMailer::Base.deliveries.clear
-      ActionMailer::Base.deliveries.should be_empty
+      expect(ActionMailer::Base.deliveries).to be_empty
 
       email = 'sahaj@samadhi.com'
       create :user, email: email
 
-      ActionMailer::Base.deliveries.should_not be_empty
-      ActionMailer::Base.deliveries.last.to.should == [email]
+      expect(ActionMailer::Base.deliveries).to_not be_empty
+      expect(ActionMailer::Base.deliveries.last.to).to eq [email]
     end
 
     it 'follows opensit' do
