@@ -22,4 +22,10 @@ class UserMailer < ActionMailer::Base
     @email = user.email
     mail(to: @email, subject: 'Set goals for your meditation') if user.email
   end
+
+  # 11th Jan 2015
+  def calendar_intro_email(user)
+    @email = user.email
+    mail(to: @email, subject: 'Meditate with people from around the globe!') if user.email
+  end
 end
