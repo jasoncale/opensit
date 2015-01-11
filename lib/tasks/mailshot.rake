@@ -32,7 +32,7 @@ task :mailshot => :environment do
   count = 0
   query = User.all.order(created_at: :asc).limit(limit).offset(skip)
   query.each do |user|
-    UserMailer.goals_are_live(user).deliver
+    UserMailer.calendar_intro_email(user).deliver
     count += 1
     puts "#{count} #{user.display_name} (#{user.email})"
   end
