@@ -55,14 +55,36 @@ class Notification < ActiveRecord::Base
 
   def self.send_new_sit_like_notification(user_id, like)
 
-    Notification.create(
-      message: "#{like.user.display_name} likes your entry.",
-      user_id: user_id,
-      link: Rails.application.routes.url_helpers.sit_path(like.likeable_id),
-      initiator: like.user.id,
-      object_type: 'like',
-      object_id: like.id
-    )
+    obj = Sit.find(like.likeable_id)
+    last_notification = User.find(user_id).notifications.first
+
+    # if last notification was a like of the same sit
+    if can_combine_likes?(last_notification, like)
+
+      like_count = Like.likers_for(obj).count
+      if like_count == 2
+        message = "#{like.user.display_name} and 1 other person liked your entry."
+      else
+        message = "#{like.user.display_name} and #{like_count - 1} other people liked your entry."
+      end
+      last_notification.update(
+        message: message,
+        initiator: like.user.id
+      )
+
+    else
+
+      Notification.create(
+        message: "#{like.user.display_name} likes your entry.",
+        user_id: user_id,
+        link: Rails.application.routes.url_helpers.sit_path(like.likeable_id),
+        initiator: like.user.id,
+        object_type: 'like',
+        object_id: like.id
+      )
+
+    end
+
 
   end
 
@@ -74,6 +96,12 @@ class Notification < ActiveRecord::Base
       n.save
     end
   end
+
+  private
+
+    def self.can_combine_likes?(last_notification, like)
+      last_notification.present? and last_notification.object_id == like.likeable_id and last_notification.object_type == 'like'
+    end
 end
 
 # == Schema Information
