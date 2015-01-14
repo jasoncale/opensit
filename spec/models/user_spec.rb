@@ -172,6 +172,12 @@ describe User do
      end
   end #location
 
+  describe "#receive_email" do
+    it "returns true" do
+      expect(user.receive_email).to be(true)
+    end
+  end
+
   describe "#display_name" do
     context "when a user has no first name" do
       let(:user) { build(:user, :no_first_name) }
@@ -627,6 +633,7 @@ end
 #  password_salt          :string(255)
 #  practice               :text
 #  privacy_setting        :string(255)      default("public")
+#  receive_email          :boolean          default(true)
 #  remember_created_at    :datetime
 #  remember_token         :string(255)
 #  reset_password_sent_at :datetime

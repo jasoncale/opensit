@@ -49,14 +49,14 @@ SET default_with_oids = false;
 
 CREATE TABLE active_admin_comments (
     id integer NOT NULL,
-    resource_id character varying(255) NOT NULL,
-    resource_type character varying(255) NOT NULL,
+    resource_id character varying NOT NULL,
+    resource_type character varying NOT NULL,
     author_id integer,
-    author_type character varying(255),
+    author_type character varying,
     body text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    namespace character varying(255)
+    namespace character varying
 );
 
 
@@ -85,16 +85,16 @@ ALTER SEQUENCE active_admin_comments_id_seq OWNED BY active_admin_comments.id;
 
 CREATE TABLE admin_users (
     id integer NOT NULL,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying(255),
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
     reset_password_sent_at timestamp without time zone,
     remember_created_at timestamp without time zone,
     sign_in_count integer DEFAULT 0,
     current_sign_in_at timestamp without time zone,
     last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255),
+    current_sign_in_ip character varying,
+    last_sign_in_ip character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -159,7 +159,7 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 CREATE TABLE favourites (
     id integer NOT NULL,
     favourable_id integer,
-    favourable_type character varying(255),
+    favourable_type character varying,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -257,7 +257,7 @@ ALTER SEQUENCE likes_id_seq OWNED BY likes.id;
 
 CREATE TABLE messages (
     id integer NOT NULL,
-    subject character varying(255),
+    subject character varying,
     body text,
     from_user_id integer,
     to_user_id integer,
@@ -289,20 +289,48 @@ ALTER SEQUENCE messages_id_seq OWNED BY messages.id;
 
 
 --
+-- Name: notification_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE notification_types (
+    id integer NOT NULL,
+    event character varying,
+    text character varying
+);
+
+
+--
+-- Name: notification_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE notification_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notification_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE notification_types_id_seq OWNED BY notification_types.id;
+
+
+--
 -- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notifications (
     id integer NOT NULL,
     user_id integer,
-    message character varying(255),
-    link character varying(255),
+    message character varying,
+    link character varying,
     initiator integer,
     viewed boolean DEFAULT false,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    object_type character varying,
-    object_id integer
+    updated_at timestamp without time zone
 );
 
 
@@ -332,9 +360,9 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 CREATE TABLE rails_admin_histories (
     id integer NOT NULL,
     message text,
-    username character varying(255),
+    username character varying,
     item integer,
-    "table" character varying(255),
+    "table" character varying,
     month smallint,
     year bigint,
     created_at timestamp without time zone NOT NULL,
@@ -443,7 +471,7 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE sits (
     id integer NOT NULL,
-    title character varying(255),
+    title character varying,
     body text,
     user_id integer,
     disable_comments boolean,
@@ -451,8 +479,7 @@ CREATE TABLE sits (
     updated_at timestamp without time zone NOT NULL,
     duration integer,
     s_type integer,
-    private boolean DEFAULT false,
-    views integer DEFAULT 0
+    private boolean DEFAULT false
 );
 
 
@@ -513,7 +540,7 @@ ALTER SEQUENCE taggings_id_seq OWNED BY taggings.id;
 
 CREATE TABLE tags (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -544,14 +571,14 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 CREATE TABLE users (
     id integer NOT NULL,
-    username character varying(255),
-    email character varying(255),
-    first_name character varying(255),
-    last_name character varying(255),
+    username character varying,
+    email character varying,
+    first_name character varying,
+    last_name character varying,
     dob date,
     gender integer,
-    city character varying(255),
-    country character varying(255),
+    city character varying,
+    country character varying,
     who text,
     why text,
     style character varying(100),
@@ -562,31 +589,29 @@ CREATE TABLE users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     encrypted_password character varying(128) DEFAULT ''::character varying NOT NULL,
-    password_salt character varying(255),
-    authentication_token character varying(255),
-    confirmation_token character varying(255),
+    password_salt character varying,
+    authentication_token character varying,
+    confirmation_token character varying,
     confirmed_at timestamp without time zone,
     confirmation_sent_at timestamp without time zone,
-    reset_password_token character varying(255),
-    remember_token character varying(255),
+    reset_password_token character varying,
+    remember_token character varying,
     remember_created_at timestamp without time zone,
     sign_in_count integer DEFAULT 0,
     current_sign_in_at timestamp without time zone,
     last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255),
+    current_sign_in_ip character varying,
+    last_sign_in_ip character varying,
     failed_attempts integer DEFAULT 0,
-    unlock_token character varying(255),
+    unlock_token character varying,
     locked_at timestamp without time zone,
     website character varying(100),
-    avatar_file_name character varying(255),
-    avatar_content_type character varying(255),
+    avatar_file_name character varying,
+    avatar_content_type character varying,
     avatar_file_size integer,
     avatar_updated_at timestamp without time zone,
     private_stream boolean DEFAULT false,
-    reset_password_sent_at timestamp without time zone,
-    sits_count integer DEFAULT 0,
-    streak integer DEFAULT 0
+    receive_email boolean DEFAULT true
 );
 
 
@@ -656,6 +681,13 @@ ALTER TABLE ONLY likes ALTER COLUMN id SET DEFAULT nextval('likes_id_seq'::regcl
 --
 
 ALTER TABLE ONLY messages ALTER COLUMN id SET DEFAULT nextval('messages_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY notification_types ALTER COLUMN id SET DEFAULT nextval('notification_types_id_seq'::regclass);
 
 
 --
@@ -768,6 +800,14 @@ ALTER TABLE ONLY likes
 
 ALTER TABLE ONLY messages
     ADD CONSTRAINT messages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY notification_types
+    ADD CONSTRAINT notification_types_pkey PRIMARY KEY (id);
 
 
 --
@@ -954,48 +994,6 @@ CREATE INDEX index_taggings_on_tag_id ON taggings USING btree (tag_id);
 
 
 --
--- Name: sit_body; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX sit_body ON sits USING gin (to_tsvector('english'::regconfig, body));
-
-
---
--- Name: sit_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX sit_title ON sits USING gin (to_tsvector('english'::regconfig, (title)::text));
-
-
---
--- Name: sits_to_tsvector_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX sits_to_tsvector_idx ON sits USING gin (to_tsvector('english'::regconfig, (title)::text));
-
-
---
--- Name: sits_to_tsvector_idx1; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX sits_to_tsvector_idx1 ON sits USING gin (to_tsvector('english'::regconfig, body));
-
-
---
--- Name: tag_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX tag_name ON tags USING gin (to_tsvector('english'::regconfig, (name)::text));
-
-
---
--- Name: tags_to_tsvector_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX tags_to_tsvector_idx ON tags USING gin (to_tsvector('english'::regconfig, (name)::text));
-
-
---
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1083,4 +1081,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140625193718');
 INSERT INTO schema_migrations (version) VALUES ('20141218153117');
 
 INSERT INTO schema_migrations (version) VALUES ('20141222165045');
+
+INSERT INTO schema_migrations (version) VALUES ('20141223144659');
 

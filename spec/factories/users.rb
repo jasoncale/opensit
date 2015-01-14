@@ -65,6 +65,7 @@ end
 #  password_salt          :string(255)
 #  practice               :text
 #  privacy_setting        :string(255)      default("public")
+#  receive_email          :boolean          default(true)
 #  remember_created_at    :datetime
 #  remember_token         :string(255)
 #  reset_password_sent_at :datetime
