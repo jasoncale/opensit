@@ -1,10 +1,12 @@
-<div class="goal row">
+<div class="goal row <%= goal.fixed? ? 'fixed' : 'ongoing' %>">
 	<div class="rating"><%= coloured_rating(goal) %></div>
 	<div class="content">
 		<div class="goal-desc <%='completed' if completed%>"><%= goal.verbalise %></div>
 	  <div class="goal-stats">
 		  <% if !completed %>
-		  	Started <%=days_ago_in_words(goal.created_at)%>. You've achieved your goal on <%= goal.days_where_goal_met %> out of <%= goal.days_into_goal%> days
+                        <% if goal.fixed? %>
+                            Started <%=days_ago_in_words(goal.created_at)%>. You've achieved your goal on <%= goal.days_where_goal_met %> out of <%= goal.days_into_goal%> days
+                        <% end %>
 		  <% else %>
 		  	From <%=goal.created_at.strftime("%e %B")%> to <%= goal.completed_date ? goal.completed_date.strftime("%e %B, %Y") : goal.last_day_of_goal.strftime("%e %B, %Y") %>. You achieved your goal on <%= goal.days_where_goal_met %> out of <%= goal.days_into_goal%> days
 		  <% end %>
