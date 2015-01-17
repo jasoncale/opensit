@@ -113,6 +113,10 @@
 .rating-gold {
 	background: #ccac00;
 }
+.goal.ongoing > .rating {
+        padding-top: 0px;
+}
+
 
 // Me page module
 .current-goals {
