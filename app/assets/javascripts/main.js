@@ -193,15 +193,6 @@ $(document).ready(function(){
       })();
 });
 
-// Loading indicator
-$(document).on('page:fetch', function() {
-  $(".loading-indicator").show();
-});
-
-$(document).on('page:change', function() {
-  $(".loading-indicator").hide();
-});
-
 // https://github.com/Nerian/bootstrap-wysihtml5-rails
 $(document).on('page:load', function(){
   window['rangy'].initialized = false
