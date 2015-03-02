@@ -25,7 +25,7 @@
 
   <%= form_element(f, :dob, 'user', "Date of Birth", 3, { as: 'date', label: false, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:day, :month, :year], include_blank: true, input_html: { :class => 'col-lg-1' }} )%>
 
-  <%= form_element(f, :gender, 'user', "Gender", 3, { collection: [['Male', 0], ['Female', 1], ['Transgender', 2]], as: :radio_buttons, item_wrapper_class: 'inline', label: false }) %>
+  <%= form_element(f, :gender, 'user', "Gender", 3, { collection: [['Male', 0], ['Female', 1], ['Other', 2]], as: :radio_buttons, item_wrapper_class: 'inline', label: false }) %>
 
   <%= form_element(f, :city, 'user', "City", 3, { label: false }) %>
 
