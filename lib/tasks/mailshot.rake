@@ -16,7 +16,7 @@ task :mailshot => :environment do
     skip = 0
   end
 
-  ActionMailer::Base.default_url_options = { :host => 'diaryforalan.com' }
+  ActionMailer::Base.default_url_options = { :host => 'fountainheadschool.org' }
 
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
