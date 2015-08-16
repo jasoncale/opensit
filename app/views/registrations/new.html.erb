@@ -1,14 +1,6 @@
 <div class="section sign-up-box">
   <div class="well col-sm-8">
-
-    <div class="row">
-      <div class="brand-header">
-        <%= image_tag 'logomark_trans.png', class: 'main-logo' %>
-        <p class="opensit">opensit</p>
-      </div>
-    </div>
-
-      <h1>Namaste! Get your beautiful, free meditation journal today.</h1>
+    <h1>Sign up as a Fountainhead School founder</h1>
 
     <div class="row">
       <div class="left col-md-offset-3 col-md-6">
@@ -30,17 +22,5 @@
       </div>
     </div>
 
-    <div class="row col-md-12">
-      <div class="our-community">
-        <h2>And become part of our awesome global community!</h2>
-        <% @users.each do |u|%>
-          <div class="user-snippet">
-            <%= sign_up_avatar(u) %>
-            <div class="details"><%=u.display_name%><br>
-            <%=u.location%></div>
-          </div>
-        <% end %>
-      </div>
-    </div>
   </div>
 </div>

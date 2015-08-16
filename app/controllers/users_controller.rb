@@ -76,8 +76,8 @@ class UsersController < ApplicationController
       end
     end
 
-    @title = "#{@user.display_name}\'s meditation practice journal"
-    @desc = "#{@user.display_name} has logged #{@user.sits_count} meditation reports on OpenSit, a free community for meditators."
+    @title = "#{@user.display_name}\'s contemplation journal"
+    @desc = "#{@user.display_name} has logged #{@user.sits_count} contemplations."
     @page_class = 'view-user'
   end
 
@@ -117,7 +117,7 @@ class UsersController < ApplicationController
   def feed
     if params[:scope] == 'global'
       @sits = Sit.communal.newest_first.limit(50)
-      @title = "Global SitStream | OpenSit"
+      @title = "Global SitStream | Fountainhead School"
     else
       @user = User.where("lower(username) = lower(?)", params[:username]).first!
       @title = "SitStream for #{@user.username}"

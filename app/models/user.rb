@@ -378,7 +378,7 @@ class User < ActiveRecord::Base
   # CALLBACKS
   ##
 
-  after_create :welcome_email, :follow_opensit
+  after_create :welcome_email
 
   private
 

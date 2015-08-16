@@ -2,14 +2,14 @@ module ApplicationHelper
   # Returns the full title on a per-page basis
   def full_title(page_title)
     if page_title.nil?
-      "OpenSit | Free Online Meditation Community"
+      "Fountainhead School | Free Online Contemplation Community"
     else
-      "#{page_title} | OpenSit"
+      "#{page_title} | Fountainhead School"
     end
   end
 
   def meta_desc(desc)
-    base_desc = "OpenSit is a place to share and deepen your meditation practice. Join other mindfulness, Vipassana, or Zen Buddhist practitioners and follow your favourites!"
+    base_desc = "Fountainhead School is a place to share and deepen your contemplation practice."
     return base_desc if desc.nil?
     return desc
   end
