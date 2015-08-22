@@ -53,9 +53,11 @@
       <%= @sit.body.html_safe %>
     </div>
 
+    <% if @sit.drawing? %>
     <div class="drawing">
       <%= image_tag @sit.drawing.url(:medium) %>
     </div>
+    <% end %>
 
 
     <% if current_user %>
