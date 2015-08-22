@@ -362,7 +362,11 @@ CREATE TABLE sits (
     duration integer,
     s_type integer,
     private boolean DEFAULT false,
-    views integer DEFAULT 0
+    views integer DEFAULT 0,
+    drawing_file_name character varying,
+    drawing_content_type character varying,
+    drawing_file_size integer,
+    drawing_updated_at timestamp without time zone
 );
 
 
@@ -904,4 +908,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141218153117');
 INSERT INTO schema_migrations (version) VALUES ('20141222165045');
 
 INSERT INTO schema_migrations (version) VALUES ('20141223144659');
+
+INSERT INTO schema_migrations (version) VALUES ('20150822112052');
 

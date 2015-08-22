@@ -2,7 +2,7 @@ require 'textacular/searchable'
 
 class Sit < ActiveRecord::Base
   attr_accessible :private, :disable_comments, :tag_list, :duration, :s_type,
-                  :body, :title, :created_at, :user_id, :views
+                  :body, :title, :created_at, :user_id, :views, :drawing
 
   belongs_to :user, counter_cache: true
   has_many :comments, :dependent => :destroy
@@ -11,11 +11,13 @@ class Sit < ActiveRecord::Base
   has_many :favourites, :as => :favourable
   has_many :likes, :as => :likeable
   has_many :reports, :as => :reportable
+  has_attached_file :drawing, styles: { large: "1024", medium: "800", small: "300" }
 
   validates :s_type, :presence => true
   validates :title, :presence => true, :if => "s_type != 0"
   validates :duration, :presence => true, :if => "s_type == 0"
   validates_numericality_of :duration, greater_than: 0, only_integer: true
+  validates_attachment_content_type :drawing, content_type: /\Aimage\/.*\Z/
 
   # Scopes
   scope :communal, -> { where(private: false) }
