@@ -40,8 +40,8 @@ class UsersController < ApplicationController
     @total_hours = @user.total_hours_sat
     @by_month = @user.journal_range
 
-    month = params[:month] ? params[:month] : Date.today.month
-    year = params[:year] ? params[:year] : Date.today.year
+    month = params[:month] ? params[:month].to_i : Date.today.month
+    year = params[:year] ? params[:year].to_i : Date.today.year
 
     index = @by_month[:list_of_months].index "#{year} #{sprintf '%02d', month}" if @user.sits.present?
 
